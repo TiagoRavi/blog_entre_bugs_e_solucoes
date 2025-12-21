@@ -1,20 +1,34 @@
 from .base import *
 import os
+import logging
+
+# ======================================================
+# LOGGING (TEMPORÁRIO PARA DEBUG NO RENDER)
+# ======================================================
+logging.basicConfig(level=logging.DEBUG)
 
 # ======================================================
 # CORE
 # ======================================================
 DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get(
-    "DJANGO_ALLOWED_HOSTS", ""
-).split(",")
+# ======================================================
+# HOSTS
+# ======================================================
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
+    if host.strip()
+]
+
+if not ALLOWED_HOSTS:
+    raise RuntimeError("DJANGO_ALLOWED_HOSTS não configurado corretamente")
 
 # ======================================================
 # SECURITY
 # ======================================================
-
 SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
@@ -26,9 +40,14 @@ SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
 
-CSRF_TRUSTED_ORIGINS = os.environ.get(
-    "DJANGO_CSRF_TRUSTED_ORIGINS", ""
-).split(",")
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
+if not CSRF_TRUSTED_ORIGINS:
+    raise RuntimeError("DJANGO_CSRF_TRUSTED_ORIGINS não configurado corretamente")
 
 # ======================================================
 # CACHE
