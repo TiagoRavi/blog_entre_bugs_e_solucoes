@@ -14,9 +14,9 @@
   },
   "headline": "{{ post.title|escapejs }}",
   "description": "{{ post.excerpt|default:''|escapejs }}",
-  {% if post.image %}
+  {% if post.featured_image %}
   "image": [
-    "{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}"
+    "{{ post.featured_image }}"
   ],
   {% endif %}
   "datePublished": "{{ post.published_at|date:'c' }}",
@@ -107,11 +107,11 @@
 
       </header>
 
-      <!-- IMAGEM DESTACADA -->
-      {% if post.image %}
+      <!-- IMAGEM DESTACADA (WordPress-like) -->
+      {% if post.featured_image %}
         <figure class="post-featured-image">
           <img
-            src="{{ post.image.url }}"
+            src="{{ post.featured_image }}"
             alt="{{ post.title }}"
             loading="lazy"
           >
