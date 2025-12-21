@@ -1,9 +1,10 @@
 from .base import *
 import os
 import logging
+import dj_database_url
 
 # ======================================================
-# LOGGING (TEMPORÁRIO PARA DEBUG NO RENDER)
+# LOGGING (TEMPORÁRIO PARA DIAGNÓSTICO)
 # ======================================================
 logging.basicConfig(level=logging.DEBUG)
 
@@ -48,6 +49,22 @@ CSRF_TRUSTED_ORIGINS = [
 
 if not CSRF_TRUSTED_ORIGINS:
     raise RuntimeError("DJANGO_CSRF_TRUSTED_ORIGINS não configurado corretamente")
+
+# ======================================================
+# DATABASE (POSTGRESQL - RENDER)
+# ======================================================
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL não configurada")
+
+DATABASES = {
+    "default": dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=True,
+    )
+}
 
 # ======================================================
 # CACHE
