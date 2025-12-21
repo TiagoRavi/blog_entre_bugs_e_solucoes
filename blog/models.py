@@ -146,22 +146,11 @@ class Post(models.Model):
     # NOVO: IMAGEM DE DESTAQUE (WordPress-like)
     # --------------------------------------------------
     featured_image = models.URLField(
-        verbose_name="Imagem de destaque (URL)",
-        blank=True,
-        help_text="URL da imagem (Cloudinary/CDN). Campo principal.",
+    verbose_name="Imagem de destaque (URL)",
+    blank=True,
+    max_length=500,
+    help_text="URL da imagem (Cloudinary/CDN).",
     )
-
-    # --------------------------------------------------
-    # LEGADO: ImageField local (TEMPORÁRIO)
-    # --------------------------------------------------
-    image = models.ImageField(
-        upload_to="posts/",
-        blank=True,
-        null=True,
-        verbose_name="Imagem local (legado)",
-        help_text="Campo legado. Será removido no passo 3.",
-    )
-
     status = models.CharField(
         max_length=10,
         choices=Status.choices,
