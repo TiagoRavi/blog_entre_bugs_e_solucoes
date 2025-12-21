@@ -1,15 +1,12 @@
 from pathlib import Path
 import os
 
-# ======================================================
-# BASE DIR
-# ======================================================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # ======================================================
 # CORE
 # ======================================================
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-dev-key")
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 DEBUG = False
 
@@ -27,15 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.sitemaps",
-
-    # Apps locais
     "blog",
     "pages",
 ]
 
-# ======================================================
-# SITES FRAMEWORK
-# ======================================================
 SITE_ID = 1
 
 # ======================================================
@@ -51,22 +43,14 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# ======================================================
-# URLS / WSGI
-# ======================================================
 ROOT_URLCONF = "config.urls"
-
 WSGI_APPLICATION = "config.wsgi.application"
 
 # ======================================================
 # DATABASE
+# (definido por ambiente)
 # ======================================================
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+DATABASES = {}
 
 # ======================================================
 # TEMPLATES
@@ -87,9 +71,6 @@ TEMPLATES = [
     },
 ]
 
-# ======================================================
-# PASSWORDS
-# ======================================================
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -97,19 +78,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# ======================================================
-# I18N
-# ======================================================
 LANGUAGE_CODE = "pt-br"
-
 TIME_ZONE = "America/Sao_Paulo"
-
 USE_I18N = True
 USE_TZ = True
 
-# ======================================================
-# STATIC / MEDIA
-# ======================================================
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
@@ -117,8 +90,4 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# ======================================================
-# DEFAULTS
-# ======================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
