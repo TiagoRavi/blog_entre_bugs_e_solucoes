@@ -2,9 +2,9 @@
   {% for post in posts %}
     <article class="post-card">
 
-      {% if post.image %}
+      {% if post.featured_image %}
         <img
-          src="{{ post.image.url }}"
+          src="{{ post.featured_image }}"
           alt="{{ post.title }}"
           class="post-image"
           loading="lazy"
