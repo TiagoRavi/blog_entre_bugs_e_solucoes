@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Sobre | Entre Bugs e Soluções
+{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Tiago",
+    "url": "{{ request.build_absolute_uri }}",
+    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}",
+    "jobTitle": "Desenvolvedor Python e Django",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Entre Bugs e Soluções"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/",
+      "https://github.com/"
+    ]
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="container post-detail">
+  <div class="post-content-box">
+
+    <h1>Sobre o autor</h1>
+
+    <p>
+      Olá! Eu sou <strong>Tiago</strong>, desenvolvedor Python e Django,
+      apaixonado por programação, arquitetura de software e ensino prático.
+    </p>
+
+    <p>
+      O <strong>Entre Bugs e Soluções</strong> nasceu com o objetivo de
+      compartilhar conhecimento real, aplicado no dia a dia de projetos
+      profissionais.
+    </p>
+
+    <p>
+      Aqui você encontra conteúdos sobre Python, Django, lógica de programação
+      e boas práticas para quem quer evoluir de forma sólida na área de tecnologia.
+    </p>
+
+  </div>
+</section>
+{% endblock %}

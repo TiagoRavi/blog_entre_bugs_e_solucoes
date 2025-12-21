@@ -1,0 +1,29 @@
+{% load static %}
+
+<section class="hero-full">
+
+  <picture>
+    <!-- MOBILE -->
+    <source
+      media="(max-width: 640px)"
+      srcset="{% static 'img/hero/hero-mobile.jpg' %}"
+    >
+
+    <!-- TABLET -->
+    <source
+      media="(max-width: 1024px)"
+      srcset="{% static 'img/hero/hero-tablet.jpg' %}"
+    >
+
+    <!-- DESKTOP (fallback) -->
+    <img
+      src="{% static 'img/hero/hero-desktop.png' %}"
+      alt="Entre Bugs e Soluções - Programação prática e soluções reais"
+      class="hero-image"
+      loading="eager"
+    >
+  </picture>
+
+  <div class="hero-overlay"></div>
+
+</section>

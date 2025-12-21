@@ -1,0 +1,39 @@
+<section class="container post-grid">
+  {% for post in posts %}
+    <article class="post-card">
+
+      {% if post.image %}
+        <img
+          src="{{ post.image.url }}"
+          alt="{{ post.title }}"
+          class="post-image"
+          loading="lazy"
+        >
+      {% endif %}
+
+      <div class="post-card-body">
+
+        <div class="post-meta">
+          <time datetime="{{ post.published_at|date:'Y-m-d' }}">
+            {{ post.published_at|date:"d/m/Y" }}
+          </time>
+          ·
+          <span class="post-category">
+            {{ post.category.name|upper }}
+          </span>
+        </div>
+
+        <h3 class="post-title">
+          <a href="{% url 'blog:post_detail' post.slug %}">
+            {{ post.title }}
+          </a>
+        </h3>
+
+        <p class="post-excerpt">
+          {{ post.excerpt|truncatechars:155 }}
+        </p>
+
+      </div>
+    </article>
+  {% endfor %}
+</section>

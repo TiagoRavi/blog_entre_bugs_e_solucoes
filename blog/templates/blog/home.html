@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Entre Bugs e Soluções | Blog
+{% endblock %}
+
+{% block meta_description %}
+Artigos sobre programação, estudos práticos, bugs reais e soluções aplicadas no dia a dia.
+{% endblock %}
+
+{% block content %}
+  {% include "blog/includes/hero.html" %}
+
+  {% if posts %}
+    {% include "blog/includes/post_grid.html" %}
+    {% include "blog/includes/pagination.html" %}
+  {% else %}
+    <section class="container">
+      <p>Nenhum post publicado ainda.</p>
+    </section>
+  {% endif %}
+{% endblock %}
+
