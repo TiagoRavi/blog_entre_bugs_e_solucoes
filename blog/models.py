@@ -5,7 +5,6 @@ from django.utils.text import Truncator, slugify
 from django.urls import reverse
 
 
-
 # ======================================================
 # CATEGORY
 # ======================================================
@@ -45,26 +44,18 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    # ==========================
-    # URL CANÔNICA
-    # ==========================
     def get_absolute_url(self):
-        return reverse(
-            "blog:category_posts",
-            args=[self.slug],
-        )
+        """
+        URL canônica da categoria.
+        """
+        return reverse("blog:category_posts", args=[self.slug])
 
-    # --------------------------
-    # Hooks internos
-    # --------------------------
     def save(self, *args, **kwargs):
         """
-        Garante que o slug seja gerado automaticamente
-        caso não seja informado manualmente.
+        Gera o slug automaticamente se não informado.
         """
         if not self.slug:
             self.slug = slugify(self.name)
-
         super().save(*args, **kwargs)
 
 
@@ -148,13 +139,27 @@ class Post(models.Model):
 
     content = models.TextField(
         verbose_name="Conteúdo",
+        help_text="Conteúdo principal do post (HTML permitido).",
     )
 
+    # --------------------------------------------------
+    # NOVO: IMAGEM DE DESTAQUE (WordPress-like)
+    # --------------------------------------------------
+    featured_image = models.URLField(
+        verbose_name="Imagem de destaque (URL)",
+        blank=True,
+        help_text="URL da imagem (Cloudinary/CDN). Campo principal.",
+    )
+
+    # --------------------------------------------------
+    # LEGADO: ImageField local (TEMPORÁRIO)
+    # --------------------------------------------------
     image = models.ImageField(
         upload_to="posts/",
         blank=True,
         null=True,
-        verbose_name="Imagem de destaque",
+        verbose_name="Imagem local (legado)",
+        help_text="Campo legado. Será removido no passo 3.",
     )
 
     status = models.CharField(
@@ -203,15 +208,11 @@ class Post(models.Model):
         return self.title
 
     # ==================================================
-    # REGRAS DE DOMÍNIO (explícitas)
+    # REGRAS DE DOMÍNIO
     # ==================================================
     def publish(self):
         """
-        Publica o post de forma explícita.
-
-        Importante:
-        - Não depender apenas do save automático
-        - Facilita uso futuro em services ou admin
+        Publica o post explicitamente.
         """
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
@@ -226,27 +227,22 @@ class Post(models.Model):
         self.save(update_fields=["status", "published_at"])
 
     # ==================================================
-    # HOOKS INTERNOS
+    # HOOK CENTRAL DE CONSISTÊNCIA
     # ==================================================
     def save(self, *args, **kwargs):
         """
-        Hook central de consistência do modelo.
-
         Responsabilidades:
         - Gerar slug
         - Gerar excerpt
         - Garantir coerência entre status e published_at
         """
 
-        # Gera slug automaticamente
         if not self.slug:
             self.slug = slugify(self.title)
 
-        # Gera excerpt automático (SEO)
         if not self.excerpt:
             self.excerpt = Truncator(self.content).chars(155)
 
-        # Consistência de publicação
         if self.status == self.Status.PUBLISHED and not self.published_at:
             self.published_at = timezone.now()
 
@@ -256,10 +252,10 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     # ==================================================
-    # URL
+    # URL CANÔNICA
     # ==================================================
     def get_absolute_url(self):
         """
         Retorna a URL canônica do post.
         """
-        return f"/posts/{self.slug}/"
+        return reverse("blog:post_detail", args=[self.slug])
