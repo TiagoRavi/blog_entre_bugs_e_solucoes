@@ -21,7 +21,7 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 # ======================================================
-# DATABASE (DEV)
+# DATABASE (DEV - SQLite)
 # ======================================================
 DATABASES = {
     "default": {

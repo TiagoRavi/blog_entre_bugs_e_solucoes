@@ -5,89 +5,6 @@ from django.utils.text import Truncator, slugify
 from django.urls import reverse
 
 
-
-# ======================================================
-# CATEGORY
-# ======================================================
-class Category(models.Model):
-    """
-    Representa uma categoria de posts do blog.
-
-    Responsabilidade:
-    - Apenas armazenar dados da categoria
-    - Garantir unicidade e consistência do slug
-    """
-
-    name = models.CharField(
-        max_length=100,
-        unique=True,
-        verbose_name="Nome",
-        help_text="Nome público da categoria.",
-    )
-
-    slug = models.SlugField(
-        max_length=120,
-        unique=True,
-        verbose_name="Slug",
-        help_text="URL da categoria. Gerada automaticamente a partir do nome.",
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Criado em",
-    )
-
-    class Meta:
-        verbose_name = "Categoria"
-        verbose_name_plural = "Categorias"
-        ordering = ["name"]
-
-    def __str__(self) -> str:
-        return self.name
-
-    # ==========================
-    # URL CANÔNICA
-    # ==========================
-    def get_absolute_url(self):
-        return reverse(
-            "blog:category_posts",
-            args=[self.slug],
-        )
-
-    # --------------------------
-    # Hooks internos
-    # --------------------------
-    def save(self, *args, **kwargs):
-        """
-        Garante que o slug seja gerado automaticamente
-        caso não seja informado manualmente.
-        """
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        super().save(*args, **kwargs)
-
-
-# ======================================================
-# QUERYSET / MANAGER
-# ======================================================
-class PostQuerySet(models.QuerySet):
-    """
-    QuerySet customizado para encapsular
-    queries reutilizáveis do Post.
-    """
-
-    def published(self):
-        """
-        Retorna apenas posts publicados
-        e com data válida.
-        """
-        return self.filter(
-            status=Post.Status.PUBLISHED,
-            published_at__lte=timezone.now(),
-        )
-
-
 # ======================================================
 # POST
 # ======================================================
@@ -133,7 +50,7 @@ class Post(models.Model):
     )
 
     category = models.ForeignKey(
-        Category,
+        "Category",
         on_delete=models.PROTECT,
         related_name="posts",
         verbose_name="Categoria",
@@ -146,15 +63,24 @@ class Post(models.Model):
         help_text="Gerado automaticamente se deixado em branco.",
     )
 
+    # --------------------------------------------------
+    # Conteúdo do post (HTML permitido)
+    # --------------------------------------------------
     content = models.TextField(
         verbose_name="Conteúdo",
+        help_text="Conteúdo principal do post (HTML permitido).",
     )
 
-    image = models.ImageField(
-        upload_to="posts/",
-        blank=True,
-        null=True,
+    # --------------------------------------------------
+    # IMAGEM DE DESTAQUE (WordPress-like)
+    # --------------------------------------------------
+    featured_image = models.URLField(
         verbose_name="Imagem de destaque",
+        blank=True,
+        help_text=(
+            "URL da imagem de destaque (Cloudinary/CDN). "
+            "Não utilize upload local."
+        ),
     )
 
     status = models.CharField(
@@ -203,15 +129,11 @@ class Post(models.Model):
         return self.title
 
     # ==================================================
-    # REGRAS DE DOMÍNIO (explícitas)
+    # REGRAS DE DOMÍNIO
     # ==================================================
     def publish(self):
         """
-        Publica o post de forma explícita.
-
-        Importante:
-        - Não depender apenas do save automático
-        - Facilita uso futuro em services ou admin
+        Publica o post explicitamente.
         """
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
@@ -226,23 +148,21 @@ class Post(models.Model):
         self.save(update_fields=["status", "published_at"])
 
     # ==================================================
-    # HOOKS INTERNOS
+    # HOOK CENTRAL DE CONSISTÊNCIA
     # ==================================================
     def save(self, *args, **kwargs):
         """
-        Hook central de consistência do modelo.
-
         Responsabilidades:
-        - Gerar slug
-        - Gerar excerpt
+        - Gerar slug automaticamente
+        - Gerar excerpt para SEO
         - Garantir coerência entre status e published_at
         """
 
-        # Gera slug automaticamente
+        # Slug automático
         if not self.slug:
             self.slug = slugify(self.title)
 
-        # Gera excerpt automático (SEO)
+        # Excerpt automático (SEO)
         if not self.excerpt:
             self.excerpt = Truncator(self.content).chars(155)
 
@@ -256,10 +176,10 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     # ==================================================
-    # URL
+    # URL CANÔNICA
     # ==================================================
     def get_absolute_url(self):
         """
         Retorna a URL canônica do post.
         """
-        return f"/posts/{self.slug}/"
+        return reverse("blog:post_detail", args=[self.slug])
