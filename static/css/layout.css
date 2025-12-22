@@ -1,6 +1,16 @@
 /* ==================================================
-   HEADER / NAV
-   ================================================== */
+CONTAINER GLOBAL
+================================================== */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ==================================================
+HEADER
+================================================== */
 
 .site-header {
   background: #ffffff;
@@ -16,104 +26,14 @@
 
 .site-logo {
   height: 60px;
-  width: auto;
-  display: block;
-}
-
-.header-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav a {
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--secondary-color);
-}
-
-.nav a:hover {
-  color: var(--primary-color);
 }
 
 /* ==================================================
-   SEARCH
-   ================================================== */
-
-.nav-search {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--border-color);
-  border-radius: 999px;
-  padding: 0.2rem 0.4rem;
-}
-
-.nav-search input {
-  border: none;
-  outline: none;
-  padding: 0.4rem 0.6rem;
-  font-size: 0.85rem;
-  width: 160px;
-}
-
-.nav-search button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* ==================================================
-   HERO
-   ================================================== */
-
-.hero-full {
-  position: relative;
-  width: 100%;
-  height: 320px;
-  overflow: hidden;
-}
-
-.hero-media {
-  position: absolute;
-  inset: 0;
-}
-
-.hero-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,.75),
-    rgba(0,0,0,.55),
-    rgba(0,0,0,.25),
-    rgba(0,0,0,0)
-  );
-}
-
-/* ==================================================
-   FOOTER
-   ================================================== */
+FOOTER
+================================================== */
 
 .site-footer {
-  background: #0f172a;
+  background-color: #0f172a;
   color: #e5e7eb;
   margin-top: 6rem;
 }
@@ -122,37 +42,26 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 3rem;
-  padding: 4.5rem 1rem;
-}
-
-.footer-logo {
-  height: 75px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem 1rem 3.5rem;
 }
 
 .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   text-align: center;
-  padding: 1.6rem;
+  padding: 1.6rem 1rem;
   font-size: 0.85rem;
+  color: #cbd5f5;
 }
 
 /* ==================================================
-   MENU MOBILE
-   ================================================== */
+RESPONSIVO — LAYOUT
+================================================== */
 
 @media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
-
-  .nav.open {
-    display: block;
-  }
-
-  .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 }
