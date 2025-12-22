@@ -6,7 +6,6 @@
 
   <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
 
-  <!-- 🔥 Essencial para responsividade -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="description"
@@ -37,17 +36,13 @@
   </div>
 </div>
 
-<script src="{% static 'js/cookies.js' %}"></script>
-<script src="{% static 'js/menu.js' %}" defer></script>
-</body>
-
 <!-- ==================================================
      HEADER
 ================================================== -->
 <header class="site-header">
   <div class="container header-flex">
 
-    <!-- Brand / Logo -->
+    <!-- Logo -->
     <a href="{% url 'blog:post_list' %}" class="brand">
       <img
         src="{% static 'img/logo.png' %}"
@@ -57,7 +52,7 @@
       >
     </a>
 
-    <!-- 🔥 Botão do menu mobile (apenas CSS) -->
+    <!-- Botão hambúrguer -->
     <button
       class="menu-toggle"
       aria-label="Abrir menu"
@@ -68,8 +63,21 @@
       <span></span>
     </button>
 
-    <!-- Menu -->
+    <!-- MENU -->
     <nav class="nav" aria-label="Menu principal">
+
+      <!-- Header do menu ABERTO -->
+      <div class="nav-mobile-header">
+        <span class="nav-logo">Entre Bugs e Soluções</span>
+
+        <button
+          class="menu-close"
+          aria-label="Fechar menu"
+        >
+          ✕
+        </button>
+      </div>
+
       <ul>
         <li><a href="{% url 'blog:home' %}">Home</a></li>
         <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
@@ -149,6 +157,12 @@
     © {% now "Y" %} Entre Bugs e Soluções. Todos os direitos reservados.
   </div>
 </footer>
+
+<!-- ==================================================
+     SCRIPTS
+================================================== -->
+<script src="{% static 'js/cookies.js' %}"></script>
+<script src="{% static 'js/menu.js' %}" defer></script>
 
 </body>
 </html>

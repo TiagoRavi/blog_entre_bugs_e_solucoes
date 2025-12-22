@@ -870,23 +870,23 @@ main {
 }
 
 /* ==================================================
-   MENU HAMBÚRGUER — ESTADO FECHADO (MODELO DA IMAGEM)
+   MENU HAMBÚRGUER — ESTADO FECHADO (CORRIGIDO)
    ================================================== */
 
 @media (max-width: 768px) {
 
-  /* Header escuro no mobile */
+  /* Header do site (FECHADO) */
   .site-header {
-    background: #ffffff;
+    background: #0f172a; /* escuro de verdade */
     border-bottom: none;
   }
 
-  /* Logo visível no fundo escuro */
+  /* Logo branca no fundo escuro */
   .site-logo {
     filter: brightness(0) invert(1);
   }
 
-  /* Botão do menu */
+  /* Botão do menu hambúrguer */
   .menu-toggle {
     display: flex;
     align-items: center;
@@ -894,8 +894,8 @@ main {
     width: 42px;
     height: 42px;
     background: #f8fafc;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    border: none;
     padding: 0;
   }
 
@@ -905,10 +905,17 @@ main {
     height: 2px;
     background: #0f172a;
     border-radius: 999px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.2s ease;
   }
 
   .menu-toggle span:not(:last-child) {
     margin-bottom: 4px;
   }
+
+  /* Quando o menu estiver ABERTO */
+  .nav.open ~ .menu-toggle,
+  .menu-toggle[aria-expanded="true"] {
+    background: transparent;
+  }
 }
+
