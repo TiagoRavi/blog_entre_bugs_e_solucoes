@@ -8,13 +8,28 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="description"
-        content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}">
+  <meta
+    name="description"
+    content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
+  >
 
   {% block extra_head %}{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- 🔥 PRELOAD DA HERO (LCP) -->
+  <link
+    rel="preload"
+    as="image"
+    href="{% static 'img/hero/hero-desktop.png' %}"
+    fetchpriority="high"
+  >
+
+  <!-- 🎨 CSS PRINCIPAL -->
+  <link
+    rel="stylesheet"
+    href="{% static 'css/style.css' %}"
+  >
 </head>
+
 
 <body>
 
