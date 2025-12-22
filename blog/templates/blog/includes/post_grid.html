@@ -9,7 +9,9 @@
           class="post-image"
           loading="lazy"
         >
-      {% endif %}
+      {% else %}
+  <div class="post-image" aria-hidden="true"></div>
+{% endif %}
 
       <div class="post-card-body">
 
@@ -18,9 +20,11 @@
             {{ post.published_at|date:"d/m/Y" }}
           </time>
           ·
-          <span class="post-category">
-            {{ post.category.name|upper }}
-          </span>
+          {% if post.category %}
+            <span class="post-category">
+              {{ post.category.name|upper }}
+            </span>
+          {% endif %}
         </div>
 
         <h3 class="post-title">

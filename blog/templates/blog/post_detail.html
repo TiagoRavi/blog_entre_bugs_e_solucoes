@@ -99,9 +99,11 @@
             <span class="meta-separator">·</span>
           {% endif %}
 
-          <span class="post-comments">
-            0 comentários
-          </span>
+          {% if post.comments_count %}
+            <span class="post-comments">
+              {{ post.comments_count }} comentários
+            </span>
+          {% endif %}
 
         </div>
 
