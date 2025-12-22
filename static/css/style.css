@@ -870,52 +870,56 @@ main {
 }
 
 /* ==================================================
-   MENU HAMBÚRGUER — ESTADO FECHADO (CORRIGIDO)
+   HEADER MOBILE — LIMPO E PROFISSIONAL
    ================================================== */
 
 @media (max-width: 768px) {
 
-  /* Header do site (FECHADO) */
+  /* Header simples */
   .site-header {
-    background: #0f172a; /* escuro de verdade */
-    border-bottom: none;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-color);
   }
 
-  /* Logo branca no fundo escuro */
+  /* Logo normal (sem filtro!) */
   .site-logo {
-    filter: brightness(0) invert(1);
+    filter: none;
+    height: 48px;
   }
 
-  /* Botão do menu hambúrguer */
+  /* Botão hambúrguer minimalista */
   .menu-toggle {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    background: #f8fafc;
-    border-radius: 8px;
+    gap: 5px;
+
+    width: 40px;
+    height: 40px;
+
+    background: transparent;
     border: none;
     padding: 0;
   }
 
-  /* Linhas do ícone */
   .menu-toggle span {
-    width: 18px;
+    width: 22px;
     height: 2px;
-    background: #0f172a;
-    border-radius: 999px;
+    background: #111827;
+    border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.2s ease;
   }
 
-  .menu-toggle span:not(:last-child) {
-    margin-bottom: 4px;
+  /* Ícone vira X ao abrir */
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
   }
 
-  /* Quando o menu estiver ABERTO */
-  .nav.open ~ .menu-toggle,
-  .menu-toggle[aria-expanded="true"] {
-    background: transparent;
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 }
-
