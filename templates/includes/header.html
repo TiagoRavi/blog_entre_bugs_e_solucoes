@@ -32,22 +32,7 @@
         <li><a href="{% url 'pages:contact' %}">Contato</a></li>
       </ul>
 
-      <form
-        class="nav-search"
-        action="{% url 'blog:post_list' %}"
-        method="get"
-        role="search"
-      >
-        <label for="q" class="visually-hidden">Buscar</label>
-        <input
-          type="search"
-          name="q"
-          id="q"
-          placeholder="Buscar no blog..."
-          value="{{ request.GET.q }}"
-        >
-        <button type="submit" aria-label="Buscar"></button>
-      </form>
+      {% include "includes/search_bar.html" %}
 
     </nav>
 

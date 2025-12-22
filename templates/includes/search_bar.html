@@ -1,0 +1,21 @@
+<form
+  class="nav-search search-bar"
+  action="{% url 'blog:post_list' %}"
+  method="get"
+  role="search"
+>
+  <label for="q" class="visually-hidden"></label>
+
+  <input
+    type="search"
+    name="q"
+    id="q"
+    placeholder="Buscar no blog..."
+    value="{{ request.GET.q }}"
+    aria-label="Buscar no blog"
+  >
+
+  <button type="submit" aria-label="Buscar">
+    🔍
+  </button>
+</form>

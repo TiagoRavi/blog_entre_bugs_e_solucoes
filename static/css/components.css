@@ -29,3 +29,31 @@ COOKIE BANNER
   transform: translateX(-50%);
   z-index: 9999;
 }
+
+/* =========================
+   SEARCH NO HEADER
+========================= */
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: nowrap;        /* 🔴 ISSO RESOLVE A QUEBRA */
+}
+
+.nav-search input {
+  min-width: 180px;
+  max-width: 220px;
+  height: 36px;
+  padding: 0 0.6rem;
+  font-size: 0.9rem;
+}
+
+.nav-search button {
+  height: 36px;
+  height: 36px;
+  padding: 0 0.6rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}

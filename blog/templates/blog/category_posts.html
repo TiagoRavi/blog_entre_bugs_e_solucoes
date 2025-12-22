@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ category.name }} | Entre Bugs e Soluções
+{% endblock %}
+
+{% block meta_description %}
+Artigos sobre {{ category.name }} no blog Entre Bugs e Soluções.
+{% endblock %}
+
+{% block content %}
+
+<section class="posts-section container">
+
+  <h1>{{ category.name }}</h1>
+
+  {% if posts %}
+    {% include "blog/includes/post_grid.html" %}
+    {% include "blog/includes/pagination.html" %}
+  {% else %}
+    <p>Nenhum post nesta categoria ainda.</p>
+  {% endif %}
+
+</section>
+
+{% endblock %}

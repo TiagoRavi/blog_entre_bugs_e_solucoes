@@ -20,3 +20,117 @@ POST DETAIL
   font-size: 1.05rem;
   line-height: 1.85;
 }
+
+/* =========================
+   ESPAÇAMENTO HERO → GRID
+========================= */
+
+.post-grid {
+  margin-top: 4rem;
+}
+
+/* =========================
+   GRID DE POSTS
+========================= */
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem; /* respiro do hero */
+}
+
+
+/* =========================
+   CARD DO POST
+========================= */
+
+.post-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================
+   IMAGEM DO CARD
+========================= */
+
+.post-image {
+  width: 100%;
+  height: 180px;              /* 🔥 controla altura */
+  object-fit: cover;
+  background: #e5e7eb;        /* fallback quando não tem imagem */
+}
+
+
+/* =========================
+   CORPO DO CARD
+========================= */
+
+.post-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+/* =========================
+   META (DATA + CATEGORIA)
+========================= */
+
+.post-meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.post-title {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.post-title a {
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.post-title a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   EXCERPT
+========================= */
+
+.post-excerpt {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #334155;
+  margin-top: auto; /* 🔥 empurra para baixo e equaliza cards */
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
