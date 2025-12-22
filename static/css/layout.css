@@ -1,6 +1,7 @@
 /* ==================================================
-HEADER / NAV
+HEADER
 ================================================== */
+
 .site-header {
   background: #ffffff;
   border-bottom: 1px solid var(--border-color);
@@ -8,9 +9,9 @@ HEADER / NAV
 
 .site-header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
 }
 
 .site-logo {
@@ -18,15 +19,10 @@ HEADER / NAV
   display: block;
 }
 
-.header-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 /* ==================================================
 NAV
 ================================================== */
+
 .nav {
   display: flex;
   align-items: center;
@@ -36,7 +32,10 @@ NAV
 .nav ul {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav a {
@@ -52,6 +51,7 @@ NAV
 /* ==================================================
 FOOTER
 ================================================== */
+
 .site-footer {
   background-color: #0f172a;
   color: #e5e7eb;
@@ -72,4 +72,30 @@ FOOTER
   text-align: center;
   padding: 1.6rem 1rem;
   font-size: 0.85rem;
+}
+
+/* ==================================================
+FOOTER – LISTAS E LINKS
+================================================== */
+
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer li {
+  margin-bottom: 0.4rem;
+}
+
+.site-footer a,
+.site-footer a:visited {
+  color: #cbd5f5;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
