@@ -844,3 +844,27 @@ main {
 .nav a:hover {
   color: var(--primary-color);
 }
+
+/* ==================================================
+   MENU PRINCIPAL — MOBILE OVERRIDE
+   ================================================== */
+
+@media (max-width: 768px) {
+
+  /* Esconde o menu inteiro no mobile */
+  .nav {
+    display: none;
+  }
+
+  /* Quando o menu estiver aberto (hambúrguer) */
+  .nav.open {
+    display: block;
+  }
+
+  /* MUDA a direção do flex */
+  .nav ul {
+    flex-direction: column;   /* 🔥 AQUI está o segredo */
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

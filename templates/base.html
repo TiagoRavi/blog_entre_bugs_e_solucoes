@@ -6,6 +6,7 @@
 
   <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
 
+  <!-- 🔥 Essencial para responsividade -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="description"
@@ -18,6 +19,9 @@
 
 <body>
 
+<!-- ==================================================
+     COOKIE BANNER
+================================================== -->
 <div id="cookie-banner" class="cookie-banner" hidden>
   <div class="cookie-content">
     <p>
@@ -35,8 +39,13 @@
 
 <script src="{% static 'js/cookies.js' %}"></script>
 
+<!-- ==================================================
+     HEADER
+================================================== -->
 <header class="site-header">
   <div class="container header-flex">
+
+    <!-- Brand / Logo -->
     <a href="{% url 'blog:post_list' %}" class="brand">
       <img
         src="{% static 'img/logo.png' %}"
@@ -46,6 +55,16 @@
       >
     </a>
 
+    <!-- 🔥 Botão do menu mobile (apenas CSS) -->
+    <button
+      class="menu-toggle"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <!-- Menu -->
     <nav class="nav" aria-label="Menu principal">
       <ul>
         <li><a href="{% url 'blog:home' %}">Home</a></li>
@@ -55,10 +74,12 @@
         <li><a href="{% url 'pages:contact' %}">Contato</a></li>
       </ul>
 
-      <form class="nav-search"
-            action="{% url 'blog:post_list' %}"
-            method="get"
-            role="search">
+      <form
+        class="nav-search"
+        action="{% url 'blog:post_list' %}"
+        method="get"
+        role="search"
+      >
         <label for="q" class="visually-hidden">Buscar</label>
         <input
           type="search"
@@ -70,15 +91,22 @@
         <button type="submit" aria-label="Buscar"></button>
       </form>
     </nav>
+
   </div>
 </header>
 
+<!-- ==================================================
+     CONTENT
+================================================== -->
 <main id="content">
   {% block content %}{% endblock %}
 </main>
 
+<!-- ==================================================
+     FOOTER
+================================================== -->
 <footer class="site-footer">
-  <div class="footer-grid">
+  <div class="container footer-grid">
 
     <div class="footer-brand">
       <img
