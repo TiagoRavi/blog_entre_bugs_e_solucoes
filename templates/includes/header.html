@@ -1,0 +1,53 @@
+<header class="site-header">
+  <div class="container header-flex">
+
+    <a href="{% url 'blog:post_list' %}" class="brand">
+      <img
+        src="{% static 'img/logo.png' %}"
+        alt="Entre Bugs e Soluções"
+        class="site-logo"
+        loading="lazy"
+      >
+    </a>
+
+    <button
+      class="menu-toggle"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" aria-label="Menu principal">
+
+      <ul>
+        <li><a href="{% url 'blog:home' %}">Home</a></li>
+        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
+        <li><a href="#">Categorias</a></li>
+        <li><a href="{% url 'pages:about' %}">Sobre</a></li>
+        <li><a href="{% url 'pages:contact' %}">Contato</a></li>
+      </ul>
+
+      <form
+        class="nav-search"
+        action="{% url 'blog:post_list' %}"
+        method="get"
+        role="search"
+      >
+        <label for="q" class="visually-hidden">Buscar</label>
+        <input
+          type="search"
+          name="q"
+          id="q"
+          placeholder="Buscar no blog..."
+          value="{{ request.GET.q }}"
+        >
+        <button type="submit" aria-label="Buscar"></button>
+      </form>
+
+    </nav>
+
+  </div>
+</header>

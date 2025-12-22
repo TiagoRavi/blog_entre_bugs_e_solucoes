@@ -1,0 +1,40 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+
+    <div class="footer-brand">
+      <img
+        src="{% static 'img/logo.png' %}"
+        alt="Entre Bugs e Soluções"
+        class="footer-logo"
+        loading="lazy"
+      >
+      <p>
+        Entre Bugs e Soluções é um blog sobre programação,
+        aprendizado prático e soluções reais do dia a dia.
+      </p>
+    </div>
+
+    <nav class="footer-links" aria-label="Links de conteúdo">
+      <h4>Conteúdo</h4>
+      <ul>
+        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
+        <li><a href="#">Categorias</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-legal" aria-label="Links legais">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="{% url 'pages:privacy' %}">Política de Privacidade</a></li>
+        <li><a href="{% url 'pages:terms' %}">Termos de Uso</a></li>
+        <li><a href="{% url 'pages:about' %}">Sobre</a></li>
+        <li><a href="{% url 'pages:contact' %}">Contato</a></li>
+      </ul>
+    </nav>
+
+  </div>
+
+  <div class="footer-bottom">
+    © {% now "Y" %} Entre Bugs e Soluções. Todos os direitos reservados.
+  </div>
+</footer>
