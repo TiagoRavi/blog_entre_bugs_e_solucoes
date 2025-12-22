@@ -16,7 +16,7 @@
   "description": "{{ post.excerpt|default:''|escapejs }}",
   {% if post.featured_image %}
   "image": [
-    "{{ post.featured_image }}"
+    "{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}"
   ],
   {% endif %}
   "datePublished": "{{ post.published_at|date:'c' }}",

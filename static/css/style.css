@@ -261,7 +261,7 @@ main {
    ================================================== */
 
 .posts-section {
-  margin: 8rem auto 6.5rem; /* ⚠️ último valor sem unidade */
+  margin: 8rem auto 6.5rem auto;
 }
 
 /* ==================================================
