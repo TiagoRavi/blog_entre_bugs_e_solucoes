@@ -1,29 +1,6 @@
 /* ==================================================
-HERO
+BLOG LIST
 ================================================== */
-
-.hero-full {
-  position: relative;
-  height: 320px;
-  overflow: hidden;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,.75) 0%,
-    rgba(0,0,0,.55) 45%,
-    rgba(0,0,0,.25) 70%,
-    rgba(0,0,0,0) 100%
-  );
-}
-
-/* ==================================================
-POST LIST
-================================================== */
-
 .post-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -33,7 +10,6 @@ POST LIST
 /* ==================================================
 POST DETAIL
 ================================================== */
-
 .post-detail-layout {
   display: grid;
   grid-template-columns: minmax(0, 820px) 240px;
@@ -43,14 +19,4 @@ POST DETAIL
 .post-content {
   font-size: 1.05rem;
   line-height: 1.85;
-}
-
-/* ==================================================
-PAGINAÇÃO
-================================================== */
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin: 4rem 0 2rem;
 }

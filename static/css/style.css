@@ -1,14 +1,17 @@
-/* ==================================================
-   ENTRYPOINT CSS
-   Arquivo principal carregado no HTML
-   ================================================== */
+/* =========================================================
+   CSS ENTRYPOINT
+   Este arquivo apenas orquestra os imports
+   NÃO escrever regras CSS aqui
+   ========================================================= */
 
-@import url("./base.css");
-@import url("./layout.css");
-@import url("./components.css");
-@import url("./blog.css");
+/* 1. Base (reset, variáveis, tipografia) */
+@import url("base.css");
 
+/* 2. Layout estrutural */
+@import url("layout.css");
 
+/* 3. Componentes reutilizáveis */
+@import url("components.css");
 
-
-
+/* 4. Domínios específicos */
+@import url("blog.css");
