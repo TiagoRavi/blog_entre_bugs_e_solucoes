@@ -1,0 +1,45 @@
+/* ==================================================
+   RESET GLOBAL
+   ================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==================================================
+   VARIÁVEIS CSS (DESIGN TOKENS)
+   ================================================== */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1f2933;
+  --primary-color: #2563eb;
+  --secondary-color: #1e2023;
+  --border-color: #e5e7eb;
+
+  --font-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+}
+
+/* ==================================================
+   BASE DO SITE
+   ================================================== */
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+main {
+  width: 100%;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
