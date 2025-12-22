@@ -35,10 +35,11 @@ class PostAdmin(admin.ModelAdmin):
     # --------------------------
     # LISTAGEM
     # --------------------------
-    list_display = ("title", "category", "status", "published_at")
+    list_display = ("title", "status", "created_at")
     list_filter = ("status", "category")
-    search_fields = ("title", "excerpt", "content")
-    ordering = ("-published_at",)
+    search_fields = ("title", "excerpt")
+    prepopulated_fields = {"slug": ("title",)}
+    ordering = ("-created_at",)
 
     # Slug automático
     prepopulated_fields = {"slug": ("title",)}

@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
 
+    # Terceiros
+    "tinymce",
+
     # Apps locais
     "blog",
     "pages",
@@ -140,8 +143,82 @@ CLOUDINARY_STORAGE = {
     "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
 }
 
+TINYMCE_DEFAULT_CONFIG = {
+    "height": 550,
+    "menubar": False,
+    "branding": False,
+
+    "plugins": (
+        "advlist autolink lists link image charmap preview "
+        "searchreplace visualblocks code fullscreen "
+        "insertdatetime media table help wordcount"
+    ),
+
+    "toolbar": (
+        "undo redo | formatselect | "
+        "bold italic underline | "
+        "alignleft aligncenter alignright | "
+        "bullist numlist outdent indent | "
+        "link image | code | removeformat"
+    ),
+
+    # Endpoint padrão do django-tinymce
+    "images_upload_url": "/tinymce/upload/",
+
+    # 🔐 Handler com CSRF
+    "images_upload_handler": """
+        function (blobInfo, progress) {
+            return new Promise(function (resolve, reject) {
+                const xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+                xhr.open('POST', '/tinymce/upload/');
+
+                // CSRF token do cookie
+                const csrftoken = document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('csrftoken='))
+                    ?.split('=')[1];
+
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+
+                xhr.onload = function () {
+                    if (xhr.status !== 200) {
+                        reject('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+
+                    const json = JSON.parse(xhr.responseText);
+                    if (!json || typeof json.location !== 'string') {
+                        reject('Resposta inválida do servidor');
+                        return;
+                    }
+
+                    resolve(json.location);
+                };
+
+                xhr.onerror = function () {
+                    reject('Erro de rede');
+                };
+
+                const formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                xhr.send(formData);
+            });
+        }
+    """,
+
+    "content_style": """
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+            font-size: 16px;
+        }
+        img { max-width: 100%; height: auto; }
+    """,
+}
 
 # ======================================================
 # DEFAULTS
 # ======================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+

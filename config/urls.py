@@ -6,12 +6,19 @@ from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import PostSitemap, CategorySitemap
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
+from blog.views_tinymce import tinymce_image_upload
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
+    # 🔥 UPLOAD DO TINYMCE (ANTES DO INCLUDE)
+    path("tinymce/upload/", tinymce_image_upload),
+
     path("", include("blog.urls")),
     path("", include("pages.urls")),
+
+    # Restante do TinyMCE
+    path("tinymce/", include("tinymce.urls")),
 ]
 
 if settings.DEBUG:

@@ -16,7 +16,7 @@ POST CARD
 .post-card {
   background: #ffffff;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: hidden; /* protege imagem */
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
@@ -51,7 +51,7 @@ POST CARD BODY
 }
 
 /* ==================================================
-POST META (GRID + DETAIL BASE)
+POST META / TITLE
 ================================================== */
 
 .post-meta {
@@ -61,10 +61,6 @@ POST META (GRID + DETAIL BASE)
   margin-bottom: 0.5rem;
   text-transform: uppercase;
 }
-
-/* ==================================================
-POST TITLE
-================================================== */
 
 .post-title {
   font-size: 1.1rem;
@@ -82,7 +78,7 @@ POST TITLE
 }
 
 /* ==================================================
-POST EXCERPT (GRID)
+POST EXCERPT
 ================================================== */
 
 .post-excerpt {
@@ -107,8 +103,13 @@ POST DETAIL LAYOUT
   gap: 3.5rem;
 }
 
+/* 🔑 Permite que conteúdo longo encolha (CRÍTICO) */
+.post-detail-layout > * {
+  min-width: 0;
+}
+
 /* ==================================================
-POST HEADER BOX
+POST HEADER
 ================================================== */
 
 .post-header-box {
@@ -125,42 +126,15 @@ POST HEADER BOX
 }
 
 /* ==================================================
-POST TOC
+TABLE OF CONTENTS
 ================================================== */
 
 .post-toc {
   background: #f8fafc;
   border-left: 4px solid #0f172a;
   padding: 1.5rem 2rem;
-  margin: 0 auto 2rem;
+  margin-bottom: 2rem;
   border-radius: 12px;
-  max-width: 100%;
-}
-
-.post-toc h2 {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: #0f172a;
-}
-
-.post-toc ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.post-toc li + li {
-  margin-top: 0.5rem;
-}
-
-.post-toc a {
-  color: #334155;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.post-toc a:hover {
-  text-decoration: underline;
 }
 
 /* ==================================================
@@ -176,7 +150,7 @@ FEATURED IMAGE
 }
 
 /* ==================================================
-POST CONTENT
+POST CONTENT BOX
 ================================================== */
 
 .post-content-box {
@@ -184,20 +158,78 @@ POST CONTENT
   padding: 2rem;
   border-radius: 16px;
   max-width: 100%;
-  overflow: hidden; /* 🔒 evita estouro visual */
+  overflow: hidden; /* protege layout desktop */
 }
+
+/* ==================================================
+POST CONTENT BASE
+================================================== */
 
 .post-content {
   font-size: 1.05rem;
   line-height: 1.85;
   max-width: 100%;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
 }
 
+/* ==================================================
+IMAGES INSIDE CONTENT
+================================================== */
+
+.post-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;
+  margin: 2rem auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
 
 /* ==================================================
-POST SIDEBAR
+INLINE CODE
+================================================== */
+
+.post-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.95em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f1f5f9;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* ==================================================
+CODE BLOCKS
+================================================== */
+
+.post-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #e5e7eb;
+  -webkit-overflow-scrolling: touch; /* mobile smooth */
+}
+
+.post-content pre code {
+  white-space: pre;
+  background: none;
+  padding: 0;
+}
+
+/* ==================================================
+LONG LINKS (URLs)
+================================================== */
+
+.post-content a {
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+SIDEBAR
 ================================================== */
 
 .post-sidebar .sidebar-box {
@@ -217,39 +249,6 @@ AUTHOR BOX
   margin-top: 4rem;
   padding-top: 2rem;
   border-top: 1px solid #e5e7eb;
-}
-
-.author-avatar img {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.author-info {
-  max-width: 600px;
-}
-
-.author-info h4 {
-  margin: 0 0 0.25rem;
-  font-size: 1rem;
-  color: #0f172a;
-}
-
-.author-info p {
-  font-size: 0.9rem;
-  color: #475569;
-  margin-bottom: 0.5rem;
-}
-
-.author-link {
-  font-size: 0.85rem;
-  color: #2563eb;
-  text-decoration: none;
-}
-
-.author-link:hover {
-  text-decoration: underline;
 }
 
 /* ==================================================
@@ -285,5 +284,14 @@ RESPONSIVE
 
   .post-featured-image img {
     max-height: 260px;
+  }
+
+  /* 🔓 libera scroll interno só no mobile */
+  .post-content-box {
+    overflow: visible;
+  }
+
+  .post-content pre {
+    font-size: 0.85rem;
   }
 }

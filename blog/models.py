@@ -2,8 +2,11 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.text import Truncator, slugify
+from django.utils.html import strip_tags
 from django.urls import reverse
+
 from cloudinary.models import CloudinaryField
+from tinymce.models import HTMLField
 
 
 # ======================================================
@@ -13,8 +16,8 @@ class Category(models.Model):
     """
     Representa uma categoria de posts do blog.
 
-    Responsabilidade:
-    - Apenas armazenar dados da categoria
+    Responsabilidades:
+    - Armazenar dados da categoria
     - Garantir unicidade e consistência do slug
     """
 
@@ -47,7 +50,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         """
-        URL canônica da categoria.
+        Retorna a URL canônica da categoria.
         """
         return reverse("blog:category_posts", args=[self.slug])
 
@@ -57,6 +60,7 @@ class Category(models.Model):
         """
         if not self.slug:
             self.slug = slugify(self.name)
+
         super().save(*args, **kwargs)
 
 
@@ -66,7 +70,7 @@ class Category(models.Model):
 class PostQuerySet(models.QuerySet):
     """
     QuerySet customizado para encapsular
-    queries reutilizáveis do Post.
+    consultas reutilizáveis do Post.
     """
 
     def published(self):
@@ -138,18 +142,14 @@ class Post(models.Model):
         help_text="Gerado automaticamente se deixado em branco.",
     )
 
-    content = models.TextField(
-        verbose_name="Conteúdo",
-        help_text="Conteúdo principal do post (HTML permitido).",
-    )
+    # Conteúdo principal do post (HTML gerado pelo TinyMCE)
+    content = HTMLField(verbose_name="Conteúdo")
 
-    # --------------------------------------------------
-    # NOVO: IMAGEM DE DESTAQUE Cloudinary
-    # --------------------------------------------------
+    # Imagem estrutural do post (hero / card / SEO)
     featured_image = CloudinaryField(
-    verbose_name="Imagem de destaque",
-    blank=True,
-    null=True,
+        verbose_name="Imagem de destaque",
+        blank=True,
+        null=True,
     )
 
     status = models.CharField(
@@ -222,17 +222,22 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         """
         Responsabilidades:
-        - Gerar slug
-        - Gerar excerpt
+        - Gerar slug automaticamente
+        - Gerar excerpt limpo para SEO (sem HTML)
         - Garantir coerência entre status e published_at
         """
 
+        # Gera slug se não informado
         if not self.slug:
             self.slug = slugify(self.title)
 
+        # Gera excerpt automaticamente a partir do conteúdo
+        # Remove HTML para evitar tags no SEO
         if not self.excerpt:
-            self.excerpt = Truncator(self.content).chars(155)
+            texto_limpo = strip_tags(self.content)
+            self.excerpt = Truncator(texto_limpo).chars(155)
 
+        # Coerência de publicação
         if self.status == self.Status.PUBLISHED and not self.published_at:
             self.published_at = timezone.now()
 
