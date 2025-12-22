@@ -183,12 +183,18 @@ POST CONTENT
   background: #ffffff;
   padding: 2rem;
   border-radius: 16px;
+  max-width: 100%;
+  overflow: hidden; /* 🔒 evita estouro visual */
 }
 
 .post-content {
   font-size: 1.05rem;
   line-height: 1.85;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
+
 
 /* ==================================================
 POST SIDEBAR

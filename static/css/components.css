@@ -57,3 +57,120 @@ COOKIE BANNER
   border: none;
   cursor: pointer;
 }
+
+/* ==================================================
+HAMBURGER BUTTON
+================================================== */
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 3px;
+  background: #0f172a;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ==================================================
+MOBILE NAV
+================================================== */
+
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 72px;
+    right: 0;
+    background: #ffffff;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.25rem;
+
+    /* escondido por padrão */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .nav.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .nav-search {
+    width: 100%;
+  }
+
+  .nav-search input {
+    width: 100%;
+  }
+}
+
+/* ==================================================
+HAMBURGER → CLOSE (X)
+================================================== */
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+@media (max-width: 768px) {
+
+  .nav {
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav ul {
+    align-items: center;
+  }
+
+  /* 🔍 BUSCA CENTRALIZADA */
+  .nav-search {
+    width: 100%;
+    max-width: 280px;
+    margin: 1rem auto 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-search input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-search button {
+    background: #0f172a;
+    color: #ffffff;
+  }
+}

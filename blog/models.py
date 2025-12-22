@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import Truncator, slugify
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 # ======================================================
@@ -143,14 +144,14 @@ class Post(models.Model):
     )
 
     # --------------------------------------------------
-    # NOVO: IMAGEM DE DESTAQUE (WordPress-like)
+    # NOVO: IMAGEM DE DESTAQUE Cloudinary
     # --------------------------------------------------
-    featured_image = models.URLField(
-    verbose_name="Imagem de destaque (URL)",
+    featured_image = CloudinaryField(
+    verbose_name="Imagem de destaque",
     blank=True,
-    max_length=500,
-    help_text="URL da imagem (Cloudinary/CDN).",
+    null=True,
     )
+
     status = models.CharField(
         max_length=10,
         choices=Status.choices,

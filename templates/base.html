@@ -30,7 +30,6 @@
   >
 </head>
 
-
 <body>
 
   {% include "includes/cookie_banner.html" %}
@@ -42,8 +41,12 @@
 
   {% include "includes/footer.html" %}
 
+  <!-- JS GLOBAL -->
   <script src="{% static 'js/cookies.js' %}" defer></script>
   <script src="{% static 'js/menu.js' %}" defer></script>
+
+  <!-- JS ESPECÍFICO DA PÁGINA -->
+  {% block extra_scripts %}{% endblock %}
 
 </body>
 </html>

@@ -4,24 +4,16 @@ import os
 # ======================================================
 # BASE DIR
 # ======================================================
-# BASE_DIR aponta para a raiz do projeto
-# Ex: entre_bugs_e_solucoes/
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # ======================================================
 # CORE
 # ======================================================
-# SECRET_KEY NÃO deve ter fallback aqui.
-# - Em produção: deve vir obrigatoriamente do ambiente
-# - Em desenvolvimento: será definido no dev.py
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-# DEBUG deve ser controlado por ambiente
-# Nunca habilitar DEBUG=True no base.py
 DEBUG = False
 
-# ALLOWED_HOSTS será definido por ambiente (dev / prod)
 ALLOWED_HOSTS: list[str] = []
 
 
@@ -39,12 +31,15 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
 
+    # Third-party
+    "cloudinary",
+    "cloudinary_storage",
+
     # Apps locais
     "blog",
     "pages",
 ]
 
-# django.contrib.sites
 SITE_ID = 1
 
 
@@ -52,14 +47,11 @@ SITE_ID = 1
 # MIDDLEWARE
 # ======================================================
 MIDDLEWARE = [
-    # Segurança básica (headers, HTTPS, etc.)
     "django.middleware.security.SecurityMiddleware",
 
-    # WhiteNoise DEVE vir logo após SecurityMiddleware
-    # Responsável por servir arquivos estáticos em produção
+    # WhiteNoise deve vir logo após SecurityMiddleware
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
-    # Sessões e middlewares padrão
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -79,9 +71,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 # ======================================================
 # DATABASE
 # ======================================================
-# Banco de dados é definido por ambiente:
-# - dev.py → sqlite
-# - prod.py → Postgres / Render
 DATABASES = {}
 
 
@@ -91,13 +80,8 @@ DATABASES = {}
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-
-        # Templates globais do projeto
         "DIRS": [BASE_DIR / "templates"],
-
-        # Templates dentro dos apps
         "APP_DIRS": True,
-
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -114,18 +98,10 @@ TEMPLATES = [
 # PASSWORD VALIDATORS
 # ======================================================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
@@ -139,29 +115,30 @@ USE_TZ = True
 
 
 # ======================================================
-# STATIC FILES
+# STATIC FILES (WhiteNoise)
 # ======================================================
 STATIC_URL = "/static/"
-
-# Diretório final coletado pelo collectstatic
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Diretórios locais de desenvolvimento
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# WhiteNoise: compressão + cache com hash
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
 
 
 # ======================================================
-# MEDIA FILES
+# MEDIA / CLOUDINARY
 # ======================================================
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
+}
 
 
 # ======================================================

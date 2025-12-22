@@ -36,12 +36,10 @@
 
   <div class="container post-detail-layout">
 
-    <!-- ===============================
-         CONTEÚDO PRINCIPAL
-    ================================ -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="post-main">
 
-      <!-- 🔷 HEADER DO POST -->
+      <!-- HEADER -->
       <header class="post-header-box">
 
         <h1 class="post-title">{{ post.title }}</h1>
@@ -69,15 +67,13 @@
 
       </header>
 
-      <!-- 🔷 SUMÁRIO -->
+      <!-- SUMÁRIO -->
       <nav class="post-toc" aria-label="Sumário do artigo">
         <h2>Sumário</h2>
-        <ul>
-          {# futuramente preenchido automaticamente #}
-        </ul>
+        <ul></ul>
       </nav>
 
-      <!-- 🔷 IMAGEM DESTACADA -->
+      <!-- IMAGEM -->
       {% if post.featured_image %}
         <figure class="post-featured-image">
           <img
@@ -88,7 +84,7 @@
         </figure>
       {% endif %}
 
-      <!-- 🔷 ARTIGO -->
+      <!-- ARTIGO -->
       <section class="post-content-box">
 
         {% if post.excerpt %}
@@ -105,9 +101,7 @@
 
     </main>
 
-    <!-- ===============================
-         SIDEBAR
-    ================================ -->
+    <!-- SIDEBAR -->
     <aside class="post-sidebar">
 
       <div class="sidebar-box">
@@ -126,4 +120,8 @@
 
 </article>
 
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/post-toc.js' %}" defer></script>
 {% endblock %}
