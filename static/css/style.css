@@ -868,3 +868,48 @@ main {
     gap: 1rem;
   }
 }
+
+/* ==================================================
+   HAMBÚRGUER ICON — ESTILO MODERNO
+   ================================================== */
+
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Linhas do hambúrguer */
+.menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--secondary-color);
+  border-radius: 999px;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+}
+
+/* Ícone vira X quando aberto */
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
