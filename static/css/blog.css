@@ -63,7 +63,7 @@ POST META / TITLE
 }
 
 .post-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
@@ -125,16 +125,74 @@ POST HEADER
   text-transform: none;
 }
 
-/* ==================================================
-TABLE OF CONTENTS
-================================================== */
+/* ================================
+   Sumário do artigo (TOC)
+   ================================ */
 
 .post-toc {
-  background: #f8fafc;
-  border-left: 4px solid #0f172a;
-  padding: 1.5rem 2rem;
-  margin-bottom: 2rem;
-  border-radius: 12px;
+    border: 1px solid #e6a04c;
+    border-radius: 12px;
+    margin: 2.5rem 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Cabeçalho do Sumário */
+.post-toc h2 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    background-color: #0f172a;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Lista */
+.post-toc ul {
+    list-style: none;
+    padding: 1.25rem 1.5rem;
+    margin: 0;
+}
+
+/* Itens */
+.post-toc li {
+    margin-bottom: 0.75rem;
+}
+
+/* Links */
+.post-toc a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    display: block;
+}
+
+/* Hover */
+.post-toc a:hover {
+    text-decoration: underline;
+}
+
+/* Remove último espaçamento */
+.post-toc li:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .post-toc {
+        margin: 2rem 0;
+    }
+
+    .post-toc h2 {
+        font-size: 1rem;
+    }
+
+    .post-toc a {
+        font-size: 0.95rem;
+    }
 }
 
 /* ==================================================
@@ -294,4 +352,92 @@ RESPONSIVE
   .post-content pre {
     font-size: 0.85rem;
   }
+}
+
+/* ================================
+   Título principal do artigo
+   ================================ */
+
+.post-title {
+    font-size: 2.25rem; /* 36px */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #111;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 2.1rem; /* ~34px */
+    }
+}
+
+/* ================================
+   Tipografia dos artigos do blog
+   ================================ */
+
+.post-content {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.8;
+    color: #222;
+}
+
+/* Parágrafos */
+.post-content p {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #2c2c2c;
+}
+
+/* Título H2 */
+.post-content h2 {
+    font-size: 1.5rem; /* 24px */
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+}
+
+/* Título H3 */
+.post-content h3 {
+    font-size: 1.25rem; /* 20px */
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .post-content {
+        font-size: 1rem; /* 16px */
+    }
+
+    .post-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .post-content h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* ================================
+   Espaço entre menu e post_detail
+   ================================ */
+
+.post-detail {
+    padding-top: 5rem; /* respiro visual do menu */
+}
+
+.post-header-box {
+    margin-bottom: 2rem;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+    .post-detail {
+        padding-top: 2.5rem;
+    }
 }
