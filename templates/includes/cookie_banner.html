@@ -1,17 +1,48 @@
 <!-- ==================================================
-     COOKIE BANNER
+     Cookie Banner (LGPD)
+     - Aviso de uso de cookies
+     - Consentimento explícito
+     - Reversível via botão flutuante
 ================================================== -->
-<div id="cookie-banner" class="cookie-banner" hidden>
-  <div class="cookie-content">
-    <p>
+<div
+  id="cookie-banner"
+  class="cookie-banner"
+  role="dialog"
+  aria-label="Aviso de cookies"
+  aria-live="polite"
+>
+  <div class="cookie-banner__content">
+
+    <!-- Texto informativo + link legal -->
+    <p class="cookie-banner__text">
       Utilizamos cookies para melhorar sua experiência.
       Ao continuar navegando, você concorda com nossa
-      <a href="{% url 'pages:privacy' %}">Política de Privacidade</a>.
+      <a href="{% url 'pages:privacy' %}">
+        Política de Privacidade
+      </a>.
     </p>
 
-    <div class="cookie-actions">
-      <button id="cookie-accept" class="cookie-btn accept">Aceitar</button>
-      <button id="cookie-decline" class="cookie-btn decline">Recusar</button>
+    <!-- Ações do usuário -->
+    <div class="cookie-banner__actions">
+
+      <!-- Aceitar cookies -->
+      <button
+        id="cookie-accept"
+        class="cookie-btn cookie-btn--accept"
+        type="button"
+      >
+        Aceitar
+      </button>
+
+      <!-- Recusar cookies -->
+      <button
+        id="cookie-decline"
+        class="cookie-btn cookie-btn--decline"
+        type="button"
+      >
+        Recusar
+      </button>
+
     </div>
   </div>
 </div>

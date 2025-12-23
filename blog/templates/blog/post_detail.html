@@ -2,15 +2,24 @@
 {% load static %}
 
 {% block extra_head %}
-<!-- Schema.org: BlogPosting -->
+<!-- =========================================================
+     Schema.org — BlogPosting (SEO + EEAT)
+========================================================== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": "{{ request.build_absolute_uri }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ request.build_absolute_uri }}"
+  },
   "headline": "{{ post.title|escapejs }}",
   "description": "{{ post.excerpt|default:''|escapejs }}",
   {% if post.featured_image %}
-  "image": ["{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}"],
+  "image": [
+    "{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}"
+  ],
   {% endif %}
   "datePublished": "{{ post.published_at|date:'c' }}",
   "dateModified": "{{ post.updated_at|date:'c' }}",
@@ -31,15 +40,16 @@
 {% endblock %}
 
 {% block content %}
-
 <article class="post-detail">
 
   <div class="container post-detail-layout">
 
-    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- =========================================================
+         CONTEÚDO PRINCIPAL
+    ========================================================== -->
     <main class="post-main">
 
-      <!-- HEADER -->
+      <!-- Header do artigo -->
       <header class="post-header-box">
 
         <h1 class="post-article-title">{{ post.title }}</h1>
@@ -67,24 +77,26 @@
 
       </header>
 
-      <!-- SUMÁRIO -->
+      <!-- Sumário (TOC gerado via JS) -->
       <nav class="post-toc" aria-label="Sumário do artigo">
         <h2>Sumário</h2>
         <ul></ul>
       </nav>
 
-      <!-- IMAGEM -->
+      <!-- Imagem destacada -->
       {% if post.featured_image %}
         <figure class="post-featured-image">
           <img
             src="{{ post.featured_image.url }}"
             alt="{{ post.title }}"
             loading="eager"
+            width="800"
+            height="450"
           >
         </figure>
       {% endif %}
 
-      <!-- ARTIGO -->
+      <!-- Conteúdo do artigo -->
       <section class="post-content-box">
 
         {% if post.excerpt %}
@@ -99,13 +111,11 @@
 
       </section>
 
-      <!-- POSTS RELACIONADOS -->
+      <!-- Posts relacionados -->
       {% if related_posts %}
       <section class="post-related">
 
-        <h2 class="post-related-title">
-          Posts relacionados
-        </h2>
+        <h2 class="post-related-title">Posts relacionados</h2>
 
         <div class="post-related-grid">
           {% for related in related_posts %}
@@ -117,8 +127,10 @@
                   alt="{{ related.title }}"
                   class="post-image"
                   loading="lazy"
+                  width="400"
+                  height="225"
                 >
-              {%else%}
+              {% else %}
                 <div class="post-image post-image--placeholder" aria-hidden="true"></div>
               {% endif %}
 
@@ -146,32 +158,34 @@
 
     </main>
 
-    <!-- SIDEBAR -->
-    
-  <!-- Banner 1 -->
-  <div class="sidebar-box sidebar-banner">
-    <h3 class="sidebar-title">indicções</h3>
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+    <aside class="sidebar">
 
-    <a
-      href="https://amzn.to/4scXVC9"
-      target="_blank"
-      rel="nofollow sponsored noopener"
-    >
-      <img
-        src="{% static 'img/banners/codigolimpo.png' %}"
-        alt="Curso completo de Django"
-        loading="lazy"
-      >
-    </a>
-  </div>
+      <div class="sidebar-box sidebar-banner">
+        <h3 class="sidebar-title">Indicações</h3>
 
-</aside>
+        <a
+          href="https://amzn.to/4scXVC9"
+          target="_blank"
+          rel="nofollow sponsored noopener"
+        >
+          <img
+            src="{% static 'img/banners/codigolimpo.png' %}"
+            alt="Curso completo de Django"
+            loading="lazy"
+            width="300"
+            height="250"
+          >
+        </a>
+      </div>
 
+    </aside>
 
   </div>
 
 </article>
-
 {% endblock %}
 
 {% block extra_scripts %}

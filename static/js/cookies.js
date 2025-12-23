@@ -1,36 +1,67 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // --------------------------------------------------
+  // Elementos do DOM
+  // --------------------------------------------------
   const banner = document.getElementById("cookie-banner");
   const acceptBtn = document.getElementById("cookie-accept");
   const declineBtn = document.getElementById("cookie-decline");
+  const settingsBtn = document.getElementById("cookie-settings-btn");
 
-  // Se o banner não existir, não faz nada
-  if (!banner || !acceptBtn || !declineBtn) return;
+  // Se os elementos essenciais não existirem, aborta
+  if (!banner || !acceptBtn || !declineBtn) {
+    return;
+  }
 
+  const STORAGE_KEY = "cookie_consent";
   let consent = null;
 
+  // --------------------------------------------------
+  // Leitura segura do localStorage
+  // --------------------------------------------------
   try {
-    consent = localStorage.getItem("cookie_consent");
-  } catch (e) {
+    consent = localStorage.getItem(STORAGE_KEY);
+  } catch (error) {
     // localStorage indisponível (modo privado, políticas, etc.)
     banner.hidden = false;
     return;
   }
 
-  if (!consent) {
-    banner.hidden = false;
-  }
+  // Se já existe decisão, o banner começa oculto
+  // Caso contrário, ele é exibido
+  banner.hidden = !!consent;
 
+  // --------------------------------------------------
+  // Ações do banner
+  // --------------------------------------------------
+
+  // Aceitar cookies
   acceptBtn.addEventListener("click", function () {
     try {
-      localStorage.setItem("cookie_consent", "accepted");
-    } catch (e) {}
+      localStorage.setItem(STORAGE_KEY, "accepted");
+    } catch (error) {
+      // Falha silenciosa
+    }
+
     banner.hidden = true;
   });
 
+  // Recusar cookies
   declineBtn.addEventListener("click", function () {
     try {
-      localStorage.setItem("cookie_consent", "declined");
-    } catch (e) {}
+      localStorage.setItem(STORAGE_KEY, "declined");
+    } catch (error) {
+      // Falha silenciosa
+    }
+
     banner.hidden = true;
   });
+
+  // --------------------------------------------------
+  // Botão flutuante (reabrir configurações)
+  // --------------------------------------------------
+  if (settingsBtn) {
+    settingsBtn.addEventListener("click", function () {
+      banner.hidden = false;
+    });
+  }
 });

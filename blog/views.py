@@ -1,19 +1,21 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from .selectors import get_published_posts, get_related_posts
-
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
 from .models import Post, Category
 from .selectors import (
     get_latest_published_posts,
     get_published_posts,
+    get_related_posts,
 )
 
 
 # ======================================================
 # HOME
 # ======================================================
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class HomeView(ListView):
     """
     Página inicial do blog.
@@ -39,6 +41,7 @@ class HomeView(ListView):
 # ======================================================
 # LISTAGEM DO BLOG + BUSCA
 # ======================================================
+@method_decorator(cache_page(60 * 10), name="dispatch")
 class BlogListView(ListView):
     """
     Página principal do blog com paginação e busca.
@@ -50,11 +53,14 @@ class BlogListView(ListView):
 
     def get_queryset(self):
         """
-        Retorna posts publicados com suporte a busca.
+        Retorna posts publicados com suporte a busca (?q=...).
+
+        OBS:
+        - Cache é seguro porque a query string
+          faz parte da chave do cache.
         """
         queryset = get_published_posts()
 
-        # Busca simples por query string (?q=...)
         q = self.request.GET.get("q")
         if q:
             queryset = queryset.filter(
@@ -69,6 +75,7 @@ class BlogListView(ListView):
 # ======================================================
 # DETALHE DO POST
 # ======================================================
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class PostDetailView(DetailView):
     """
     Página de detalhe do post.
@@ -84,11 +91,15 @@ class PostDetailView(DetailView):
 
     def get_queryset(self):
         """
-        Retorna apenas posts publicados.
+        Retorna apenas posts publicados
+        com relações otimizadas.
         """
-        return get_published_posts().select_related(
-            "category",
-            "author",
+        return (
+            get_published_posts()
+            .select_related(
+                "category",
+                "author",
+            )
         )
 
     def get_context_data(self, **kwargs):
@@ -97,7 +108,7 @@ class PostDetailView(DetailView):
         """
         context = super().get_context_data(**kwargs)
 
-        post = self.object  # post atual
+        post = self.object
 
         context["related_posts"] = get_related_posts(
             post=post,
@@ -107,10 +118,10 @@ class PostDetailView(DetailView):
         return context
 
 
-
 # ======================================================
 # LISTAGEM POR CATEGORIA
 # ======================================================
+@method_decorator(cache_page(60 * 10), name="dispatch")
 class CategoryPostListView(ListView):
     """
     Página de listagem de posts por categoria.
@@ -144,9 +155,10 @@ class CategoryPostListView(ListView):
         - Retorna 404 se a categoria não existir
         """
         context = super().get_context_data(**kwargs)
+
         context["category"] = get_object_or_404(
             Category,
             slug=self.kwargs["slug"],
         )
-        return context
 
+        return context

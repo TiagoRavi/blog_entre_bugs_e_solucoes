@@ -15,10 +15,6 @@ from tinymce.models import HTMLField
 class Category(models.Model):
     """
     Representa uma categoria de posts do blog.
-
-    Responsabilidades:
-    - Armazenar dados da categoria
-    - Garantir unicidade e consistência do slug
     """
 
     name = models.CharField(
@@ -49,9 +45,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        """
-        Retorna a URL canônica da categoria.
-        """
+        """URL canônica da categoria."""
         return reverse("blog:category_posts", args=[self.slug])
 
     def save(self, *args, **kwargs):
@@ -69,14 +63,12 @@ class Category(models.Model):
 # ======================================================
 class PostQuerySet(models.QuerySet):
     """
-    QuerySet customizado para encapsular
-    consultas reutilizáveis do Post.
+    QuerySet customizado para consultas reutilizáveis do Post.
     """
 
     def published(self):
         """
-        Retorna apenas posts publicados
-        e com data válida.
+        Retorna apenas posts publicados e com data válida.
         """
         return self.filter(
             status=Post.Status.PUBLISHED,
@@ -90,11 +82,6 @@ class PostQuerySet(models.QuerySet):
 class Post(models.Model):
     """
     Modelo principal do Blog.
-
-    Responsabilidades:
-    - Representar um artigo/post
-    - Conter regras essenciais do domínio
-    - NÃO conter lógica de apresentação
     """
 
     # --------------------------
@@ -142,10 +129,11 @@ class Post(models.Model):
         help_text="Gerado automaticamente se deixado em branco.",
     )
 
-    # Conteúdo principal do post (HTML gerado pelo TinyMCE)
-    content = HTMLField(verbose_name="Conteúdo")
+    content = HTMLField(
+        verbose_name="Conteúdo",
+        help_text="Conteúdo HTML gerado pelo editor.",
+    )
 
-    # Imagem estrutural do post (hero / card / SEO)
     featured_image = CloudinaryField(
         verbose_name="Imagem de destaque",
         blank=True,
@@ -201,39 +189,42 @@ class Post(models.Model):
     # REGRAS DE DOMÍNIO
     # ==================================================
     def publish(self):
-        """
-        Publica o post explicitamente.
-        """
+        """Publica o post explicitamente."""
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
         self.save(update_fields=["status", "published_at"])
 
     def unpublish(self):
-        """
-        Retorna o post para rascunho.
-        """
+        """Retorna o post para rascunho."""
         self.status = self.Status.DRAFT
         self.published_at = None
         self.save(update_fields=["status", "published_at"])
 
     # ==================================================
-    # HOOK CENTRAL DE CONSISTÊNCIA
+    # SAVE — CONSISTÊNCIA CENTRAL
     # ==================================================
     def save(self, *args, **kwargs):
         """
         Responsabilidades:
-        - Gerar slug automaticamente
-        - Gerar excerpt limpo para SEO (sem HTML)
+        - Gerar slug automaticamente (com fallback seguro)
+        - Gerar excerpt limpo para SEO
         - Garantir coerência entre status e published_at
         """
 
-        # Gera slug se não informado
+        # Slug automático
         if not self.slug:
-            self.slug = slugify(self.title)
+            base_slug = slugify(self.title)
+            slug = base_slug
+            counter = 1
 
-        # Gera excerpt automaticamente a partir do conteúdo
-        # Remove HTML para evitar tags no SEO
-        if not self.excerpt:
+            while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+
+            self.slug = slug
+
+        # Excerpt automático (remove HTML)
+        if not self.excerpt and self.content:
             texto_limpo = strip_tags(self.content)
             self.excerpt = Truncator(texto_limpo).chars(155)
 
@@ -250,7 +241,5 @@ class Post(models.Model):
     # URL CANÔNICA
     # ==================================================
     def get_absolute_url(self):
-        """
-        Retorna a URL canônica do post.
-        """
+        """URL canônica do post."""
         return reverse("blog:post_detail", args=[self.slug])

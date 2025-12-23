@@ -2,20 +2,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <!-- =========================================================
+       Meta básicos
+  ========================================================== -->
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta
     name="description"
     content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
   >
 
-  {% block extra_head %}{% endblock %}
+  <!-- =========================================================
+       Canonical URL (SEO crítico)
+  ========================================================== -->
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
-  <!-- 🔥 PRELOAD DA HERO (LCP) -->
+  <!-- =========================================================
+       Open Graph (Facebook, LinkedIn, WhatsApp)
+  ========================================================== -->
+  <meta property="og:title" content="{% block og_title %}Entre Bugs e Soluções{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:image" content="{% block og_image %}{% static 'img/logo.png' %}{% endblock %}">
+
+  <!-- =========================================================
+       Twitter Cards
+  ========================================================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}Entre Bugs e Soluções{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Blog sobre programação e soluções reais{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{% static 'img/logo.png' %}{% endblock %}">
+
+  <!-- =========================================================
+       Favicon
+  ========================================================== -->
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+
+  <!-- =========================================================
+       Preload da imagem LCP (Hero)
+       Ajuste para WEBP quando possível
+  ========================================================== -->
   <link
     rel="preload"
     as="image"
@@ -23,30 +53,56 @@
     fetchpriority="high"
   >
 
-  <!-- 🎨 CSS PRINCIPAL -->
-  <link
-    rel="stylesheet"
-    href="{% static 'css/style.css' %}"
-  >
+  <!-- =========================================================
+       CSS principal
+  ========================================================== -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <!-- =========================================================
+       Head extra por página
+  ========================================================== -->
+  {% block extra_head %}{% endblock %}
+
+  <!-- =========================================================
+       Cookie Settings Button (flutuante)
+  ========================================================== -->
+  {% include "includes/cookie_button.html" %}
+
 </head>
 
 <body>
 
+  <!-- =========================================================
+       Cookie banner (LGPD)
+  ========================================================== -->
   {% include "includes/cookie_banner.html" %}
+
+  <!-- =========================================================
+       Header
+  ========================================================== -->
   {% include "includes/header.html" %}
 
+  <!-- =========================================================
+       Conteúdo principal
+  ========================================================== -->
   <main id="content">
     {% block content %}{% endblock %}
   </main>
 
+  <!-- =========================================================
+       Footer
+  ========================================================== -->
   {% include "includes/footer.html" %}
 
-  <!-- JS GLOBAL -->
+  <!-- =========================================================
+       JS global
+  ========================================================== -->
   <script src="{% static 'js/cookies.js' %}" defer></script>
   <script src="{% static 'js/menu.js' %}" defer></script>
 
-  <!-- JS ESPECÍFICO DA PÁGINA -->
+  <!-- =========================================================
+       JS específico por página
+  ========================================================== -->
   {% block extra_scripts %}{% endblock %}
-
 </body>
 </html>
