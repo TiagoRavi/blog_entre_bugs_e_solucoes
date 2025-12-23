@@ -4,12 +4,14 @@
   <div class="container footer-grid">
 
     <div class="footer-brand">
-      <img
-        src="{% static 'img/logo.png' %}"
-        alt="Entre Bugs e Soluções"
-        class="footer-logo"
-        loading="lazy"
-      >
+      <a href="{% url 'blog:post_list' %}" class="footer-logo-link">
+        <img
+      src="{% static 'img/logo.png' %}"
+      alt="Entre Bugs e Soluções"
+      class="footer-logo"
+      loading="lazy"
+        >
+      </a>
       <p>
         Entre Bugs e Soluções é um blog sobre programação,
         aprendizado prático e soluções reais do dia a dia.

@@ -58,6 +58,7 @@ FOOTER
   margin-top: 6rem;
 }
 
+/* Grid principal */
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -67,6 +68,7 @@ FOOTER
   padding: 4.5rem 1rem 3.5rem;
 }
 
+/* Footer bottom */
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   text-align: center;
@@ -98,4 +100,79 @@ FOOTER – LISTAS E LINKS
 .site-footer a:hover {
   color: #ffffff;
   text-decoration: underline;
+}
+
+/* ==================================================
+FOOTER – LOGO
+================================================== */
+
+.footer-logo-link {
+  display: inline-block;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-logo-link:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.footer-logo {
+  max-width: 140px;
+  height: auto;
+}
+
+/* 
+  Mobile: logo ligeiramente maior para reforçar branding
+  em layout vertical centralizado
+*/
+
+@media (max-width: 768px) {
+  .footer-logo {
+    max-width: 150px;
+  }
+}
+
+/* ==================================================
+FOOTER – RESPONSIVO
+================================================== */
+
+@media (max-width: 768px) {
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 3rem 1.25rem 2.5rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .footer-brand p {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .footer-links,
+  .footer-legal {
+    text-align: center;
+  }
+
+  .footer-links h4,
+  .footer-legal h4 {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .site-footer li {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.8rem;
+    padding: 1.25rem 1rem;
+  }
 }
