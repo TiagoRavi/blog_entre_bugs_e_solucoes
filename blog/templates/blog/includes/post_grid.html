@@ -4,14 +4,14 @@
 
       {% if post.featured_image %}
         <img
-          src="{{ post.featured_image }}"
+          src="{{ post.featured_image.url }}"
           alt="{{ post.title }}"
           class="post-image"
           loading="lazy"
         >
       {% else %}
-  <div class="post-image" aria-hidden="true"></div>
-{% endif %}
+        <div class="post-image" aria-hidden="true"></div>
+      {% endif %}
 
       <div class="post-card-body">
 
@@ -41,3 +41,4 @@
     </article>
   {% endfor %}
 </section>
+
