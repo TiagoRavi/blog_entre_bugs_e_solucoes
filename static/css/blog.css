@@ -62,33 +62,6 @@ POST CARD BODY
 }
 
 /* ==================================================
-POST META / TITLE
-================================================== */
-
-.post-meta {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #64748b;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-
-.post-title {
-  font-size: 1.2rem;
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
-}
-
-.post-title a {
-  color: #0f172a;
-  text-decoration: none;
-}
-
-.post-title a:hover {
-  text-decoration: underline;
-}
-
-/* ==================================================
 POST EXCERPT
 ================================================== */
 
