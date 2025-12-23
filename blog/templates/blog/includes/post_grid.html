@@ -27,11 +27,11 @@
           {% endif %}
         </div>
 
-        <h3 class="post-title">
+        <h2 class="post-card-title">
           <a href="{% url 'blog:post_detail' post.slug %}">
             {{ post.title }}
           </a>
-        </h3>
+        </h2>
 
         <p class="post-excerpt">
           {{ post.excerpt|truncatechars:155 }}

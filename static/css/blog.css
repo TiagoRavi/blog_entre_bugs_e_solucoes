@@ -9,24 +9,35 @@ BLOG LIST / GRID
   margin-top: 4rem;
 }
 
-/* ==================================================
-POST CARD
-================================================== */
+/* ================================
+   Título do post (CARD / GRID)
+   ================================ */
 
-.post-card {
-  background: #ffffff;
-  border-radius: 16px;
-  overflow: hidden; /* protege imagem */
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.post-card-title {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #0f172a;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 3;
+  line-clamp: 3; /* padrão futuro */
+
+  overflow: hidden;
 }
 
-.post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.post-card-title a {
+  color: inherit;
+  text-decoration: none;
 }
+
+.post-card-title a:hover {
+  text-decoration: underline;
+}
+
 
 /* ==================================================
 POST CARD IMAGE
@@ -88,8 +99,11 @@ POST EXCERPT
   margin-top: auto;
 
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 3;
+  line-clamp: 3; /* padrão futuro */
+
   overflow: hidden;
 }
 
@@ -358,7 +372,7 @@ RESPONSIVE
    Título principal do artigo
    ================================ */
 
-.post-title {
+.post-article-title {
     font-size: 2.25rem; /* 36px */
     line-height: 1.2;
     margin-bottom: 1rem;
@@ -368,8 +382,8 @@ RESPONSIVE
 
 /* Mobile */
 @media (max-width: 768px) {
-    .post-title {
-        font-size: 2.1rem; /* ~34px */
+    .post-article-title {
+        font-size: 2rem;
     }
 }
 
