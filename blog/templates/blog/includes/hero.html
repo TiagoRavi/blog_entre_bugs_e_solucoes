@@ -3,27 +3,35 @@
 <section class="hero-full">
 
   <picture>
-    <!-- MOBILE -->
+    <!-- DESKTOP GRANDE -->
     <source
-      media="(max-width: 640px)"
+      media="(min-width: 1441px)"
       srcset="{% static 'img/hero/hero-desktop.png' %}"
+    >
+
+    <!-- NOTEBOOK -->
+    <source
+      media="(min-width: 1025px)"
+      srcset="{% static 'img/hero/hero-notebook.webp' %}"
     >
 
     <!-- TABLET -->
     <source
-      media="(max-width: 1024px)"
-      srcset="{% static 'img/hero/hero-tablet.jpg' %}"
+      media="(min-width: 641px)"
+      srcset="{% static 'img/hero/hero-tablet.webp' %}"
     >
 
-    <!-- DESKTOP (fallback) -->
+    <!-- MOBILE (fallback) -->
     <img
-      src="{% static 'img/hero/hero-desktop.png' %}"
+      src="{% static 'img/hero/hero-mobile.webp' %}"
       alt="Entre Bugs e Soluções - Programação prática e soluções reais"
       class="hero-image"
       loading="eager"
+      decoding="async"
     >
   </picture>
 
   <div class="hero-overlay"></div>
 
 </section>
+

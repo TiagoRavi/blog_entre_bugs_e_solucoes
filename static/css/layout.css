@@ -3,20 +3,38 @@ HEADER
 ================================================== */
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   background: #ffffff;
   border-bottom: 1px solid var(--border-color);
 }
 
-.site-header .container {
+/* Container do header */
+.header-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+
+  padding: 0.4rem 1rem;
+  min-height: 64px; /* garante padrão visual */
 }
 
+/* ==================================================
+LOGO (HEADER)
+================================================== */
+
 .site-logo {
-  height: 60px;
+  height: 75px;      /* 🔑 controla altura do header */
+  width: auto;
   display: block;
+}
+
+/* Evita que o <a> crie altura extra */
+.brand {
+  display: flex;
+  align-items: center;
 }
 
 /* ==================================================
@@ -26,26 +44,44 @@ NAV
 .nav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .nav ul {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
   margin: 0;
   padding: 0;
 }
 
+/* Links do menu */
 .nav a {
-  font-weight: 700;
+  font-weight: 600;     /* mais elegante que 700 */
+  font-size: 0.95rem;
+  line-height: 1;       /* 🔑 remove altura invisível */
+  padding: 0.25rem 0;
+
   text-decoration: none;
   color: var(--secondary-color);
 }
 
 .nav a:hover {
   color: var(--primary-color);
+}
+
+
+
+
+.nav a:hover {
+  color: var(--primary-color);
+}
+
+.nav input[type="search"] {
+  height: 36px;
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
 }
 
 /* ==================================================

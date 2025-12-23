@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
+from .selectors import get_published_posts, get_related_posts
+
 
 from .models import Post, Category
 from .selectors import (
@@ -71,9 +73,9 @@ class PostDetailView(DetailView):
     """
     Página de detalhe do post.
 
-    Importante:
-    - Nunca expõe rascunhos
-    - Sempre usa selector
+    Responsabilidades:
+    - Exibir apenas posts publicados
+    - Injetar posts relacionados no contexto
     """
 
     model = Post
@@ -84,7 +86,26 @@ class PostDetailView(DetailView):
         """
         Retorna apenas posts publicados.
         """
-        return get_published_posts()
+        return get_published_posts().select_related(
+            "category",
+            "author",
+        )
+
+    def get_context_data(self, **kwargs):
+        """
+        Adiciona posts relacionados ao contexto do template.
+        """
+        context = super().get_context_data(**kwargs)
+
+        post = self.object  # post atual
+
+        context["related_posts"] = get_related_posts(
+            post=post,
+            limit=3,
+        )
+
+        return context
+
 
 
 # ======================================================
@@ -128,3 +149,4 @@ class CategoryPostListView(ListView):
             slug=self.kwargs["slug"],
         )
         return context
+

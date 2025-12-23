@@ -85,3 +85,17 @@ def get_posts_by_category(category: Category) -> QuerySet[Post]:
         .filter(category=category)
         .order_by("-published_at")
     )
+
+def get_related_posts(post, limit=3):
+    if not post.category:
+        return Post.objects.none()
+
+    return (
+        Post.objects
+        .filter(
+            category=post.category,
+            status=Post.Status.PUBLISHED,
+        )
+        .exclude(pk=post.pk)
+        .order_by('-published_at')[:limit]
+    )

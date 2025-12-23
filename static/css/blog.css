@@ -86,7 +86,7 @@ POST DETAIL LAYOUT
 
 .post-detail-layout {
   display: grid;
-  grid-template-columns: minmax(0, 820px) 240px;
+  grid-template-columns: minmax(0, 820px) 350px;
   gap: 3.5rem;
 }
 
@@ -428,3 +428,99 @@ RESPONSIVE
         padding-top: 2.5rem;
     }
 }
+
+/* ================================
+   Posts Relacionados
+   ================================ */
+
+.post-related {
+  margin-top: 4rem;
+}
+
+.post-related-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.post-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards sempre lado a lado */
+  gap: 2rem;
+}
+
+/* Placeholder para cards sem imagem */
+.post-image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    #e5e7eb,
+    #f1f5f9
+  );
+  position: relative;
+}
+
+/* Ícone opcional */
+.post-image--placeholder::after {
+  content: "📄";
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .post-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .post-related-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+SIDEBAR – BANNERS
+================================ */
+
+.post-sidebar {
+  position: sticky;
+  top: 90px; /* abaixo do header */
+}
+
+.sidebar-box {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 16px;
+  margin-bottom: 1.75rem;
+}
+
+.sidebar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #0f172a;
+}
+
+/* Banner maior na sidebar */
+.sidebar-banner img {
+  width: 100%;
+  max-width: 500px;   /* 👈 aumenta visualmente */
+  margin: 0 auto;     /* centraliza */
+  height: auto;
+
+  border-radius: 12px;
+  display: block;
+}
+
+.sidebar-banner a:hover img {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+

@@ -42,7 +42,7 @@
       <!-- HEADER -->
       <header class="post-header-box">
 
-        <h1 class="post-title">{{ post.title }}</h1>
+        <h1 class="post-article-title">{{ post.title }}</h1>
 
         <div class="post-meta">
           {% if post.author %}
@@ -99,22 +99,74 @@
 
       </section>
 
+      <!-- POSTS RELACIONADOS -->
+      {% if related_posts %}
+      <section class="post-related">
+
+        <h2 class="post-related-title">
+          Posts relacionados
+        </h2>
+
+        <div class="post-related-grid">
+          {% for related in related_posts %}
+            <article class="post-card">
+
+              {% if related.featured_image %}
+                <img
+                  src="{{ related.featured_image.url }}"
+                  alt="{{ related.title }}"
+                  class="post-image"
+                  loading="lazy"
+                >
+              {%else%}
+                <div class="post-image post-image--placeholder" aria-hidden="true"></div>
+              {% endif %}
+
+              <div class="post-card-body">
+
+                <div class="post-meta">
+                  <time datetime="{{ related.published_at|date:'Y-m-d' }}">
+                    {{ related.published_at|date:"d/m/Y" }}
+                  </time>
+                </div>
+
+                <h3 class="post-card-title">
+                  <a href="{% url 'blog:post_detail' related.slug %}">
+                    {{ related.title }}
+                  </a>
+                </h3>
+
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+      </section>
+      {% endif %}
+
     </main>
 
     <!-- SIDEBAR -->
-    <aside class="post-sidebar">
+    
+  <!-- Banner 1 -->
+  <div class="sidebar-box sidebar-banner">
+    <h3 class="sidebar-title">indicções</h3>
 
-      <div class="sidebar-box">
-        <strong>Recomendado</strong>
-        <p>Banner afiliado</p>
-      </div>
+    <a
+      href="https://amzn.to/4scXVC9"
+      target="_blank"
+      rel="nofollow sponsored noopener"
+    >
+      <img
+        src="{% static 'img/banners/codigolimpo.png' %}"
+        alt="Curso completo de Django"
+        loading="lazy"
+      >
+    </a>
+  </div>
 
-      <div class="sidebar-box">
-        <strong>Curso indicado</strong>
-        <p>Outro banner</p>
-      </div>
+</aside>
 
-    </aside>
 
   </div>
 
