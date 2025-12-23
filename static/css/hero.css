@@ -1,0 +1,152 @@
+/* ==================================================
+HERO – CONTAINER PRINCIPAL (full-bleed)
+================================================== */
+.hero-full {
+  position: relative;
+
+  /* Usa a largura real da viewport (ignora containers) */
+  width: 100vw;
+
+  /* Altura pensada para mobile-first */
+  height: 80vh;
+  min-height: 480px;
+
+  /* Truque para centralizar o 100vw mesmo dentro de layout */
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  overflow: hidden;
+}
+
+/* ==================================================
+PICTURE – precisa ocupar todo o hero
+(evita imagem estreita no mobile)
+================================================== */
+.hero-full picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==================================================
+IMAGEM – comportamento responsivo correto
+================================================== */
+.hero-full img {
+  display: block;         /* remove gaps inline */
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;      /* preenche o hero */
+  object-position: center top; /* prioriza rosto no mobile */
+}
+
+/* ==================================================
+OVERLAY – usado para contraste do texto
+================================================== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* ==================================================
+AJUSTES PARA DESKTOP
+================================================== */
+@media (min-width: 1024px) {
+  .hero-full {
+    height: 75vh;
+    min-height: 600px;
+    max-height: 900px;
+  }
+
+  /* No desktop o corte pode ser central */
+  .hero-full img {
+    object-position: center center;
+  }
+}
+
+/* ==================================================
+CONTEÚDO DO HERO (TEXTO)
+================================================== */
+.hero-content {
+  position: absolute;
+
+  /* ⬇️ AJUSTE PRINCIPAL:
+     desce o texto para NÃO cobrir o rosto */
+  top: 50%;
+
+  left: 6%;
+  z-index: 3;
+
+  max-width: 520px;
+  color: #fff;
+}
+
+/* ==================================================
+MARCA / ASSINATURA
+================================================== */
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  opacity: 0.9;
+}
+
+.hero-code {
+  color: #9eff00; /* verde tech */
+  font-weight: 700;
+}
+
+.hero-brand-text {
+  line-height: 1.2;
+}
+
+/* ==================================================
+TÍTULO PRINCIPAL
+================================================== */
+.hero-title {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+.hero-title span {
+  color: #9eff00;
+}
+
+/* ==================================================
+SUBTÍTULO
+================================================== */
+.hero-subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ==================================================
+AJUSTES DE TEXTO PARA DESKTOP
+================================================== */
+@media (min-width: 1024px) {
+  .hero-content {
+    /* No desktop o rosto ocupa menos área */
+    top: 25%;
+    left: 10%;
+    max-width: 600px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+}

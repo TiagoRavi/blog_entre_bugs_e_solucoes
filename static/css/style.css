@@ -15,3 +15,6 @@
 
 /* 4. Domínios específicos */
 @import url("blog.css");
+
+/* 5. hero*/
+@import url("hero.css");
