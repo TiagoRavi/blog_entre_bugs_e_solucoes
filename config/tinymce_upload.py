@@ -1,19 +1,22 @@
 from cloudinary.uploader import upload
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.admin.views.decorators import staff_member_required
 
 
 @csrf_exempt
-@staff_member_required
 def tinymce_upload(request):
     """
     Upload handler do TinyMCE usando Cloudinary.
 
     - Não usa filesystem local
     - Compatível com Render Free
-    - Restrito a usuários staff
+    - Retorna JSON (obrigatório para AJAX)
+    - Segurança baseada em autenticação do usuário
     """
+
+    if not request.user.is_authenticated or not request.user.is_staff:
+        return JsonResponse({"error": "Unauthorized"}, status=403)
+
     if request.method != "POST" or "file" not in request.FILES:
         return JsonResponse({"error": "Invalid request"}, status=400)
 
