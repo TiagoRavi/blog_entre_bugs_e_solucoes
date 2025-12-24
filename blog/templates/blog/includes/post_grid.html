@@ -2,43 +2,51 @@
   {% for post in posts %}
     <article class="post-card">
 
-      {% if post.featured_image %}
+  <a href="{% url 'blog:post_detail' post.slug %}" class="post-card-link">
+
+    {% if post.featured_image %}
+      <figure class="post-card-image">
         <img
           src="{{ post.featured_image.url }}"
           alt="{{ post.title }}"
-          class="post-image"
           loading="lazy"
+          width="400"
+          height="225"
         >
-      {% else %}
-        <div class="post-image" aria-hidden="true"></div>
-      {% endif %}
+        {% if post.category %}
+          <span class="post-card-category">
+            {{ post.category.name }}
+          </span>
+        {% endif %}
+      </figure>
+    {% else %}
+      <figure class="post-card-image post-card-image--placeholder"></figure>
+    {% endif %}
 
-      <div class="post-card-body">
+    <div class="post-card-body">
 
-        <div class="post-meta">
-          <time datetime="{{ post.published_at|date:'Y-m-d' }}">
-            {{ post.published_at|date:"d/m/Y" }}
-          </time>
-          ·
-          {% if post.category %}
-            <span class="post-category">
-              {{ post.category.name|upper }}
-            </span>
-          {% endif %}
-        </div>
+      <time class="post-card-date" datetime="{{ post.published_at|date:'Y-m-d' }}">
+        {{ post.published_at|date:"d M Y" }}
+      </time>
 
-        <h2 class="post-card-title">
-          <a href="{% url 'blog:post_detail' post.slug %}">
-            {{ post.title }}
-          </a>
-        </h2>
+      <h2 class="post-card-title">
+        {{ post.title|truncatechars:65 }}
+      </h2>
 
-        <p class="post-excerpt">
-          {{ post.excerpt|truncatechars:155 }}
-        </p>
+      <p class="post-excerpt">
+        {{ post.excerpt|truncatechars:120 }}
+      </p>
 
-      </div>
-    </article>
+      <span class="post-card-cta">
+        Ler artigo →
+      </span>
+
+    </div>
+
+  </a>
+
+</article>
+
   {% endfor %}
 </section>
 
