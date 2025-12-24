@@ -1,67 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // --------------------------------------------------
-  // Elementos do DOM
-  // --------------------------------------------------
   const banner = document.getElementById("cookie-banner");
   const acceptBtn = document.getElementById("cookie-accept");
   const declineBtn = document.getElementById("cookie-decline");
   const settingsBtn = document.getElementById("cookie-settings-btn");
 
-  // Se os elementos essenciais não existirem, aborta
-  if (!banner || !acceptBtn || !declineBtn) {
-    return;
-  }
+  if (!banner || !acceptBtn || !declineBtn || !settingsBtn) return;
 
   const STORAGE_KEY = "cookie_consent";
-  let consent = null;
+  const consent = localStorage.getItem(STORAGE_KEY);
 
-  // --------------------------------------------------
-  // Leitura segura do localStorage
-  // --------------------------------------------------
-  try {
-    consent = localStorage.getItem(STORAGE_KEY);
-  } catch (error) {
-    // localStorage indisponível (modo privado, políticas, etc.)
-    banner.hidden = false;
-    return;
+  // Estado inicial
+  if (consent) {
+    banner.classList.add("is-hidden");
+    settingsBtn.classList.remove("is-hidden");
+  } else {
+    banner.classList.add("is-hidden");
+    settingsBtn.classList.remove("is-hidden");
   }
 
-  // Se já existe decisão, o banner começa oculto
-  // Caso contrário, ele é exibido
-  banner.hidden = !!consent;
-
-  // --------------------------------------------------
-  // Ações do banner
-  // --------------------------------------------------
-
-  // Aceitar cookies
-  acceptBtn.addEventListener("click", function () {
-    try {
-      localStorage.setItem(STORAGE_KEY, "accepted");
-    } catch (error) {
-      // Falha silenciosa
-    }
-
-    banner.hidden = true;
+  // Abrir banner
+  settingsBtn.addEventListener("click", () => {
+    banner.classList.remove("is-hidden");
+    settingsBtn.classList.add("is-hidden");
   });
 
-  // Recusar cookies
-  declineBtn.addEventListener("click", function () {
-    try {
-      localStorage.setItem(STORAGE_KEY, "declined");
-    } catch (error) {
-      // Falha silenciosa
-    }
-
-    banner.hidden = true;
-  });
-
-  // --------------------------------------------------
-  // Botão flutuante (reabrir configurações)
-  // --------------------------------------------------
-  if (settingsBtn) {
-    settingsBtn.addEventListener("click", function () {
-      banner.hidden = false;
-    });
+  function closeBanner(value) {
+    localStorage.setItem(STORAGE_KEY, value);
+    banner.classList.add("is-hidden");
+    settingsBtn.classList.remove("is-hidden");
   }
+
+  acceptBtn.addEventListener("click", () => closeBanner("accepted"));
+  declineBtn.addEventListener("click", () => closeBanner("declined"));
 });

@@ -6,26 +6,20 @@
 ================================================== -->
 <div
   id="cookie-banner"
-  class="cookie-banner"
+  class="cookie-banner is-hidden"
   role="dialog"
   aria-label="Aviso de cookies"
   aria-live="polite"
 >
   <div class="cookie-banner__content">
 
-    <!-- Texto informativo + link legal -->
     <p class="cookie-banner__text">
       Utilizamos cookies para melhorar sua experiência.
       Ao continuar navegando, você concorda com nossa
-      <a href="{% url 'pages:privacy' %}">
-        Política de Privacidade
-      </a>.
+      <a href="{% url 'pages:privacy' %}">Política de Privacidade</a>.
     </p>
 
-    <!-- Ações do usuário -->
     <div class="cookie-banner__actions">
-
-      <!-- Aceitar cookies -->
       <button
         id="cookie-accept"
         class="cookie-btn cookie-btn--accept"
@@ -34,7 +28,6 @@
         Aceitar
       </button>
 
-      <!-- Recusar cookies -->
       <button
         id="cookie-decline"
         class="cookie-btn cookie-btn--decline"
@@ -42,7 +35,7 @@
       >
         Recusar
       </button>
-
     </div>
+
   </div>
 </div>

@@ -232,10 +232,17 @@ HAMBURGER → CLOSE (X)
   }
 
   .home-posts-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem; /* Titulo do cabeçalho do Grid Home */
   }
 
   .home-posts-subtitle {
-    font-size: 0.95rem;
+    font-size: 1.3rem; /* Subtitulo do cabeçalho do Grid Home */
   }
+
+  .home-posts-link {
+    font-size: 1.25rem;            /* um pouco maior no mobile */
+    margin-top: 0.5rem;
+    align-self: center;         /* centraliza no flex */
+  }
+
 }

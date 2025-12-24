@@ -1,17 +1,19 @@
 /* ==================================================
 HERO – CONTAINER PRINCIPAL (full-bleed)
+- Ocupa toda a largura da viewport
+- Funciona mesmo dentro de layouts com container
 ================================================== */
 .hero-full {
   position: relative;
 
-  /* Usa a largura real da viewport (ignora containers) */
+  /* Força largura real da viewport */
   width: 100vw;
 
-  /* Altura pensada para mobile-first */
+  /* Altura mobile-first */
   height: 80vh;
   min-height: 480px;
 
-  /* Truque para centralizar o 100vw mesmo dentro de layout */
+  /* Centraliza o 100vw ignorando containers */
   margin-left: 50%;
   transform: translateX(-50%);
 
@@ -19,8 +21,7 @@ HERO – CONTAINER PRINCIPAL (full-bleed)
 }
 
 /* ==================================================
-PICTURE – precisa ocupar todo o hero
-(evita imagem estreita no mobile)
+PICTURE – ocupa todo o hero
 ================================================== */
 .hero-full picture {
   display: block;
@@ -29,23 +30,29 @@ PICTURE – precisa ocupar todo o hero
 }
 
 /* ==================================================
-IMAGEM – comportamento responsivo correto
+IMAGEM DO HERO
+- Preenche o container
+- Mantém proporção
+- Prioriza enquadramento correto
 ================================================== */
 .hero-full img {
-  display: block;         /* remove gaps inline */
+  display: block;              /* remove gaps inline */
   width: 100%;
   height: 100%;
 
-  object-fit: cover;      /* preenche o hero */
+  object-fit: cover;           /* preenche sem distorcer */
   object-position: center top; /* prioriza rosto no mobile */
 }
 
 /* ==================================================
-OVERLAY – usado para contraste do texto
+OVERLAY
+- Camada para contraste do texto
+- Gradiente pode ser aplicado aqui se quiser
 ================================================== */
 .hero-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
 }
 
 /* ==================================================
@@ -58,26 +65,38 @@ AJUSTES PARA DESKTOP
     max-height: 900px;
   }
 
-  /* No desktop o corte pode ser central */
+  /* Enquadramento mais neutro no desktop */
   .hero-full img {
     object-position: center center;
   }
 }
 
 /* ==================================================
-CONTEÚDO DO HERO (TEXTO)
+CONTEÚDO DO HERO (CAIXA DE TEXTO)
+- Glass dark (escuro + transparente)
+- Centralizado verticalmente no mobile
 ================================================== */
 .hero-content {
   position: absolute;
-
-  /* ⬇️ AJUSTE PRINCIPAL:
-     desce o texto para NÃO cobrir o rosto */
   top: 50%;
-
   left: 6%;
+  transform: translateY(-50%); /* centralização real */
+
   z-index: 3;
 
   max-width: 520px;
+  padding: 2rem 2.5rem;
+
+  /* Fundo escuro translúcido */
+  background: rgba(2, 6, 23, 0.55);
+
+  /* Efeito vidro fosco */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+
   color: #fff;
 }
 
@@ -132,14 +151,15 @@ SUBTÍTULO
 }
 
 /* ==================================================
-AJUSTES DE TEXTO PARA DESKTOP
+AJUSTES PARA DESKTOP
+- Texto sobe para não cobrir o rosto
 ================================================== */
 @media (min-width: 1024px) {
   .hero-content {
-    /* No desktop o rosto ocupa menos área */
     top: 25%;
     left: 10%;
-    max-width: 600px;
+    transform: none; /* remove centralização */
+    max-width: 475px;
   }
 
   .hero-title {
@@ -148,5 +168,33 @@ AJUSTES DE TEXTO PARA DESKTOP
 
   .hero-subtitle {
     font-size: 18px;
+  }
+}
+
+/* ==================================================
+AJUSTES PARA MOBILE PEQUENO
+- Evita texto colado
+================================================== */
+@media (max-width: 480px) {
+  .hero-content {
+    left: 5%;
+    right: 5%;
+    max-width: none;
+    max-height: 3.12rem;
+    padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+}
+
+/* ==================================================
+AJUSTE DE PERFORMANCE / LEGIBILIDADE MOBILE
+================================================== */
+@media (max-width: 768px) {
+  .hero-content {
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(4px);
   }
 }
