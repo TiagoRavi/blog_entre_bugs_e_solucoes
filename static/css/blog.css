@@ -36,23 +36,16 @@ POST HEADER
    ================================ */
 
 .post-toc {
-    border: 1px solid #e6a04c;
-    border-radius: 12px;
     margin: 2.5rem 0;
-    overflow: hidden;
+    border-radius: 14px;
     background: #fff;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
 }
 
-/* Cabeçalho do Sumário */
-.post-toc h2 {
-    margin: 0;
-    padding: 1rem 1.5rem;
-    background-color: #0f172a;
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
+
+
 
 /* Lista */
 .post-toc ul {
@@ -86,13 +79,57 @@ POST HEADER
     margin-bottom: 0;
 }
 
+.post-toc-toggle {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(180deg, #0f172a, #020617);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: none;
+    border-top: 4px solid #0f172a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.toc-icon::before {
+    content: "▾";
+    font-size: 0.9rem;
+    transition: transform 0.25s ease;
+}
+
+.post-toc[data-collapsed="true"] ul {
+    display: none;
+}
+
+.post-toc[data-collapsed="true"] .toc-icon::before {
+    transform: rotate(-90deg);
+}
+
+.post-toc[data-collapsed="true"] .post-toc-toggle {
+    padding-bottom: 0.85rem;
+}
+
+
+.post-toc-toggle:focus {
+    outline: 2px solid #0f172a;
+    outline-offset: -2px;
+}
+
+
+
 /* Mobile */
 @media (max-width: 768px) {
     .post-toc {
         margin: 2rem 0;
     }
 
-    .post-toc h2 {
+    .post-toc-toggle {
         font-size: 1rem;
     }
 
@@ -100,6 +137,7 @@ POST HEADER
         font-size: 0.95rem;
     }
 }
+
 
 /* ==================================================
 FEATURED IMAGE

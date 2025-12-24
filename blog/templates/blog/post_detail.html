@@ -116,10 +116,19 @@
       </header>
 
       <!-- Sumário (TOC gerado via JS) -->
-      <nav class="post-toc" aria-label="Sumário do artigo">
-        <h2>Sumário</h2>
-        <ul></ul>
-      </nav>
+<nav class="post-toc" aria-label="Sumário do artigo">
+  <button
+    class="post-toc-toggle"
+    type="button"
+    aria-expanded="true"
+    aria-controls="post-toc-list"
+  >
+    <span>Sumário</span>
+    <span class="toc-icon" aria-hidden="true"></span>
+  </button>
+
+  <ul id="post-toc-list"></ul>
+</nav>
 
       <!-- Imagem destacada -->
       {% if post.featured_image %}
