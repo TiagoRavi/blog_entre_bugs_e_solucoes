@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block extra_head %}
+{{ block.super }}
+
 <!-- =========================================================
      Schema.org — BlogPosting (SEO + EEAT)
 ========================================================== -->
@@ -35,6 +37,42 @@
       "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}"
     }
   }
+}
+</script>
+
+<!-- =========================================================
+     Schema.org — FAQPage (Rich Results)
+========================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "HTML é uma linguagem de programação?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. HTML é uma linguagem de marcação usada para estruturar conteúdos na web, não para implementar algoritmos ou lógica de programação."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Por que HTML não é considerado linguagem de programação?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Porque ele não possui estruturas como variáveis, condições ou laços de repetição. Seu papel é apenas estrutural."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "HTML é importante para quem programa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. Para quem trabalha com web, entender HTML é fundamental para criar interfaces acessíveis, semânticas e bem estruturadas."
+      }
+    }
+  ]
 }
 </script>
 {% endblock %}
@@ -172,7 +210,7 @@
           rel="nofollow sponsored noopener"
         >
           <img
-            src="{% static 'img/banners/codigolimpo.png' %}"
+            src="{% static 'img/banners/codigolimpo.webp' %}"
             alt="Curso completo de Django"
             loading="lazy"
             width="300"
