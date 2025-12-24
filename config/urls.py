@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.contrib.sitemaps.views import sitemap
 from django.views.generic import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 from blog.sitemaps import PostSitemap, CategorySitemap
 from config.tinymce_upload import tinymce_upload
@@ -66,12 +67,12 @@ urlpatterns = [
 
     # Fivicon
     path(
-        "favicon.ico",
-        RedirectView.as_view(
-            url=static("favicon.ico"),
-            permanent=True,
-        ),
+    "favicon.ico",
+    RedirectView.as_view(
+        url=staticfiles_storage.url("favicon.ico"),
+        permanent=True,
     ),
+),
 ]
 
 
