@@ -177,10 +177,13 @@ AJUSTES PARA MOBILE PEQUENO
 ================================================== */
 @media (max-width: 480px) {
   .hero-content {
+    top:auto;
+    bottom: 5%;
     left: 5%;
     right: 5%;
+
+    transform: none;
     max-width: none;
-    max-height: 3.12rem;
     padding: 1.5rem;
   }
 
