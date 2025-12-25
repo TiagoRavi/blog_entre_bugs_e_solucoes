@@ -18,7 +18,6 @@ POST DETAIL – LAYOUT
   gap: 3.5rem;
 }
 
-/* Permite encolhimento correto em grid */
 .post-detail-layout > * {
   min-width: 0;
 }
@@ -187,13 +186,11 @@ CONTEÚDO DO POST
   max-width: 100%;
 }
 
-/* Parágrafos */
 .post-content p {
   margin-bottom: 1.5rem;
   color: #2c2c2c;
 }
 
-/* Headings */
 .post-content h2 {
   font-size: 1.5rem;
   margin-top: 3rem;
@@ -222,7 +219,6 @@ CONTEÚDO DO POST
   }
 }
 
-/* Figuras e imagens */
 .post-content figure {
   margin: 2rem 0;
 }
@@ -237,7 +233,6 @@ CONTEÚDO DO POST
   border-radius: 12px;
 }
 
-/* Código inline */
 .post-content code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.95em;
@@ -248,7 +243,6 @@ CONTEÚDO DO POST
   overflow-wrap: anywhere;
 }
 
-/* Blocos de código */
 .post-content pre {
   margin: 2rem 0;
   padding: 1.25rem;
@@ -265,13 +259,36 @@ CONTEÚDO DO POST
   white-space: pre;
 }
 
-/* Links longos */
 .post-content a {
   overflow-wrap: anywhere;
 }
 
 /* ==================================================
-POSTS RELACIONADOS
+BLOG – AJUSTE DE CONTAINER NO MOBILE
+================================================== */
+
+@media (max-width: 768px) {
+  .post-detail .container {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .post-detail-layout {
+    display: block;
+  }
+
+  .post-main {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+/* ==================================================
+POSTS RELACIONADOS (COMPONENTE)
 ================================================== */
 
 .post-related {
@@ -303,6 +320,7 @@ POSTS RELACIONADOS
 @media (max-width: 640px) {
   .post-related-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
@@ -318,20 +336,20 @@ POSTS RELACIONADOS
 }
 
 .post-related .post-image,
-.post-image--placeholder {
+.post-related .post-image--placeholder {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-.post-image--placeholder {
+.post-related .post-image--placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #e5e7eb, #f1f5f9);
 }
 
-.post-image--placeholder::after {
+.post-related .post-image--placeholder::after {
   content: "📄";
   font-size: 2rem;
   opacity: 0.4;
@@ -415,69 +433,4 @@ SIDEBAR
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
-
-/* ==================================================
-CARDS – POSTS RELACIONADOS (COMPONENTE)
-================================================== */
-
-.post-related .post-card {
-  background: #ffffff;
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-}
-
-/* Imagem do card */
-.post-related .post-image,
-.post-related .post-image--placeholder {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-/* Corpo do card */
-.post-related .post-card-body {
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-}
-
-/* Meta (data) */
-.post-related .post-meta time {
-  font-size: 0.75rem;
-  color: #64748b;
-}
-
-/* Título */
-.post-related .post-card-title {
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 600;
-  color: #0f172a;
-}
-
-.post-related .post-card-title a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.post-related .post-card-title a:hover {
-  text-decoration: underline;
-}
-
-/* Hover apenas para dispositivos com mouse */
-@media (hover: hover) {
-  .post-related .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
-  }
-}
-
-
 
