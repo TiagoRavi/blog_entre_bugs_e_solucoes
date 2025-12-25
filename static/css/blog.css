@@ -172,6 +172,22 @@ POST CONTENT BOX
     0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
+/* Alinhamento de imagens com o texto do artigo */
+.post-content figure {
+  margin: 2rem 0;
+}
+
+.post-content figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+  /* alinhamento com o texto */
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
 
 /* ==================================================
 POST CONTENT BASE
