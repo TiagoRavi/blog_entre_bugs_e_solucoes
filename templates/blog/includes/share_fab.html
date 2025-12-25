@@ -1,0 +1,55 @@
+{% load static %}
+
+<div class="share-fab" aria-label="Compartilhar post">
+
+  <button
+    class="share-fab__toggle"
+    type="button"
+    aria-expanded="false"
+    aria-label="Compartilhar"
+  >
+    <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="18" cy="5" r="3"/>
+      <circle cx="6" cy="12" r="3"/>
+      <circle cx="18" cy="19" r="3"/>
+      <path d="M8.5 11l7-4M8.5 13l7 4"/>
+    </svg>
+  </button>
+
+  <div class="share-fab__menu" role="menu">
+
+    <a
+      href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Compartilhar no Facebook"
+      class="share-fab__item facebook"
+      role="menuitem"
+    >
+      <img src="{% static 'img/svg/facebook_icon.svg' %}" alt="">
+    </a>
+
+    <a
+      href="https://wa.me/?text={{ post.title|urlencode }}%20{{ request.build_absolute_uri|urlencode }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Compartilhar no WhatsApp"
+      class="share-fab__item whatsapp"
+      role="menuitem"
+    >
+      <img src="{% static 'img/svg/whatsapp_icon.svg' %}" alt="">
+    </a>
+
+    <a
+      href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Compartilhar no LinkedIn"
+      class="share-fab__item linkedin"
+      role="menuitem"
+    >
+      <img src="{% static 'img/svg/linkedin_icon.svg' %}" alt="">
+    </a>
+
+  </div>
+</div>

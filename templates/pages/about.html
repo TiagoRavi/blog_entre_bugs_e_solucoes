@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block title %}
-Sobre | Entre Bugs e Soluções
+Sobre o Autor | Entre Bugs e Soluções
 {% endblock %}
 
 {% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/pages/about.css' %}">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -14,15 +16,12 @@ Sobre | Entre Bugs e Soluções
     "@type": "Person",
     "name": "Tiago",
     "url": "{{ request.build_absolute_uri }}",
-    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}",
+    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/tiago.webp' %}",
     "jobTitle": "Desenvolvedor Python e Django",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Entre Bugs e Soluções"
-    },
+    "description": "Desenvolvedor Python especializado em Django, arquitetura de software e boas práticas.",
     "sameAs": [
-      "https://www.linkedin.com/",
-      "https://github.com/"
+      "https://github.com/SEU_GITHUB",
+      "https://www.linkedin.com/in/SEU_LINKEDIN"
     ]
   }
 }
@@ -30,27 +29,57 @@ Sobre | Entre Bugs e Soluções
 {% endblock %}
 
 {% block content %}
-<section class="container post-detail">
-  <div class="post-content-box">
+<section class="about-page">
 
-    <h1>Sobre o autor</h1>
+  <header class="about-page__hero">
+    <img
+      src="{% static 'img/perfil/tiagosousa.webp' %}"
+      alt="Tiago - Desenvolvedor Python e Django"
+      class="about-page__avatar"
+      loading="lazy"
+    />
+
+    <h1 class="about-page__name">Tiago</h1>
+    <p class="about-page__role">
+      Desenvolvedor Python & Django • Arquitetura de Software
+    </p>
+  </header>
+
+  <article class="about-page__content">
 
     <p>
-      Olá! Eu sou <strong>Tiago</strong>, desenvolvedor Python e Django,
-      apaixonado por programação, arquitetura de software e ensino prático.
+      Olá, eu sou <strong>Tiago</strong> 👋  
+      Desenvolvedor especializado em <strong>Python</strong> e <strong>Django</strong>,
+      com foco em arquitetura de software, código limpo e soluções escaláveis.
     </p>
 
     <p>
-      O <strong>Entre Bugs e Soluções</strong> nasceu com o objetivo de
-      compartilhar conhecimento real, aplicado no dia a dia de projetos
-      profissionais.
+      O <strong>Entre Bugs e Soluções</strong> nasceu da necessidade de compartilhar
+      conhecimento real, aplicado no dia a dia de projetos profissionais.
     </p>
+
+    <h2>🎯 Propósito</h2>
 
     <p>
-      Aqui você encontra conteúdos sobre Python, Django, lógica de programação
-      e boas práticas para quem quer evoluir de forma sólida na área de tecnologia.
+      Aqui você aprende desenvolvimento de software além do básico:
     </p>
 
-  </div>
+    <ul>
+      <li>Python e Django para produção</li>
+      <li>Arquitetura e organização de código</li>
+      <li>Boas práticas que escalam</li>
+      <li>Performance, segurança e manutenção</li>
+    </ul>
+
+    <h2>👨‍💻 Para quem é</h2>
+
+    <ul>
+      <li>Iniciantes que querem aprender da forma certa</li>
+      <li>Desenvolvedores que buscam maturidade técnica</li>
+      <li>Profissionais que trabalham com Django</li>
+    </ul>
+
+  </article>
+
 </section>
 {% endblock %}

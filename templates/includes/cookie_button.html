@@ -1,8 +1,4 @@
-<!-- ==================================================
-     Botão flutuante — Configurações de Cookies
-     - Permite reabrir o banner de consentimento
-     - Atende LGPD/GDPR (consentimento reversível)
-================================================== -->
+{% load static %}
 
 <button
   id="cookie-settings-btn"
@@ -10,5 +6,11 @@
   type="button"
   aria-label="Configurações de cookies"
 >
-  🍪
+  <img
+    src="{% static 'img/svg/cookie_icon.svg' %}"
+    alt=""
+    width="24"
+    height="24"
+    aria-hidden="true"
+  >
 </button>

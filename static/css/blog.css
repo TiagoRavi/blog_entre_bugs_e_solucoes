@@ -438,58 +438,78 @@ SIDEBAR
   }
 }
 
-/* ==================================================
-FLOATING SHARE BUTTON – ACIMA DO COOKIE
-================================================== */
+/* ==========================================
+FLOATING SHARE BUTTON
+========================================== */
+
+:root {
+  --fab-bg: #0f172a;
+  --fab-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+  --facebook: #1877f2;
+  --whatsapp: #25d366;
+  --linkedin: #0a66c2;
+}
 
 .share-fab {
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 6.5rem; /* acima do cookie banner */
-  z-index: 10000;
+  bottom: 7rem;
+  left: 1.5rem;
+  z-index: 9999;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
 }
 
-/* Botão principal */
+/* ==========================================
+BOTÃO PRINCIPAL
+========================================== */
+
 .share-fab__toggle {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: none;
-  background: #0f172a;
+
+  background: var(--fab-bg);
   color: #ffffff;
+
   cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--fab-shadow);
 }
 
-/* Ícone SVG */
+.share-fab__toggle:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Ícone principal */
 .share-icon {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
+
+  stroke: currentColor;
   fill: none;
-  stroke: #ffffff;
+
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* ==================================================
-MENU DE OPÇÕES
-================================================== */
+/* ==========================================
+MENU
+========================================== */
 
 .share-fab__menu {
   position: absolute;
-  bottom: 64px; /* abre para cima */
+  bottom: 60px;
+
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -497,50 +517,85 @@ MENU DE OPÇÕES
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* Ícones */
-.share-fab__menu a {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #ffffff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-decoration: none;
-  font-size: 1.1rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-/* Estado aberto */
 .share-fab.is-open .share-fab__menu {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* ==================================================
-MOBILE
-================================================== */
+/* ==========================================
+ITENS DO MENU
+========================================== */
 
-@media (max-width: 768px) {
-  .share-fab {
-    bottom: 5.5rem; /* acima do cookie + barra do navegador */
-    left: 2.5rem;   /* canto esquerdo */
+.share-fab__item {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  text-decoration: none;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.share-fab__item:hover {
+  transform: scale(1.12);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+}
+
+.share-fab__item:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.share-fab__item img {
+  width: 30px;
+  height: 30px;
+  display: block;
+
+  
+}
+
+
+/* ==========================================
+CORES POR REDE
+========================================== */
+
+.facebook { background: var(--facebook); }
+.whatsapp { background: var(--whatsapp); }
+.linkedin { background: var(--linkedin); }
+
+/* ==========================================
+ACESSIBILIDADE — REDUÇÃO DE MOVIMENTO
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .share-fab__menu,
+  .share-fab__item {
+    transition: none;
   }
 }
 
-/* ==================================================
-DESKTOP
-================================================== */
+/* ==========================================
+MOBILE
+========================================== */
 
-@media (min-width: 1024px) {
+@media (max-width: 640px) {
   .share-fab {
-    bottom: 5.5rem; /* alinhado visualmente acima do cookie */
-    left: calc(50% - 410px - 13.5rem);
+    bottom: 11rem;
+    left: 0.75rem;
   }
 }

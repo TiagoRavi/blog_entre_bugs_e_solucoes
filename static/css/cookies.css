@@ -105,41 +105,51 @@
 
 /* =====================================================
    Botão flutuante — Configurações de Cookies
-   - Redondo
-   - Discreto
-   - Sempre visível
-   - LGPD/GDPR compliant
+   - SVG (não emoji)
+   - Consistente com FAB
+   - Acessível
 ===================================================== */
+
 .cookie-settings-btn {
   position: fixed;
   bottom: 1.5rem;
   left: 1.5rem;
+
   width: 48px;
   height: 48px;
+
   border-radius: 50%;
   border: none;
-  background: #0f172a;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
+
+  background: transparent;
+  color: #0f172a;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
   z-index: 1000;
 }
 
-/* Hover desktop */
-.cookie-settings-btn:hover {
-  background: #020617;
+/* SVG */
+.cookie-settings-btn img {
+  width: 50px;
+  height: 50px;
+  display: block;
 }
 
-
-/* =====================================================
-   Ajuste para mobile
-===================================================== */
-@media (max-width: 640px) {
-  .cookie-settings-btn {
-    bottom: 1rem;
-    left: 1rem;
+/* Hover só em dispositivos com mouse */
+@media (hover: hover) and (pointer: fine) {
+  .cookie-settings-btn:hover {
+    background-color: rgba(15, 23, 42, 0.9);
+    color: #ffffff;
   }
 }
+
+/* Foco acessível */
+.cookie-settings-btn:focus-visible {
+  outline: 3px solid #0f172a;
+  outline-offset: 3px;
+}
+

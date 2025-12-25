@@ -155,32 +155,8 @@
 
   </div>
 
-  <!-- Floating Share Button -->
-<div class="share-fab" aria-label="Compartilhar post">
-
-  <button
-    class="share-fab__toggle"
-    type="button"
-    aria-expanded="false"
-    aria-label="Compartilhar"
-  >
-    <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="18" cy="5" r="3"/>
-      <circle cx="6" cy="12" r="3"/>
-      <circle cx="18" cy="19" r="3"/>
-      <path d="M8.5 11l7-4M8.5 13l7 4"/>
-    </svg>
-  </button>
-
-  <div class="share-fab__menu">
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" aria-label="Facebook">📘</a>
-    <a href="https://api.whatsapp.com/send?text={{ post.title|urlencode }}%20{{ request.build_absolute_uri }}" target="_blank" aria-label="WhatsApp">🟢</a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" aria-label="LinkedIn">💼</a>
-  </div>
-
-</div>
-
 </article>
+
 {% endblock %}
 
 {% block extra_scripts %}
