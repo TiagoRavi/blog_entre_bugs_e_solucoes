@@ -1,7 +1,16 @@
-
 /* ==================================================
-POST DETAIL LAYOUT
+POST DETAIL – LAYOUT
 ================================================== */
+
+.post-detail {
+  padding-top: 5rem;
+}
+
+@media (max-width: 768px) {
+  .post-detail {
+    padding-top: 2.5rem;
+  }
+}
 
 .post-detail-layout {
   display: grid;
@@ -9,13 +18,13 @@ POST DETAIL LAYOUT
   gap: 3.5rem;
 }
 
-/* 🔑 Permite que conteúdo longo encolha (CRÍTICO) */
+/* Permite encolhimento correto em grid */
 .post-detail-layout > * {
   min-width: 0;
 }
 
 /* ==================================================
-POST HEADER
+HEADER DO POST
 ================================================== */
 
 .post-header-box {
@@ -28,119 +37,113 @@ POST HEADER
 .post-detail .post-meta {
   font-size: 0.85rem;
   font-weight: 500;
-  text-transform: none;
 }
 
-/* ================================
-   Sumário do artigo (TOC)
-   ================================ */
+/* ==================================================
+TÍTULO DO ARTIGO
+================================================== */
+
+.post-article-title {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+@media (max-width: 768px) {
+  .post-article-title {
+    font-size: 2rem;
+  }
+}
+
+/* ==================================================
+SUMÁRIO (TOC)
+================================================== */
 
 .post-toc {
-    margin: 2.5rem 0;
-    border-radius: 14px;
-    background: #fff;
-    overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.2s ease;
-}
-
-
-
-
-/* Lista */
-.post-toc ul {
-    list-style: none;
-    padding: 1.25rem 1.5rem;
-    margin: 0;
-}
-
-/* Itens */
-.post-toc li {
-    margin-bottom: 0.75rem;
-}
-
-/* Links */
-.post-toc a {
-    text-decoration: none;
-    color: #000;
-    font-size: 1rem;
-    line-height: 1.5;
-    font-weight: 500;
-    display: block;
-}
-
-/* Hover */
-.post-toc a:hover {
-    text-decoration: underline;
-}
-
-/* Remove último espaçamento */
-.post-toc li:last-child {
-    margin-bottom: 0;
+  margin: 2.5rem 0;
+  border-radius: 14px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .post-toc-toggle {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    background: linear-gradient(180deg, #0f172a, #020617);
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border: none;
-    border-top: 4px solid #0f172a;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(180deg, #0f172a, #020617);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  border-top: 4px solid #0f172a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
+.post-toc-toggle:focus {
+  outline: 2px solid #0f172a;
+  outline-offset: -2px;
+}
 
 .toc-icon::before {
-    content: "▾";
-    font-size: 0.9rem;
-    transition: transform 0.25s ease;
+  content: "▾";
+  font-size: 0.9rem;
+  transition: transform 0.25s ease;
+}
+
+.post-toc ul {
+  list-style: none;
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+}
+
+.post-toc li {
+  margin-bottom: 0.75rem;
+}
+
+.post-toc li:last-child {
+  margin-bottom: 0;
+}
+
+.post-toc a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.post-toc a:hover {
+  text-decoration: underline;
 }
 
 .post-toc[data-collapsed="true"] ul {
-    display: none;
+  display: none;
 }
 
 .post-toc[data-collapsed="true"] .toc-icon::before {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
-.post-toc[data-collapsed="true"] .post-toc-toggle {
-    padding-bottom: 0.85rem;
-}
-
-
-.post-toc-toggle:focus {
-    outline: 2px solid #0f172a;
-    outline-offset: -2px;
-}
-
-
-
-/* Mobile */
 @media (max-width: 768px) {
-    .post-toc {
-        margin: 2rem 0;
-    }
+  .post-toc {
+    margin: 2rem 0;
+  }
 
-    .post-toc-toggle {
-        font-size: 1rem;
-    }
-
-    .post-toc a {
-        font-size: 0.95rem;
-    }
+  .post-toc a {
+    font-size: 0.95rem;
+  }
 }
-
 
 /* ==================================================
-FEATURED IMAGE
+IMAGEM DESTACADA
 ================================================== */
 
 .post-featured-image img {
@@ -151,57 +154,78 @@ FEATURED IMAGE
   margin-bottom: 2rem;
 }
 
-/* ==================================================
-POST CONTENT BOX
-================================================== */
+@media (max-width: 640px) {
+  .post-featured-image img {
+    max-height: 260px;
+  }
+}
 
 /* ==================================================
-POST CONTENT BOX
+CONTEÚDO DO POST
 ================================================== */
 
 .post-content-box {
   background: #ffffff;
   padding: 2rem;
   border-radius: 16px;
-  max-width: 100%;
-  overflow: hidden;
-
-  /* destaque visual */
   box-shadow:
     0 12px 32px rgba(15, 23, 42, 0.08),
     0 4px 12px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
 }
 
-/* Alinhamento de imagens com o texto do artigo */
+@media (max-width: 640px) {
+  .post-content-box {
+    overflow: visible;
+  }
+}
+
+.post-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #222;
+  max-width: 100%;
+}
+
+/* Parágrafos */
+.post-content p {
+  margin-bottom: 1.5rem;
+  color: #2c2c2c;
+}
+
+/* Headings */
+.post-content h2 {
+  font-size: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.3;
+}
+
+.post-content h3 {
+  font-size: 1.25rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .post-content {
+    font-size: 1rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .post-content h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Figuras e imagens */
 .post-content figure {
   margin: 2rem 0;
 }
-
-.post-content figure img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-
-  /* alinhamento com o texto */
-  margin-left: 0;
-  margin-right: 0;
-}
-
-
-
-/* ==================================================
-POST CONTENT BASE
-================================================== */
-
-.post-content {
-  font-size: 1.05rem;
-  line-height: 1.85;
-  max-width: 100%;
-}
-
-/* ==================================================
-IMAGES INSIDE CONTENT
-================================================== */
 
 .post-content img {
   display: block;
@@ -213,217 +237,48 @@ IMAGES INSIDE CONTENT
   border-radius: 12px;
 }
 
-/* ==================================================
-INLINE CODE
-================================================== */
-
+/* Código inline */
 .post-content code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.95em;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
   background: #f1f5f9;
   padding: 0.2em 0.4em;
   border-radius: 4px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
-/* ==================================================
-CODE BLOCKS
-================================================== */
-
+/* Blocos de código */
 .post-content pre {
-  max-width: 100%;
-  overflow-x: auto;
-  padding: 1.25rem;
   margin: 2rem 0;
-  border-radius: 12px;
+  padding: 1.25rem;
   background: #0f172a;
   color: #e5e7eb;
-  -webkit-overflow-scrolling: touch; /* mobile smooth */
+  border-radius: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .post-content pre code {
-  white-space: pre;
   background: none;
   padding: 0;
+  white-space: pre;
 }
 
-/* ==================================================
-LONG LINKS (URLs)
-================================================== */
-
+/* Links longos */
 .post-content a {
   overflow-wrap: anywhere;
 }
 
 /* ==================================================
-SIDEBAR
+POSTS RELACIONADOS
 ================================================== */
-
-.post-sidebar .sidebar-box {
-  background: #ffffff;
-  padding: 1.5rem;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
-}
-
-/* ==================================================
-AUTHOR BOX
-================================================== */
-
-.post-author-box {
-  display: flex;
-  gap: 1rem;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid #e5e7eb;
-}
-
-/* ==================================================
-RESPONSIVE
-================================================== */
-
-@media (max-width: 1024px) {
-  .post-detail-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .post-sidebar {
-    display: none;
-  }
-}
-
-@media (max-width: 640px) {
-  .post-grid {
-    gap: 1.5rem;
-  }
-
-  .post-image {
-    height: 160px;
-  }
-
-  .post-card-body {
-    padding: 1rem;
-  }
-
-  .post-title {
-    font-size: 1rem;
-  }
-
-  .post-featured-image img {
-    max-height: 260px;
-  }
-
-  /* 🔓 libera scroll interno só no mobile */
-  .post-content-box {
-    overflow: visible;
-  }
-
-  .post-content pre {
-    font-size: 0.85rem;
-  }
-}
-
-
-
-/* ================================
-   Título principal do artigo
-   ================================ */
-
-.post-article-title {
-    font-size: 2.25rem; /* 36px */
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    color: #111;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .post-article-title {
-        font-size: 2rem;
-    }
-}
-
-/* ================================
-   Tipografia dos artigos do blog
-   ================================ */
-
-.post-content {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.8;
-    color: #222;
-}
-
-/* Parágrafos */
-.post-content p {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    color: #2c2c2c;
-}
-
-/* Título H2 */
-.post-content h2 {
-    font-size: 1.5rem; /* 24px */
-    margin-top: 3rem;
-    margin-bottom: 1.25rem;
-    line-height: 1.3;
-}
-
-/* Título H3 */
-.post-content h3 {
-    font-size: 1.25rem; /* 20px */
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .post-content {
-        font-size: 1rem; /* 16px */
-    }
-
-    .post-content h2 {
-        font-size: 1.6rem;
-    }
-
-    .post-content h3 {
-        font-size: 1.3rem;
-    }
-}
-
-/* ================================
-   Espaço entre menu e post_detail
-   ================================ */
-
-.post-detail {
-    padding-top: 5rem; /* respiro visual do menu */
-}
-
-.post-header-box {
-    margin-bottom: 2rem;
-}
-
-
-/* Mobile */
-@media (max-width: 768px) {
-    .post-detail {
-        padding-top: 2.5rem;
-    }
-}
-
-/* ================================
-   Posts Relacionados
-   ================================ */
 
 .post-related {
   margin-top: 4rem;
   padding-top: 3rem;
   border-top: 1px solid #e5e7eb;
 }
-
 
 .post-related-title {
   font-size: 1.5rem;
@@ -435,46 +290,21 @@ RESPONSIVE
 
 .post-related-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards sempre lado a lado */
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
-/* Placeholder para cards sem imagem */
-.post-image--placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    135deg,
-    #e5e7eb,
-    #f1f5f9
-  );
-  position: relative;
-}
-
-/* Ícone opcional */
-.post-image--placeholder::after {
-  content: "📄";
-  font-size: 2rem;
-  opacity: 0.4;
-}
-
-
-/* Tablet */
 @media (max-width: 1024px) {
   .post-related-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .post-related-grid {
     grid-template-columns: 1fr;
   }
 }
-
-/* Cards – SOMENTE posts relacionados */
 
 .post-related .post-card {
   background: #ffffff;
@@ -488,10 +318,23 @@ RESPONSIVE
 }
 
 .post-related .post-image,
-.post-related .post-image--placeholder {
+.post-image--placeholder {
   width: 100%;
   height: 180px;
   object-fit: cover;
+}
+
+.post-image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e5e7eb, #f1f5f9);
+}
+
+.post-image--placeholder::after {
+  content: "📄";
+  font-size: 2rem;
+  opacity: 0.4;
 }
 
 .post-related .post-card-body {
@@ -509,8 +352,8 @@ RESPONSIVE
 
 .post-related .post-card-title {
   font-size: 1rem;
-  line-height: 1.4;
   font-weight: 600;
+  line-height: 1.4;
   color: #0f172a;
 }
 
@@ -530,14 +373,19 @@ RESPONSIVE
   }
 }
 
-
-/* ================================
-SIDEBAR – BANNERS
-================================ */
+/* ==================================================
+SIDEBAR
+================================================== */
 
 .post-sidebar {
   position: sticky;
-  top: 90px; /* abaixo do header */
+  top: 90px;
+}
+
+@media (max-width: 1024px) {
+  .post-sidebar {
+    display: none;
+  }
 }
 
 .sidebar-box {
@@ -554,19 +402,82 @@ SIDEBAR – BANNERS
   color: #0f172a;
 }
 
-/* Banner maior na sidebar */
 .sidebar-banner img {
   width: 100%;
-  max-width: 500px;   /* 👈 aumenta visualmente */
-  margin: 0 auto;     /* centraliza */
+  max-width: 500px;
+  margin: 0 auto;
   height: auto;
-
   border-radius: 12px;
   display: block;
 }
 
 .sidebar-banner a:hover img {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
+
+/* ==================================================
+CARDS – POSTS RELACIONADOS (COMPONENTE)
+================================================== */
+
+.post-related .post-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* Imagem do card */
+.post-related .post-image,
+.post-related .post-image--placeholder {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Corpo do card */
+.post-related .post-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+/* Meta (data) */
+.post-related .post-meta time {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Título */
+.post-related .post-card-title {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.post-related .post-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-related .post-card-title a:hover {
+  text-decoration: underline;
+}
+
+/* Hover apenas para dispositivos com mouse */
+@media (hover: hover) {
+  .post-related .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+  }
+}
+
+
 
