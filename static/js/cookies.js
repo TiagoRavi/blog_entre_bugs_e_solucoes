@@ -9,16 +9,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const STORAGE_KEY = "cookie_consent";
   const consent = localStorage.getItem(STORAGE_KEY);
 
+  /**
+   * Aplica consentimento ao Google Analytics
+   */
+  function applyConsent(status) {
+    if (typeof gtag !== "function") return;
+
+    if (status === "accepted") {
+      gtag("consent", "update", {
+        analytics_storage: "granted"
+      });
+      gtag("config", "G-Z2V7ET28GR", { anonymize_ip: true });
+    } else {
+      gtag("consent", "update", {
+        analytics_storage: "denied"
+      });
+    }
+  }
+
   // Estado inicial
-  if (consent) {
-    banner.classList.add("is-hidden");
-    settingsBtn.classList.remove("is-hidden");
+  if (!consent) {
+    banner.classList.remove("is-hidden");
+    settingsBtn.classList.add("is-hidden");
   } else {
     banner.classList.add("is-hidden");
     settingsBtn.classList.remove("is-hidden");
+    applyConsent(consent);
   }
 
-  // Abrir banner
+  // Abrir configurações
   settingsBtn.addEventListener("click", () => {
     banner.classList.remove("is-hidden");
     settingsBtn.classList.add("is-hidden");
@@ -28,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem(STORAGE_KEY, value);
     banner.classList.add("is-hidden");
     settingsBtn.classList.remove("is-hidden");
+    applyConsent(value);
   }
 
   acceptBtn.addEventListener("click", () => closeBanner("accepted"));
