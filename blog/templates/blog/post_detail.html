@@ -4,20 +4,20 @@
 {% block extra_head %}
 {{ block.super }}
 
-<!-- =========================================================
-     Schema.org — BlogPosting (SEO + EEAT)
-========================================================== -->
+<!-- =========================
+ Schema.org — BlogPosting
+========================= -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "@id": "{{ request.build_absolute_uri }}",
+  "@id": "{{ request.build_absolute_uri }}#blogpost",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ request.build_absolute_uri }}"
   },
   "headline": "{{ post.title|escapejs }}",
-  "description": "{{ post.excerpt|default:''|escapejs }}",
+  "description": "{{ post.excerpt|default:post.title|escapejs }}",
   {% if post.featured_image %}
   "image": [
     "{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}"
@@ -40,9 +40,9 @@
 }
 </script>
 
-<!-- =========================================================
-     Schema.org — FAQPage (Rich Results)
-========================================================== -->
+<!-- =========================
+ Schema.org — FAQPage
+========================= -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,23 +53,7 @@
       "name": "HTML é uma linguagem de programação?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Não. HTML é uma linguagem de marcação usada para estruturar conteúdos na web, não para implementar algoritmos ou lógica de programação."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Por que HTML não é considerado linguagem de programação?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Porque ele não possui estruturas como variáveis, condições ou laços de repetição. Seu papel é apenas estrutural."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "HTML é importante para quem programa?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sim. Para quem trabalha com web, entender HTML é fundamental para criar interfaces acessíveis, semânticas e bem estruturadas."
+        "text": "Não. HTML é uma linguagem de marcação usada para estruturar conteúdos na web."
       }
     }
   ]
@@ -82,14 +66,10 @@
 
   <div class="container post-detail-layout">
 
-    <!-- =========================================================
-         CONTEÚDO PRINCIPAL
-    ========================================================== -->
     <main class="post-main">
 
-      <!-- Header do artigo -->
+      <!-- Header -->
       <header class="post-header-box">
-
         <h1 class="post-article-title">{{ post.title }}</h1>
 
         <div class="post-meta">
@@ -97,141 +77,106 @@
             <span>Por {{ post.author.get_full_name|default:post.author.username }}</span>
             <span class="meta-separator">·</span>
           {% endif %}
-
           <time datetime="{{ post.published_at|date:'Y-m-d' }}">
             {{ post.published_at|date:"d/m/Y" }}
           </time>
 
           {% if post.category %}
             <span class="meta-separator">·</span>
-            <a
-              href="{% url 'blog:category_posts' post.category.slug %}"
-              class="post-category"
-            >
+            <a href="{% url 'blog:category_posts' post.category.slug %}" rel="category tag">
               {{ post.category.name|upper }}
             </a>
           {% endif %}
         </div>
-
       </header>
 
-      <!-- Sumário (TOC gerado via JS) -->
-<nav class="post-toc" aria-label="Sumário do artigo">
-  <button
-    class="post-toc-toggle"
-    type="button"
-    aria-expanded="true"
-    aria-controls="post-toc-list"
-  >
-    <span>Sumário</span>
-    <span class="toc-icon" aria-hidden="true"></span>
-  </button>
+      <!-- TOC -->
+      <nav class="post-toc" aria-label="Sumário do artigo">
+        <button class="post-toc-toggle" type="button" aria-expanded="true" aria-controls="post-toc-list">
+          <span>Sumário</span>
+          <span class="toc-icon" aria-hidden="true"></span>
+        </button>
+        <ul id="post-toc-list"></ul>
+      </nav>
 
-  <ul id="post-toc-list"></ul>
-</nav>
-
-      <!-- Imagem destacada -->
+      <!-- Imagem -->
       {% if post.featured_image %}
-        <figure class="post-featured-image">
-          <img
-            src="{{ post.featured_image.url }}"
-            alt="{{ post.title }}"
-            loading="eager"
-            width="800"
-            height="450"
-          >
-        </figure>
+      <figure class="post-featured-image">
+        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" loading="eager">
+      </figure>
       {% endif %}
 
-      <!-- Conteúdo do artigo -->
+      <!-- Conteúdo -->
       <section class="post-content-box">
-
         {% if post.excerpt %}
-          <p class="post-excerpt-lead">
-            {{ post.excerpt }}
-          </p>
+          <p class="post-excerpt-lead">{{ post.excerpt }}</p>
         {% endif %}
 
         <div class="post-content">
           {{ post.content|safe }}
         </div>
-
       </section>
 
-      <!-- Posts relacionados -->
-      {% if related_posts %}
-      <section class="post-related">
+{% if related_posts %}
+<section class="post-related" aria-labelledby="related-posts-title">
 
-        <h2 class="post-related-title">Posts relacionados</h2>
+  <h2 id="related-posts-title" class="post-related-title">
+    Continue lendo
+  </h2>
 
-        <div class="post-related-grid">
-          {% for related in related_posts %}
-            <article class="post-card">
+  <div class="post-related-grid">
+    {% for related in related_posts %}
+      <article class="post-card">
 
-              {% if related.featured_image %}
-                <img
-                  src="{{ related.featured_image.url }}"
-                  alt="{{ related.title }}"
-                  class="post-image"
-                  loading="lazy"
-                  width="400"
-                  height="225"
-                >
-              {% else %}
-                <div class="post-image post-image--placeholder" aria-hidden="true"></div>
-              {% endif %}
+        {% if related.featured_image %}
+          <img
+            src="{{ related.featured_image.url }}"
+            alt="{{ related.title }}"
+            class="post-image"
+            loading="lazy"
+            width="400"
+            height="225"
+          >
+        {% else %}
+          <div class="post-image post-image--placeholder" aria-hidden="true"></div>
+        {% endif %}
 
-              <div class="post-card-body">
+        <div class="post-card-body">
 
-                <div class="post-meta">
-                  <time datetime="{{ related.published_at|date:'Y-m-d' }}">
-                    {{ related.published_at|date:"d/m/Y" }}
-                  </time>
-                </div>
+          <div class="post-meta">
+            <time datetime="{{ related.published_at|date:'Y-m-d' }}">
+              {{ related.published_at|date:"d/m/Y" }}
+            </time>
+          </div>
 
-                <h3 class="post-card-title">
-                  <a href="{% url 'blog:post_detail' related.slug %}">
-                    {{ related.title }}
-                  </a>
-                </h3>
+          <h3 class="post-card-title">
+            <a href="{% url 'blog:post_detail' related.slug %}">
+              {{ related.title }}
+            </a>
+          </h3>
 
-              </div>
-            </article>
-          {% endfor %}
         </div>
+      </article>
+    {% endfor %}
+  </div>
 
-      </section>
-      {% endif %}
+</section>
+{% endif %}
+
 
     </main>
 
-    <!-- =========================================================
-         SIDEBAR
-    ========================================================== -->
-    <aside class="sidebar">
-
+    <!-- Sidebar -->
+    <aside class="post-sidebar">
       <div class="sidebar-box sidebar-banner">
         <h3 class="sidebar-title">Indicações</h3>
-
-        <a
-          href="https://amzn.to/4scXVC9"
-          target="_blank"
-          rel="nofollow sponsored noopener"
-        >
-          <img
-            src="{% static 'img/banners/codigolimpo.webp' %}"
-            alt="Curso completo de Django"
-            loading="lazy"
-            width="300"
-            height="250"
-          >
+        <a href="https://amzn.to/4scXVC9" target="_blank" rel="nofollow sponsored noopener">
+          <img src="{% static 'img/banners/codigolimpo.webp' %}" alt="Código Limpo">
         </a>
       </div>
-
     </aside>
 
   </div>
-
 </article>
 {% endblock %}
 
