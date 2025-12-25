@@ -68,7 +68,6 @@
 
     <main class="post-main">
 
-      <!-- Header -->
       <header class="post-header-box">
         <h1 class="post-article-title">{{ post.title }}</h1>
 
@@ -83,89 +82,68 @@
 
           {% if post.category %}
             <span class="meta-separator">·</span>
-            <a href="{% url 'blog:category_posts' post.category.slug %}" rel="category tag">
+            <a href="{% url 'blog:category_posts' post.category.slug %}">
               {{ post.category.name|upper }}
             </a>
           {% endif %}
         </div>
       </header>
 
-      <!-- TOC -->
       <nav class="post-toc" aria-label="Sumário do artigo">
-        <button class="post-toc-toggle" type="button" aria-expanded="true" aria-controls="post-toc-list">
+        <button class="post-toc-toggle" type="button">
           <span>Sumário</span>
           <span class="toc-icon" aria-hidden="true"></span>
         </button>
         <ul id="post-toc-list"></ul>
       </nav>
 
-      <!-- Imagem -->
       {% if post.featured_image %}
       <figure class="post-featured-image">
         <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" loading="eager">
       </figure>
       {% endif %}
 
-      <!-- Conteúdo -->
       <section class="post-content-box">
         {% if post.excerpt %}
           <p class="post-excerpt-lead">{{ post.excerpt }}</p>
         {% endif %}
-
         <div class="post-content">
           {{ post.content|safe }}
         </div>
       </section>
 
-{% if related_posts %}
-<section class="post-related" aria-labelledby="related-posts-title">
+      {% if related_posts %}
+      <section class="post-related">
+        <h2 class="post-related-title">Continue lendo</h2>
 
-  <h2 id="related-posts-title" class="post-related-title">
-    Continue lendo
-  </h2>
+        <div class="post-related-grid">
+          {% for related in related_posts %}
+          <article class="post-card">
+            {% if related.featured_image %}
+              <img src="{{ related.featured_image.url }}" alt="{{ related.title }}" class="post-image" loading="lazy">
+            {% else %}
+              <div class="post-image post-image--placeholder"></div>
+            {% endif %}
 
-  <div class="post-related-grid">
-    {% for related in related_posts %}
-      <article class="post-card">
+            <div class="post-card-body">
+              <time datetime="{{ related.published_at|date:'Y-m-d' }}">
+                {{ related.published_at|date:"d/m/Y" }}
+              </time>
 
-        {% if related.featured_image %}
-          <img
-            src="{{ related.featured_image.url }}"
-            alt="{{ related.title }}"
-            class="post-image"
-            loading="lazy"
-            width="400"
-            height="225"
-          >
-        {% else %}
-          <div class="post-image post-image--placeholder" aria-hidden="true"></div>
-        {% endif %}
-
-        <div class="post-card-body">
-
-          <div class="post-meta">
-            <time datetime="{{ related.published_at|date:'Y-m-d' }}">
-              {{ related.published_at|date:"d/m/Y" }}
-            </time>
-          </div>
-
-          <h3 class="post-card-title">
-            <a href="{% url 'blog:post_detail' related.slug %}">
-              {{ related.title }}
-            </a>
-          </h3>
-
+              <h3 class="post-card-title">
+                <a href="{% url 'blog:post_detail' related.slug %}">
+                  {{ related.title }}
+                </a>
+              </h3>
+            </div>
+          </article>
+          {% endfor %}
         </div>
-      </article>
-    {% endfor %}
-  </div>
-
-</section>
-{% endif %}
+      </section>
+      {% endif %}
 
     </main>
 
-    <!-- Sidebar -->
     <aside class="post-sidebar">
       <div class="sidebar-box sidebar-banner">
         <h3 class="sidebar-title">Indicações</h3>
@@ -176,9 +154,37 @@
     </aside>
 
   </div>
+
+  <!-- Floating Share Button -->
+<div class="share-fab" aria-label="Compartilhar post">
+
+  <button
+    class="share-fab__toggle"
+    type="button"
+    aria-expanded="false"
+    aria-label="Compartilhar"
+  >
+    <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="18" cy="5" r="3"/>
+      <circle cx="6" cy="12" r="3"/>
+      <circle cx="18" cy="19" r="3"/>
+      <path d="M8.5 11l7-4M8.5 13l7 4"/>
+    </svg>
+  </button>
+
+  <div class="share-fab__menu">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" aria-label="Facebook">📘</a>
+    <a href="https://api.whatsapp.com/send?text={{ post.title|urlencode }}%20{{ request.build_absolute_uri }}" target="_blank" aria-label="WhatsApp">🟢</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" aria-label="LinkedIn">💼</a>
+  </div>
+
+</div>
+
 </article>
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{% static 'js/post-toc.js' %}" defer></script>
+  {{ block.super }}
+  <script src="{% static 'js/post-toc.js' %}" defer></script>
+  <script src="{% static 'js/share-fab.js' %}" defer></script>
 {% endblock %}

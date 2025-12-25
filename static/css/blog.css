@@ -18,9 +18,6 @@ POST DETAIL – LAYOUT
   gap: 3.5rem;
 }
 
-.post-detail-layout > * {
-  min-width: 0;
-}
 
 /* ==================================================
 HEADER DO POST
@@ -287,6 +284,7 @@ BLOG – AJUSTE DE CONTAINER NO MOBILE
 }
 
 
+
 /* ==================================================
 POSTS RELACIONADOS (COMPONENTE)
 ================================================== */
@@ -434,3 +432,115 @@ SIDEBAR
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
+@media (max-width: 1024px) {
+  .post-sidebar {
+    display: none;
+  }
+}
+
+/* ==================================================
+FLOATING SHARE BUTTON – ACIMA DO COOKIE
+================================================== */
+
+.share-fab {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 6.5rem; /* acima do cookie banner */
+  z-index: 10000;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Botão principal */
+.share-fab__toggle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: #0f172a;
+  color: #ffffff;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Ícone SVG */
+.share-icon {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==================================================
+MENU DE OPÇÕES
+================================================== */
+
+.share-fab__menu {
+  position: absolute;
+  bottom: 64px; /* abre para cima */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Ícones */
+.share-fab__menu a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Estado aberto */
+.share-fab.is-open .share-fab__menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ==================================================
+MOBILE
+================================================== */
+
+@media (max-width: 768px) {
+  .share-fab {
+    bottom: 5.5rem; /* acima do cookie + barra do navegador */
+    left: 2.5rem;   /* canto esquerdo */
+  }
+}
+
+/* ==================================================
+DESKTOP
+================================================== */
+
+@media (min-width: 1024px) {
+  .share-fab {
+    bottom: 5.5rem; /* alinhado visualmente acima do cookie */
+    left: calc(50% - 410px - 13.5rem);
+  }
+}
