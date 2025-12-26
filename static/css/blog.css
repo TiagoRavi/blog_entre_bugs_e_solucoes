@@ -15,9 +15,8 @@ POST DETAIL – LAYOUT
 .post-detail-layout {
   display: grid;
   grid-template-columns: minmax(0, 820px) 350px;
-  gap: 3.5rem;
+  gap: 4.5rem;
 }
-
 
 /* ==================================================
 HEADER DO POST
@@ -405,6 +404,22 @@ Ajustes finos de escaneabilidade e hierarquia
 }
 
 /* ==================================================
+POST DETAIL — CONTAINER (DESKTOP)
+================================================== */
+
+.post-detail .container {
+  max-width: 1320px;  /* 🔑 controla o ar lateral */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1440px) {
+  .post-detail .container {
+    max-width: 1380px;
+  }
+}
+
+/* ==================================================
 BLOG – AJUSTE DE CONTAINER NO MOBILE
 ================================================== */
 
@@ -413,8 +428,8 @@ BLOG – AJUSTE DE CONTAINER NO MOBILE
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .post-detail-layout {
@@ -534,50 +549,146 @@ POSTS RELACIONADOS (COMPONENTE)
 }
 
 /* ==================================================
-SIDEBAR
+SIDEBAR — FLUTUA EM BLOCO (DESKTOP)
 ================================================== */
 
 .post-sidebar {
-  position: sticky;
-  top: 90px;
+  position: relative;
+  align-self: flex-start;
+  padding-right: 4px;
 }
 
+/* Scroll discreto */
+.post-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: 6px;
+}
+
+.post-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Container das recomendações */
+.sidebar-recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ==================================================
+SIDEBAR CTA — CARD INDIVIDUAL
+================================================== */
+
+.sidebar-cta {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.25rem;
+
+  box-shadow:
+    0 20px 40px rgba(15, 23, 42, 0.08),
+    0 8px 20px rgba(15, 23, 42, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+/* Label */
+.sidebar-cta-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+/* Imagem */
+.sidebar-cta-image img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sidebar-cta-image:hover img {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Texto */
+.sidebar-cta-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0;
+}
+
+/* Botão */
+.sidebar-cta-button {
+  margin-top: 0.25rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sidebar-cta-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+}
+
+/* ==================================================
+SIDEBAR — RESPONSIVO
+================================================== */
+
 @media (max-width: 1024px) {
+
   .post-sidebar {
     display: none;
   }
 }
 
-.sidebar-box {
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 16px;
-  margin-bottom: 1.75rem;
-}
+/* =========================
+CTA — CONTROLE DE VISIBILIDADE
+========================= */
 
-.sidebar-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: #0f172a;
-}
-
-.sidebar-banner img {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  height: auto;
-  border-radius: 12px;
+/* Desktop */
+.sidebar-cta--desktop {
   display: block;
 }
 
-.sidebar-banner a:hover img {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+/* Mobile escondido por padrão */
+.sidebar-cta--mobile {
+  display: none;
 }
 
+/* =========================
+MOBILE
+========================= */
 @media (max-width: 1024px) {
+
+  /* Sidebar some */
   .post-sidebar {
+    display: none;
+  }
+
+  /* CTA aparece só no final */
+  .sidebar-cta--mobile {
+    display: block;
+    margin-top: 3rem;
+  }
+
+  .sidebar-cta--desktop {
     display: none;
   }
 }
@@ -599,7 +710,7 @@ FLOATING SHARE BUTTON
   position: fixed;
   bottom: 7rem;
   left: 1.5rem;
-  z-index: 9999;
+  z-index: 1000;
 
   display: flex;
   flex-direction: column;
@@ -736,10 +847,74 @@ ACESSIBILIDADE — REDUÇÃO DE MOVIMENTO
 /* ==========================================
 MOBILE
 ========================================== */
-
 @media (max-width: 640px) {
   .share-fab {
     bottom: 11rem;
     left: 0.75rem;
   }
+}
+
+
+/* ================================
+   PAGINAÇÃO – BLOG
+================================ */
+
+.pagination {
+  margin: 4rem 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination-item {
+  display: flex;
+}
+
+.pagination-link,
+.pagination-current {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: all 0.2s ease;
+}
+
+/* Botões normais */
+.pagination-link {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+.pagination-link:hover {
+  background: #0d6efd;
+  color: #ffffff;
+}
+
+/* Página ativa */
+.pagination-item.active .pagination-current {
+  background: #0d6efd;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.35);
+}
+
+/* Anterior / Próxima */
+.pagination-link:first-child,
+.pagination-link:last-child {
+  padding: 0 16px;
 }

@@ -1,3 +1,47 @@
+/* =========================
+   BLOG HEADER
+========================= */
+
+.blog-header {
+  text-align: center;
+  margin: 4rem auto 3.5rem;
+
+  padding-top: 5rem;
+}
+
+.blog-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+}
+
+.blog-subtitle {
+  font-size: 1.05rem;
+  color: #64748b;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog-header {
+    margin: 3rem auto 2.5rem;
+  }
+
+  .blog-title {
+    font-size: 1.9rem;
+  }
+
+  .blog-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+
+
+
 /* ================================
    POST GRID
 ================================ */
@@ -5,6 +49,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+
+  padding-top: 2.5rem;
 }
 
 

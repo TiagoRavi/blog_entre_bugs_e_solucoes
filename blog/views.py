@@ -47,18 +47,11 @@ class BlogListView(ListView):
     Página principal do blog com paginação e busca.
     """
 
-    template_name = "blog/post_list.html"
+    template_name = "blog/blog_list.html"
     context_object_name = "posts"
     paginate_by = 9
 
     def get_queryset(self):
-        """
-        Retorna posts publicados com suporte a busca (?q=...).
-
-        OBS:
-        - Cache é seguro porque a query string
-          faz parte da chave do cache.
-        """
         queryset = get_published_posts()
 
         q = self.request.GET.get("q")
@@ -70,7 +63,6 @@ class BlogListView(ListView):
             )
 
         return queryset
-
 
 # ======================================================
 # DETALHE DO POST
@@ -128,21 +120,13 @@ class PostDetailView(DetailView):
 class CategoryPostListView(ListView):
     """
     Página de listagem de posts por categoria.
-
-    Responsabilidade:
-    - Exibir apenas posts publicados
-    - Filtrar pelo slug da categoria
-    - Reutilizar o template de listagem
     """
 
-    template_name = "blog/post_list.html"
+    template_name = "blog/blog_list.html"
     context_object_name = "posts"
     paginate_by = 9
 
     def get_queryset(self):
-        """
-        Retorna posts publicados filtrados pela categoria.
-        """
         return (
             get_published_posts()
             .filter(category__slug=self.kwargs["slug"])
@@ -151,12 +135,6 @@ class CategoryPostListView(ListView):
         )
 
     def get_context_data(self, **kwargs):
-        """
-        Adiciona a categoria atual ao contexto do template.
-
-        Segurança:
-        - Retorna 404 se a categoria não existir
-        """
         context = super().get_context_data(**kwargs)
 
         context["category"] = get_object_or_404(

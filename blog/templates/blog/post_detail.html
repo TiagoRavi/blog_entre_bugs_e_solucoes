@@ -66,23 +66,24 @@
 
   <div class="container post-detail-layout">
 
-    <main class="post-main">
+  <main class="post-main">
 
       {% include "blog/includes/post_header.html" %}
       {% include "blog/includes/post_toc.html" %}
       {% include "blog/includes/post_featured_image.html" %}
       {% include "blog/includes/post_content.html" %}
-      {% include "blog/includes/post_related.html" %}
-    
-    </main>
-
-    <aside class="post-sidebar">
-      <div class="sidebar-box sidebar-banner">
-        <h3 class="sidebar-title">Indicações</h3>
-        <a href="https://amzn.to/4scXVC9" target="_blank" rel="nofollow sponsored noopener">
-          <img src="{% static 'img/banners/codigolimpo.webp' %}" alt="Código Limpo">
-        </a>
+      
+      {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}
+      <div class="sidebar-cta--mobile post-mobile-cta">
+      {% include "blog/includes/post_sidbar.html" %}
       </div>
+      
+      {% include "blog/includes/post_related.html" %}
+   
+  </main>
+
+    <aside class="post-sidebar sidebar-cta--desktop">
+      {% include "blog/includes/post_sidbar.html" %}
     </aside>
 
   </div>

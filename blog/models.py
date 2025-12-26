@@ -61,19 +61,33 @@ class Category(models.Model):
 # ======================================================
 # QUERYSET / MANAGER
 # ======================================================
-class PostQuerySet(models.QuerySet):
-    """
-    QuerySet customizado para consultas reutilizáveis do Post.
-    """
+from django.db import models
+from django.utils import timezone
 
+class PostQuerySet(models.QuerySet):
     def published(self):
-        """
-        Retorna apenas posts publicados e com data válida.
-        """
         return self.filter(
             status=Post.Status.PUBLISHED,
             published_at__lte=timezone.now(),
         )
+
+
+class Post(models.Model):
+    class Status(models.TextChoices):
+        DRAFT = "draft", "Rascunho"
+        PUBLISHED = "published", "Publicado"
+
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.DRAFT,
+    )
+
+    published_at = models.DateTimeField(null=True, blank=True)
+
+    # ✅ MANAGER CORRETO
+    objects = PostQuerySet.as_manager()
+
 
 
 # ======================================================
