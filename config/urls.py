@@ -2,10 +2,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
-from django.http import JsonResponse
+from django.views.generic import TemplateView, RedirectView
+from django.http import JsonResponse, HttpResponse
 from django.contrib.sitemaps.views import sitemap
-from django.views.generic import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from blog.sitemaps import PostSitemap, CategorySitemap
@@ -17,6 +16,16 @@ from config.tinymce_upload import tinymce_upload
 # ---------------------------------------------------------------------
 def healthcheck(_request):
     return JsonResponse({"status": "ok"})
+
+
+# ---------------------------------------------------------------------
+# IndexNow key (verificação de domínio)
+# ---------------------------------------------------------------------
+def indexnow_key(_request):
+    return HttpResponse(
+        "b7360389d77240f3940b63ae081517d9",
+        content_type="text/plain",
+    )
 
 
 # ---------------------------------------------------------------------
@@ -35,6 +44,13 @@ urlpatterns = [
     # Admin Django
     path("admin/", admin.site.urls),
 
+    # IndexNow key (ROOT do domínio)
+    path(
+        "b7360389d77240f3940b63ae081517d9.txt",
+        indexnow_key,
+        name="indexnow-key",
+    ),
+
     # Robots.txt (SEO crítico)
     path(
         "robots.txt",
@@ -52,7 +68,7 @@ urlpatterns = [
         name="sitemap",
     ),
 
-    # Healthcheck (monitoramento)
+    # Healthcheck
     path("health/", healthcheck),
 
     # Upload do TinyMCE (Cloudinary)
@@ -65,14 +81,14 @@ urlpatterns = [
     path("", include("blog.urls")),
     path("", include("pages.urls")),
 
-    # Fivicon
+    # Favicon
     path(
-    "favicon.ico",
-    RedirectView.as_view(
-        url=staticfiles_storage.url("favicon.ico"),
-        permanent=True,
+        "favicon.ico",
+        RedirectView.as_view(
+            url=staticfiles_storage.url("favicon.ico"),
+            permanent=True,
+        ),
     ),
-),
 ]
 
 
