@@ -20,9 +20,10 @@
   "description": "{{ post.excerpt|default:post.title|escapejs }}",
   {% if post.featured_image %}
   "image": [
-    "{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}"
+    "{{ post.featured_image.url }}"
   ],
   {% endif %}
+
   "datePublished": "{{ post.published_at|date:'c' }}",
   "dateModified": "{{ post.updated_at|date:'c' }}",
   "author": {

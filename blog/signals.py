@@ -2,6 +2,8 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.core.cache import cache
 
+from .indexnow import submit_to_indexnow
+
 from .models import Post
 
 
@@ -63,3 +65,14 @@ def invalidate_cache_on_post_delete(sender, instance: Post, **kwargs):
     # Página da categoria
     if instance.category_id:
         safe_delete_pattern(f"*categoria/{instance.category.slug}*")
+
+
+@receiver(post_save, sender=Post)
+def indexnow_on_save(sender, instance, **kwargs):
+    if instance.status == "published":
+        submit_to_indexnow([instance.get_absolute_url()])
+
+
+@receiver(post_delete, sender=Post)
+def indexnow_on_delete(sender, instance, **kwargs):
+    submit_to_indexnow([instance.get_absolute_url()])

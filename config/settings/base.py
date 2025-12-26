@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "tinymce",
 
     # Apps locais
-    "blog",
+    "blog.apps.BlogConfig",
     "pages",
 ]
 
