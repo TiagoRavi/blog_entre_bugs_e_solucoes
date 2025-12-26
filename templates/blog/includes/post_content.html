@@ -1,0 +1,11 @@
+{% load static %}
+
+<section class="post-content-box">
+  {% if post.excerpt %}
+    <p class="post-excerpt-lead">{{ post.excerpt }}</p>
+  {% endif %}
+
+  <div class="post-content">
+    {{ post.content|safe }}
+  </div>
+</section>

@@ -1,0 +1,38 @@
+{% load static %}
+
+{% if related_posts %}
+<section class="post-related">
+  <h2 class="post-related-title">Continue lendo</h2>
+
+  <div class="post-related-grid">
+    {% for related in related_posts %}
+      <article class="post-card">
+
+        {% if related.featured_image %}
+          <img
+            src="{{ related.featured_image.url }}"
+            alt="{{ related.title }}"
+            class="post-image"
+            loading="lazy"
+          >
+        {% else %}
+          <div class="post-image post-image--placeholder"></div>
+        {% endif %}
+
+        <div class="post-card-body">
+          <time datetime="{{ related.published_at|date:'Y-m-d' }}">
+            {{ related.published_at|date:"d/m/Y" }}
+          </time>
+
+          <h3 class="post-card-title">
+            <a href="{% url 'blog:post_detail' related.slug %}">
+              {{ related.title }}
+            </a>
+          </h3>
+        </div>
+
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

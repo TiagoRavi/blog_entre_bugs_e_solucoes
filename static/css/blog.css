@@ -36,6 +36,51 @@ HEADER DO POST
 }
 
 /* ==================================================
+POST EXCERPT (LEAD EDITORIAL)
+Introdução do artigo
+================================================== */
+
+.post-excerpt-lead {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #475569;
+
+  margin-top: 0;
+  margin-bottom: 2rem; /* separa claramente do conteúdo */
+
+  padding-left: 1rem;
+  border-left: 4px solid #e5e7eb;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .post-excerpt-lead {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding-left: 0.75rem;
+  }
+}
+
+/* ==================================================
+AJUSTE DE SCROLL PARA ÂNCORAS (TOC / LINKS INTERNOS)
+Evita título ficar escondido sob header sticky
+================================================== */
+
+.post-content h2,
+.post-content h3 {
+  scroll-margin-top: 96px;
+}
+
+/* Mobile: header ocupa menos altura */
+@media (max-width: 768px) {
+  .post-content h2,
+  .post-content h3 {
+    scroll-margin-top: 72px;
+  }
+}
+
+
+/* ==================================================
 TÍTULO DO ARTIGO
 ================================================== */
 
@@ -58,7 +103,7 @@ SUMÁRIO (TOC)
 ================================================== */
 
 .post-toc {
-  margin: 2.5rem 0;
+  margin: 2rem 0 2.5rem;
   border-radius: 14px;
   background: #ffffff;
   overflow: hidden;
@@ -120,6 +165,16 @@ SUMÁRIO (TOC)
   text-decoration: underline;
 }
 
+/* ==================================================
+POST TOC — ABRIR / FECHAR
+================================================== */
+
+.toc-icon::before {
+  content: "▾";
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
 .post-toc[data-collapsed="true"] ul {
   display: none;
 }
@@ -128,6 +183,7 @@ SUMÁRIO (TOC)
   transform: rotate(-90deg);
 }
 
+/* Ajustes mobile */
 @media (max-width: 768px) {
   .post-toc {
     margin: 2rem 0;
@@ -137,6 +193,7 @@ SUMÁRIO (TOC)
     font-size: 0.95rem;
   }
 }
+
 
 /* ==================================================
 IMAGEM DESTACADA
@@ -182,6 +239,93 @@ CONTEÚDO DO POST
   color: #222;
   max-width: 100%;
 }
+
+/* ==================================================
+TIPOGRAFIA DO CONTEÚDO DO POST
+Ajustes finos de escaneabilidade e hierarquia
+================================================== */
+
+/* Corpo do texto */
+.post-content {
+  line-height: 1.65; /* leitura confortável + escaneável */
+}
+
+/* Parágrafos */
+.post-content p {
+  margin-top: 0;
+  margin-bottom: 1.25rem; /* 20px desktop */
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+/* H2 — novo bloco mental */
+.post-content h2 {
+  margin-top: 3.25rem;    /* 52px */
+  margin-bottom: 1.125rem; /* 18px */
+  line-height: 1.3;
+}
+
+/* H3 — subdivisão */
+.post-content h3 {
+  margin-top: 2.25rem;    /* 36px */
+  margin-bottom: 0.875rem; /* 14px */
+  line-height: 1.4;
+}
+
+/* =========================
+   LISTAS
+========================= */
+
+.post-content ul,
+.post-content ol {
+  margin-top: 0.75rem;    /* 12px */
+  margin-bottom: 1.5rem; /* 24px */
+  padding-left: 1.25rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem; /* 8px */
+}
+
+.post-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .post-content {
+    line-height: 1.7;
+  }
+
+  .post-content p {
+    margin-bottom: 1rem; /* 16px */
+  }
+
+  .post-content h2 {
+    margin-top: 2.75rem;    /* 44px */
+    margin-bottom: 1rem;   /* 16px */
+  }
+
+  .post-content h3 {
+    margin-top: 2rem;      /* 32px */
+    margin-bottom: 0.75rem; /* 12px */
+  }
+
+  .post-content ul,
+  .post-content ol {
+    margin-bottom: 1.25rem; /* 20px */
+  }
+
+  .post-content li {
+    margin-bottom: 0.5rem; /* 8px */
+  }
+}
+
 
 .post-content p {
   margin-bottom: 1.5rem;

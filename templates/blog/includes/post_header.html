@@ -1,0 +1,23 @@
+{% load static %}
+
+<header class="post-header-box">
+  <h1 class="post-article-title">{{ post.title }}</h1>
+
+  <div class="post-meta">
+    {% if post.author %}
+      <span>Por {{ post.author.get_full_name|default:post.author.username }}</span>
+      <span class="meta-separator">·</span>
+    {% endif %}
+
+    <time datetime="{{ post.published_at|date:'Y-m-d' }}">
+      {{ post.published_at|date:"d/m/Y" }}
+    </time>
+
+    {% if post.category %}
+      <span class="meta-separator">·</span>
+      <a href="{% url 'blog:category_posts' post.category.slug %}">
+        {{ post.category.name|upper }}
+      </a>
+    {% endif %}
+  </div>
+</header>

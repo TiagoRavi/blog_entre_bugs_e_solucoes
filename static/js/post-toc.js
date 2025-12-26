@@ -8,43 +8,61 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const headings = content.querySelectorAll("h2, h3");
+  const buildTOC = () => {
+    const headings = content.querySelectorAll("h2, h3");
 
-  // Se não houver headings, remove o TOC
-  if (headings.length === 0) {
-    toc.remove();
-    return;
-  }
-
-  // Gera os itens do TOC
-  headings.forEach((heading, index) => {
-    if (!heading.id) {
-      heading.id = `section-${index}`;
+    if (!headings.length) {
+      return false;
     }
 
-    const li = document.createElement("li");
-    const a = document.createElement("a");
+    tocList.innerHTML = "";
 
-    a.href = `#${heading.id}`;
-    a.textContent = heading.textContent;
+    headings.forEach((heading, index) => {
+      if (!heading.id) {
+        heading.id = `section-${index}`;
+      }
 
-    if (heading.tagName === "H3") {
-      li.style.marginLeft = "1rem";
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = `#${heading.id}`;
+      a.textContent = heading.textContent;
+
+      if (heading.tagName === "H3") {
+        li.style.marginLeft = "1rem";
+      }
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // Estado inicial
+    toc.dataset.collapsed = "false";
+    tocToggle.setAttribute("aria-expanded", "true");
+
+    return true;
+  };
+
+  // 1️⃣ Tentativa imediata (SEM return)
+  buildTOC();
+
+  // 2️⃣ Observa mudanças no conteúdo (CMS / imagens / embeds)
+  const observer = new MutationObserver(() => {
+    if (buildTOC()) {
+      observer.disconnect();
     }
-
-    li.appendChild(a);
-    tocList.appendChild(li);
   });
 
-  // Estado inicial
-  toc.dataset.collapsed = "false";
-  tocToggle.setAttribute("aria-expanded", "true");
+  observer.observe(content, {
+    childList: true,
+    subtree: true,
+  });
 
-  // Toggle abrir / fechar
+  // Toggle abrir / fechar (AGORA SEMPRE REGISTRADO)
   tocToggle.addEventListener("click", () => {
     const isCollapsed = toc.dataset.collapsed === "true";
 
-    toc.dataset.collapsed = String(!isCollapsed);
-    tocToggle.setAttribute("aria-expanded", String(isCollapsed));
+    toc.dataset.collapsed = isCollapsed ? "false" : "true";
+    tocToggle.setAttribute("aria-expanded", isCollapsed ? "true" : "false");
   });
 });

@@ -115,6 +115,9 @@ class PostDetailView(DetailView):
             limit=3,
         )
 
+        # FLAG DE LAYOUT (ESSENCIAL)
+        context["is_post_detail"] = True
+
         return context
 
 

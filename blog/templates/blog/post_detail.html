@@ -68,80 +68,12 @@
 
     <main class="post-main">
 
-      <header class="post-header-box">
-        <h1 class="post-article-title">{{ post.title }}</h1>
-
-        <div class="post-meta">
-          {% if post.author %}
-            <span>Por {{ post.author.get_full_name|default:post.author.username }}</span>
-            <span class="meta-separator">·</span>
-          {% endif %}
-          <time datetime="{{ post.published_at|date:'Y-m-d' }}">
-            {{ post.published_at|date:"d/m/Y" }}
-          </time>
-
-          {% if post.category %}
-            <span class="meta-separator">·</span>
-            <a href="{% url 'blog:category_posts' post.category.slug %}">
-              {{ post.category.name|upper }}
-            </a>
-          {% endif %}
-        </div>
-      </header>
-
-      <nav class="post-toc" aria-label="Sumário do artigo">
-        <button class="post-toc-toggle" type="button">
-          <span>Sumário</span>
-          <span class="toc-icon" aria-hidden="true"></span>
-        </button>
-        <ul id="post-toc-list"></ul>
-      </nav>
-
-      {% if post.featured_image %}
-      <figure class="post-featured-image">
-        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" loading="eager">
-      </figure>
-      {% endif %}
-
-      <section class="post-content-box">
-        {% if post.excerpt %}
-          <p class="post-excerpt-lead">{{ post.excerpt }}</p>
-        {% endif %}
-        <div class="post-content">
-          {{ post.content|safe }}
-        </div>
-      </section>
-
-      {% if related_posts %}
-      <section class="post-related">
-        <h2 class="post-related-title">Continue lendo</h2>
-
-        <div class="post-related-grid">
-          {% for related in related_posts %}
-          <article class="post-card">
-            {% if related.featured_image %}
-              <img src="{{ related.featured_image.url }}" alt="{{ related.title }}" class="post-image" loading="lazy">
-            {% else %}
-              <div class="post-image post-image--placeholder"></div>
-            {% endif %}
-
-            <div class="post-card-body">
-              <time datetime="{{ related.published_at|date:'Y-m-d' }}">
-                {{ related.published_at|date:"d/m/Y" }}
-              </time>
-
-              <h3 class="post-card-title">
-                <a href="{% url 'blog:post_detail' related.slug %}">
-                  {{ related.title }}
-                </a>
-              </h3>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
-
+      {% include "blog/includes/post_header.html" %}
+      {% include "blog/includes/post_toc.html" %}
+      {% include "blog/includes/post_featured_image.html" %}
+      {% include "blog/includes/post_content.html" %}
+      {% include "blog/includes/post_related.html" %}
+    
     </main>
 
     <aside class="post-sidebar">
@@ -156,6 +88,14 @@
   </div>
 
 </article>
+
+<!-- =========================================================
+       Floating Share FAB
+  ========================================================== -->
+{% if is_post_detail %}
+  {% include "blog/includes/share_fab.html" %}
+{% endif %}
+
 
 {% endblock %}
 

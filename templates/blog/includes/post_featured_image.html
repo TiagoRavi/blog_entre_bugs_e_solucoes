@@ -1,0 +1,7 @@
+{% load static %}
+
+{% if post.featured_image %}
+<figure class="post-featured-image">
+  <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" loading="eager">
+</figure>
+{% endif %}
