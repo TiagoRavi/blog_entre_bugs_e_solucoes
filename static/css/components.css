@@ -230,42 +230,155 @@ COOKIE BANNER
   z-index: 9999;
 }
 
-/* =========================
+/* ==================================================
    SEARCH NO HEADER
-========================= */
+================================================== */
 
 .nav-search {
+  position: relative;
+}
+
+/* Estado padrão: só lupa visível */
+.search-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  flex-wrap: nowrap;        /* 🔴 ISSO RESOLVE A QUEBRA */
+  gap: 0.5rem;
 }
 
-.nav-search input {
-  min-width: 180px;
-  max-width: 220px;
-  height: 36px;
-  padding: 0 0.6rem;
-  font-size: 0.9rem;
+/* Input e botão buscar escondidos */
+.search-input,
+.search-submit {
+  display: none;
 }
 
-.nav-search button {
-  height: 36px;
-  height: 36px;
-  padding: 0 0.6rem;
-  border-radius: 6px;
+/* =========================
+   SEARCH ATIVA
+========================= */
+
+.search-wrapper.active {
+  position: fixed;
+  top: 15%;
+  left: 25%;
+  transform: translateX(-50%, -50%);
+
+  width: 50%;
+  max-width: 800; /* controla largura máxima */
+  
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 1rem;
+  background: transparent;
+  box-shadow: none;
+  z-index: 1000;
+}
+/* Esconde a lupa quando a busca está aberta */
+  .search-wrapper.active .search-toggle {
+    display: none;
+  }
+
+/* ==================================================
+   SEARCH RESPONSIVO - MOBILE
+================================================== */
+
+@media (max-width: 768px) {
+
+  .search-wrapper.active {
+    position: fixed;
+    top: 100%;                     /* mais alto no mobile */
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100%;
+    max-width: 75%;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;       /* empilha input + botão */
+    gap: 0.75rem;
+
+    z-index: 10000;
+  }
+
+  .search-wrapper.active .search-input {
+    width: 100%;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .search-wrapper.active .search-submit {
+    width: 50%;
+    height: 20px;
+    font-size: 1.5rem;
+  }
+
+  /* Esconde a lupa quando a busca está aberta */
+  .search-wrapper.active .search-toggle {
+    display: none;
+  }
+}
+
+
+
+
+/* Input grande */
+.search-wrapper.active .search-input {
+  display: block;
+  flex: 1;
+
+  height: 48px;
+  padding: 0 1rem;
+
+  font-size: 1rem;
+  color: #0f172a;
+
+  background: #ffffff;
+  border: 1px solid #0b5ed7;
+  border-radius: 8px;
+}
+
+/* Botão Buscar */
+.search-wrapper.active .search-submit {
+  display: block;
+
+  height: 44px;
+  padding: 0 1.2rem;
+
+  background: #0b5ed7;
+  color: #ffffff;
+
   border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
 
+/* Lupa sempre clicável */
+.search-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  z-index: 1001;
+}
+
+
+
 /* ==================================================
-HAMBURGER BUTTON
+   HAMBURGER BUTTON
 ================================================== */
 
 .menu-toggle {
   display: none;
   flex-direction: column;
   gap: 5px;
+
   background: none;
   border: none;
   cursor: pointer;
@@ -274,39 +387,47 @@ HAMBURGER BUTTON
 .menu-toggle span {
   width: 24px;
   height: 3px;
+
   background: #0f172a;
   border-radius: 2px;
+
   transition: all 0.3s ease;
 }
 
 /* ==================================================
-MOBILE NAV
+   MOBILE NAV
 ================================================== */
 
 @media (max-width: 768px) {
 
+  /* Mostra o botão hamburger */
   .menu-toggle {
     display: flex;
   }
 
+  /* Menu mobile escondido por padrão */
   .nav {
     position: absolute;
     top: 72px;
     right: 0;
-    background: #ffffff;
+
     width: 100%;
+    padding: 1.5rem;
+
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.5rem;
     gap: 1.25rem;
 
-    /* escondido por padrão */
+    background: #ffffff;
+
     opacity: 0;
     pointer-events: none;
     transform: translateY(-10px);
     transition: all 0.3s ease;
   }
 
+  /* Menu mobile visível */
   .nav.active {
     opacity: 1;
     pointer-events: auto;
@@ -314,22 +435,20 @@ MOBILE NAV
   }
 
   .nav ul {
+    display: flex;
     flex-direction: column;
     width: 100%;
     gap: 1rem;
   }
 
+  /* Busca ocupa toda largura no mobile */
   .nav-search {
-    width: 100%;
-  }
-
-  .nav-search input {
     width: 100%;
   }
 }
 
 /* ==================================================
-HAMBURGER → CLOSE (X)
+   HAMBURGER → CLOSE (X)
 ================================================== */
 
 .menu-toggle.active span:nth-child(1) {
@@ -344,6 +463,10 @@ HAMBURGER → CLOSE (X)
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* ==================================================
+   MOBILE - AJUSTES FINAIS
+================================================== */
+
 @media (max-width: 768px) {
 
   .nav {
@@ -355,26 +478,17 @@ HAMBURGER → CLOSE (X)
     align-items: center;
   }
 
-  /* 🔍 BUSCA CENTRALIZADA */
+  /* Busca centralizada no menu mobile */
   .nav-search {
-    width: 100%;
     max-width: 280px;
     margin: 1rem auto 0;
-    display: flex;
     justify-content: center;
   }
 
-  .nav-search input {
-    width: 100%;
-    text-align: center;
-  }
-
   .nav-search button {
-    background: #0f172a;
-    color: #ffffff;
+    background: #ffffff;
   }
 }
-
 
 /* ================================
    HOME – TÍTULO + CTA DO GRID
