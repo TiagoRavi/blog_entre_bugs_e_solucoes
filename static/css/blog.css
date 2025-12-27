@@ -14,8 +14,8 @@ POST DETAIL – LAYOUT
 
 .post-detail-layout {
   display: grid;
-  grid-template-columns: minmax(0, 820px) 350px;
-  gap: 4.5rem;
+  grid-template-columns: minmax(0, 720px) 350px;
+  gap: 7.5rem;
 }
 
 /* ==================================================
@@ -411,6 +411,7 @@ POST DETAIL — CONTAINER (DESKTOP)
   max-width: 1320px;  /* 🔑 controla o ar lateral */
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  margin-left: 3rem;
 }
 
 @media (min-width: 1440px) {
@@ -703,7 +704,7 @@ FLOATING SHARE BUTTON
 
   --facebook: #1877f2;
   --whatsapp: #25d366;
-  --linkedin: #0a66c2;
+  --linkedin: #ffff;
 }
 
 .share-fab {

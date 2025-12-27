@@ -103,6 +103,15 @@
   }
 }
 
+@media (max-width: 640px) {
+  .cookie-settings-btn {
+    left: 50%;
+    transform: translateX(calc(-50% + 1rem));
+  }
+}
+
+
+
 /* =====================================================
    Botão flutuante — Configurações de Cookies
    - SVG (não emoji)
