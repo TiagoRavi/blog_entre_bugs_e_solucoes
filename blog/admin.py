@@ -24,29 +24,14 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     """
     Admin do Post inspirado no WordPress.
-
-    Objetivos:
-    - UX editorial clara
-    - Imagem de destaque separada
-    - SEO explícito
-    - Zero upload local
     """
 
-    # --------------------------
-    # LISTAGEM
-    # --------------------------
     list_display = ("title", "status", "created_at")
     list_filter = ("status", "category")
     search_fields = ("title", "excerpt")
     prepopulated_fields = {"slug": ("title",)}
     ordering = ("-created_at",)
 
-    # Slug automático
-    prepopulated_fields = {"slug": ("title",)}
-
-    # --------------------------
-    # FIELDSETS (UX EDITORIAL)
-    # --------------------------
     fieldsets = (
         (
             "Conteúdo",
@@ -61,9 +46,7 @@ class PostAdmin(admin.ModelAdmin):
         (
             "Imagem de destaque",
             {
-                "fields": (
-                    "featured_image",
-                ),
+                "fields": ("featured_image",),
                 "description": (
                     "Cole aqui a URL da imagem de destaque "
                     "(Cloudinary/CDN). Não utilize upload local."
@@ -71,11 +54,19 @@ class PostAdmin(admin.ModelAdmin):
             },
         ),
         (
+            "Vídeo do YouTube",
+            {
+                "fields": ("youtube_video_id",),
+                "description": (
+                    "Informe apenas o ID do vídeo "
+                    "(ex: dQw4w9WgXcQ). O vídeo aparecerá no post automaticamente."
+                ),
+            },
+        ),
+        (
             "SEO",
             {
-                "fields": (
-                    "excerpt",
-                ),
+                "fields": ("excerpt",),
             },
         ),
         (
@@ -91,7 +82,5 @@ class PostAdmin(admin.ModelAdmin):
         ),
     )
 
-    # --------------------------
-    # COMPORTAMENTO
-    # --------------------------
     readonly_fields = ("published_at",)
+

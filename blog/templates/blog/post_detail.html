@@ -41,6 +41,32 @@
 }
 </script>
 
+{% if post.youtube_video_id %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ post.title|escapejs }}",
+  "description": "{{ post.excerpt|default:post.title|escapejs }}",
+  "thumbnailUrl": [
+    "https://img.youtube.com/vi/{{ post.youtube_video_id }}/hqdefault.jpg"
+  ],
+  "uploadDate": "{{ post.published_at|date:'c' }}",
+  "embedUrl": "https://www.youtube.com/embed/{{ post.youtube_video_id }}",
+  "contentUrl": "https://www.youtube.com/watch?v={{ post.youtube_video_id }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Entre Bugs e Soluções",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}"
+    }
+  }
+}
+</script>
+{% endif %}
+
+
 <!-- =========================
  Schema.org — FAQPage
 ========================= -->
@@ -72,6 +98,7 @@
       {% include "blog/includes/post_header.html" %}
       {% include "blog/includes/post_toc.html" %}
       {% include "blog/includes/post_featured_image.html" %}
+      {% include "blog/includes/post_video.html" %}
       {% include "blog/includes/post_content.html" %}
       
       {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}

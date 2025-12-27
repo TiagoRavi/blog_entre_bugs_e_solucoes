@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from .selectors import get_related_video_posts
+
 
 from .models import Post, Category
 from .selectors import (
@@ -74,7 +76,8 @@ class PostDetailView(DetailView):
 
     Responsabilidades:
     - Exibir apenas posts publicados
-    - Injetar posts relacionados no contexto
+    - Injetar posts relacionados
+    - Injetar playlist de vídeos (quando existir)
     """
 
     model = Post
@@ -88,29 +91,35 @@ class PostDetailView(DetailView):
         """
         return (
             get_published_posts()
-            .select_related(
-                "category",
-                "author",
-            )
+            .select_related("category", "author")
         )
 
     def get_context_data(self, **kwargs):
-        """
-        Adiciona posts relacionados ao contexto do template.
-        """
         context = super().get_context_data(**kwargs)
 
         post = self.object
 
+        # Posts relacionados (texto)
         context["related_posts"] = get_related_posts(
             post=post,
             limit=3,
         )
 
-        # FLAG DE LAYOUT (ESSENCIAL)
+        # Playlist de vídeos (somente se o post tiver vídeo)
+        context["related_videos"] = []
+        if post.youtube_video_id:
+            context["related_videos"] = get_related_video_posts(
+                post=post,
+                limit=3,
+            )
+
+        # Flag de layout
         context["is_post_detail"] = True
 
         return context
+
+
+
 
 
 # ======================================================
@@ -143,3 +152,4 @@ class CategoryPostListView(ListView):
         )
 
         return context
+

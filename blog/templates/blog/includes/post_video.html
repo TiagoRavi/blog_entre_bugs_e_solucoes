@@ -1,0 +1,14 @@
+{% if post.youtube_video_id %}
+<section class="post-video">
+    <div class="post-video__wrapper">
+        <iframe
+            src="https://www.youtube.com/embed/{{ post.youtube_video_id }}"
+            title="Vídeo do YouTube"
+            loading="lazy"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+</section>
+{% endif %}

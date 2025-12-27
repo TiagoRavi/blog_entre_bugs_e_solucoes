@@ -4,6 +4,8 @@ from django.db.models import QuerySet
 
 from .models import Category, Post
 
+from django.utils import timezone
+from .models import Post
 
 # ======================================================
 # CATEGORY SELECTORS
@@ -104,4 +106,22 @@ def get_related_posts(
         get_published_posts()
         .filter(category=post.category)
         .exclude(pk=post.pk)[:limit]
+    )
+
+
+def get_related_video_posts(post, limit=3):
+    """
+    Retorna posts da mesma categoria que:
+    - estejam publicados
+    - tenham vídeo do YouTube
+    - não sejam o post atual
+    """
+    return (
+        Post.objects.published()
+        .filter(
+            category=post.category,
+            youtube_video_id__isnull=False,
+        )
+        .exclude(pk=post.pk)
+        .order_by("-published_at")[:limit]
     )

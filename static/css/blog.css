@@ -919,3 +919,74 @@ MOBILE
 .pagination-link:last-child {
   padding: 0 16px;
 }
+
+/* ===========================
+   YouTube Embed / Fallback
+   =========================== */
+
+.post-video,
+.post-video__wrapper {
+    margin: 2.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.post-video__wrapper {
+    width: 100%;
+    max-width: 720px;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* iframe padrão */
+.post-video__wrapper iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    display: block;
+}
+
+/* ===========================
+   Fallback (Erro 153)
+   =========================== */
+
+#yt-fallback {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: #e5e5e5;
+}
+
+#yt-fallback p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* Link “Assistir no YouTube” */
+#yt-fallback a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    background: #ff0000;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#yt-fallback a:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
+}
+
+/* Ícone do YouTube (opcional, via ::before) */
+#yt-fallback a::before {
+    content: "▶";
+    font-size: 0.9rem;
+}

@@ -8,6 +8,37 @@ from django.urls import reverse
 from cloudinary.models import CloudinaryField
 from tinymce.models import HTMLField
 
+import re
+
+
+def extract_youtube_id(value: str) -> str | None:
+    """
+    Extrai o ID do vídeo do YouTube a partir de uma URL ou retorna
+    o valor se já parecer um ID válido.
+    """
+    if not value:
+        return None
+
+    value = value.strip()
+
+    patterns = [
+        r"youtu\.be/(?P<id>[^/?&]+)",
+        r"youtube\.com/watch\?v=(?P<id>[^&]+)",
+        r"youtube\.com/embed/(?P<id>[^/?&]+)",
+        r"youtube\.com/shorts/(?P<id>[^/?&]+)",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, value)
+        if match:
+            return match.group("id")
+
+    # Fallback: se já for um ID válido (11 chars)
+    if re.fullmatch(r"[a-zA-Z0-9_-]{11}", value):
+        return value
+
+    return None
+
 
 # ======================================================
 # CATEGORY
@@ -45,49 +76,23 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        """URL canônica da categoria."""
         return reverse("blog:category_posts", args=[self.slug])
 
     def save(self, *args, **kwargs):
-        """
-        Gera o slug automaticamente se não informado.
-        """
         if not self.slug:
             self.slug = slugify(self.name)
-
         super().save(*args, **kwargs)
 
 
 # ======================================================
-# QUERYSET / MANAGER
+# QUERYSET
 # ======================================================
-from django.db import models
-from django.utils import timezone
-
 class PostQuerySet(models.QuerySet):
     def published(self):
         return self.filter(
             status=Post.Status.PUBLISHED,
             published_at__lte=timezone.now(),
         )
-
-
-class Post(models.Model):
-    class Status(models.TextChoices):
-        DRAFT = "draft", "Rascunho"
-        PUBLISHED = "published", "Publicado"
-
-    status = models.CharField(
-        max_length=20,
-        choices=Status.choices,
-        default=Status.DRAFT,
-    )
-
-    published_at = models.DateTimeField(null=True, blank=True)
-
-    # ✅ MANAGER CORRETO
-    objects = PostQuerySet.as_manager()
-
 
 
 # ======================================================
@@ -99,14 +104,14 @@ class Post(models.Model):
     """
 
     # --------------------------
-    # Status do Post
+    # Status
     # --------------------------
     class Status(models.TextChoices):
         DRAFT = "draft", "Rascunho"
         PUBLISHED = "published", "Publicado"
 
     # --------------------------
-    # Campos principais
+    # Conteúdo
     # --------------------------
     title = models.CharField(
         max_length=200,
@@ -154,6 +159,18 @@ class Post(models.Model):
         null=True,
     )
 
+    # 🎥 YouTube
+    youtube_video_id = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name="Vídeo do YouTube",
+        help_text="Informe apenas o ID do vídeo (ex: dQw4w9WgXcQ)",
+    )
+
+    # --------------------------
+    # Publicação
+    # --------------------------
     status = models.CharField(
         max_length=10,
         choices=Status.choices,
@@ -162,9 +179,6 @@ class Post(models.Model):
         verbose_name="Status",
     )
 
-    # --------------------------
-    # Datas
-    # --------------------------
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Criado em",
@@ -200,32 +214,23 @@ class Post(models.Model):
         return self.title
 
     # ==================================================
-    # REGRAS DE DOMÍNIO
+    # DOMÍNIO
     # ==================================================
     def publish(self):
-        """Publica o post explicitamente."""
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
         self.save(update_fields=["status", "published_at"])
 
     def unpublish(self):
-        """Retorna o post para rascunho."""
         self.status = self.Status.DRAFT
         self.published_at = None
         self.save(update_fields=["status", "published_at"])
 
     # ==================================================
-    # SAVE — CONSISTÊNCIA CENTRAL
+    # SAVE CENTRAL
     # ==================================================
     def save(self, *args, **kwargs):
-        """
-        Responsabilidades:
-        - Gerar slug automaticamente (com fallback seguro)
-        - Gerar excerpt limpo para SEO
-        - Garantir coerência entre status e published_at
-        """
-
-        # Slug automático
+        # Slug automático com fallback
         if not self.slug:
             base_slug = slugify(self.title)
             slug = base_slug
@@ -237,7 +242,7 @@ class Post(models.Model):
 
             self.slug = slug
 
-        # Excerpt automático (remove HTML)
+        # Excerpt automático (SEO-safe)
         if not self.excerpt and self.content:
             texto_limpo = strip_tags(self.content)
             self.excerpt = Truncator(texto_limpo).chars(155)
@@ -249,11 +254,21 @@ class Post(models.Model):
         if self.status == self.Status.DRAFT:
             self.published_at = None
 
+        # Normalização do vídeo do YouTube
+        if self.youtube_video_id:
+            extracted_id = extract_youtube_id(self.youtube_video_id)
+            self.youtube_video_id = extracted_id
+        else:
+            self.youtube_video_id = None
+
         super().save(*args, **kwargs)
+
+    
 
     # ==================================================
     # URL CANÔNICA
     # ==================================================
     def get_absolute_url(self):
-        """URL canônica do post."""
         return reverse("blog:post_detail", args=[self.slug])
+    
+    
