@@ -1037,3 +1037,92 @@ details[open] .faq-question::after {
   line-height: 1.7;
   color: #374151;
 }
+
+
+/* =========================
+   Caixa de Autor – Harmonizada
+   ========================= */
+
+.author-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    max-width: 720px;
+    margin: 3rem auto 0;
+    padding: 1.25rem 1.5rem;
+
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    position: relative;
+}
+
+.author-box__avatar {
+    flex-shrink: 0;
+}
+
+.author-box__avatar img {
+    width: 64px !important;
+    height: 64px !important;
+    max-width: 64px !important;
+    max-height: 64px !important;
+
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.author-box__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-box__name {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.author-box__bio {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.author-box__links {
+    margin-top: 0.5rem;
+}
+
+.author-box__links a {
+    margin-right: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.author-box__links a:hover {
+    text-decoration: underline;
+}
+
+.author-box::before {
+    content: "Autor";
+    position: absolute;
+    top: -0.55rem;
+    left: 1.25rem;
+
+    background-color: #ffffff;
+    padding: 0 0.4rem;
+
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #9ca3af;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
