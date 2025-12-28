@@ -1,8 +1,43 @@
 {% extends "base.html" %}
 {% load static %}
 
+{# =========================
+ SEO PRINCIPAL — POST
+========================= #}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
+{% endblock %}
+
+{% block canonical %}
+{{ post.get_absolute_url }}
+{% endblock %}
+
+{% block og_title %}{{ post.title }}{% endblock %}
+{% block og_description %}
+{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
+{% endblock %}
+{% block og_image %}
+{% if post.featured_image %}{{ post.featured_image.url }}{% endif %}
+{% endblock %}
+
+{% block twitter_title %}{{ post.title }}{% endblock %}
+{% block twitter_description %}
+{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
+{% endblock %}
+{% block twitter_image %}
+{% if post.featured_image %}{{ post.featured_image.url }}{% endif %}
+{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
+
+<meta property="og:type" content="article">
+
 
 <!-- =========================
  Schema.org — BlogPosting
@@ -11,18 +46,19 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "@id": "{{ request.build_absolute_uri }}#blogpost",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ request.build_absolute_uri }}"
-  },
+  "@id": "{{ post.get_absolute_url }}#blogpost",
+"mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "{{ post.get_absolute_url }}"
+}, 
+
   "headline": "{{ post.title|escapejs }}",
   "description": "{{ post.excerpt|default:post.content|striptags|truncatechars:155|escapejs }}",
   {% if post.featured_image %}
-  "image": [
-  "https://site.com/media/imagem.webp"
-  ],
-  {% endif %}
+"image": [
+  "{{ post.featured_image.url }}"
+],
+{% endif %}
 
   "datePublished": "{{ post.published_at|date:'c' }}",
   "dateModified": "{{ post.updated_at|date:'c' }}",

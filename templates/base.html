@@ -32,7 +32,7 @@
   <!-- =========================================================
        Canonical URL (SEO crítico)
   ========================================================== -->
-  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
 
   <!-- =========================================================
        Open Graph (Facebook, LinkedIn, WhatsApp)

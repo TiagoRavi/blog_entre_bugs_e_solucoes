@@ -6,8 +6,6 @@ Sobre o Autor | Entre Bugs e Soluções
 {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/pages/about.css' %}">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -16,7 +14,7 @@ Sobre o Autor | Entre Bugs e Soluções
     "@type": "Person",
     "name": "Tiago",
     "url": "{{ request.build_absolute_uri }}",
-    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/tiago.webp' %}",
+    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/perfil/tiagosousa.webp' %}",
     "jobTitle": "Desenvolvedor Python e Django",
     "description": "Desenvolvedor Python especializado em Django, arquitetura de software e boas práticas.",
     "sameAs": [
@@ -46,39 +44,11 @@ Sobre o Autor | Entre Bugs e Soluções
   </header>
 
   <article class="about-page__content">
-
     <p>
       Olá, eu sou <strong>Tiago</strong> 👋  
       Desenvolvedor especializado em <strong>Python</strong> e <strong>Django</strong>,
       com foco em arquitetura de software, código limpo e soluções escaláveis.
     </p>
-
-    <p>
-      O <strong>Entre Bugs e Soluções</strong> nasceu da necessidade de compartilhar
-      conhecimento real, aplicado no dia a dia de projetos profissionais.
-    </p>
-
-    <h2>🎯 Propósito</h2>
-
-    <p>
-      Aqui você aprende desenvolvimento de software além do básico:
-    </p>
-
-    <ul>
-      <li>Python e Django para produção</li>
-      <li>Arquitetura e organização de código</li>
-      <li>Boas práticas que escalam</li>
-      <li>Performance, segurança e manutenção</li>
-    </ul>
-
-    <h2>👨‍💻 Para quem é</h2>
-
-    <ul>
-      <li>Iniciantes que querem aprender da forma certa</li>
-      <li>Desenvolvedores que buscam maturidade técnica</li>
-      <li>Profissionais que trabalham com Django</li>
-    </ul>
-
   </article>
 
 </section>
