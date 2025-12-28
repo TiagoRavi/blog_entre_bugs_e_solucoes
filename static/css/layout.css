@@ -102,7 +102,7 @@ MENU COM SUBMENU (BASE)
   padding: 0.4rem 0;
 }
 
-/* Submenu sempre oculto */
+/* Submenu sempre oculto no Mobile */
 .nav .submenu {
   display: none;
   pointer-events: none;
@@ -115,6 +115,32 @@ MENU COM SUBMENU (BASE)
   display: block;
   pointer-events: auto;
 }
+
+/* Desktop: submenu aparece só pelo clique em Categorias */
+@media (min-width: 1024px) {
+  .menu-item.is-open > .submenu {
+    display: block;
+    pointer-events: auto;
+  }
+}
+
+.submenu {
+  min-width: 180px;      /* ⬅ diminui a largura */
+  padding: 1rem;         /* ⬅ reduz bastante o volume */
+  gap: 0.4rem;
+  height: auto;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+
 
 
 .menu-item.is-open .menu-arrow {
@@ -150,7 +176,7 @@ MENU COM SUBMENU (BASE)
     background: #fff;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    box-shadow: 0 12px 32px rgba(0,0,0,.12);
     z-index: 1000;
   }
 }
