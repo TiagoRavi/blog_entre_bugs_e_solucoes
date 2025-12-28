@@ -66,26 +66,30 @@
 </script>
 {% endif %}
 
-
 <!-- =========================
  Schema.org — FAQPage
 ========================= -->
+{% if post.faqs.exists %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {% for faq in post.faqs.all %}
     {
       "@type": "Question",
-      "name": "HTML é uma linguagem de programação?",
+      "name": "{{ faq.question|escapejs }}",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Não. HTML é uma linguagem de marcação usada para estruturar conteúdos na web."
+        "text": "{{ faq.answer|striptags|escapejs }}"
       }
-    }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
   ]
 }
 </script>
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
@@ -100,13 +104,13 @@
       {% include "blog/includes/post_featured_image.html" %}
       {% include "blog/includes/post_video.html" %}
       {% include "blog/includes/post_content.html" %}
+      {% include "blog/includes/post_faq.html" %}
+      {% include "blog/includes/post_related.html" %}
       
       {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}
       <div class="sidebar-cta--mobile post-mobile-cta">
       {% include "blog/includes/post_sidbar.html" %}
       </div>
-      
-      {% include "blog/includes/post_related.html" %}
    
   </main>
 

@@ -42,12 +42,13 @@ NAV
 ================================================== */
 
 .nav {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 1.25rem;
+  position: relative;
 }
 
-.nav ul {
+.nav > ul {
   list-style: none;
   display: flex;
   align-items: center;
@@ -56,33 +57,131 @@ NAV
   padding: 0;
 }
 
-/* Links do menu */
-.nav a {
-  font-weight: 600;     /* mais elegante que 700 */
-  font-size: 0.95rem;
-  line-height: 1;       /* 🔑 remove altura invisível */
-  padding: 0.25rem 0;
+/* Desktop */
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+  }
+}
+/* Mobile ABERTO somente via JS */
+.nav.is-open {
+  display: flex;
+}
 
-  text-decoration: none;
+/* ==================================================
+MENU COM SUBMENU (BASE)
+================================================== */
+
+.menu-item {
+  position: relative;
+}
+
+.menu-button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  font-weight: 700;
+  font-size: 0.95rem;
   color: var(--secondary-color);
 }
 
-.nav a:hover {
-  color: var(--primary-color);
+.menu-arrow {
+  font-size: 0.65rem;
+  transition: transform 0.2s ease;
+}
+
+/* Submenu — SEMPRE fechado por padrão */
+.submenu {
+  display: none;                 /* 🔒 regra absoluta */
+  pointer-events: none;
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+}
+
+/* Submenu sempre oculto */
+.nav .submenu {
+  display: none;
+  pointer-events: none;
+}
+
+/* Submenu só aparece se:
+   - menu mobile estiver aberto
+   - usuário clicou em Categorias */
+.nav.is-open .menu-item.is-open > .submenu {
+  display: block;
+  pointer-events: auto;
 }
 
 
-
-
-.nav a:hover {
-  color: var(--primary-color);
+.menu-item.is-open .menu-arrow {
+  transform: rotate(180deg);
 }
 
-.nav input[type="search"] {
-  height: 36px;
-  padding: 0 0.75rem;
-  font-size: 0.9rem;
+@media (max-width: 768px) {
+  .submenu {
+    position: static;
+    width: 100%;
+    margin-top: 0.5rem;
+
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: none;
+  }
+
+  .submenu li a {
+    display: block;
+    padding: 0.6rem 1rem;
+  }
 }
+
+@media (min-width: 1024px) {
+  .submenu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    z-index: 1000;
+  }
+}
+
+/* ==================================================
+LINKS DO MENU (SEM SUBLINHADO + NEGRITO)
+================================================== */
+
+.nav a,
+.menu-button {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+/* Submenu links */
+.submenu a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.nav a:hover,
+.submenu a:hover,
+.nav a:focus-visible,
+.submenu a:focus-visible {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+
 
 /* ==================================================
 FOOTER

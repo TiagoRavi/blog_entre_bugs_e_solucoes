@@ -16,25 +16,50 @@
       class="menu-toggle"
       aria-label="Abrir menu"
       aria-expanded="false"
+      data-menu-toggle
     >
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <nav class="nav" aria-label="Menu principal">
+    <nav class="nav" aria-label="Menu principal" data-nav>
+      <ul class="nav-list">
 
-      <ul>
         <li><a href="{% url 'blog:home' %}">Home</a></li>
         <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
-        <li><a href="#">Categorias</a></li>
+
+        <li class="menu-item has-submenu" data-submenu>
+          <button
+            class="menu-button"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Categorias
+            <span class="menu-arrow" aria-hidden="true">▾</span>
+          </button>
+
+          <ul class="submenu" role="menu">
+            {% for category in menu_categories %}
+              <li role="none">
+                <a role="menuitem" href="{{ category.get_absolute_url }}">
+                  {{ category.name }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+
         <li><a href="{% url 'pages:about' %}">Sobre</a></li>
         <li><a href="{% url 'pages:contact' %}">Contato</a></li>
+
       </ul>
 
       {% include "includes/search_bar.html" %}
-
     </nav>
 
   </div>
 </header>
+
+<script src="{% static 'js/menu-submenu.js' %}" defer></script>

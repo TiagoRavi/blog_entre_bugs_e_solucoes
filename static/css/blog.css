@@ -921,72 +921,119 @@ MOBILE
 }
 
 /* ===========================
-   YouTube Embed / Fallback
+   Post Video (YouTube Embed)
    =========================== */
 
-.post-video,
-.post-video__wrapper {
-    margin: 2.5rem 0;
+.post-video {
+    margin: 3rem 0;
     display: flex;
     justify-content: center;
 }
 
 .post-video__wrapper {
     width: 100%;
-    max-width: 720px;
-    background: #111;
-    border-radius: 12px;
+    max-width: 800px;
+    background: #0f0f0f;
+    border-radius: 14px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
-/* iframe padrão */
+/* Iframe responsivo */
 .post-video__wrapper iframe {
     width: 100%;
     aspect-ratio: 16 / 9;
-    border: 0;
+    border: none;
     display: block;
+    background: #000;
 }
 
-/* ===========================
-   Fallback (Erro 153)
-   =========================== */
-
-#yt-fallback {
-    padding: 2rem 1.5rem;
+/* Espaço elegante caso o player falhe */
+.post-video__wrapper::after {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
     text-align: center;
-    color: #e5e5e5;
+    color: rgba(255, 255, 255, 0.6);
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0)
+    );
+    pointer-events: none;
 }
 
-#yt-fallback p {
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    opacity: 0.85;
+/* Mobile refinado */
+@media (max-width: 768px) {
+    .post-video {
+        margin: 2rem 0;
+    }
+
+    .post-video__wrapper {
+        border-radius: 10px;
+    }
 }
 
-/* Link “Assistir no YouTube” */
-#yt-fallback a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.1rem;
-    background: #ff0000;
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s ease, transform 0.2s ease;
+/* =========================
+   FAQ – Estilo em Caixa
+========================= */
+
+.post-faq {
+  margin-top: 4rem;
 }
 
-#yt-fallback a:hover {
-    background: #cc0000;
-    transform: translateY(-1px);
+.post-faq h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Ícone do YouTube (opcional, via ::before) */
-#yt-fallback a::before {
-    content: "▶";
-    font-size: 0.9rem;
+.faq-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  border-color: #d1d5db;
+}
+
+.faq-question {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  position: relative;
+  padding-right: 2rem;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+details[open] .faq-question::after {
+  content: "–";
+}
+
+.faq-answer {
+  margin-top: 0.75rem;
+  line-height: 1.7;
+  color: #374151;
 }

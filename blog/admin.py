@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category
+from .models import Post, Category, FAQ
 
 
 # ======================================================
@@ -16,6 +16,15 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     list_display = ("name", "slug")
 
+# ======================================================
+# FAQ INLINE
+# ======================================================
+class FAQInline(admin.TabularInline):
+    model = FAQ
+    extra = 1
+    ordering = ("order",)
+    fields = ("question", "answer", "order")
+
 
 # ======================================================
 # POST ADMIN (WordPress-like)
@@ -25,6 +34,7 @@ class PostAdmin(admin.ModelAdmin):
     """
     Admin do Post inspirado no WordPress.
     """
+    inlines = [FAQInline]
 
     list_display = ("title", "status", "created_at")
     list_filter = ("status", "category")

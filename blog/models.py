@@ -10,7 +10,9 @@ from tinymce.models import HTMLField
 
 import re
 
-
+# ======================================================
+# HELPERS
+# ======================================================
 def extract_youtube_id(value: str) -> str | None:
     """
     Extrai o ID do vídeo do YouTube a partir de uma URL ou retorna
@@ -196,6 +198,7 @@ class Post(models.Model):
         verbose_name="Publicado em",
     )
 
+
     # --------------------------
     # Manager
     # --------------------------
@@ -272,3 +275,22 @@ class Post(models.Model):
         return reverse("blog:post_detail", args=[self.slug])
     
     
+# ======================================================
+# FAQ
+# ======================================================
+class FAQ(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="faqs",
+    )
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return self.question

@@ -1,7 +1,9 @@
-{% load static %}
-
 <header class="post-header-box">
   <h1 class="post-article-title">{{ post.title }}</h1>
+
+  {% if post.excerpt %}
+    <p class="post-excerpt-lead">{{ post.excerpt }}</p>
+  {% endif %}
 
   <div class="post-meta">
     {% if post.author %}
