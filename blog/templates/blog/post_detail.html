@@ -141,7 +141,9 @@
       {% include "blog/includes/post_featured_image.html" %}
       {% include "blog/includes/post_video.html" %}
       {% include "blog/includes/post_content.html" %}
-      {% include "includes/newsletter_beehiiv.html" %}
+      {% with has_newsletter=True %}
+      {% include "blog/includes/newsletter_beehiiv.html" %}
+      {% endwith %}
       {% include "blog/includes/post_faq.html" %}
       {% include "blog/includes/post_related.html" %}
       {% include "blog/includes/post_author_box.html" %}
@@ -174,6 +176,9 @@
 
 {% block extra_scripts %}
   {{ block.super }}
+  <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+  <script async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+  
   <script src="{% static 'js/post-toc.js' %}" defer></script>
   <script src="{% static 'js/share-fab.js' %}" defer></script>
 {% endblock %}
