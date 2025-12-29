@@ -1,5 +1,5 @@
 /* =========================================================
-   MAILERLITE NEWSLETTER – FINAL CSS
+   MAILERLITE NEWSLETTER – FINAL CSS (WCAG AA)
    Form ID: #mlb2-35107002
    ========================================================= */
 
@@ -43,7 +43,7 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 28px 28px 24px;
-  box-shadow: 
+  box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.08),
     0 2px 6px rgba(0, 0, 0, 0.04);
 }
@@ -57,19 +57,32 @@
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-size: 28px;
   font-weight: 700;
-  color: #000;
+  color: #000000;
   margin: 0 0 6px;
 }
 
 #mlb2-35107002 .ml-form-embedContent p {
   font-size: 14px;
-  color: #555;
+  color: #555555; /* contraste AA */
   margin: 0 0 20px;
 }
 
+/* Texto em destaque (strong) */
+#mlb2-35107002 .ml-form-embedContent strong {
+  color: #111111; /* contraste reforçado */
+  font-weight: 700;
+}
+
+/* Links */
 #mlb2-35107002 a {
-  color: #000;
+  color: #000000;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+#mlb2-35107002 a:hover,
+#mlb2-35107002 a:focus {
+  color: #111111;
 }
 
 
@@ -81,14 +94,21 @@
   width: 100% !important;
   padding: 14px 12px !important;
   border-radius: 8px !important;
-  border: 1px solid #ddd !important;
+  border: 1px solid #dddddd !important;
   font-size: 14px !important;
+  color: #111111;
+  background-color: #ffffff;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#mlb2-35107002 input[type="email"]::placeholder {
+  color: #6b6b6b;
+  opacity: 1;
 }
 
 #mlb2-35107002 input[type="email"]:focus {
   outline: none;
-  border-color: #000 !important;
+  border-color: #000000 !important;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -99,7 +119,7 @@
 
 #mlb2-35107002 .privacy-policy p {
   font-size: 12px;
-  color: #777;
+  color: #555555; /* contraste AA */
   margin: 14px 0 12px;
   line-height: 1.5;
 }
@@ -118,7 +138,7 @@
   align-items: flex-start;
   gap: 8px;
   font-size: 12px;
-  color: #333;
+  color: #333333;
   cursor: pointer;
 }
 
@@ -170,13 +190,15 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 3px solid #fff;
-  border-color: #fff transparent #fff transparent;
+  border: 3px solid #ffffff;
+  border-color: #ffffff transparent #ffffff transparent;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
@@ -192,11 +214,12 @@
 #mlb2-35107002 .ml-form-successBody h4 {
   font-size: 22px;
   margin-bottom: 8px;
+  color: #000000;
 }
 
 #mlb2-35107002 .ml-form-successBody p {
   font-size: 14px;
-  color: #444;
+  color: #444444;
 }
 
 
