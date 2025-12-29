@@ -714,3 +714,71 @@ MOBILE
   }
 }
 
+/* ==============================
+   Video placeholder (YouTube)
+   ============================== */
+
+.post-video__wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.95)
+  );
+
+  color: #f5f5f5;
+  text-align: center;
+}
+
+.video-placeholder p {
+  max-width: 420px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.video-placeholder button {
+  appearance: none;
+  border: none;
+  border-radius: 8px;
+
+  padding: 12px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  background-color: #ffffff;
+  color: #000000;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.video-placeholder button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.video-placeholder button:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
