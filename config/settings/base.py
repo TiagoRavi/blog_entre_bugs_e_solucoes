@@ -14,7 +14,17 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS = [
+    "entrebugsesolucoes.com.br",
+    "www.entrebugsesolucoes.com.br",
+]
+
+SECURE_SSL_REDIRECT = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://entrebugsesolucoes.com.br",
+    "https://www.entrebugsesolucoes.com.br",
+]
 
 
 # ======================================================
@@ -44,6 +54,9 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 2
+
+SITE_URL = "https://entrebugsesolucoes.com.br"
+
 
 
 # ======================================================
@@ -93,6 +106,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
 
                 "blog.context_processors.categories_menu",
+                "blog.context_processors.seo",
             ],
         },
     },
@@ -227,4 +241,5 @@ TINYMCE_DEFAULT_CONFIG = {
 # DEFAULTS
 # ======================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 

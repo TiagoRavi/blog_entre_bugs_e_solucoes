@@ -32,7 +32,9 @@
   <!-- =========================================================
        Canonical URL (SEO crítico)
   ========================================================== -->
-  <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+  <link rel="canonical" href="{{ CANONICAL_URL }}">
+  <meta property="og:url" content="{{ CANONICAL_URL }}">
+
 
   <!-- =========================================================
        Open Graph (Facebook, LinkedIn, WhatsApp)
@@ -40,7 +42,6 @@
   <meta property="og:title" content="{% block og_title %}Entre Bugs e Soluções{% endblock %}">
   <meta property="og:description" content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ request.build_absolute_uri }}">
   <meta property="og:image" content="{% block og_image %}{% static 'img/logo.png' %}{% endblock %}">
 
   <!-- =========================================================
