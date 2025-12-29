@@ -141,12 +141,13 @@
       {% include "blog/includes/post_featured_image.html" %}
       {% include "blog/includes/post_video.html" %}
       {% include "blog/includes/post_content.html" %}
-      {% with has_newsletter=True %}
-      {% include "blog/includes/newsletter_beehiiv.html" %}
-      {% endwith %}
       {% include "blog/includes/post_faq.html" %}
-      {% include "blog/includes/post_related.html" %}
       {% include "blog/includes/post_author_box.html" %}
+      {% with has_newsletter=True %}
+      {% include "blog/includes/newsletter.html" %}
+      {% endwith %}
+      {% include "blog/includes/post_related.html" %}
+      
 
       
       {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}
@@ -176,9 +177,12 @@
 
 {% block extra_scripts %}
   {{ block.super }}
-  <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-  <script async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
-  
+  <!-- MailerLite -->
+  <script src="https://groot.mailerlite.com/js/w/webforms.min.js"></script>
+
+  <!-- CSS DEPOIS DO JS -->
+  <link rel="stylesheet" href="{% static 'css/newsletter.css' %}">
+
   <script src="{% static 'js/post-toc.js' %}" defer></script>
   <script src="{% static 'js/share-fab.js' %}" defer></script>
 {% endblock %}

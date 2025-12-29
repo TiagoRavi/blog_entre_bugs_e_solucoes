@@ -53,23 +53,3 @@ document.addEventListener("DOMContentLoaded", function () {
   acceptBtn.addEventListener("click", () => closeBanner("accepted"));
   declineBtn.addEventListener("click", () => closeBanner("declined"));
 });
-
-function applyConsent(status) {
-  if (typeof gtag === "function") {
-    if (status === "accepted") {
-      gtag("consent", "update", {
-        analytics_storage: "granted"
-      });
-      gtag("config", "G-Z2V7ET28GR", { anonymize_ip: true });
-    } else {
-      gtag("consent", "update", {
-        analytics_storage: "denied"
-      });
-    }
-  }
-
-  // 👉 AQUI ESTÁ A CHAVE
-  if (status === "accepted") {
-    loadBeehiiv();
-  }
-}

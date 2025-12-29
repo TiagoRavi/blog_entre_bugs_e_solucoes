@@ -714,22 +714,3 @@ MOBILE
   }
 }
 
-/* ==================================================
-NEWSLETTER — FINAL DO ARTIGO
-================================================== */
-
-.beehiiv-wrapper {
-    max-width: 500px;
-    margin: 48px auto;
-    min-height: 242px; /* reserva espaço */
-}
-
-.beehiiv-embed {
-    width: 100%;
-    height: 242px;
-    border: none;
-}
-
-
-
-
