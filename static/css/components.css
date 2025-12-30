@@ -782,3 +782,55 @@ MOBILE
   outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
+
+
+/* ===============================
+   POST CTA – HARMONIZADO
+================================ */
+
+.post-cta {
+    margin: 3rem 0;
+}
+
+.post-cta-card {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 2rem 2.25rem;
+    border-left: 4px solid #2563eb;
+}
+
+/* Título */
+.post-cta-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+}
+
+/* Descrição */
+.post-cta-description {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 620px;
+}
+
+/* Botão */
+.post-cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1.2rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.post-cta-button:hover {
+    background-color: #1e40af;
+    transform: translateY(-1px);
+}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category, FAQ
+from .models import Post, Category, FAQ, CTA
 
 
 # ======================================================
@@ -25,6 +25,16 @@ class FAQInline(admin.TabularInline):
     ordering = ("order",)
     fields = ("question", "answer", "order")
 
+# ======================================================
+# CTA INLINE (SEO)
+# ======================================================
+class CTAInline(admin.TabularInline):
+    model = Post.ctas.through
+    extra = 1
+    verbose_name = "CTA de SEO"
+    verbose_name_plural = "CTAs de SEO"
+
+
 
 # ======================================================
 # POST ADMIN (WordPress-like)
@@ -34,7 +44,10 @@ class PostAdmin(admin.ModelAdmin):
     """
     Admin do Post inspirado no WordPress.
     """
-    inlines = [FAQInline]
+    inlines = [FAQInline, CTAInline]
+    
+    exclude = ("ctas",)
+
 
     list_display = ("title", "status", "created_at")
     list_filter = ("status", "category")
@@ -94,3 +107,20 @@ class PostAdmin(admin.ModelAdmin):
 
     readonly_fields = ("published_at",)
 
+
+# ======================================================
+# CTA ADMIN
+# ======================================================
+@admin.register(CTA)
+class CTAAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "anchor_text",
+        "url",
+        "is_active",
+        "created_at",
+    )
+
+    list_filter = ("is_active",)
+    search_fields = ("title", "anchor_text", "url")
+    ordering = ("-created_at",)

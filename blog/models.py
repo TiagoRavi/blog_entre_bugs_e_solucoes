@@ -96,6 +96,58 @@ class PostQuerySet(models.QuerySet):
             published_at__lte=timezone.now(),
         )
 
+# ======================================================
+# CTA (SEO)
+# ======================================================
+class CTA(models.Model):
+    """
+    Call To Action reutilizável para SEO interno.
+    """
+
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Título do CTA",
+        help_text="Título exibido no box."
+    )
+
+    description = models.TextField(
+        blank=True,
+        verbose_name="Descrição",
+        help_text="Texto opcional para reforçar o CTA."
+    )
+
+    url = models.URLField(
+        verbose_name="Link"
+    )
+
+    anchor_text = models.CharField(
+        max_length=150,
+        verbose_name="Texto âncora (SEO)",
+        help_text="Texto do link para SEO interno."
+    )
+
+    open_in_new_tab = models.BooleanField(
+        default=True,
+        verbose_name="Abrir em nova aba"
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Ativo"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        verbose_name = "CTA (SEO)"
+        verbose_name_plural = "CTAs (SEO)"
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return self.title
+
 
 # ======================================================
 # POST
@@ -153,6 +205,13 @@ class Post(models.Model):
     content = HTMLField(
         verbose_name="Conteúdo",
         help_text="Conteúdo HTML gerado pelo editor.",
+    )
+
+    ctas = models.ManyToManyField(
+        CTA,
+        blank=True,
+        related_name="posts",
+        verbose_name="CTAs de SEO"
     )
 
     featured_image = CloudinaryField(
