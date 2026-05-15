@@ -1,22 +1,32 @@
+from dotenv import load_dotenv
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+load_dotenv(BASE_DIR / ".env")
+
 from .base import *
+
 import os
 import logging
 import dj_database_url
-import cloudinary
 
 # ======================================================
-# LOGGING (TEMPORÁRIO PARA DIAGNÓSTICO)
+# LOGGING
 # ======================================================
-logging.basicConfig(level=logging.DEBUG)
+
+logging.basicConfig(level=logging.INFO)
 
 # ======================================================
 # CORE
 # ======================================================
+
 DEBUG = False
 
 # ======================================================
 # HOSTS
 # ======================================================
+
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
@@ -24,88 +34,127 @@ ALLOWED_HOSTS = [
 ]
 
 if not ALLOWED_HOSTS:
-    raise RuntimeError("DJANGO_ALLOWED_HOSTS não configurado corretamente")
+    raise RuntimeError(
+        "DJANGO_ALLOWED_HOSTS não configurado corretamente"
+    )
 
 # ======================================================
 # SECURITY
 # ======================================================
+
 SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+SECURE_PROXY_SSL_HEADER = (
+    "HTTP_X_FORWARDED_PROTO",
+    "https",
+)
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_HTTPONLY = True
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+X_FRAME_OPTIONS = "DENY"
 
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = "DENY"
-
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
-    for origin in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "",
+    ).split(",")
     if origin.strip()
 ]
 
 if not CSRF_TRUSTED_ORIGINS:
-    raise RuntimeError("DJANGO_CSRF_TRUSTED_ORIGINS não configurado corretamente")
+    raise RuntimeError(
+        "DJANGO_CSRF_TRUSTED_ORIGINS não configurado corretamente"
+    )
 
 # ======================================================
-# DATABASE (POSTGRESQL - RENDER)
+# DATABASE
 # ======================================================
+
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL não configurada")
 
 DATABASES = {
-    "default": dj_database_url.parse(
-        DATABASE_URL,
+    "default": dj_database_url.config(
+        default=DATABASE_URL,
         conn_max_age=600,
-        ssl_require=True,
+        ssl_require=False,
     )
 }
 
 # ======================================================
 # CACHE
 # ======================================================
+
 REDIS_URL = os.environ.get("REDIS_URL")
 
 if REDIS_URL:
     CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "BACKEND": (
+                "django.core.cache.backends.redis.RedisCache"
+            ),
             "LOCATION": REDIS_URL,
         }
     }
 else:
     CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-            "LOCATION": "render-fallback-cache",
+            "BACKEND": (
+                "django.core.cache.backends.locmem.LocMemCache"
+            ),
+            "LOCATION": "fallback-cache",
         }
     }
 
 # ======================================================
-# CLOUDINARY (OBRIGATÓRIO PARA UPLOAD MANUAL)
+# CLOUDINARY
 # ======================================================
-import cloudinary
 
-CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
-CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
-CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
+}
 
-if not all([
-    CLOUDINARY_CLOUD_NAME,
-    CLOUDINARY_API_KEY,
-    CLOUDINARY_API_SECRET,
-]):
-    raise RuntimeError("Credenciais do Cloudinary não configuradas corretamente")
-
-cloudinary.config(
-    cloud_name=CLOUDINARY_CLOUD_NAME,
-    api_key=CLOUDINARY_API_KEY,
-    api_secret=CLOUDINARY_API_SECRET,
-    secure=True,
+DEFAULT_FILE_STORAGE = (
+    "cloudinary_storage.storage.MediaCloudinaryStorage"
 )
+
+# ======================================================
+# STATIC FILES
+# ======================================================
+
+STATICFILES_STORAGE = (
+    "whitenoise.storage.CompressedManifestStaticFilesStorage"
+)
+
+# ======================================================
+# LOGGING DJANGO
+# ======================================================
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+}

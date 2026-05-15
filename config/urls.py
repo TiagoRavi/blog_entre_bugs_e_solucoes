@@ -2,25 +2,38 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView, RedirectView
-from django.http import JsonResponse, HttpResponse
+from django.views.generic import (
+    TemplateView,
+    RedirectView,
+)
+from django.http import (
+    JsonResponse,
+    HttpResponse,
+)
 from django.contrib.sitemaps.views import sitemap
-from django.contrib.staticfiles.storage import staticfiles_storage
+from django.contrib.staticfiles.storage import (
+    staticfiles_storage,
+)
 
-from blog.sitemaps import PostSitemap, CategorySitemap
+from blog.sitemaps import (
+    PostSitemap,
+    CategorySitemap,
+)
+
 from config.tinymce_upload import tinymce_upload
 
+# =========================================================
+# HEALTHCHECK
+# =========================================================
 
-# ---------------------------------------------------------------------
-# Healthcheck simples para monitoramento (uptime / load balancer)
-# ---------------------------------------------------------------------
 def healthcheck(_request):
     return JsonResponse({"status": "ok"})
 
 
-# ---------------------------------------------------------------------
-# IndexNow key (verificação de domínio)
-# ---------------------------------------------------------------------
+# =========================================================
+# INDEXNOW
+# =========================================================
+
 def indexnow_key(_request):
     return HttpResponse(
         "b7360389d77240f3940b63ae081517d9",
@@ -28,39 +41,58 @@ def indexnow_key(_request):
     )
 
 
-# ---------------------------------------------------------------------
-# Sitemap configuration
-# ---------------------------------------------------------------------
+# =========================================================
+# SITEMAPS
+# =========================================================
+
 sitemaps = {
     "posts": PostSitemap,
     "categories": CategorySitemap,
 }
 
+# =========================================================
+# URLS
+# =========================================================
 
-# ---------------------------------------------------------------------
-# URL patterns
-# ---------------------------------------------------------------------
 urlpatterns = [
-    # Admin Django
+    # -----------------------------------------------------
+    # ADMIN
+    # -----------------------------------------------------
     path("admin/", admin.site.urls),
 
-    # IndexNow key (ROOT do domínio)
+    # -----------------------------------------------------
+    # HEALTHCHECK
+    # -----------------------------------------------------
+    path(
+        "health/",
+        healthcheck,
+        name="healthcheck",
+    ),
+
+    # -----------------------------------------------------
+    # INDEXNOW
+    # -----------------------------------------------------
     path(
         "b7360389d77240f3940b63ae081517d9.txt",
         indexnow_key,
         name="indexnow-key",
     ),
 
-    # Robots.txt (SEO crítico)
+    # -----------------------------------------------------
+    # ROBOTS
+    # -----------------------------------------------------
     path(
         "robots.txt",
         TemplateView.as_view(
             template_name="robots.txt",
             content_type="text/plain",
         ),
+        name="robots-txt",
     ),
 
-    # Sitemap XML
+    # -----------------------------------------------------
+    # SITEMAP
+    # -----------------------------------------------------
     path(
         "sitemap.xml",
         sitemap,
@@ -68,20 +100,36 @@ urlpatterns = [
         name="sitemap",
     ),
 
-    # Healthcheck
-    path("health/", healthcheck),
+    # -----------------------------------------------------
+    # TINYMCE
+    # -----------------------------------------------------
+    path(
+        "tinymce/upload/",
+        tinymce_upload,
+        name="tinymce-upload",
+    ),
 
-    # Upload do TinyMCE (Cloudinary)
-    path("tinymce/upload/", tinymce_upload),
+    path(
+        "tinymce/",
+        include("tinymce.urls"),
+    ),
 
-    # URLs internas do TinyMCE
-    path("tinymce/", include("tinymce.urls")),
+    # -----------------------------------------------------
+    # APPS
+    # -----------------------------------------------------
+    path(
+        "",
+        include("blog.urls"),
+    ),
 
-    # Apps principais
-    path("", include("blog.urls")),
-    path("", include("pages.urls")),
+    path(
+        "",
+        include("pages.urls"),
+    ),
 
-    # Favicon
+    # -----------------------------------------------------
+    # FAVICON
+    # -----------------------------------------------------
     path(
         "favicon.ico",
         RedirectView.as_view(
@@ -91,12 +139,20 @@ urlpatterns = [
     ),
 ]
 
+# =========================================================
+# MEDIA FILES (DEV ONLY)
+# =========================================================
 
-# ---------------------------------------------------------------------
-# Media files apenas em ambiente de desenvolvimento
-# ---------------------------------------------------------------------
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT,
     )
+
+# =========================================================
+# CUSTOM ERROR HANDLERS
+# =========================================================
+
+handler404 = "pages.views.handler404"
+
+handler500 = "pages.views.handler500"

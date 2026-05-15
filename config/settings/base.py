@@ -12,19 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # ======================================================
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-DEBUG = False
-
-ALLOWED_HOSTS = [
-    "entrebugsesolucoes.com.br",
-    "www.entrebugsesolucoes.com.br",
-]
-
-SECURE_SSL_REDIRECT = True
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://entrebugsesolucoes.com.br",
-    "https://www.entrebugsesolucoes.com.br",
-]
 
 
 # ======================================================
@@ -87,7 +74,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 # ======================================================
 # DATABASE
 # ======================================================
-DATABASES = {}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # ======================================================
@@ -146,6 +138,11 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # ======================================================
 # MEDIA / CLOUDINARY (com fallback seguro)
