@@ -234,9 +234,20 @@ TINYMCE_DEFAULT_CONFIG = {
     """,
 }
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
+
 # ======================================================
 # DEFAULTS
 # ======================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CSRF_COOKIE_HTTPONLY = True
+
+SESSION_COOKIE_HTTPONLY = True
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 

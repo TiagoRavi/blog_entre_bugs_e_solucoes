@@ -7,7 +7,14 @@
 
   <div class="post-meta">
     {% if post.author %}
-      <span>Por {{ post.author.get_full_name|default:post.author.username }}</span>
+      <span>
+        Por
+        {% if post.author.get_full_name %}
+          {{ post.author.get_full_name }}
+        {% else %}
+          {{ post.author.username }}
+        {% endif %}
+      </span>
       <span class="meta-separator">·</span>
     {% endif %}
 
