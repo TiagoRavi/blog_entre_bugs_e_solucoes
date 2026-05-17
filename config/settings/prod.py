@@ -42,7 +42,7 @@ if not ALLOWED_HOSTS:
 # SECURITY
 # ======================================================
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 SECURE_PROXY_SSL_HEADER = (
     "HTTP_X_FORWARDED_PROTO",
@@ -59,9 +59,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 X_FRAME_OPTIONS = "DENY"
 
-SECURE_HSTS_SECONDS = 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_HSTS_PRELOAD = False
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
@@ -127,7 +127,14 @@ CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
     "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
     "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
+    "SECURE": True,
 }
+
+CLOUDINARY_URL = (
+    f"cloudinary://{os.getenv('CLOUDINARY_API_KEY')}:"
+    f"{os.getenv('CLOUDINARY_API_SECRET')}@"
+    f"{os.getenv('CLOUDINARY_CLOUD_NAME')}?secure=true"
+)
 
 DEFAULT_FILE_STORAGE = (
     "cloudinary_storage.storage.MediaCloudinaryStorage"

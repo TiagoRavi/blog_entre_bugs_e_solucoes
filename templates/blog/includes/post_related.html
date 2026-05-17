@@ -10,7 +10,7 @@
 
         {% if related.featured_image %}
           <img
-            src="{{ related.featured_image.url }}"
+            src="{{ related.featured_image.url|cut:'http://'|add:'https://' }}"
             alt="{{ related.title }}"
             class="post-image"
             loading="lazy"

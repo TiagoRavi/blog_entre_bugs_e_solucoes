@@ -18,26 +18,33 @@
 {% endblock %}
 
 {% block og_title %}{{ post.title }}{% endblock %}
+
 {% block og_description %}
 {{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
 {% endblock %}
+
 {% block og_image %}
-{% if post.featured_image %}{{ post.featured_image.url }}{% endif %}
+{% if post.featured_image %}
+{{ post.featured_image.url }}
+{% endif %}
 {% endblock %}
 
 {% block twitter_title %}{{ post.title }}{% endblock %}
+
 {% block twitter_description %}
 {{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
 {% endblock %}
+
 {% block twitter_image %}
-{% if post.featured_image %}{{ post.featured_image.url }}{% endif %}
+{% if post.featured_image %}
+{{ post.featured_image.url }}
+{% endif %}
 {% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
 
 <meta property="og:type" content="article">
-
 
 <!-- =========================
  Schema.org — BlogPosting
@@ -47,26 +54,30 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "@id": "{{ post.get_absolute_url }}#blogpost",
-"mainEntityOfPage": {
-  "@type": "WebPage",
-  "@id": "{{ post.get_absolute_url }}"
-}, 
+
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ post.get_absolute_url }}"
+  },
 
   "headline": "{{ post.title|escapejs }}",
   "description": "{{ post.excerpt|default:post.content|striptags|truncatechars:155|escapejs }}",
+
   {% if post.featured_image %}
-"image": [
-  "{{ post.featured_image.url }}"
-],
-{% endif %}
+  "image": [
+     "{{ post.featured_image.url }}"
+  ],
+  {% endif %}
 
   "datePublished": "{{ post.published_at|date:'c' }}",
   "dateModified": "{{ post.updated_at|date:'c' }}",
+
   "author": {
-  "@type": "Person",
-  "name": "{% if post.author %}{{ post.author.get_full_name|default:post.author.username|escapejs }}{% else %}Equipe Entre Bugs e Soluções{% endif %}",
-  "url": "{{ request.scheme }}://{{ request.get_host }}/sobre"
+    "@type": "Person",
+    "name": "{% if post.author %}{{ post.author.get_full_name|default:post.author.username|escapejs }}{% else %}Equipe Entre Bugs e Soluções{% endif %}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}/sobre"
   },
+
   "publisher": {
     "@type": "Organization",
     "name": "Entre Bugs e Soluções",
@@ -85,12 +96,17 @@
   "@type": "VideoObject",
   "name": "{{ post.title|escapejs }}",
   "description": "{{ post.excerpt|default:post.title|escapejs }}",
+
   "thumbnailUrl": [
     "https://img.youtube.com/vi/{{ post.youtube_video_id }}/hqdefault.jpg"
   ],
+
   "uploadDate": "{{ post.published_at|date:'c' }}",
+
   "embedUrl": "https://www.youtube.com/embed/{{ post.youtube_video_id }}",
+
   "contentUrl": "https://www.youtube.com/watch?v={{ post.youtube_video_id }}",
+
   "publisher": {
     "@type": "Organization",
     "name": "Entre Bugs e Soluções",
@@ -134,7 +150,7 @@
 
   <div class="container post-detail-layout">
 
-  <main class="post-main">
+    <main class="post-main">
 
       {% include "blog/includes/post_header.html" %}
       {% include "blog/includes/post_toc.html" %}
@@ -144,19 +160,19 @@
       {% include "blog/includes/post_cta_box.html" %}
       {% include "blog/includes/post_faq.html" %}
       {% include "blog/includes/post_author_box.html" %}
-      {% with has_newsletter=True %}
-      {% include "blog/includes/newsletter.html" %}
-      {% endwith %}
-      {% include "blog/includes/post_related.html" %}
-      
 
-      
+      {% with has_newsletter=True %}
+        {% include "blog/includes/newsletter.html" %}
+      {% endwith %}
+
+      {% include "blog/includes/post_related.html" %}
+
       {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}
       <div class="sidebar-cta--mobile post-mobile-cta">
-      {% include "blog/includes/post_sidbar.html" %}
+        {% include "blog/includes/post_sidbar.html" %}
       </div>
-   
-  </main>
+
+    </main>
 
     <aside class="post-sidebar sidebar-cta--desktop">
       {% include "blog/includes/post_sidbar.html" %}
@@ -167,17 +183,17 @@
 </article>
 
 <!-- =========================================================
-       Floating Share FAB
-  ========================================================== -->
+ Floating Share FAB
+========================================================== -->
 {% if is_post_detail %}
   {% include "blog/includes/share_fab.html" %}
 {% endif %}
-
 
 {% endblock %}
 
 {% block extra_scripts %}
   {{ block.super }}
+
   <!-- MailerLite -->
   <script src="https://groot.mailerlite.com/js/w/webforms.min.js"></script>
 
