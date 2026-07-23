@@ -1,0 +1,50 @@
+services:
+
+  db:
+    image: postgres:16
+
+    container_name: blog_db
+
+    restart: always
+
+    env_file:
+      - .env
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  redis:
+    image: redis:7-alpine
+
+    container_name: blog_redis
+
+    restart: always
+
+  web:
+    build: .
+
+    container_name: blog_web
+
+    restart: always
+
+    command: /entrypoint.sh
+
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+
+    volumes:
+      - static_volume:/app/staticfiles
+
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:
+  static_volume:

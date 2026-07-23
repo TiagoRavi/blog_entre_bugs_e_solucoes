@@ -2,31 +2,173 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.text import Truncator, slugify
+from django.utils.html import strip_tags
 from django.urls import reverse
 
+from cloudinary.models import CloudinaryField
+from tinymce.models import HTMLField
 
+import re
+
+# ======================================================
+# HELPERS
+# ======================================================
+def extract_youtube_id(value: str) -> str | None:
+    """
+    Extrai o ID do vídeo do YouTube a partir de uma URL ou retorna
+    o valor se já parecer um ID válido.
+    """
+    if not value:
+        return None
+
+    value = value.strip()
+
+    patterns = [
+        r"youtu\.be/(?P<id>[^/?&]+)",
+        r"youtube\.com/watch\?v=(?P<id>[^&]+)",
+        r"youtube\.com/embed/(?P<id>[^/?&]+)",
+        r"youtube\.com/shorts/(?P<id>[^/?&]+)",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, value)
+        if match:
+            return match.group("id")
+
+    # Fallback: se já for um ID válido (11 chars)
+    if re.fullmatch(r"[a-zA-Z0-9_-]{11}", value):
+        return value
+
+    return None
+
+<<<<<<< HEAD
+=======
+
+# ======================================================
+# CATEGORY
+# ======================================================
+class Category(models.Model):
+    """
+    Representa uma categoria de posts do blog.
+    """
+
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        verbose_name="Nome",
+        help_text="Nome público da categoria.",
+    )
+
+    slug = models.SlugField(
+        max_length=120,
+        unique=True,
+        verbose_name="Slug",
+        help_text="URL da categoria. Gerada automaticamente a partir do nome.",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Criado em",
+    )
+
+    class Meta:
+        verbose_name = "Categoria"
+        verbose_name_plural = "Categorias"
+        ordering = ["name"]
+
+    def __str__(self) -> str:
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("blog:category_posts", args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+
+# ======================================================
+# QUERYSET
+# ======================================================
+class PostQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(
+            status=Post.Status.PUBLISHED,
+            published_at__lte=timezone.now(),
+        )
+
+# ======================================================
+# CTA (SEO)
+# ======================================================
+class CTA(models.Model):
+    """
+    Call To Action reutilizável para SEO interno.
+    """
+
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Título do CTA",
+        help_text="Título exibido no box."
+    )
+
+    description = models.TextField(
+        blank=True,
+        verbose_name="Descrição",
+        help_text="Texto opcional para reforçar o CTA."
+    )
+
+    url = models.URLField(
+        verbose_name="Link"
+    )
+
+    anchor_text = models.CharField(
+        max_length=150,
+        verbose_name="Texto âncora (SEO)",
+        help_text="Texto do link para SEO interno."
+    )
+
+    open_in_new_tab = models.BooleanField(
+        default=True,
+        verbose_name="Abrir em nova aba"
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Ativo"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        verbose_name = "CTA (SEO)"
+        verbose_name_plural = "CTAs (SEO)"
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return self.title
+
+
+>>>>>>> develop
 # ======================================================
 # POST
 # ======================================================
 class Post(models.Model):
     """
     Modelo principal do Blog.
-
-    Responsabilidades:
-    - Representar um artigo/post
-    - Conter regras essenciais do domínio
-    - NÃO conter lógica de apresentação
     """
 
     # --------------------------
-    # Status do Post
+    # Status
     # --------------------------
     class Status(models.TextChoices):
         DRAFT = "draft", "Rascunho"
         PUBLISHED = "published", "Publicado"
 
     # --------------------------
-    # Campos principais
+    # Conteúdo
     # --------------------------
     title = models.CharField(
         max_length=200,
@@ -63,6 +205,7 @@ class Post(models.Model):
         help_text="Gerado automaticamente se deixado em branco.",
     )
 
+<<<<<<< HEAD
     # --------------------------------------------------
     # Conteúdo do post (HTML permitido)
     # --------------------------------------------------
@@ -81,8 +224,38 @@ class Post(models.Model):
             "URL da imagem de destaque (Cloudinary/CDN). "
             "Não utilize upload local."
         ),
+=======
+    content = HTMLField(
+        verbose_name="Conteúdo",
+        help_text="Conteúdo HTML gerado pelo editor.",
     )
 
+    ctas = models.ManyToManyField(
+        CTA,
+        blank=True,
+        related_name="posts",
+        verbose_name="CTAs de SEO"
+    )
+
+    featured_image = CloudinaryField(
+        verbose_name="Imagem de destaque",
+        blank=True,
+        null=True,
+>>>>>>> develop
+    )
+
+    # 🎥 YouTube
+    youtube_video_id = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name="Vídeo do YouTube",
+        help_text="Informe apenas o ID do vídeo (ex: dQw4w9WgXcQ)",
+    )
+
+    # --------------------------
+    # Publicação
+    # --------------------------
     status = models.CharField(
         max_length=10,
         choices=Status.choices,
@@ -91,9 +264,6 @@ class Post(models.Model):
         verbose_name="Status",
     )
 
-    # --------------------------
-    # Datas
-    # --------------------------
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Criado em",
@@ -110,6 +280,7 @@ class Post(models.Model):
         db_index=True,
         verbose_name="Publicado em",
     )
+
 
     # --------------------------
     # Manager
@@ -129,25 +300,29 @@ class Post(models.Model):
         return self.title
 
     # ==================================================
+<<<<<<< HEAD
     # REGRAS DE DOMÍNIO
     # ==================================================
     def publish(self):
         """
         Publica o post explicitamente.
         """
+=======
+    # DOMÍNIO
+    # ==================================================
+    def publish(self):
+>>>>>>> develop
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
         self.save(update_fields=["status", "published_at"])
 
     def unpublish(self):
-        """
-        Retorna o post para rascunho.
-        """
         self.status = self.Status.DRAFT
         self.published_at = None
         self.save(update_fields=["status", "published_at"])
 
     # ==================================================
+<<<<<<< HEAD
     # HOOK CENTRAL DE CONSISTÊNCIA
     # ==================================================
     def save(self, *args, **kwargs):
@@ -159,27 +334,82 @@ class Post(models.Model):
         """
 
         # Slug automático
+=======
+    # SAVE CENTRAL
+    # ==================================================
+    def save(self, *args, **kwargs):
+        # Slug automático com fallback
+>>>>>>> develop
         if not self.slug:
-            self.slug = slugify(self.title)
+            base_slug = slugify(self.title)
+            slug = base_slug
+            counter = 1
 
+<<<<<<< HEAD
         # Excerpt automático (SEO)
         if not self.excerpt:
             self.excerpt = Truncator(self.content).chars(155)
+=======
+            while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+>>>>>>> develop
 
-        # Consistência de publicação
+            self.slug = slug
+
+        # Excerpt automático (SEO-safe)
+        if not self.excerpt and self.content:
+            texto_limpo = strip_tags(self.content)
+            self.excerpt = Truncator(texto_limpo).chars(155)
+
+        # Coerência de publicação
         if self.status == self.Status.PUBLISHED and not self.published_at:
             self.published_at = timezone.now()
 
         if self.status == self.Status.DRAFT:
             self.published_at = None
 
+        # Normalização do vídeo do YouTube
+        if self.youtube_video_id:
+            extracted_id = extract_youtube_id(self.youtube_video_id)
+            self.youtube_video_id = extracted_id
+        else:
+            self.youtube_video_id = None
+
         super().save(*args, **kwargs)
+
+    
 
     # ==================================================
     # URL CANÔNICA
     # ==================================================
     def get_absolute_url(self):
+<<<<<<< HEAD
         """
         Retorna a URL canônica do post.
         """
         return reverse("blog:post_detail", args=[self.slug])
+=======
+        return reverse("blog:post_detail", args=[self.slug])
+    
+    
+# ======================================================
+# FAQ
+# ======================================================
+class FAQ(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="faqs",
+    )
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return self.question
+>>>>>>> develop

@@ -1,0 +1,29 @@
+{% if post.ctas.exists %}
+<section class="post-cta">
+    {% for cta in post.ctas.all %}
+        {% if cta.is_active %}
+            <article class="post-cta-card">
+                <h3 class="post-cta-title">
+                    {{ cta.title }}
+                </h3>
+
+                {% if cta.description %}
+                    <p class="post-cta-description">
+                        {{ cta.description }}
+                    </p>
+                {% endif %}
+
+                <a
+                    href="{{ cta.url }}"
+                    class="post-cta-button"
+                    {% if cta.open_in_new_tab %}
+                        target="_blank" rel="noopener noreferrer"
+                    {% endif %}
+                >
+                    {{ cta.anchor_text }}
+                </a>
+            </article>
+        {% endif %}
+    {% endfor %}
+</section>
+{% endif %}

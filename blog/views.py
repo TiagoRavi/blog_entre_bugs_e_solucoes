@@ -1,17 +1,23 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from .selectors import get_related_video_posts
+
 
 from .models import Post, Category
 from .selectors import (
     get_latest_published_posts,
     get_published_posts,
+    get_related_posts,
 )
 
 
 # ======================================================
 # HOME
 # ======================================================
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class HomeView(ListView):
     """
     Página inicial do blog.
@@ -37,22 +43,19 @@ class HomeView(ListView):
 # ======================================================
 # LISTAGEM DO BLOG + BUSCA
 # ======================================================
+@method_decorator(cache_page(60 * 10), name="dispatch")
 class BlogListView(ListView):
     """
     Página principal do blog com paginação e busca.
     """
 
-    template_name = "blog/post_list.html"
+    template_name = "blog/blog_list.html"
     context_object_name = "posts"
     paginate_by = 9
 
     def get_queryset(self):
-        """
-        Retorna posts publicados com suporte a busca.
-        """
         queryset = get_published_posts()
 
-        # Busca simples por query string (?q=...)
         q = self.request.GET.get("q")
         if q:
             queryset = queryset.filter(
@@ -63,17 +66,18 @@ class BlogListView(ListView):
 
         return queryset
 
-
 # ======================================================
 # DETALHE DO POST
 # ======================================================
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class PostDetailView(DetailView):
     """
     Página de detalhe do post.
 
-    Importante:
-    - Nunca expõe rascunhos
-    - Sempre usa selector
+    Responsabilidades:
+    - Exibir apenas posts publicados
+    - Injetar posts relacionados
+    - Injetar playlist de vídeos (quando existir)
     """
 
     model = Post
@@ -82,32 +86,56 @@ class PostDetailView(DetailView):
 
     def get_queryset(self):
         """
-        Retorna apenas posts publicados.
+        Retorna apenas posts publicados
+        com relações otimizadas.
         """
-        return get_published_posts()
+        return (
+            get_published_posts()
+            .select_related("category", "author")
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        post = self.object
+
+        # Posts relacionados (texto)
+        context["related_posts"] = get_related_posts(
+            post=post,
+            limit=3,
+        )
+
+        # Playlist de vídeos (somente se o post tiver vídeo)
+        context["related_videos"] = []
+        if post.youtube_video_id:
+            context["related_videos"] = get_related_video_posts(
+                post=post,
+                limit=3,
+            )
+
+        # Flag de layout
+        context["is_post_detail"] = True
+
+        return context
+
+
+
 
 
 # ======================================================
 # LISTAGEM POR CATEGORIA
 # ======================================================
+@method_decorator(cache_page(60 * 10), name="dispatch")
 class CategoryPostListView(ListView):
     """
     Página de listagem de posts por categoria.
-
-    Responsabilidade:
-    - Exibir apenas posts publicados
-    - Filtrar pelo slug da categoria
-    - Reutilizar o template de listagem
     """
 
-    template_name = "blog/post_list.html"
+    template_name = "blog/blog_list.html"
     context_object_name = "posts"
     paginate_by = 9
 
     def get_queryset(self):
-        """
-        Retorna posts publicados filtrados pela categoria.
-        """
         return (
             get_published_posts()
             .filter(category__slug=self.kwargs["slug"])
@@ -116,15 +144,12 @@ class CategoryPostListView(ListView):
         )
 
     def get_context_data(self, **kwargs):
-        """
-        Adiciona a categoria atual ao contexto do template.
-
-        Segurança:
-        - Retorna 404 se a categoria não existir
-        """
         context = super().get_context_data(**kwargs)
+
         context["category"] = get_object_or_404(
             Category,
             slug=self.kwargs["slug"],
         )
+
         return context
+

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Sobre | Entre Bugs e Soluções
+Sobre o Autor | Entre Bugs e Soluções
 {% endblock %}
 
 {% block extra_head %}
@@ -14,15 +14,12 @@ Sobre | Entre Bugs e Soluções
     "@type": "Person",
     "name": "Tiago",
     "url": "{{ request.build_absolute_uri }}",
-    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}",
+    "image": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/perfil/tiagosousa.webp' %}",
     "jobTitle": "Desenvolvedor Python e Django",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Entre Bugs e Soluções"
-    },
+    "description": "Desenvolvedor Python especializado em Django, arquitetura de software e boas práticas.",
     "sameAs": [
-      "https://www.linkedin.com/",
-      "https://github.com/"
+      "https://github.com/SEU_GITHUB",
+      "https://www.linkedin.com/in/SEU_LINKEDIN"
     ]
   }
 }
@@ -30,27 +27,29 @@ Sobre | Entre Bugs e Soluções
 {% endblock %}
 
 {% block content %}
-<section class="container post-detail">
-  <div class="post-content-box">
+<section class="about-page">
 
-    <h1>Sobre o autor</h1>
+  <header class="about-page__hero">
+    <img
+      src="{% static 'img/perfil/tiagosousa.webp' %}"
+      alt="Tiago - Desenvolvedor Python e Django"
+      class="about-page__avatar"
+      loading="lazy"
+    />
 
-    <p>
-      Olá! Eu sou <strong>Tiago</strong>, desenvolvedor Python e Django,
-      apaixonado por programação, arquitetura de software e ensino prático.
+    <h1 class="about-page__name">Tiago</h1>
+    <p class="about-page__role">
+      Desenvolvedor Python & Django • Arquitetura de Software
     </p>
+  </header>
 
+  <article class="about-page__content">
     <p>
-      O <strong>Entre Bugs e Soluções</strong> nasceu com o objetivo de
-      compartilhar conhecimento real, aplicado no dia a dia de projetos
-      profissionais.
+      Olá, eu sou <strong>Tiago</strong> 👋  
+      Desenvolvedor especializado em <strong>Python</strong> e <strong>Django</strong>,
+      com foco em arquitetura de software, código limpo e soluções escaláveis.
     </p>
+  </article>
 
-    <p>
-      Aqui você encontra conteúdos sobre Python, Django, lógica de programação
-      e boas práticas para quem quer evoluir de forma sólida na área de tecnologia.
-    </p>
-
-  </div>
 </section>
 {% endblock %}

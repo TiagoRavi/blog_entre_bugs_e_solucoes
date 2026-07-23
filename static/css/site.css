@@ -1,0 +1,353 @@
+/* ==========================================================================
+   ESTILOS GERAIS DO SITE
+   --------------------------------------------------------------------------
+   
+   ========================================================================== */
+
+
+/* ==================================================
+RESET GLOBAL
+================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==================================================
+VARIÁVEIS CSS (DESIGN TOKENS)
+================================================== */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1f2933;
+  --primary-color: #2563eb;
+  --secondary-color: #1e2023;
+  --border-color: #e5e7eb;
+
+  --font-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+}
+
+/* ==================================================
+BASE GLOBAL
+================================================== */
+body {
+  font-family: var(--font-base);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+main {
+  width: 100%;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+/* =====================================================
+   Cookie Banner (LGPD)
+   - Fixo no rodapé
+   - Responsivo
+   - Não intrusivo
+===================================================== */
+
+/* Container principal do banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  /* Largura adaptável (mobile-first) */
+  max-width: 960px;
+  width: calc(100% - 2rem);
+
+  background-color: #0f172a;
+  color: #fff;
+
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  padding: 1rem 1.25rem;
+}
+
+/* Conteúdo interno (texto + ações) */
+.cookie-banner__content {
+  display: flex;
+  flex-wrap: wrap; /* quebra naturalmente no mobile */
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Texto principal do aviso */
+.cookie-banner__text {
+  flex: 1; /* ocupa o espaço disponível */
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Link da política de privacidade */
+.cookie-banner__text a {
+  color: #4ea1ff;
+  text-decoration: underline;
+}
+
+/* Container dos botões */
+.cookie-banner__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Botões base */
+.cookie-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Botão "Aceitar" */
+.cookie-btn--accept {
+  background-color: #4ea1ff;
+  color: #000;
+}
+
+/* Botão "Recusar" */
+.cookie-btn--decline {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+/* =====================================================
+   Ajustes para mobile pequeno
+===================================================== */
+@media (max-width: 480px) {
+  .cookie-banner__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cookie-btn {
+    flex: 1; /* botões ocupam largura igual */
+  }
+}
+
+/* =====================================================
+   Botão flutuante — Configurações de Cookies
+   - Redondo
+   - Discreto
+   - Sempre visível
+   - LGPD/GDPR compliant
+===================================================== */
+.cookie-settings-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;              /* 👈 lado esquerdo */
+  z-index: 9998;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;        /* 👈 botão redondo */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #0f172a;
+  color: #fff;
+
+  border: none;
+  cursor: pointer;
+
+  font-size: 1.2rem;
+  line-height: 1;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Feedback visual de interação */
+.cookie-settings-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Acessibilidade: foco visível */
+.cookie-settings-btn:focus-visible {
+  outline: 2px solid #4ea1ff;
+  outline-offset: 3px;
+}
+
+/* =====================================================
+   Ajuste para mobile
+===================================================== */
+@media (max-width: 480px) {
+  .cookie-settings-btn {
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
+
+/* ==================================================
+HERO – CONTAINER PRINCIPAL (full-bleed)
+================================================== */
+.hero-full {
+  position: relative;
+
+  /* Usa a largura real da viewport (ignora containers) */
+  width: 100vw;
+
+  /* Altura pensada para mobile-first */
+  height: 80vh;
+  min-height: 480px;
+
+  /* Truque para centralizar o 100vw mesmo dentro de layout */
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  overflow: hidden;
+}
+
+/* ==================================================
+PICTURE – precisa ocupar todo o hero
+(evita imagem estreita no mobile)
+================================================== */
+.hero-full picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==================================================
+IMAGEM – comportamento responsivo correto
+================================================== */
+.hero-full img {
+  display: block;         /* remove gaps inline */
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;      /* preenche o hero */
+  object-position: center top; /* prioriza rosto no mobile */
+}
+
+/* ==================================================
+OVERLAY – usado para contraste do texto
+================================================== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* ==================================================
+AJUSTES PARA DESKTOP
+================================================== */
+@media (min-width: 1024px) {
+  .hero-full {
+    height: 75vh;
+    min-height: 600px;
+    max-height: 900px;
+  }
+
+  /* No desktop o corte pode ser central */
+  .hero-full img {
+    object-position: center center;
+  }
+}
+
+/* ==================================================
+CONTEÚDO DO HERO (TEXTO)
+================================================== */
+.hero-content {
+  position: absolute;
+
+  /* ⬇️ AJUSTE PRINCIPAL:
+     desce o texto para NÃO cobrir o rosto */
+  top: 50%;
+
+  left: 6%;
+  z-index: 3;
+
+  max-width: 520px;
+  color: #fff;
+}
+
+/* ==================================================
+MARCA / ASSINATURA
+================================================== */
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  opacity: 0.9;
+}
+
+.hero-code {
+  color: #9eff00; /* verde tech */
+  font-weight: 700;
+}
+
+.hero-brand-text {
+  line-height: 1.2;
+}
+
+/* ==================================================
+TÍTULO PRINCIPAL
+================================================== */
+.hero-title {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+.hero-title span {
+  color: #9eff00;
+}
+
+/* ==================================================
+SUBTÍTULO
+================================================== */
+.hero-subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ==================================================
+AJUSTES DE TEXTO PARA DESKTOP
+================================================== */
+@media (min-width: 1024px) {
+  .hero-content {
+    /* No desktop o rosto ocupa menos área */
+    top: 25%;
+    left: 10%;
+    max-width: 600px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+}
+

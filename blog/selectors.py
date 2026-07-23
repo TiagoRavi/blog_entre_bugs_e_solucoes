@@ -4,6 +4,8 @@ from django.db.models import QuerySet
 
 from .models import Category, Post
 
+from django.utils import timezone
+from .models import Post
 
 # ======================================================
 # CATEGORY SELECTORS
@@ -39,6 +41,7 @@ def get_published_posts() -> QuerySet[Post]:
 
     Otimizações aplicadas:
     - select_related para author e category
+    - ordenação padrão por data de publicação
     """
     return (
         Post.objects.published()
@@ -63,13 +66,12 @@ def get_post_by_slug(slug: str) -> Optional[Post]:
     """
     Retorna um post publicado pelo slug.
 
-    Importante:
+    Segurança:
     - Apenas posts publicados
-    - Garante segurança (não expõe rascunhos)
+    - Não expõe rascunhos
     """
     return (
-        Post.objects.published()
-        .select_related("author", "category")
+        get_published_posts()
         .filter(slug=slug)
         .first()
     )
@@ -80,8 +82,46 @@ def get_posts_by_category(category: Category) -> QuerySet[Post]:
     Retorna posts publicados de uma categoria específica.
     """
     return (
-        Post.objects.published()
-        .select_related("author", "category")
+        get_published_posts()
         .filter(category=category)
-        .order_by("-published_at")
+    )
+
+
+def get_related_posts(
+    post: Post,
+    limit: int = 3,
+) -> QuerySet[Post]:
+    """
+    Retorna posts relacionados ao post atual.
+
+    Regra:
+    - Mesma categoria
+    - Apenas posts publicados
+    - Exclui o próprio post
+    """
+    if not post.category:
+        return Post.objects.none()
+
+    return (
+        get_published_posts()
+        .filter(category=post.category)
+        .exclude(pk=post.pk)[:limit]
+    )
+
+
+def get_related_video_posts(post, limit=3):
+    """
+    Retorna posts da mesma categoria que:
+    - estejam publicados
+    - tenham vídeo do YouTube
+    - não sejam o post atual
+    """
+    return (
+        Post.objects.published()
+        .filter(
+            category=post.category,
+            youtube_video_id__isnull=False,
+        )
+        .exclude(pk=post.pk)
+        .order_by("-published_at")[:limit]
     )

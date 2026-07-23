@@ -1,54 +1,54 @@
 from django.urls import path
 
-# Views públicas do blog
 from .views import (
     HomeView,
     BlogListView,
     PostDetailView,
-    CategoryPostListView,  # 👈 NOVA VIEW IMPORTADA
+    CategoryPostListView,
 )
 
-# Namespace do app (obrigatório para reverse("blog:..."))
+# Namespace do app (obrigatório para reverse e templates)
 app_name = "blog"
 
+
 urlpatterns = [
-    # =====================================
-    # HOME
-    # /
-    # =====================================
+    # --------------------------------------------------
+    # Home do site
+    # URL: /
+    # --------------------------------------------------
     path(
         "",
         HomeView.as_view(),
         name="home",
     ),
 
-    # =====================================
-    # LISTAGEM DE POSTS
-    # /blog/
-    # =====================================
+    # --------------------------------------------------
+    # Listagem principal do blog
+    # URL: /blog/
+    # --------------------------------------------------
     path(
         "blog/",
         BlogListView.as_view(),
         name="post_list",
     ),
 
-    # =====================================
-    # DETALHE DO POST
-    # /posts/<slug>/
-    # =====================================
+    # --------------------------------------------------
+    # Detalhe do post
+    # URL: /posts/<slug>/
+    # --------------------------------------------------
     path(
         "posts/<slug:slug>/",
         PostDetailView.as_view(),
         name="post_detail",
     ),
 
-    # =====================================
-    # LISTAGEM POR CATEGORIA
-    # /categoria/<slug>/
-    # =====================================
+    # --------------------------------------------------
+    # Listagem de posts por categoria
+    # URL: /categoria/<slug>/
+    # --------------------------------------------------
     path(
         "categoria/<slug:slug>/",
         CategoryPostListView.as_view(),
-        name="category_posts",  # 👈 ESSE NOME É CRÍTICO
+        name="category_posts",
     ),
 ]

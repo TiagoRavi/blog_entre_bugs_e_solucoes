@@ -3,27 +3,55 @@
 <section class="hero-full">
 
   <picture>
-    <!-- MOBILE -->
+    <!-- DESKTOP GRANDE -->
     <source
-      media="(max-width: 640px)"
-      srcset="{% static 'img/hero/hero-mobile.jpg' %}"
+      media="(min-width: 1441px)"
+      srcset="{% static 'img/hero/hero-desktop.webp' %}"
+    >
+
+    <!-- NOTEBOOK -->
+    <source
+      media="(min-width: 1025px)"
+      srcset="{% static 'img/hero/hero-notebook.webp' %}"
     >
 
     <!-- TABLET -->
     <source
-      media="(max-width: 1024px)"
-      srcset="{% static 'img/hero/hero-tablet.jpg' %}"
+      media="(min-width: 641px)"
+      srcset="{% static 'img/hero/hero-notebook.webp' %}"
     >
 
-    <!-- DESKTOP (fallback) -->
+    <!-- MOBILE -->
     <img
-      src="{% static 'img/hero/hero-desktop.png' %}"
+      src="{% static 'img/hero/hero-mobile.webp' %}"
       alt="Entre Bugs e Soluções - Programação prática e soluções reais"
       class="hero-image"
       loading="eager"
+      decoding="async"
     >
   </picture>
 
   <div class="hero-overlay"></div>
 
+  <!-- 🔥 CONTEÚDO DO HERO -->
+  <div class="hero-content">
+    
+    <div class="hero-brand">
+      <span class="hero-code">&lt;/&gt;</span>
+      <span class="hero-brand-text">ENTRE BUGS<br>E SOLUÇÕES</span>
+    </div>
+
+    <h1 class="hero-title">
+      Domine programação<br>
+      com <span>aprendizado prático</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Dicas, tutoriais e soluções reais<br>
+      para desenvolvedores.
+    </p>
+
+  </div>
+
 </section>
+

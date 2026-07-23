@@ -1,0 +1,26 @@
+{% if post.youtube_video_id %}
+<section class="post-video">
+    <div class="post-video__wrapper">
+
+        {% if request.COOKIES.cookie_consent == "accepted" %}
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/{{ post.youtube_video_id }}"
+                title="Vídeo do YouTube"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        {% else %}
+            <div class="video-placeholder" data-video-id="{{ post.youtube_video_id }}">
+                <p>Este vídeo é hospedado no YouTube e pode usar cookies.</p>
+                <button class="accept-cookies-and-load-video">
+                    Aceitar cookies e carregar vídeo
+                </button>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endif %}

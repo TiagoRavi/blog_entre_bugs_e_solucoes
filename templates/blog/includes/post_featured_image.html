@@ -1,0 +1,14 @@
+{% load static %}
+
+{% if post.featured_image %}
+<figure class="post-featured-image">
+  <img
+    src="{{ post.featured_image.url|cut:'http://'|add:'https://' }}"
+    alt="{{ post.title }}"
+    width="1200"
+    height="630"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async">
+</figure>
+{% endif %}

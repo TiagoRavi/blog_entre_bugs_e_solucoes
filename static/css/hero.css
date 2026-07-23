@@ -1,0 +1,203 @@
+/* ==================================================
+HERO – CONTAINER PRINCIPAL (full-bleed)
+- Ocupa toda a largura da viewport
+- Funciona mesmo dentro de layouts com container
+================================================== */
+.hero-full {
+  position: relative;
+
+  /* Força largura real da viewport */
+  width: 100vw;
+
+  /* Altura mobile-first */
+  height: 80vh;
+  min-height: 480px;
+
+  /* Centraliza o 100vw ignorando containers */
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  overflow: hidden;
+}
+
+/* ==================================================
+PICTURE – ocupa todo o hero
+================================================== */
+.hero-full picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==================================================
+IMAGEM DO HERO
+- Preenche o container
+- Mantém proporção
+- Prioriza enquadramento correto
+================================================== */
+.hero-full img {
+  display: block;              /* remove gaps inline */
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;           /* preenche sem distorcer */
+  object-position: center top; /* prioriza rosto no mobile */
+}
+
+/* ==================================================
+OVERLAY
+- Camada para contraste do texto
+- Gradiente pode ser aplicado aqui se quiser
+================================================== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ==================================================
+AJUSTES PARA DESKTOP
+================================================== */
+@media (min-width: 1024px) {
+  .hero-full {
+    height: 75vh;
+    min-height: 600px;
+    max-height: 900px;
+  }
+
+  /* Enquadramento mais neutro no desktop */
+  .hero-full img {
+    object-position: center center;
+  }
+}
+
+/* ==================================================
+CONTEÚDO DO HERO (CAIXA DE TEXTO)
+- Glass dark (escuro + transparente)
+- Centralizado verticalmente no mobile
+================================================== */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  transform: translateY(-50%); /* centralização real */
+
+  z-index: 3;
+
+  max-width: 520px;
+  padding: 2rem 2.5rem;
+
+  /* Fundo escuro translúcido */
+  background: rgba(2, 6, 23, 0.55);
+
+  /* Efeito vidro fosco */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+
+  color: #fff;
+}
+
+/* ==================================================
+MARCA / ASSINATURA
+================================================== */
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  opacity: 0.9;
+}
+
+.hero-code {
+  color: #9eff00; /* verde tech */
+  font-weight: 700;
+}
+
+.hero-brand-text {
+  line-height: 1.2;
+}
+
+/* ==================================================
+TÍTULO PRINCIPAL
+================================================== */
+.hero-title {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+.hero-title span {
+  color: #9eff00;
+}
+
+/* ==================================================
+SUBTÍTULO
+================================================== */
+.hero-subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ==================================================
+AJUSTES PARA DESKTOP
+- Texto sobe para não cobrir o rosto
+================================================== */
+@media (min-width: 1024px) {
+  .hero-content {
+    top: 25%;
+    left: 10%;
+    transform: none; /* remove centralização */
+    max-width: 475px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+}
+
+/* ==================================================
+AJUSTES PARA MOBILE PEQUENO
+- Evita texto colado
+================================================== */
+@media (max-width: 480px) {
+  .hero-content {
+    top:auto;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+
+    transform: none;
+    max-width: none;
+    padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+}
+
+/* ==================================================
+AJUSTE DE PERFORMANCE / LEGIBILIDADE MOBILE
+================================================== */
+@media (max-width: 768px) {
+  .hero-content {
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(4px);
+  }
+}

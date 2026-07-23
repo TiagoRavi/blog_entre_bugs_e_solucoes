@@ -2,121 +2,124 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <!-- =========================================================
+       Meta básicos
+  ========================================================== -->
   <meta charset="UTF-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- Verificação Bing -->
+  <meta name="msvalidate.01" content="B08F08D034CBCA80AEEECD1B9F6B9390">
   <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <meta name="description"
-        content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}">
+  gtag('consent', 'default', {
+    analytics_storage: 'denied'
+  });
+</script>
 
+
+  <meta
+    name="description"
+    content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
+  >
+
+  <!-- =========================================================
+       Canonical URL (SEO crítico)
+  ========================================================== -->
+  <link rel="canonical" href="{{ CANONICAL_URL }}">
+  <meta property="og:url" content="{{ CANONICAL_URL }}">
+
+
+  <!-- =========================================================
+       Open Graph (Facebook, LinkedIn, WhatsApp)
+  ========================================================== -->
+  <meta property="og:title" content="{% block og_title %}Entre Bugs e Soluções{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{% block og_image %}{% static 'img/logo.png' %}{% endblock %}">
+
+  <!-- =========================================================
+       Twitter Cards
+  ========================================================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}Entre Bugs e Soluções{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Blog sobre programação e soluções reais{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{% static 'img/logo.png' %}{% endblock %}">
+
+  <!-- =========================================================
+       Favicon
+  ========================================================== -->
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+
+  <!-- =========================================================
+       Preload da imagem LCP (Hero)
+       Ajuste para WEBP quando possível
+  ========================================================== -->
+  <link
+    rel="preload"
+    as="image"
+    href="{% static 'img/hero/hero-desktop.webp' %}"
+    fetchpriority="high"
+  >
+
+  <!-- =========================================================
+       CSS principal
+  ========================================================== -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <!-- =========================================================
+       Head extra por página
+  ========================================================== -->
   {% block extra_head %}{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- =========================================================
+       Cookie Settings Button (flutuante)
+  ========================================================== -->
+  {% include "includes/cookie_button.html" %}
+
 </head>
 
 <body>
 
-<div id="cookie-banner" class="cookie-banner" hidden>
-  <div class="cookie-content">
-    <p>
-      Utilizamos cookies para melhorar sua experiência.
-      Ao continuar navegando, você concorda com nossa
-      <a href="{% url 'pages:privacy' %}">Política de Privacidade</a>.
-    </p>
+  <!-- =========================================================
+       Cookie banner (LGPD)
+  ========================================================== -->
+  {% include "includes/cookie_banner.html" %}
 
-    <div class="cookie-actions">
-      <button id="cookie-accept" class="cookie-btn accept">Aceitar</button>
-      <button id="cookie-decline" class="cookie-btn decline">Recusar</button>
-    </div>
-  </div>
-</div>
+  <!-- =========================================================
+       Header
+  ========================================================== -->
+  {% include "includes/header.html" %}
 
-<script src="{% static 'js/cookies.js' %}"></script>
+  <!-- =========================================================
+       Conteúdo principal
+  ========================================================== -->
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
 
-<header class="site-header">
-  <div class="container header-flex">
-    <a href="{% url 'blog:post_list' %}" class="brand">
-      <img
-        src="{% static 'img/logo.png' %}"
-        alt="Entre Bugs e Soluções"
-        class="site-logo"
-        loading="lazy"
-      >
-    </a>
+    <!-- =========================================================
+       Footer
+  ========================================================== -->
+  {% include "includes/footer.html" %}
 
-    <nav class="nav" aria-label="Menu principal">
-      <ul>
-        <li><a href="{% url 'blog:home' %}">Home</a></li>
-        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
-        <li><a href="#">Categorias</a></li>
-        <li><a href="{% url 'pages:about' %}">Sobre</a></li>
-        <li><a href="{% url 'pages:contact' %}">Contato</a></li>
-      </ul>
-
-      <form class="nav-search"
-            action="{% url 'blog:post_list' %}"
-            method="get"
-            role="search">
-        <label for="q" class="visually-hidden">Buscar</label>
-        <input
-          type="search"
-          name="q"
-          id="q"
-          placeholder="Buscar no blog..."
-          value="{{ request.GET.q }}"
-        >
-        <button type="submit" aria-label="Buscar"></button>
-      </form>
-    </nav>
-  </div>
-</header>
-
-<main id="content">
-  {% block content %}{% endblock %}
-</main>
-
-<footer class="site-footer">
-  <div class="footer-grid">
-
-    <div class="footer-brand">
-      <img
-        src="{% static 'img/logo.png' %}"
-        alt="Entre Bugs e Soluções"
-        class="footer-logo"
-        loading="lazy"
-      >
-      <p>
-        Entre Bugs e Soluções é um blog sobre programação,
-        aprendizado prático e soluções reais do dia a dia.
-      </p>
-    </div>
-
-    <nav class="footer-links" aria-label="Links de conteúdo">
-      <h4>Conteúdo</h4>
-      <ul>
-        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
-        <li><a href="#">Categorias</a></li>
-      </ul>
-    </nav>
-
-    <nav class="footer-legal" aria-label="Links legais">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="{% url 'pages:privacy' %}">Política de Privacidade</a></li>
-        <li><a href="{% url 'pages:terms' %}">Termos de Uso</a></li>
-        <li><a href="{% url 'pages:about' %}">Sobre</a></li>
-        <li><a href="{% url 'pages:contact' %}">Contato</a></li>
-      </ul>
-    </nav>
-
-  </div>
-
-  <div class="footer-bottom">
-    © {% now "Y" %} Entre Bugs e Soluções. Todos os direitos reservados.
-  </div>
-</footer>
-
+  <!-- =========================================================
+       JS global
+  ========================================================== -->
+  <script src="{% static 'js/cookies.js' %}" defer></script>
+  <script src="{% static 'js/menu.js' %}" defer></script>
+  <script src="{% static 'js/search.js' %}" defer></script>
+  
+  <!-- =========================================================
+       JS específico por página
+  ========================================================== -->
+  {% block extra_scripts %}{% endblock %}
 </body>
+
 </html>

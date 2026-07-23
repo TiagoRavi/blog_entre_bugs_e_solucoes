@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Entre Bugs e Soluções | Blog
+{% endblock %}
+
+{% block meta_description %}
+Artigos sobre programação, estudos práticos, bugs reais e soluções aplicadas no dia a dia.
+{% endblock %}
+
+{% block content %}
+
+<section class="blog-header container">
+  <h1 class="blog-title">Artigos</h1>
+  <p class="blog-subtitle">
+    Conteúdo prático sobre programação, bugs reais e soluções aplicadas
+  </p>
+</section>
+
+<section class="posts-section container">
+
+  {% if posts %}
+    {% include "blog/includes/post_grid.html" %}
+    {% include "blog/includes/pagination.html" %}
+  {% else %}
+    <p>Nenhum post publicado ainda.</p>
+  {% endif %}
+
+</section>
+
+{% endblock %}

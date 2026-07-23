@@ -1,30 +1,83 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_head %}
+{# =========================
+ SEO PRINCIPAL — POST
+========================= #}
 
-<!-- Schema.org: BlogPosting -->
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
+{% endblock %}
+
+{% block canonical %}
+{{ post.get_absolute_url }}
+{% endblock %}
+
+{% block og_title %}{{ post.title }}{% endblock %}
+
+{% block og_description %}
+{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
+{% endblock %}
+
+{% block og_image %}
+{% if post.featured_image %}
+{{ post.featured_image.url }}
+{% endif %}
+{% endblock %}
+
+{% block twitter_title %}{{ post.title }}{% endblock %}
+
+{% block twitter_description %}
+{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}
+{% endblock %}
+
+{% block twitter_image %}
+{% if post.featured_image %}
+{{ post.featured_image.url }}
+{% endif %}
+{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+
+<meta property="og:type" content="article">
+
+<!-- =========================
+ Schema.org — BlogPosting
+========================= -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": "{{ post.get_absolute_url }}#blogpost",
+
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "{{ request.build_absolute_uri }}"
+    "@id": "{{ post.get_absolute_url }}"
   },
+
   "headline": "{{ post.title|escapejs }}",
-  "description": "{{ post.excerpt|default:''|escapejs }}",
-  {% if post.image %}
+  "description": "{{ post.excerpt|default:post.content|striptags|truncatechars:155|escapejs }}",
+
+  {% if post.featured_image %}
   "image": [
-    "{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}"
+     "{{ post.featured_image.url }}"
   ],
   {% endif %}
+
   "datePublished": "{{ post.published_at|date:'c' }}",
   "dateModified": "{{ post.updated_at|date:'c' }}",
+
   "author": {
     "@type": "Person",
-    "name": "{% if post.author %}{{ post.author.get_full_name|default:post.author.username|escapejs }}{% else %}Equipe Entre Bugs e Soluções{% endif %}"
+    "name": "{% if post.author %}{{ post.author.get_full_name|default:post.author.username|escapejs }}{% else %}Equipe Entre Bugs e Soluções{% endif %}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}/sobre"
   },
+
   "publisher": {
     "@type": "Organization",
     "name": "Entre Bugs e Soluções",
@@ -36,104 +89,117 @@
 }
 </script>
 
-<!-- Schema.org: BreadcrumbList -->
+{% if post.youtube_video_id %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "{{ request.scheme }}://{{ request.get_host }}/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Blog",
-      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'blog:post_list' %}"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "{{ post.title|escapejs }}",
-      "item": "{{ request.build_absolute_uri }}"
+  "@type": "VideoObject",
+  "name": "{{ post.title|escapejs }}",
+  "description": "{{ post.excerpt|default:post.title|escapejs }}",
+
+  "thumbnailUrl": [
+    "https://img.youtube.com/vi/{{ post.youtube_video_id }}/hqdefault.jpg"
+  ],
+
+  "uploadDate": "{{ post.published_at|date:'c' }}",
+
+  "embedUrl": "https://www.youtube.com/embed/{{ post.youtube_video_id }}",
+
+  "contentUrl": "https://www.youtube.com/watch?v={{ post.youtube_video_id }}",
+
+  "publisher": {
+    "@type": "Organization",
+    "name": "Entre Bugs e Soluções",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}"
     }
+  }
+}
+</script>
+{% endif %}
+
+<!-- =========================
+ Schema.org — FAQPage
+========================= -->
+{% if post.faqs.exists %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in post.faqs.all %}
+    {
+      "@type": "Question",
+      "name": "{{ faq.question|escapejs }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ faq.answer|striptags|escapejs }}"
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
   ]
 }
 </script>
+{% endif %}
 
 {% endblock %}
 
-
 {% block content %}
-
-<section class="post-detail">
+<article class="post-detail">
 
   <div class="container post-detail-layout">
 
-    <!-- COLUNA PRINCIPAL -->
     <main class="post-main">
 
-      <!-- HEADER DO POST -->
-      <header class="post-header">
+      {% include "blog/includes/post_header.html" %}
+      {% include "blog/includes/post_toc.html" %}
+      {% include "blog/includes/post_featured_image.html" %}
+      {% include "blog/includes/post_video.html" %}
+      {% include "blog/includes/post_content.html" %}
+      {% include "blog/includes/post_cta_box.html" %}
+      {% include "blog/includes/post_faq.html" %}
+      {% include "blog/includes/post_author_box.html" %}
 
-        <h1 class="post-title">
-          {{ post.title }}
-        </h1>
+      {% with has_newsletter=True %}
+        {% include "blog/includes/newsletter.html" %}
+      {% endwith %}
 
-        <div class="post-meta">
+      {% include "blog/includes/post_related.html" %}
 
-          {% if post.author %}
-            <span class="post-author">
-              Por {{ post.author.get_full_name|default:post.author.username }}
-            </span>
-            <span class="meta-separator">·</span>
-          {% endif %}
-
-          {% if post.published_at %}
-            <time datetime="{{ post.published_at|date:'Y-m-d' }}">
-              {{ post.published_at|date:"d/m/Y" }}
-            </time>
-            <span class="meta-separator">·</span>
-          {% endif %}
-
-          <span class="post-comments">
-            0 comentários
-          </span>
-
-        </div>
-
-      </header>
-
-      <!-- IMAGEM DESTACADA -->
-      {% if post.image %}
-        <figure class="post-featured-image">
-          <img
-            src="{{ post.image.url }}"
-            alt="{{ post.title }}"
-            loading="lazy"
-          >
-        </figure>
-      {% endif %}
-
-      <!-- CONTEÚDO -->
-      <div class="post-content-box">
-        <div class="post-content">
-          {{ post.content|safe }}
-        </div>
+      {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}
+      <div class="sidebar-cta--mobile post-mobile-cta">
+        {% include "blog/includes/post_sidbar.html" %}
       </div>
 
     </main>
 
-    <!-- SIDEBAR -->
-    <aside class="post-sidebar">
-      {# banners / afiliados / widgets #}
+    <aside class="post-sidebar sidebar-cta--desktop">
+      {% include "blog/includes/post_sidbar.html" %}
     </aside>
 
   </div>
 
-</section>
+</article>
 
+<!-- =========================================================
+ Floating Share FAB
+========================================================== -->
+{% if is_post_detail %}
+  {% include "blog/includes/share_fab.html" %}
+{% endif %}
+
+{% endblock %}
+
+{% block extra_scripts %}
+  {{ block.super }}
+
+  <!-- MailerLite -->
+  <script src="https://groot.mailerlite.com/js/w/webforms.min.js"></script>
+
+  <!-- CSS DEPOIS DO JS -->
+  <link rel="stylesheet" href="{% static 'css/newsletter.css' %}">
+
+  <script src="{% static 'js/post-toc.js' %}" defer></script>
+  <script src="{% static 'js/share-fab.js' %}" defer></script>
 {% endblock %}

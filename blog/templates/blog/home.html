@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 Entre Bugs e Soluções | Blog
@@ -11,13 +12,40 @@ Artigos sobre programação, estudos práticos, bugs reais e soluções aplicada
 {% block content %}
   {% include "blog/includes/hero.html" %}
 
-  {% if posts %}
-    {% include "blog/includes/post_grid.html" %}
-    {% include "blog/includes/pagination.html" %}
-  {% else %}
-    <section class="container">
-      <p>Nenhum post publicado ainda.</p>
-    </section>
-  {% endif %}
+{% if posts %}
+<section
+  class="home-posts container"
+  aria-labelledby="home-posts-title"
+>
+
+  <header class="home-posts-header">
+    <div class="home-posts-header-text">
+      <h2 id="home-posts-title" class="home-posts-title">
+        Últimos artigos
+      </h2>
+      <p class="home-posts-subtitle">
+        Conteúdo prático sobre programação, bugs reais e soluções aplicadas
+      </p>
+    </div>
+
+    <a
+      href="{% url 'blog:post_list' %}"
+      class="home-posts-link"
+      aria-label="Ver todos os artigos do blog"
+    >
+      Ver todos →
+    </a>
+  </header>
+
+  {% include "blog/includes/post_grid.html" %}
+  {% include "blog/includes/pagination.html" %}
+
+</section>
+{% else %}
+<section class="container">
+  <p>Nenhum post publicado ainda.</p>
+</section>
+{% endif %}
+
 {% endblock %}
 
