@@ -1,45 +1,15 @@
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
-from django.utils.text import Truncator, slugify
-from django.utils.html import strip_tags
-from django.urls import reverse
+from html import unescape
 
 from cloudinary.models import CloudinaryField
+from django.conf import settings
+from django.db import models
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.html import strip_tags
+from django.utils.text import Truncator, slugify
 from tinymce.models import HTMLField
 
-import re
-
-# ======================================================
-# HELPERS
-# ======================================================
-def extract_youtube_id(value: str) -> str | None:
-    """
-    Extrai o ID do vídeo do YouTube a partir de uma URL ou retorna
-    o valor se já parecer um ID válido.
-    """
-    if not value:
-        return None
-
-    value = value.strip()
-
-    patterns = [
-        r"youtu\.be/(?P<id>[^/?&]+)",
-        r"youtube\.com/watch\?v=(?P<id>[^&]+)",
-        r"youtube\.com/embed/(?P<id>[^/?&]+)",
-        r"youtube\.com/shorts/(?P<id>[^/?&]+)",
-    ]
-
-    for pattern in patterns:
-        match = re.search(pattern, value)
-        if match:
-            return match.group("id")
-
-    # Fallback: se já for um ID válido (11 chars)
-    if re.fullmatch(r"[a-zA-Z0-9_-]{11}", value):
-        return value
-
-    return None
+from .utils.youtube import extract_youtube_id
 
 
 # ======================================================
@@ -306,8 +276,9 @@ class Post(models.Model):
 
         # Excerpt automático (SEO-safe)
         if not self.excerpt and self.content:
-            texto_limpo = strip_tags(self.content)
-            self.excerpt = Truncator(texto_limpo).chars(155)
+            self.excerpt = Truncator(
+                unescape(strip_tags(self.content))
+            ).chars(155)
 
         # Coerência de publicação
         if self.status == self.Status.PUBLISHED and not self.published_at:
