@@ -72,17 +72,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 # ======================================================
-# DATABASE
-# ======================================================
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-
-# ======================================================
 # TEMPLATES
 # ======================================================
 TEMPLATES = [

@@ -29,9 +29,6 @@ services:
 
     command: /entrypoint.sh
 
-    environment:
-      DJANGO_SETTINGS_MODULE: config.settings.prod
-
     volumes:
       - static_volume:/app/staticfiles
 

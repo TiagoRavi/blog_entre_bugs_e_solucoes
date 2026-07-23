@@ -258,46 +258,54 @@ class Post(models.Model):
         self.published_at = None
         self.save(update_fields=["status", "published_at"])
 
-    # ==================================================
-    # SAVE CENTRAL
-    # ==================================================
-    def save(self, *args, **kwargs):
-        # Slug automático com fallback
-        if not self.slug:
-            base_slug = slugify(self.title)
-            slug = base_slug
-            counter = 1
+    def _generate_slug(self):
+        if self.slug:
+            return
 
-            while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f"{base_slug}-{counter}"
-                counter += 1
+        base_slug = slugify(self.title)
+        slug = base_slug
+        counter = 1
 
-            self.slug = slug
+        while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
 
-        # Excerpt automático (SEO-safe)
-        if not self.excerpt and self.content:
-            self.excerpt = Truncator(
-                unescape(strip_tags(self.content))
-            ).chars(155)
+        self.slug = slug
 
-        # Coerência de publicação
+    def _generate_excerpt(self):
+        if self.excerpt or not self.content:
+            return
+        
+        self.excerpt = Truncator(
+            unescape(strip_tags(self.content))
+        ).chars(155)
+
+    def _sync_publication(self):
         if self.status == self.Status.PUBLISHED and not self.published_at:
             self.published_at = timezone.now()
 
         if self.status == self.Status.DRAFT:
             self.published_at = None
 
-        # Normalização do vídeo do YouTube
-        if self.youtube_video_id:
-            extracted_id = extract_youtube_id(self.youtube_video_id)
-            self.youtube_video_id = extracted_id
-        else:
+    def _normalize_youtube(self):
+        if not self.youtube_video_id:   
             self.youtube_video_id = None
+            return
+
+        self.youtube_video_id = extract_youtube_id(self.youtube_video_id)
+
+    # ==================================================
+    # SAVE CENTRAL
+    # ==================================================
+    def save(self, *args, **kwargs):
+        self._generate_slug()
+        self._generate_excerpt()
+        self._sync_publication()
+        self._normalize_youtube()
 
         super().save(*args, **kwargs)
 
     
-
     # ==================================================
     # URL CANÔNICA
     # ==================================================
