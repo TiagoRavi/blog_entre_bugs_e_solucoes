@@ -1,9 +1,7 @@
-{% load static %}
-
 {% if post.featured_image %}
 <figure class="post-featured-image">
   <img
-    src="{{ post.featured_image.url|cut:'http://'|add:'https://' }}"
+    src="{{ post.featured_image.url }}"
     alt="{{ post.title }}"
     width="1200"
     height="630"
