@@ -278,13 +278,13 @@ POST CTA
 ================================================== */
 
 .post-cta {
-  margin: 3rem 0;
+  margin: var(--space-2xl) 0;
 }
 
 .post-cta-card {
-  background: #f9fafb;
-  border-radius: 12px;
-  padding: 2rem 2.25rem;
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) 2.25rem;
   border-left: 4px solid var(--color-primary);
 }
 
