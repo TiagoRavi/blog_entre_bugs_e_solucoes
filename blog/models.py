@@ -47,24 +47,13 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("blog:category_posts", args=[self.slug])
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
-
-
-# ======================================================
-# QUERYSET
-# ======================================================
-class PostQuerySet(models.QuerySet):
-    def published(self):
-        return self.filter(
-            status=Post.Status.PUBLISHED,
-            published_at__lte=timezone.now(),
-        )
 
 # ======================================================
 # CTA (SEO)
@@ -118,6 +107,15 @@ class CTA(models.Model):
     def __str__(self) -> str:
         return self.title
 
+# ======================================================
+# QUERYSET
+# ======================================================
+class PostQuerySet(models.QuerySet):
+    def published(self) -> models.QuerySet:
+        return self.filter(
+            status=Post.Status.PUBLISHED,
+            published_at__lte=timezone.now(),
+        )
 
 # ======================================================
 # POST
@@ -238,7 +236,6 @@ class Post(models.Model):
         verbose_name_plural = "Posts"
         ordering = ["-published_at"]
         indexes = [
-            models.Index(fields=["slug"]),
             models.Index(fields=["status", "published_at"]),
         ]
 
@@ -248,17 +245,17 @@ class Post(models.Model):
     # ==================================================
     # DOMÍNIO
     # ==================================================
-    def publish(self):
+    def publish(self) -> None:
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
         self.save(update_fields=["status", "published_at"])
 
-    def unpublish(self):
+    def unpublish(self) -> None:
         self.status = self.Status.DRAFT
         self.published_at = None
         self.save(update_fields=["status", "published_at"])
 
-    def _generate_slug(self):
+    def _generate_slug(self) -> None:
         if self.slug:
             return
 
@@ -272,7 +269,7 @@ class Post(models.Model):
 
         self.slug = slug
 
-    def _generate_excerpt(self):
+    def _generate_excerpt(self) -> None:
         if self.excerpt or not self.content:
             return
         
@@ -280,14 +277,14 @@ class Post(models.Model):
             unescape(strip_tags(self.content))
         ).chars(155)
 
-    def _sync_publication(self):
+    def _sync_publication(self) -> None:
         if self.status == self.Status.PUBLISHED and not self.published_at:
             self.published_at = timezone.now()
 
-        if self.status == self.Status.DRAFT:
+        elif self.status == self.Status.DRAFT:
             self.published_at = None
 
-    def _normalize_youtube(self):
+    def _normalize_youtube(self) -> None:
         if not self.youtube_video_id:   
             self.youtube_video_id = None
             return
@@ -297,7 +294,7 @@ class Post(models.Model):
     # ==================================================
     # SAVE CENTRAL
     # ==================================================
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         self._generate_slug()
         self._generate_excerpt()
         self._sync_publication()
@@ -309,7 +306,7 @@ class Post(models.Model):
     # ==================================================
     # URL CANÔNICA
     # ==================================================
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("blog:post_detail", args=[self.slug])
     
     
