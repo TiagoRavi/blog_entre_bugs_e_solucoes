@@ -21,9 +21,10 @@ Revisar todos os Templates para identificar oportunidades de simplificação, re
 * ✅ Organização inicial dos diretórios.
 * ✅ Identificação dos primeiros componentes reutilizáveis.
 * ✅ Auditoria de `home.html`.
+* ✅ Auditoria de `post_list.html`.
 * ✅ Auditoria de `post_detail.html`.
-* 🔄 Auditoria de duplicações em andamento.
-* 🔄 Avaliação de lógica excessiva em andamento.
+* ✅ Auditoria de duplicações.
+* ✅ Avaliação de lógica excessiva.
 
 ### Decisões
 
@@ -32,10 +33,15 @@ Revisar todos os Templates para identificar oportunidades de simplificação, re
 * Componentizar apenas trechos com reutilização comprovada.
 * Não criar componentes para uso único.
 * Manter os blocos de SEO e JSON-LD no próprio `post_detail.html`, pois pertencem exclusivamente a essa página.
+* Manter componentes específicos de uma página em `includes/`.
+
+### Resultado
+
+A auditoria confirmou que os Templates já apresentam boa organização e baixo acoplamento.
 
 ### Status
 
-🔄 Em andamento
+✅ Concluído
 
 ---
 
@@ -49,25 +55,41 @@ Extrair trechos reutilizados em múltiplos Templates para componentes.
 
 ```text
 components/
-├── post_card.html        ✅
-├── author_box.html       ⬜
-├── badge.html            ⬜
-├── newsletter.html       ⬜
-├── share_buttons.html    ⬜
-└── toc.html              ⬜
+├── newsletter.html      ✅
+└── post_card.html       ✅
+```
+
+### Componentes mantidos como `includes`
+
+```text
+includes/
+├── post_author_box.html
+├── post_content.html
+├── post_cta_box.html
+├── post_faq.html
+├── post_featured_image.html
+├── post_header.html
+├── post_related.html
+├── post_sidebar.html
+├── post_toc.html
+├── post_video.html
+├── hero.html
+├── pagination.html
+└── post_grid.html
 ```
 
 ### Refatorações concluídas
 
 * ✅ Extraído `post_card.html`.
-* ✅ Simplificado `includes/post_grid.html`, delegando a renderização de cada post ao componente.
+* ✅ Simplificado `post_grid.html`.
 * ✅ Corrigida a nomenclatura de `post_sidebar.html`.
+* ✅ `newsletter.html` classificado como componente reutilizável.
 
-### Critérios
+### Decisões
 
-* Criar componentes apenas quando houver reutilização ou ganho claro de manutenção.
-* Evitar componentes utilizados apenas uma vez.
-* Manter responsabilidade única para cada componente.
+* Componentes representam elementos reutilizáveis da interface.
+* `includes` permanecem para estruturas específicas de uma página.
+* Não criar componentes apenas por convenção.
 
 ### Status
 
@@ -83,16 +105,15 @@ Padronizar o uso de `include` para melhorar organização e reutilização.
 
 ### Revisão
 
-* ✅ Separação inicial entre `includes/` e `components/`.
-* ✅ `post_grid.html` simplificado para atuar apenas como estrutura da grade.
-* ✅ Padronização da nomenclatura para `post_sidebar.html`.
-* 🔄 Revisar os demais `include`s do projeto.
-* 🔄 Validar a organização da pasta `components`.
-* 🔄 Avaliar futura organização por contexto (ex.: `post/`), apenas se houver ganho real.
+* ✅ Separação entre `includes/` e `components/`.
+* ✅ `post_grid.html` atua apenas como estrutura da grade.
+* ✅ Padronização da nomenclatura de `post_sidebar.html`.
+* ✅ Auditoria dos principais `include`s.
+* 🔄 Avaliar reorganização por contexto apenas se houver ganho real.
 
 ### Critérios
 
-Cada componente deve possuir responsabilidade única e ser reutilizável.
+Cada `include` deve possuir responsabilidade única e representar uma estrutura específica da página.
 
 ### Status
 
@@ -104,7 +125,7 @@ Cada componente deve possuir responsabilidade única e ser reutilizável.
 
 | Feature                         | Status          |
 | ------------------------------- | --------------- |
-| 4.1 – Auditoria dos Templates   | 🔄 Em andamento |
+| 4.1 – Auditoria dos Templates   | ✅ Concluído     |
 | 4.2 – Componentização           | 🔄 Em andamento |
 | 4.3 – Padronização dos Includes | 🔄 Em andamento |
 
@@ -112,18 +133,19 @@ Cada componente deve possuir responsabilidade única e ser reutilizável.
 
 ### ✅ Concluído
 
-* Estrutura inicial dos Templates auditada.
+* Auditoria completa dos principais Templates.
 * Auditoria de `home.html`.
+* Auditoria de `post_list.html`.
 * Auditoria de `post_detail.html`.
-* Componente `post_card.html` extraído.
-* `post_grid.html` simplificado.
-* Separação inicial entre `includes/` e `components/`.
-* Padronização da nomenclatura de `post_sidebar.html`.
+* Extração de `post_card.html`.
+* Simplificação de `post_grid.html`.
+* Separação entre `includes/` e `components`.
+* Padronização de `post_sidebar.html`.
+* Identificação de `newsletter.html` como componente reutilizável.
 
 ### 🔜 Próximos passos
 
-1. Auditar `post_list.html`.
-2. Verificar reutilização de `post_grid.html` e `pagination.html`.
-3. Identificar novos componentes realmente reutilizáveis.
-4. Revisar os demais `include`s para manter um padrão consistente.
-5. Encerrar a auditoria dos Templates e decidir se novas extrações são realmente necessárias.
+1. Concluir a migração de `newsletter.html` para `components/` (caso ainda não tenha sido realizada).
+2. Revisar os demais Templates do projeto (`pages/` e eventuais templates administrativos personalizados).
+3. Encerrar a Feature 4.2 quando não houver novas oportunidades reais de reutilização.
+4. Encerrar a Feature 4.3 após validar que todos os `include`s seguem o padrão definido.
