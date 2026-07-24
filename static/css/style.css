@@ -1,29 +1,31 @@
 /* =========================================================
    CSS ENTRYPOINT
-   Este arquivo apenas orquestra os imports
-   NÃO escrever regras CSS aqui
+   Este arquivo apenas orquestra os imports.
+   Não escreva regras CSS aqui.
    ========================================================= */
 
-/* 1. Base (reset, variáveis, tipografia) */
+/* 1. Design Tokens */
+@import url("tokens/colors.css");
+@import url("tokens/spacing.css");
+@import url("tokens/typography.css");
+@import url("tokens/variables.css");
+
+/* 2. Base (reset e estilos globais) */
 @import url("base.css");
 
-/* 2. Layout estrutural */
+/* 3. Layout estrutural */
 @import url("layout.css");
 
-/* 3. Componentes reutilizáveis */
+/* 4. Componentes reutilizáveis */
 @import url("components.css");
 
-/* 4. Domínios específicos */
+/* 5. Domínios */
 @import url("blog.css");
 
-/* 5. Páginas */
+/* 6. Páginas */
 @import url("about.css");
 
-/* 6. hero */
+/* 7. Componentes específicos */
 @import url("hero.css");
-
-/* 7. Cookies */
 @import url("cookies.css");
-
-/* 8. newsletter */
 @import url("newsletter.css");
