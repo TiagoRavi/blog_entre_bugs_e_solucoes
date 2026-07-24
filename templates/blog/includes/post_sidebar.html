@@ -1,0 +1,9 @@
+<div class="sidebar-recommendations">
+
+    {% include "blog/includes/post_author_box.html" %}
+
+    {% with has_newsletter=True %}
+        {% include "blog/components/newsletter.html" %}
+    {% endwith %}
+
+</div>

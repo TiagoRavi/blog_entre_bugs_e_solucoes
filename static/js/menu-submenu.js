@@ -1,53 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const submenus = document.querySelectorAll("[data-submenu]");
-  const toggle = document.querySelector("[data-menu-toggle]");
   const nav = document.querySelector("[data-nav]");
-  
-  function closeAllSubmenus() {
-    submenus.forEach(item => {
-      item.classList.remove("is-open");
-      item.querySelector(".menu-button")
+
+  if (!nav) return;
+
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const submenus = document.querySelectorAll("[data-submenu]");
+
+  const closeAllSubmenus = () => {
+    submenus.forEach(submenu => {
+      submenu.classList.remove("is-open");
+      submenu
+        .querySelector(".menu-button")
         ?.setAttribute("aria-expanded", "false");
     });
-  }
+  };
 
-  // Submenu: só abre com clique explícito
-  submenus.forEach(item => {
-    const button = item.querySelector(".menu-button");
+  submenus.forEach(submenu => {
+    const button = submenu.querySelector(".menu-button");
 
-    button.addEventListener("click", event => {
+    button?.addEventListener("click", event => {
       event.stopPropagation();
 
-      const isOpen = item.classList.contains("is-open");
+      const isOpen = submenu.classList.contains("is-open");
 
       closeAllSubmenus();
 
       if (!isOpen) {
-        item.classList.add("is-open");
+        submenu.classList.add("is-open");
         button.setAttribute("aria-expanded", "true");
       }
     });
   });
 
-  // Clique fora fecha tudo
-  if (nav) {
   nav.addEventListener("click", event => {
     event.stopPropagation();
   });
-}
 
+  if (!toggle) return;
 
-  // Menu mobile
-  if (toggle && nav) {
-    toggle.addEventListener("click", event => {
-      event.stopPropagation(); // 🔒 ESSENCIAL
+  toggle.addEventListener("click", event => {
+    event.stopPropagation();
 
-      const isOpen = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", isOpen);
+    const isOpen = nav.classList.toggle("is-open");
 
-      if (isOpen) {
-        closeAllSubmenus(); // garante submenu fechado
-      }
-    });
-  }
+    toggle.setAttribute("aria-expanded", String(isOpen));
+
+    if (isOpen) {
+      closeAllSubmenus();
+    }
+  });
 });

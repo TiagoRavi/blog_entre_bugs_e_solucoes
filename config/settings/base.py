@@ -1,19 +1,15 @@
 from pathlib import Path
-import os
+from os import getenv
 
+# ======================================================
+# BASE DIR
+# ======================================================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
 
 # ======================================================
 # CORE
 # ======================================================
-<<<<<<< HEAD
-SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
-=======
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
->>>>>>> develop
-
-
+SECRET_KEY = getenv("DJANGO_SECRET_KEY")
 
 # ======================================================
 # APPLICATIONS
@@ -28,13 +24,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.sitemaps",
-<<<<<<< HEAD
-    "blog",
-    "pages",
-]
-
-SITE_ID = 1
-=======
 
     # Third-party
     "cloudinary",
@@ -51,9 +40,6 @@ SITE_ID = 1
 SITE_ID = 2
 
 SITE_URL = "https://entrebugsesolucoes.com.br"
-
-
->>>>>>> develop
 
 # ======================================================
 # MIDDLEWARE
@@ -72,23 +58,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-<<<<<<< HEAD
-=======
-
 # ======================================================
 # URLS / WSGI
 # ======================================================
->>>>>>> develop
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
-
-
-# ======================================================
-# DATABASE
-# (definido por ambiente)
-# ======================================================
-DATABASES = {}
-
 
 # ======================================================
 # TEMPLATES
@@ -112,13 +86,9 @@ TEMPLATES = [
     },
 ]
 
-<<<<<<< HEAD
-=======
-
 # ======================================================
 # PASSWORD VALIDATORS
 # ======================================================
->>>>>>> develop
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -126,25 +96,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-<<<<<<< HEAD
-=======
-
 # ======================================================
 # I18N / TIMEZONE
 # ======================================================
->>>>>>> develop
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
 USE_TZ = True
 
-<<<<<<< HEAD
-=======
-
 # ======================================================
 # STATIC FILES (WhiteNoise)
 # ======================================================
->>>>>>> develop
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -165,7 +127,7 @@ STATICFILES_FINDERS = [
 # MEDIA / CLOUDINARY (com fallback seguro)
 # ======================================================
 
-CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+CLOUDINARY_URL = getenv("CLOUDINARY_URL")
 
 if CLOUDINARY_URL:
     DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
@@ -176,6 +138,10 @@ else:
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media"
 
+
+# ======================================================
+# TinyMCE
+# ======================================================
 
 TINYMCE_DEFAULT_CONFIG = {
     "height": 550,
@@ -251,14 +217,15 @@ TINYMCE_DEFAULT_CONFIG = {
     """,
 }
 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+MAX_UPLOAD_SIZE = 5 * 1024 * 1024
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+FILE_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
+DATA_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
 
-
+# ======================================================
+# DEFAULTS
+# ======================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-<<<<<<< HEAD
-=======
 
 CSRF_COOKIE_HTTPONLY = True
 
@@ -267,4 +234,3 @@ SESSION_COOKIE_HTTPONLY = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
->>>>>>> develop

@@ -4,8 +4,6 @@ from django.db.models import QuerySet
 
 from .models import Category, Post
 
-from django.utils import timezone
-from .models import Post
 
 # ======================================================
 # CATEGORY SELECTORS
@@ -77,15 +75,14 @@ def get_post_by_slug(slug: str) -> Optional[Post]:
     )
 
 
-def get_posts_by_category(category: Category) -> QuerySet[Post]:
+def get_posts_by_category(slug: str) -> QuerySet[Post]:
     """
-    Retorna posts publicados de uma categoria específica.
-    """
-    return (
-        get_published_posts()
-        .filter(category=category)
-    )
+    Retorna os posts publicados de uma categoria.
 
+    Ideal para:
+    - Página de categoria
+    """
+    return get_published_posts().filter(category__slug=slug)
 
 def get_related_posts(
     post: Post,
@@ -109,7 +106,7 @@ def get_related_posts(
     )
 
 
-def get_related_video_posts(post, limit=3):
+def get_related_video_posts(post: Post, limit:int=3) -> QuerySet[Post]:
     """
     Retorna posts da mesma categoria que:
     - estejam publicados
@@ -117,11 +114,10 @@ def get_related_video_posts(post, limit=3):
     - não sejam o post atual
     """
     return (
-        Post.objects.published()
+        get_published_posts()
         .filter(
             category=post.category,
-            youtube_video_id__isnull=False,
+            youtube_video_id__isnull=False
         )
-        .exclude(pk=post.pk)
-        .order_by("-published_at")[:limit]
+        .exclude(pk=post.pk)[:limit]
     )

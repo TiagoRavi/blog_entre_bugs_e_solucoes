@@ -1,0 +1,54 @@
+<section class="newsletter">
+    <h2>Newsletter semanal</h2>
+
+    <p class="newsletter-description">
+        Conteúdo útil, direto ao ponto e sem enrolação.
+    </p>
+
+    <form class="newsletter-form" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Seu e-mail"
+                autocomplete="email"
+                required
+            >
+        </div>
+
+        <label class="newsletter-consent">
+            <input
+                type="checkbox"
+                name="consent"
+                required
+            >
+            Aceito receber notícias e atualizações.
+        </label>
+
+        <button
+            type="submit"
+            class="primary"
+            disabled
+            title="Em breve"
+        >
+            Inscrever-me gratuitamente
+        </button>
+    </form>
+
+    <p class="newsletter-policy">
+        <strong>
+            Você pode cancelar a inscrição a qualquer momento.
+            Para mais detalhes, consulte nossa
+            <a
+                href="https://entrebugsesolucoes.com.br/politica-de-privacidade/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Política de Privacidade
+            </a>.
+        </strong>
+    </p>
+</section>

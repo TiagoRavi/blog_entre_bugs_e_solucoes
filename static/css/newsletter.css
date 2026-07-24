@@ -1,239 +1,105 @@
-/* =========================================================
-   MAILERLITE NEWSLETTER – FINAL CSS (WCAG AA)
-   Form ID: #mlb2-35107002
-   ========================================================= */
+/* ==========================================================
+   NEWSLETTER
+========================================================== */
 
-
-/* =========================================================
-   1. RESET / HELPERS
-   ========================================================= */
-
-#mlb2-35107002 * {
-  box-sizing: border-box;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-}
-
-.g-recaptcha {
-  transform: scale(1);
-  transform-origin: 0 0;
-}
-
-
-/* =========================================================
-   2. CONTAINER / CARD
-   ========================================================= */
-
-#mlb2-35107002.ml-form-embedContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 48px 0;
-}
-
-#mlb2-35107002 .ml-form-embedWrapper {
-  width: 100%;
+.newsletter {
   max-width: 420px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 28px 28px 24px;
+  margin: var(--space-2xl) auto;
+  padding: 1.75rem;
+
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.08),
     0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-
-/* =========================================================
-   3. HEADER / TEXT
-   ========================================================= */
-
-#mlb2-35107002 h4 {
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: #000000;
-  margin: 0 0 6px;
+.newsletter h2 {
+  margin-bottom: var(--space-sm);
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
 }
 
-#mlb2-35107002 .ml-form-embedContent p {
-  font-size: 14px;
-  color: #555555; /* contraste AA */
-  margin: 0 0 20px;
+.newsletter-description {
+  margin-bottom: var(--space-lg);
+  color: #555;
+  text-align: justify;
 }
 
-/* Texto em destaque (strong) */
-#mlb2-35107002 .ml-form-embedContent strong {
-  color: #111111; /* contraste reforçado */
-  font-weight: 700;
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
-/* Links */
-#mlb2-35107002 a {
-  color: #000000;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
+.newsletter-form input[type="email"] {
+  width: 100%;
+  padding: 0.875rem var(--space-md);
+
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+
+  font: inherit;
 }
 
-#mlb2-35107002 a:hover,
-#mlb2-35107002 a:focus {
-  color: #111111;
-}
-
-
-/* =========================================================
-   4. INPUT
-   ========================================================= */
-
-#mlb2-35107002 input[type="email"] {
-  width: 100% !important;
-  padding: 14px 12px !important;
-  border-radius: 8px !important;
-  border: 1px solid #dddddd !important;
-  font-size: 14px !important;
-  color: #111111;
-  background-color: #ffffff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-#mlb2-35107002 input[type="email"]::placeholder {
-  color: #6b6b6b;
-  opacity: 1;
-}
-
-#mlb2-35107002 input[type="email"]:focus {
+.newsletter-form input[type="email"]:focus {
   outline: none;
-  border-color: #000000 !important;
+  border-color: #000;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
-
-/* =========================================================
-   5. PRIVACY TEXT
-   ========================================================= */
-
-#mlb2-35107002 .privacy-policy p {
-  font-size: 12px;
-  color: #555555; /* contraste AA */
-  margin: 14px 0 12px;
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   6. CHECKBOX
-   ========================================================= */
-
-#mlb2-35107002 .ml-form-checkboxRow {
-  margin-bottom: 18px;
-}
-
-#mlb2-35107002 .ml-form-checkboxRow label {
+.newsletter-consent {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  font-size: 12px;
-  color: #333333;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+}
+
+.newsletter button {
+  width: 100%;
+  padding: 0.875rem;
+
+  border: 0;
+  border-radius: var(--radius-sm);
+
+  background: #000;
+  color: var(--color-bg);
+
+  font-weight: var(--font-weight-bold);
+
   cursor: pointer;
+  transition: background var(--transition);
 }
 
-#mlb2-35107002 .ml-form-checkboxRow input {
-  margin-top: 2px;
+.newsletter button:hover:not(:disabled) {
+  background: #222;
 }
 
-
-/* =========================================================
-   7. BUTTON
-   ========================================================= */
-
-#mlb2-35107002 .ml-form-embedSubmit button {
-  width: 100% !important;
-  padding: 14px !important;
-  border-radius: 8px !important;
-  background: linear-gradient(135deg, #000000, #222222) !important;
-  color: #ffffff !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  border: none !important;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+.newsletter button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-#mlb2-35107002 .ml-form-embedSubmit button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+.newsletter-policy {
+  margin-top: var(--space-md);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #555;
 }
 
-#mlb2-35107002 .ml-form-embedSubmit button:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.newsletter-policy a {
+  color: inherit;
+  text-decoration: underline;
 }
-
-
-/* =========================================================
-   8. LOADER
-   ========================================================= */
-
-.ml-form-embedSubmitLoad {
-  width: 20px;
-  height: 20px;
-}
-
-.ml-form-embedSubmitLoad::after {
-  content: "";
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 3px solid #ffffff;
-  border-color: #ffffff transparent #ffffff transparent;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-/* =========================================================
-   9. SUCCESS MESSAGE
-   ========================================================= */
-
-#mlb2-35107002 .ml-form-successBody {
-  text-align: center;
-  padding: 20px;
-}
-
-#mlb2-35107002 .ml-form-successBody h4 {
-  font-size: 22px;
-  margin-bottom: 8px;
-  color: #000000;
-}
-
-#mlb2-35107002 .ml-form-successBody p {
-  font-size: 14px;
-  color: #444444;
-}
-
-
-/* =========================================================
-   10. MOBILE
-   ========================================================= */
 
 @media (max-width: 480px) {
-  #mlb2-35107002 .ml-form-embedWrapper {
-    padding: 22px 18px;
-    border-radius: 10px;
+  .newsletter {
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
   }
 
-  #mlb2-35107002 h4 {
-    font-size: 24px;
+  .newsletter h2 {
+    font-size: 1.5rem;
   }
 }

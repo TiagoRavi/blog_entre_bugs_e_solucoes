@@ -1,19 +1,15 @@
 /* ==================================================
 HERO – CONTAINER PRINCIPAL (full-bleed)
-- Ocupa toda a largura da viewport
-- Funciona mesmo dentro de layouts com container
 ================================================== */
+
 .hero-full {
   position: relative;
 
-  /* Força largura real da viewport */
   width: 100vw;
 
-  /* Altura mobile-first */
   height: 80vh;
   min-height: 480px;
 
-  /* Centraliza o 100vw ignorando containers */
   margin-left: 50%;
   transform: translateX(-50%);
 
@@ -21,8 +17,9 @@ HERO – CONTAINER PRINCIPAL (full-bleed)
 }
 
 /* ==================================================
-PICTURE – ocupa todo o hero
+PICTURE
 ================================================== */
+
 .hero-full picture {
   display: block;
   width: 100%;
@@ -30,25 +27,22 @@ PICTURE – ocupa todo o hero
 }
 
 /* ==================================================
-IMAGEM DO HERO
-- Preenche o container
-- Mantém proporção
-- Prioriza enquadramento correto
+IMAGEM
 ================================================== */
+
 .hero-full img {
-  display: block;              /* remove gaps inline */
+  display: block;
   width: 100%;
   height: 100%;
 
-  object-fit: cover;           /* preenche sem distorcer */
-  object-position: center top; /* prioriza rosto no mobile */
+  object-fit: cover;
+  object-position: center top;
 }
 
 /* ==================================================
 OVERLAY
-- Camada para contraste do texto
-- Gradiente pode ser aplicado aqui se quiser
 ================================================== */
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -56,8 +50,9 @@ OVERLAY
 }
 
 /* ==================================================
-AJUSTES PARA DESKTOP
+DESKTOP
 ================================================== */
+
 @media (min-width: 1024px) {
   .hero-full {
     height: 75vh;
@@ -65,44 +60,42 @@ AJUSTES PARA DESKTOP
     max-height: 900px;
   }
 
-  /* Enquadramento mais neutro no desktop */
   .hero-full img {
-    object-position: center center;
+    object-position: center;
   }
 }
 
 /* ==================================================
-CONTEÚDO DO HERO (CAIXA DE TEXTO)
-- Glass dark (escuro + transparente)
-- Centralizado verticalmente no mobile
+CONTEÚDO
 ================================================== */
+
 .hero-content {
   position: absolute;
   top: 50%;
   left: 6%;
-  transform: translateY(-50%); /* centralização real */
+  transform: translateY(-50%);
 
   z-index: 3;
 
   max-width: 520px;
-  padding: 2rem 2.5rem;
+  padding: var(--space-xl) 2.5rem;
 
-  /* Fundo escuro translúcido */
   background: rgba(2, 6, 23, 0.55);
 
-  /* Efeito vidro fosco */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
+
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 
-  color: #fff;
+  color: var(--color-bg);
 }
 
 /* ==================================================
-MARCA / ASSINATURA
+MARCA
 ================================================== */
+
 .hero-brand {
   display: flex;
   align-items: center;
@@ -118,8 +111,8 @@ MARCA / ASSINATURA
 }
 
 .hero-code {
-  color: #9eff00; /* verde tech */
-  font-weight: 700;
+  color: #9eff00;
+  font-weight: var(--font-weight-bold);
 }
 
 .hero-brand-text {
@@ -127,14 +120,15 @@ MARCA / ASSINATURA
 }
 
 /* ==================================================
-TÍTULO PRINCIPAL
+TÍTULO
 ================================================== */
+
 .hero-title {
   font-size: 32px;
   line-height: 1.15;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 
-  margin-bottom: 16px;
+  margin-bottom: var(--space-md);
 }
 
 .hero-title span {
@@ -144,6 +138,7 @@ TÍTULO PRINCIPAL
 /* ==================================================
 SUBTÍTULO
 ================================================== */
+
 .hero-subtitle {
   font-size: 15px;
   line-height: 1.6;
@@ -151,14 +146,14 @@ SUBTÍTULO
 }
 
 /* ==================================================
-AJUSTES PARA DESKTOP
-- Texto sobe para não cobrir o rosto
+DESKTOP
 ================================================== */
+
 @media (min-width: 1024px) {
   .hero-content {
     top: 25%;
     left: 10%;
-    transform: none; /* remove centralização */
+    transform: none;
     max-width: 475px;
   }
 
@@ -172,19 +167,20 @@ AJUSTES PARA DESKTOP
 }
 
 /* ==================================================
-AJUSTES PARA MOBILE PEQUENO
-- Evita texto colado
+MOBILE PEQUENO
 ================================================== */
+
 @media (max-width: 480px) {
   .hero-content {
-    top:auto;
+    top: auto;
     bottom: 5%;
     left: 5%;
     right: 5%;
 
     transform: none;
     max-width: none;
-    padding: 1.5rem;
+
+    padding: var(--space-lg);
   }
 
   .hero-title {
@@ -193,8 +189,9 @@ AJUSTES PARA MOBILE PEQUENO
 }
 
 /* ==================================================
-AJUSTE DE PERFORMANCE / LEGIBILIDADE MOBILE
+PERFORMANCE MOBILE
 ================================================== */
+
 @media (max-width: 768px) {
   .hero-content {
     background: rgba(2, 6, 23, 0.7);

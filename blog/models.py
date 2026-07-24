@@ -1,48 +1,16 @@
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
-from django.utils.text import Truncator, slugify
-from django.utils.html import strip_tags
-from django.urls import reverse
+from html import unescape
 
 from cloudinary.models import CloudinaryField
+from django.conf import settings
+from django.db import models
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.html import strip_tags
+from django.utils.text import Truncator, slugify
 from tinymce.models import HTMLField
 
-import re
+from .utils.youtube import extract_youtube_id
 
-# ======================================================
-# HELPERS
-# ======================================================
-def extract_youtube_id(value: str) -> str | None:
-    """
-    Extrai o ID do vídeo do YouTube a partir de uma URL ou retorna
-    o valor se já parecer um ID válido.
-    """
-    if not value:
-        return None
-
-    value = value.strip()
-
-    patterns = [
-        r"youtu\.be/(?P<id>[^/?&]+)",
-        r"youtube\.com/watch\?v=(?P<id>[^&]+)",
-        r"youtube\.com/embed/(?P<id>[^/?&]+)",
-        r"youtube\.com/shorts/(?P<id>[^/?&]+)",
-    ]
-
-    for pattern in patterns:
-        match = re.search(pattern, value)
-        if match:
-            return match.group("id")
-
-    # Fallback: se já for um ID válido (11 chars)
-    if re.fullmatch(r"[a-zA-Z0-9_-]{11}", value):
-        return value
-
-    return None
-
-<<<<<<< HEAD
-=======
 
 # ======================================================
 # CATEGORY
@@ -79,24 +47,13 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("blog:category_posts", args=[self.slug])
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
-
-
-# ======================================================
-# QUERYSET
-# ======================================================
-class PostQuerySet(models.QuerySet):
-    def published(self):
-        return self.filter(
-            status=Post.Status.PUBLISHED,
-            published_at__lte=timezone.now(),
-        )
 
 # ======================================================
 # CTA (SEO)
@@ -150,8 +107,16 @@ class CTA(models.Model):
     def __str__(self) -> str:
         return self.title
 
+# ======================================================
+# QUERYSET
+# ======================================================
+class PostQuerySet(models.QuerySet):
+    def published(self) -> models.QuerySet:
+        return self.filter(
+            status=Post.Status.PUBLISHED,
+            published_at__lte=timezone.now(),
+        )
 
->>>>>>> develop
 # ======================================================
 # POST
 # ======================================================
@@ -192,7 +157,7 @@ class Post(models.Model):
     )
 
     category = models.ForeignKey(
-        "Category",
+        Category,
         on_delete=models.PROTECT,
         related_name="posts",
         verbose_name="Categoria",
@@ -205,26 +170,6 @@ class Post(models.Model):
         help_text="Gerado automaticamente se deixado em branco.",
     )
 
-<<<<<<< HEAD
-    # --------------------------------------------------
-    # Conteúdo do post (HTML permitido)
-    # --------------------------------------------------
-    content = models.TextField(
-        verbose_name="Conteúdo",
-        help_text="Conteúdo principal do post (HTML permitido).",
-    )
-
-    # --------------------------------------------------
-    # IMAGEM DE DESTAQUE (WordPress-like)
-    # --------------------------------------------------
-    featured_image = models.URLField(
-        verbose_name="Imagem de destaque",
-        blank=True,
-        help_text=(
-            "URL da imagem de destaque (Cloudinary/CDN). "
-            "Não utilize upload local."
-        ),
-=======
     content = HTMLField(
         verbose_name="Conteúdo",
         help_text="Conteúdo HTML gerado pelo editor.",
@@ -241,7 +186,6 @@ class Post(models.Model):
         verbose_name="Imagem de destaque",
         blank=True,
         null=True,
->>>>>>> develop
     )
 
     # 🎥 YouTube
@@ -292,7 +236,6 @@ class Post(models.Model):
         verbose_name_plural = "Posts"
         ordering = ["-published_at"]
         indexes = [
-            models.Index(fields=["slug"]),
             models.Index(fields=["status", "published_at"]),
         ]
 
@@ -300,96 +243,70 @@ class Post(models.Model):
         return self.title
 
     # ==================================================
-<<<<<<< HEAD
-    # REGRAS DE DOMÍNIO
-    # ==================================================
-    def publish(self):
-        """
-        Publica o post explicitamente.
-        """
-=======
     # DOMÍNIO
     # ==================================================
-    def publish(self):
->>>>>>> develop
+    def publish(self) -> None:
         self.status = self.Status.PUBLISHED
         self.published_at = timezone.now()
         self.save(update_fields=["status", "published_at"])
 
-    def unpublish(self):
+    def unpublish(self) -> None:
         self.status = self.Status.DRAFT
         self.published_at = None
         self.save(update_fields=["status", "published_at"])
 
-    # ==================================================
-<<<<<<< HEAD
-    # HOOK CENTRAL DE CONSISTÊNCIA
-    # ==================================================
-    def save(self, *args, **kwargs):
-        """
-        Responsabilidades:
-        - Gerar slug automaticamente
-        - Gerar excerpt para SEO
-        - Garantir coerência entre status e published_at
-        """
+    def _generate_slug(self) -> None:
+        if self.slug:
+            return
 
-        # Slug automático
-=======
-    # SAVE CENTRAL
-    # ==================================================
-    def save(self, *args, **kwargs):
-        # Slug automático com fallback
->>>>>>> develop
-        if not self.slug:
-            base_slug = slugify(self.title)
-            slug = base_slug
-            counter = 1
+        base_slug = slugify(self.title)
+        slug = base_slug
+        counter = 1
 
-<<<<<<< HEAD
-        # Excerpt automático (SEO)
-        if not self.excerpt:
-            self.excerpt = Truncator(self.content).chars(155)
-=======
-            while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f"{base_slug}-{counter}"
-                counter += 1
->>>>>>> develop
+        while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
 
-            self.slug = slug
+        self.slug = slug
 
-        # Excerpt automático (SEO-safe)
-        if not self.excerpt and self.content:
-            texto_limpo = strip_tags(self.content)
-            self.excerpt = Truncator(texto_limpo).chars(155)
+    def _generate_excerpt(self) -> None:
+        if self.excerpt or not self.content:
+            return
+        
+        self.excerpt = Truncator(
+            unescape(strip_tags(self.content))
+        ).chars(155)
 
-        # Coerência de publicação
+    def _sync_publication(self) -> None:
         if self.status == self.Status.PUBLISHED and not self.published_at:
             self.published_at = timezone.now()
 
-        if self.status == self.Status.DRAFT:
+        elif self.status == self.Status.DRAFT:
             self.published_at = None
 
-        # Normalização do vídeo do YouTube
-        if self.youtube_video_id:
-            extracted_id = extract_youtube_id(self.youtube_video_id)
-            self.youtube_video_id = extracted_id
-        else:
+    def _normalize_youtube(self) -> None:
+        if not self.youtube_video_id:   
             self.youtube_video_id = None
+            return
+
+        self.youtube_video_id = extract_youtube_id(self.youtube_video_id)
+
+    # ==================================================
+    # SAVE CENTRAL
+    # ==================================================
+    def save(self, *args, **kwargs) -> None:
+        self._generate_slug()
+        self._generate_excerpt()
+        self._sync_publication()
+        self._normalize_youtube()
 
         super().save(*args, **kwargs)
 
     
-
     # ==================================================
     # URL CANÔNICA
     # ==================================================
-    def get_absolute_url(self):
-<<<<<<< HEAD
-        """
-        Retorna a URL canônica do post.
-        """
-        return reverse("blog:post_detail", args=[self.slug])
-=======
+    def get_absolute_url(self) -> str:
         return reverse("blog:post_detail", args=[self.slug])
     
     
@@ -412,4 +329,3 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
->>>>>>> develop
