@@ -1,18 +1,16 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
-from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
-from .selectors import get_related_video_posts
+from django.views.decorators.cache import cache_page
+from django.views.generic import DetailView, ListView
 
-
-from .models import Post, Category
+from .models import Category, Post
 from .selectors import (
     get_latest_published_posts,
     get_published_posts,
     get_related_posts,
+    get_related_video_posts,
 )
-
 
 # ======================================================
 # HOME
