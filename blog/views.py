@@ -7,6 +7,7 @@ from django.views.generic import DetailView, ListView
 from .models import Category, Post
 from .selectors import (
     get_latest_published_posts,
+    get_posts_by_category,
     get_published_posts,
     get_related_posts,
     get_related_video_posts,
@@ -105,6 +106,7 @@ class PostDetailView(DetailView):
 
         # Playlist de vídeos (somente se o post tiver vídeo)
         context["related_videos"] = []
+
         if post.youtube_video_id:
             context["related_videos"] = get_related_video_posts(
                 post=post,
@@ -115,10 +117,6 @@ class PostDetailView(DetailView):
         context["is_post_detail"] = True
 
         return context
-
-
-
-
 
 # ======================================================
 # LISTAGEM POR CATEGORIA
@@ -134,12 +132,7 @@ class CategoryPostListView(ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        return (
-            get_published_posts()
-            .filter(category__slug=self.kwargs["slug"])
-            .select_related("category")
-            .order_by("-published_at")
-        )
+        return get_posts_by_category(self.kwargs["slug"])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
