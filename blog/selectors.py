@@ -75,15 +75,14 @@ def get_post_by_slug(slug: str) -> Optional[Post]:
     )
 
 
-def get_posts_by_category(category: Category) -> QuerySet[Post]:
+def get_posts_by_category(slug: str) -> QuerySet[Post]:
     """
-    Retorna posts publicados de uma categoria específica.
-    """
-    return (
-        get_published_posts()
-        .filter(category=category)
-    )
+    Retorna os posts publicados de uma categoria.
 
+    Ideal para:
+    - Página de categoria
+    """
+    return get_published_posts().filter(category__slug=slug)
 
 def get_related_posts(
     post: Post,

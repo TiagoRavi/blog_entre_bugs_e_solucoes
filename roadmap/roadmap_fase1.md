@@ -55,27 +55,35 @@ blog/utils/youtube.py
 
 ## Objetivo
 
-Padronizar todos os imports do projeto para melhorar legibilidade e consistência.
+Padronizar o estilo do código e unificar a organização dos imports em todo o projeto.
 
-### Tarefas
+### Entregas realizadas
 
-* Organizar imports conforme PEP 8.
-* Aplicar `isort`.
-* Aplicar `black`.
-* Remover imports não utilizados.
-* Revisar imports relativos desnecessários.
+* Configuração do **Black** via `pyproject.toml`.
+* Configuração do **isort** utilizando o perfil do Black.
+* Inclusão das ferramentas no ambiente do projeto.
+* Padronização dos imports conforme a PEP 8.
+* Formatação automática de todo o código-fonte.
+* Remoção de inconsistências de estilo.
+
+### Benefícios
+
+* Código padronizado em todo o projeto.
+* Maior legibilidade.
+* Menor difusão de estilos entre desenvolvedores.
+* Base preparada para futuras integrações com CI/CD e pre-commit.
 
 ### Status
 
-⬜ Não iniciado
+✅ Concluído
 
 ---
 
-# Feature 1.3 — Melhorar organização das configurações
+# Feature 1.3 — Auditoria e simplificação das configurações
 
 ## Objetivo
 
-Modularizar as configurações do projeto para facilitar manutenção e escalabilidade.
+Avaliar a organização das configurações do Django e identificar oportunidades reais de melhoria, evitando modularizações desnecessárias.
 
 ### Estrutura atual
 
@@ -86,28 +94,47 @@ config/settings/
 └── prod.py
 ```
 
-### Estrutura alvo
+### Auditoria realizada
 
-```text
-config/settings/
-├── base.py
-├── dev.py
-├── prod.py
-├── logging.py
-├── cache.py
-├── email.py
-└── security.py
-```
+Foi realizada uma revisão completa do `base.py` com foco em:
+
+* organização por responsabilidade;
+* separação lógica das configurações;
+* legibilidade;
+* simplificação do código;
+* aderência ao princípio YAGNI.
+
+### Entregas realizadas
+
+* Substituição de `os.getenv()` por `getenv()`.
+* Criação da constante `MAX_UPLOAD_SIZE`.
+* Melhoria na organização visual das seções.
+* Isolamento da configuração do TinyMCE em um bloco próprio.
+* Revisão geral da estrutura do arquivo.
+
+### Decisões arquiteturais
+
+Após a auditoria, concluiu-se que **não há necessidade de modularizar** o pacote `config/settings` neste momento.
+
+As configurações atuais apresentam:
+
+* boa organização;
+* responsabilidades bem definidas;
+* baixo acoplamento;
+* tamanho adequado para um único `base.py`.
+
+A criação de módulos como `logging.py`, `cache.py`, `email.py` e `security.py` foi descartada por não haver complexidade suficiente que justificasse essa divisão.
 
 ### Benefícios
 
-* Melhor organização.
-* Configurações isoladas por responsabilidade.
-* Maior facilidade de manutenção.
+* Configuração mais simples.
+* Menor quantidade de arquivos para manutenção.
+* Evolução guiada por necessidade real.
+* Arquitetura alinhada ao princípio YAGNI.
 
 ### Status
 
-⬜ Não iniciado
+✅ Concluído
 
 ---
 
@@ -121,21 +148,9 @@ Refatorar o domínio antes de evoluir o restante da aplicação.
 
 **Status:** ✅ Concluído
 
-**Resultado:**
-
-* Criado `blog/utils/youtube.py`.
-* Removida a lógica de extração do `models.py`.
-* Redução do acoplamento.
-
----
-
 ### RF-002 — Refatorar o método `save()`
 
 **Status:** ✅ Concluído
-
-**Resultado:**
-
-O `save()` passou a atuar apenas como orquestrador.
 
 Métodos extraídos:
 
@@ -144,140 +159,97 @@ Métodos extraídos:
 * `_sync_publication()`
 * `_normalize_youtube()`
 
----
-
 ### RF-003 — Avaliação da camada de Service
 
 **Status:** ✅ Concluído
 
 **Decisão arquitetural:**
 
-Manter `publish()` e `unpublish()` no modelo neste momento.
-
-**Motivo:**
-
-* Regras de negócio ainda simples.
-* Evitar abstração prematura (YAGNI).
-* Manter alta coesão do domínio.
+Manter `publish()` e `unpublish()` no modelo.
 
 ---
 
 # Auditoria das Views
 
-## Objetivo
+## Status
 
-Validar se as views possuem responsabilidades adequadas e identificar oportunidades de extração de lógica.
-
-### Resultado
-
-**Status:** ✅ Concluído
+✅ Concluído
 
 ### Conclusões
 
-* As CBVs possuem boa separação de responsabilidades.
-* A lógica de acesso aos dados já está centralizada nos selectors.
-* Não foi identificada necessidade de criação de Services.
-* O uso de cache está adequado.
-* As consultas estão organizadas e reutilizáveis.
+* Boa separação de responsabilidades.
+* Uso adequado de CBVs.
+* Cache corretamente aplicado.
+* Consultas delegadas aos selectors.
+* Nenhuma necessidade de criação de Services.
 
-**Nota da auditoria:** **9,4/10**
+**Nota:** **9,4/10**
 
 ---
 
 # Auditoria dos Selectors
 
-## Objetivo
+## RF-004 — Limpeza de imports
 
-Padronizar e simplificar a camada de consultas da aplicação.
+✅ Concluído
 
-### RF-004 — Limpeza de imports
+## RF-005 — Padronização de tipagem
 
-**Status:** ✅ Concluído
+✅ Concluído
 
-**Resultado:**
+## RF-006 — Reutilização de consultas
 
-* Remoção de imports duplicados.
-* Remoção de imports não utilizados.
-* Organização conforme PEP 8.
+✅ Concluído
 
----
+## RF-007 — Avaliação do filtro de vídeos
 
-### RF-005 — Padronização de tipagem
+✅ Concluído
 
-**Status:** ✅ Concluído
+**Decisão:**
 
-**Resultado:**
-
-* Padronização das assinaturas dos selectors.
-* Uso consistente de `QuerySet[Post]`.
-* Melhoria na legibilidade das anotações de tipo.
-
----
-
-### RF-006 — Reutilização de consultas
-
-**Status:** ✅ Concluído
-
-**Resultado:**
-
-* `get_related_video_posts()` passou a reutilizar `get_published_posts()`.
-* Eliminação de duplicação de regras de consulta.
-* Centralização da lógica de posts publicados.
-
----
-
-### RF-007 — Avaliação do filtro de vídeos
-
-**Status:** ✅ Concluído
-
-**Decisão arquitetural:**
-
-Não adicionar filtros para `youtube_video_id=""`.
-
-**Motivo:**
-
-* O modelo já normaliza valores vazios para `None`.
-* Evita duplicação de responsabilidade.
-* Mantém os selectors simples e focados apenas nas consultas.
+Não adicionar filtros redundantes para `youtube_video_id=""`, pois o modelo já garante a normalização.
 
 ---
 
 # Auditoria do Admin
 
-## Objetivo
+## Status
 
-Revisar a configuração do Django Admin para melhorar organização, usabilidade e identificar oportunidades de otimização.
-
-### Resultado
-
-**Status:** ✅ Concluído
+✅ Concluído
 
 ### Conclusões
 
-* Estrutura do arquivo organizada e de fácil manutenção.
-* Uso adequado de `@admin.register`.
-* `fieldsets` bem definidos e separados por responsabilidade.
-* `Inline`s configurados corretamente.
-* `search_fields`, `list_filter` e `readonly_fields` apropriados.
-* Mantida a ordenação por `created_at` em `PostAdmin` e `CTAAdmin`, priorizando os registros mais recentes.
-* Avaliada a utilização de `list_select_related`, mas descartada por não trazer benefício prático no estado atual da aplicação (YAGNI).
+* Estrutura organizada.
+* Uso adequado de `ModelAdmin`.
+* `fieldsets` bem definidos.
+* `Inline`s corretamente configurados.
+* Ordenação mantida por data de criação.
+* `list_select_related` avaliado e descartado por YAGNI.
 
-**Nota da auditoria:** **9,6/10**
+**Nota:** **9,6/10**
+
+---
+
+# Fase 1 — Status Geral
+
+## Concluído
+
+* ✅ Feature 1.1 — Estruturação da arquitetura
+* ✅ Feature 1.2 — Padronização de imports e formatação
+* ✅ Feature 1.3 — Auditoria e simplificação das configurações
+* ✅ Auditoria dos Models
+* ✅ Auditoria das Views
+* ✅ Auditoria dos Selectors
+* ✅ Auditoria do Admin
+
+## Resultado
+
+A Fase 1 estabeleceu uma base arquitetural sólida para o projeto, priorizando simplicidade, legibilidade e evolução incremental. As decisões seguiram os princípios de Clean Code e YAGNI, evitando abstrações prematuras e mantendo o código preparado para crescer conforme novas necessidades surgirem.
 
 ---
 
 # Próxima etapa
 
-## Feature 1.2 — Padronizar imports
+## Fase 2 — Evolução Funcional
 
-### Objetivos
-
-* Organizar imports conforme a PEP 8.
-* Aplicar `isort`.
-* Aplicar `black`.
-* Remover imports não utilizados.
-* Revisar imports relativos desnecessários.
-
-### Status
-
-🔄 Próxima atividade da Fase 1.
+A próxima fase deverá concentrar-se na implementação de novas funcionalidades e melhorias orientadas pelas necessidades do domínio, utilizando a base arquitetural consolidada na Fase 1.
