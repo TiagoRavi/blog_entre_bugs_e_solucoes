@@ -1,34 +1,28 @@
 /* =====================================================
    Cookie Banner (LGPD)
-   - Fixo no rodapé
-   - Responsivo
-   - Não intrusivo
 ===================================================== */
 
-/* Container principal do banner */
 .cookie-banner {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: var(--space-lg);
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
 
-  /* Largura adaptável (mobile-first) */
   max-width: 960px;
   width: calc(100% - 2rem);
 
   background-color: #0f172a;
-  color: #fff;
+  color: var(--color-bg);
 
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 
-  padding: 1rem 1.25rem;
-}
+  padding: var(--space-md) 1.25rem;
 
-/* Estado oculto do banner */
-.cookie-banner {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
 }
 
 .cookie-banner.is-hidden {
@@ -37,36 +31,37 @@
   transform: translateX(-50%) translateY(20px);
 }
 
+/* =====================================================
+   Conteúdo
+===================================================== */
 
-
-/* Conteúdo interno (texto + ações) */
 .cookie-banner__content {
   display: flex;
-  flex-wrap: wrap; /* quebra naturalmente no mobile */
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-md);
 }
 
-/* Texto principal do aviso */
 .cookie-banner__text {
-  flex: 1; /* ocupa o espaço disponível */
+  flex: 1;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
-/* Link da política de privacidade */
 .cookie-banner__text a {
   color: #4ea1ff;
   text-decoration: underline;
 }
 
-/* Container dos botões */
 .cookie-banner__actions {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--space-sm);
 }
 
-/* Botões base */
+/* =====================================================
+   Botões
+===================================================== */
+
 .cookie-btn {
   border: none;
   border-radius: 6px;
@@ -76,22 +71,21 @@
   cursor: pointer;
 }
 
-/* Botão "Aceitar" */
 .cookie-btn--accept {
   background-color: #4ea1ff;
   color: #000;
 }
 
-/* Botão "Recusar" */
 .cookie-btn--decline {
   background-color: transparent;
-  color: #fff;
+  color: var(--color-bg);
   border: 1px solid #555;
 }
 
 /* =====================================================
-   Ajustes para mobile pequeno
+   Mobile
 ===================================================== */
+
 @media (max-width: 480px) {
   .cookie-banner__actions {
     width: 100%;
@@ -99,7 +93,7 @@
   }
 
   .cookie-btn {
-    flex: 1; /* botões ocupam largura igual */
+    flex: 1;
   }
 }
 
@@ -110,24 +104,19 @@
   }
 }
 
-
-
 /* =====================================================
-   Botão flutuante — Configurações de Cookies
-   - SVG (não emoji)
-   - Consistente com FAB
-   - Acessível
+   Botão flutuante
 ===================================================== */
 
 .cookie-settings-btn {
   position: fixed;
-  bottom: 1.5rem;
-  left: 1.5rem;
+  bottom: var(--space-lg);
+  left: var(--space-lg);
 
   width: 48px;
   height: 48px;
 
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   border: none;
 
   background: transparent;
@@ -141,24 +130,20 @@
   z-index: 1000;
 }
 
-/* SVG */
 .cookie-settings-btn img {
   width: 50px;
   height: 50px;
   display: block;
 }
 
-/* Hover só em dispositivos com mouse */
 @media (hover: hover) and (pointer: fine) {
   .cookie-settings-btn:hover {
     background-color: rgba(15, 23, 42, 0.9);
-    color: #ffffff;
+    color: var(--color-bg);
   }
 }
 
-/* Foco acessível */
 .cookie-settings-btn:focus-visible {
   outline: 3px solid #0f172a;
   outline-offset: 3px;
 }
-
