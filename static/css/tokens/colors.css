@@ -1,13 +1,12 @@
-/* ==================================================
-VARIÁVEIS CSS (DESIGN TOKENS)
-================================================== */
 :root {
-  --bg-color: #ffffff;
-  --text-color: #1f2933;
-  --primary-color: #2563eb;
-  --secondary-color: #1e2023;
-  --border-color: #e5e7eb;
+  --color-bg: #ffffff;
+  --color-bg-muted: #f9fafb;
 
-  --font-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-code: 'JetBrains Mono', monospace;
+  --color-text: #1f2933;
+  --color-text-muted: #64748b;
+
+  --color-primary: #2563eb;
+  --color-secondary: #1e2023;
+
+  --color-border: #e5e7eb;
 }

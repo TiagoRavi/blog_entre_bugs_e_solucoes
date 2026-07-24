@@ -959,7 +959,7 @@ details[open] .faq-question::after {
     margin-right: 0.75rem;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #2563eb;
+    color: var(--color-primary);
     text-decoration: none;
 }
 
