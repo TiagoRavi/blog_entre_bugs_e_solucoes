@@ -7,8 +7,8 @@ HEADER
   top: 0;
   z-index: 1000;
 
-  background: #ffffff;
-  border-bottom: 1px solid var(--border-color);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
 
 /* Container do header */
@@ -17,7 +17,7 @@ HEADER
   align-items: center;
   justify-content: space-between;
 
-  padding: 0.4rem 1rem;
+  padding: 0.4rem var(--space-md);
   min-height: 64px; /* garante padrão visual */
 }
 
@@ -26,7 +26,7 @@ LOGO (HEADER)
 ================================================== */
 
 .site-logo {
-  height: 75px;      /* 🔑 controla altura do header */
+  height: 75px; /* 🔑 controla altura do header */
   width: auto;
   display: block;
 }
@@ -63,6 +63,7 @@ NAV
     display: flex;
   }
 }
+
 /* Mobile ABERTO somente via JS */
 .nav.is-open {
   display: flex;
@@ -83,23 +84,36 @@ MENU COM SUBMENU (BASE)
   align-items: center;
   gap: 0.4rem;
 
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   font-size: 0.95rem;
   color: var(--secondary-color);
 }
 
 .menu-arrow {
   font-size: 0.65rem;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition);
 }
 
 /* Submenu — SEMPRE fechado por padrão */
 .submenu {
-  display: none;                 /* 🔒 regra absoluta */
+  display: none;
   pointer-events: none;
+
   list-style: none;
   margin: 0;
-  padding: 0.4rem 0;
+
+  min-width: 180px;
+  padding: var(--space-md);
+  gap: 0.4rem;
+  height: auto;
+
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 /* Submenu sempre oculto no Mobile */
@@ -124,25 +138,6 @@ MENU COM SUBMENU (BASE)
   }
 }
 
-.submenu {
-  min-width: 180px;      /* ⬅ diminui a largura */
-  padding: 1rem;         /* ⬅ reduz bastante o volume */
-  gap: 0.4rem;
-  height: auto;
-
-  background: #ffffff;
-  border-radius: 12px;
-
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.12),
-    0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-
-
-
 .menu-item.is-open .menu-arrow {
   transform: rotate(180deg);
 }
@@ -151,17 +146,17 @@ MENU COM SUBMENU (BASE)
   .submenu {
     position: static;
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: var(--space-sm);
 
-    background: #fff;
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: 6px;
     box-shadow: none;
   }
 
   .submenu li a {
     display: block;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem var(--space-md);
   }
 }
 
@@ -173,10 +168,10 @@ MENU COM SUBMENU (BASE)
     transform: translateX(-50%);
 
     min-width: 200px;
-    background: #fff;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 12px 32px rgba(0,0,0,.12);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     z-index: 1000;
   }
 }
@@ -188,14 +183,15 @@ LINKS DO MENU (SEM SUBLINHADO + NEGRITO)
 .nav a,
 .menu-button {
   text-decoration: none;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--secondary-color);
 }
 
 /* Submenu links */
+
 .submenu a {
   text-decoration: none;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--secondary-color);
 }
 
@@ -206,8 +202,6 @@ LINKS DO MENU (SEM SUBLINHADO + NEGRITO)
   text-decoration: none;
   opacity: 0.85;
 }
-
-
 
 /* ==================================================
 FOOTER
@@ -220,20 +214,22 @@ FOOTER
 }
 
 /* Grid principal */
+
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 3rem;
+  gap: var(--space-2xl);
   max-width: 1100px;
   margin: 0 auto;
-  padding: 4.5rem 1rem 3.5rem;
+  padding: 4.5rem var(--space-md) 3.5rem;
 }
 
 /* Footer bottom */
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   text-align: center;
-  padding: 1.6rem 1rem;
+  padding: 1.6rem var(--space-md);
   font-size: 0.85rem;
 }
 
@@ -259,7 +255,7 @@ FOOTER – LISTAS E LINKS
 }
 
 .site-footer a:hover {
-  color: #ffffff;
+  color: var(--color-bg);
   text-decoration: underline;
 }
 
@@ -269,7 +265,9 @@ FOOTER – LOGO
 
 .footer-logo-link {
   display: inline-block;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
 }
 
 .footer-logo-link:hover {
@@ -282,7 +280,7 @@ FOOTER – LOGO
   height: auto;
 }
 
-/* 
+/*
   Mobile: logo ligeiramente maior para reforçar branding
   em layout vertical centralizado
 */
@@ -298,11 +296,10 @@ FOOTER – RESPONSIVO
 ================================================== */
 
 @media (max-width: 768px) {
-
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    padding: 3rem 1.25rem 2.5rem;
+    padding: var(--space-2xl) 1.25rem 2.5rem;
     text-align: center;
   }
 
@@ -334,6 +331,6 @@ FOOTER – RESPONSIVO
 
   .footer-bottom {
     font-size: 0.8rem;
-    padding: 1.25rem 1rem;
+    padding: 1.25rem var(--space-md);
   }
 }
