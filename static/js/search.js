@@ -1,25 +1,33 @@
-console.log("search.js carregado");
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("search-wrapper");
-  const toggle = document.getElementById("search-toggle");
   const input = document.getElementById("search-input");
-
-  console.log(wrapper, toggle, input);
+  const toggle = document.getElementById("search-toggle");
 
   if (!wrapper || !toggle || !input) return;
 
-  toggle.addEventListener("click", function (event) {
-    event.stopPropagation();
-    wrapper.classList.add("active");
+  const openSearch = () => {
+    wrapper.classList.add("is-open");
     input.focus();
+  };
+
+  const closeSearch = () => {
+    wrapper.classList.remove("is-open");
+  };
+
+  toggle.addEventListener("click", event => {
+    event.stopPropagation();
+    openSearch();
   });
 
-  wrapper.addEventListener("click", function (event) {
+  wrapper.addEventListener("click", event => {
     event.stopPropagation();
   });
 
-  document.addEventListener("click", function () {
-    wrapper.classList.remove("active");
+  document.addEventListener("click", closeSearch);
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeSearch();
+    }
   });
 });
