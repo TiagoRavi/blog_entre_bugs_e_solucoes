@@ -11,15 +11,15 @@ def extract_youtube_id(value: str) -> str | None:
 
     value = value.strip()
 
-    paterns = (
+    patterns = (
         r"youtu\.be/(?P<id>[^/?&]+)",
         r"youtube\.com/watch\?v=(?P<id>[^&]+)",
         r"youtube\.com/embed/(?P<id>[^/?&]+)",
         r"youtube\.com/shorts/(?P<id>[^/?&]+)",
     )
 
-    for patern in paterns:
-        match = re.search(patern, value)
+    for pattern in patterns:
+        match = re.search(pattern, value)
         if match:
             return match.group("id")
 
