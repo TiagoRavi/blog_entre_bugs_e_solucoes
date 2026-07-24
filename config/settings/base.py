@@ -1,18 +1,15 @@
 from pathlib import Path
-import os
+from os import getenv
 
 # ======================================================
 # BASE DIR
 # ======================================================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
 # ======================================================
 # CORE
 # ======================================================
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-
-
+SECRET_KEY = getenv("DJANGO_SECRET_KEY")
 
 # ======================================================
 # APPLICATIONS
@@ -44,8 +41,6 @@ SITE_ID = 2
 
 SITE_URL = "https://entrebugsesolucoes.com.br"
 
-
-
 # ======================================================
 # MIDDLEWARE
 # ======================================================
@@ -63,13 +58,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-
 # ======================================================
 # URLS / WSGI
 # ======================================================
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
-
 
 # ======================================================
 # TEMPLATES
@@ -93,7 +86,6 @@ TEMPLATES = [
     },
 ]
 
-
 # ======================================================
 # PASSWORD VALIDATORS
 # ======================================================
@@ -104,7 +96,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-
 # ======================================================
 # I18N / TIMEZONE
 # ======================================================
@@ -112,7 +103,6 @@ LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
 USE_TZ = True
-
 
 # ======================================================
 # STATIC FILES (WhiteNoise)
@@ -137,7 +127,7 @@ STATICFILES_FINDERS = [
 # MEDIA / CLOUDINARY (com fallback seguro)
 # ======================================================
 
-CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+CLOUDINARY_URL = getenv("CLOUDINARY_URL")
 
 if CLOUDINARY_URL:
     DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
@@ -148,6 +138,10 @@ else:
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media"
 
+
+# ======================================================
+# TinyMCE
+# ======================================================
 
 TINYMCE_DEFAULT_CONFIG = {
     "height": 550,
@@ -223,10 +217,10 @@ TINYMCE_DEFAULT_CONFIG = {
     """,
 }
 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+MAX_UPLOAD_SIZE = 5 * 1024 * 1024
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
-
+FILE_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
+DATA_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
 
 # ======================================================
 # DEFAULTS
