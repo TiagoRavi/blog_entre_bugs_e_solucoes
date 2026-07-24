@@ -52,7 +52,7 @@ NAV
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   margin: 0;
   padding: 0;
 }
@@ -67,6 +67,82 @@ NAV
 /* Mobile ABERTO somente via JS */
 .nav.is-open {
   display: flex;
+}
+
+/* ==================================================
+MENU HAMBÚRGUER
+================================================== */
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  width: 44px;
+  height: 44px;
+
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block !important;
+  width: 24px !important;
+  height: 3px !important;
+  background: #111827 !important;
+  border-radius: 999px;
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 1023px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: var(--space-lg);
+
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .nav > ul {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-search {
+    width: 100%;
+    margin-top: var(--space-lg);
+  }
 }
 
 /* ==================================================
@@ -143,22 +219,66 @@ RESPONSIVO
 ================================================== */
 
 @media (max-width: 1023px) {
-  .nav-search {
-    width: 100%;
-    margin: var(--space-md) 0 0;
-  }
 
-  .search-wrapper {
-    width: 100%;
-  }
-
+  .nav-search,
+  .search-wrapper,
   .search-input {
     width: 100%;
+  }
+
+  .nav > ul {
+    gap: 1rem;
+  }
+
+  .nav a,
+  .menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0.75rem 0;
+  }
+
+  .submenu {
+    position: static;
+
+    width: auto;
+    min-width: auto;
+
+    margin: 0.25rem 0 0.5rem 0.75rem;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .submenu li {
+    margin: 0;
+  }
+
+  .submenu a {
+  display: inline-block;
+  padding: 0.35rem 0;
+
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-secondary);
+}
+
+  .nav-search {
+    width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+
+    border-top: 1px solid var(--color-border);
   }
 }
 
 /* ==================================================
-MENU COM SUBMENU (BASE)
+MENU COM SUBMENU
 ================================================== */
 
 .menu-item {
@@ -168,12 +288,13 @@ MENU COM SUBMENU (BASE)
 .menu-button {
   all: unset;
   cursor: pointer;
+
   display: flex;
   align-items: center;
   gap: 0.4rem;
 
-  font-weight: var(--font-weight-bold);
   font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
   color: var(--secondary-color);
 }
 
@@ -182,73 +303,40 @@ MENU COM SUBMENU (BASE)
   transition: transform var(--transition);
 }
 
-/* Submenu — SEMPRE fechado por padrão */
+/* ==================================================
+SUBMENU (BASE)
+================================================== */
+
 .submenu {
   display: none;
   pointer-events: none;
 
   list-style: none;
   margin: 0;
-
-  min-width: 180px;
-  padding: var(--space-md);
-  gap: 0.4rem;
-  height: auto;
-
-  background: var(--color-bg);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.12),
-    0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 0;
 }
 
-/* Submenu sempre oculto no Mobile */
+/* Mobile */
+
 .nav .submenu {
   display: none;
   pointer-events: none;
 }
 
-/* Submenu só aparece se:
-   - menu mobile estiver aberto
-   - usuário clicou em Categorias */
 .nav.is-open .menu-item.is-open > .submenu {
   display: block;
   pointer-events: auto;
 }
 
-/* Desktop: submenu aparece só pelo clique em Categorias */
+/* Desktop */
+
 @media (min-width: 1024px) {
+
   .menu-item.is-open > .submenu {
     display: block;
     pointer-events: auto;
   }
-}
 
-.menu-item.is-open .menu-arrow {
-  transform: rotate(180deg);
-}
-
-@media (max-width: 768px) {
-  .submenu {
-    position: static;
-    width: 100%;
-    margin-top: var(--space-sm);
-
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    box-shadow: none;
-  }
-
-  .submenu li a {
-    display: block;
-    padding: 0.6rem var(--space-md);
-  }
-}
-
-@media (min-width: 1024px) {
   .submenu {
     position: absolute;
     top: calc(100% + 10px);
@@ -256,39 +344,42 @@ MENU COM SUBMENU (BASE)
     transform: translateX(-50%);
 
     min-width: 200px;
-    background: var(--color-bg);
+
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
+
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     z-index: 1000;
   }
 }
 
+.menu-item.is-open .menu-arrow {
+  transform: rotate(180deg);
+}
+
 /* ==================================================
-LINKS DO MENU (SEM SUBLINHADO + NEGRITO)
+LINKS DO MENU
 ================================================== */
 
 .nav a,
 .menu-button {
-  text-decoration: none;
-  font-weight: var(--font-weight-bold);
   color: var(--secondary-color);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
 }
 
-/* Submenu links */
-
 .submenu a {
-  text-decoration: none;
-  font-weight: var(--font-weight-semibold);
   color: var(--secondary-color);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
 }
 
 .nav a:hover,
 .submenu a:hover,
 .nav a:focus-visible,
 .submenu a:focus-visible {
-  text-decoration: none;
   opacity: 0.85;
+  text-decoration: none;
 }
 
 /* ==================================================
