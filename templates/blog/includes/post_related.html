@@ -1,4 +1,5 @@
 {% load static %}
+{% load cloudinary_extras %}
 
 {% if related_posts %}
 <section class="post-related">
@@ -9,11 +10,15 @@
       <article class="post-card">
 
         {% if related.featured_image %}
+          {% cloudinary_image related.featured_image 400 225 as image_url %}
+
           <img
-            src="{{ related.featured_image.url }}"
+            src="{{ image_url }}"
             alt="{{ related.title }}"
             class="post-image"
             loading="lazy"
+            width="400"
+            height="225"
           >
         {% else %}
           <div class="post-image post-image--placeholder"></div>

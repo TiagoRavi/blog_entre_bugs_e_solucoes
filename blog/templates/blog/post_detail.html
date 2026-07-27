@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
+
+{% if post.featured_image %}
+  {% cloudinary_image post.featured_image 1200 630 as social_image_url %}
+{% endif %}
 
 {# =========================
  SEO PRINCIPAL — POST
@@ -25,7 +30,7 @@
 
 {% block og_image %}
 {% if post.featured_image %}
-{{ post.featured_image.url }}
+{{ social_image_url }}
 {% endif %}
 {% endblock %}
 
@@ -37,7 +42,7 @@
 
 {% block twitter_image %}
 {% if post.featured_image %}
-{{ post.featured_image.url }}
+{{ social_image_url }}
 {% endif %}
 {% endblock %}
 
@@ -65,7 +70,7 @@
 
   {% if post.featured_image %}
   "image": [
-     "{{ post.featured_image.url }}"
+    "{{ social_image_url }}"
   ],
   {% endif %}
 
@@ -162,7 +167,6 @@
 
       {% include "blog/includes/post_related.html" %}
 
-      {# CTA APENAS PARA MOBILE — FINAL DO ARTIGO #}
       <div class="sidebar-cta--mobile post-mobile-cta">
         {% include "blog/includes/post_sidebar.html" %}
       </div>
@@ -177,9 +181,6 @@
 
 </article>
 
-<!-- =========================================================
- Floating Share FAB
-========================================================== -->
 {% if is_post_detail %}
   {% include "blog/includes/share_fab.html" %}
 {% endif %}
@@ -189,10 +190,8 @@
 {% block extra_scripts %}
   {{ block.super }}
 
-  <!-- MailerLite -->
   <script src="https://groot.mailerlite.com/js/w/webforms.min.js"></script>
 
-  <!-- CSS DEPOIS DO JS -->
   <link rel="stylesheet" href="{% static 'css/newsletter.css' %}">
 
   <script src="{% static 'js/post-toc.js' %}" defer></script>

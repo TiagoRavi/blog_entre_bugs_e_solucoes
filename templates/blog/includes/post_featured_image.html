@@ -1,12 +1,16 @@
+{% load cloudinary_extras %}
+
 {% if post.featured_image %}
-<figure class="post-featured-image">
-  <img
-    src="{{ post.featured_image.url }}"
-    alt="{{ post.title }}"
-    width="1200"
-    height="630"
-    loading="eager"
-    fetchpriority="high"
-    decoding="async">
-</figure>
+  {% cloudinary_image post.featured_image 1200 630 as image_url %}
+
+  <figure class="post-featured-image">
+    <img
+      src="{{ image_url }}"
+      alt="{{ post.title }}"
+      width="1200"
+      height="630"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async">
+  </figure>
 {% endif %}
