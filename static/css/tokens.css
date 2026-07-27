@@ -1,5 +1,6 @@
-
-
+/* =========================
+   Paleta de Cores
+   ========================= */
 :root {
   --color-bg: #ffffff;
   --color-bg-muted: #f9fafb;
@@ -13,6 +14,9 @@
   --color-border: #e5e7eb;
 }
 
+/* =========================
+   Espaçamentos
+   ========================= */
 :root {
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -23,6 +27,9 @@
   --space-3xl: 5rem;
 }
 
+/* =========================
+   Tipografia
+   ========================= */
 :root {
   --font-base: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-code: "JetBrains Mono", monospace;
@@ -38,6 +45,9 @@
   --font-weight-bold: 700;
 }
 
+/* =========================
+   Bordas, Sombras e Transições
+   ========================= */
 :root {
   --radius-sm: 8px;
   --radius-md: 12px;

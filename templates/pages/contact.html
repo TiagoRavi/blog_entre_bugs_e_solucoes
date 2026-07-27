@@ -1,3 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Contato | Entre Bugs e Soluções
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
 <section class="container contact-page">
 
     <header class="contact-header">
@@ -14,7 +27,9 @@
 
     <div class="contact-card">
 
-        <form class="contact-form" action="#" method="post">
+        <form id="contactForm" class="contact-form" method="post" novalidate>
+
+            {% csrf_token %}
 
             <div class="form-grid">
 
@@ -28,6 +43,8 @@
                         name="name"
                         type="text"
                         placeholder="Seu nome completo"
+                        autocomplete="name"
+                        maxlength="120"
                         required>
                 </div>
 
@@ -41,6 +58,8 @@
                         name="email"
                         type="email"
                         placeholder="seu@email.com"
+                        autocomplete="email"
+                        maxlength="150"
                         required>
                 </div>
 
@@ -53,7 +72,9 @@
                         id="phone"
                         name="phone"
                         type="tel"
-                        placeholder="(11) 99999-9999">
+                        placeholder="(11) 99999-9999"
+                        autocomplete="tel"
+                        maxlength="20">
                 </div>
 
                 <div class="form-group">
@@ -66,6 +87,7 @@
                         name="subject"
                         type="text"
                         placeholder="Sobre o que deseja falar?"
+                        maxlength="150"
                         required>
                 </div>
 
@@ -83,24 +105,12 @@
                             Selecione uma categoria
                         </option>
 
-                        <option value="duvida">
-                            Dúvida
-                        </option>
-
-                        <option value="sugestao">
-                            Sugestão
-                        </option>
-
-                        <option value="erro">
-                            Erro no blog
-                        </option>
-
-                        <option value="parceria">
-                            Parceria
-                        </option>
+                        <option value="duvida">Dúvida</option>
+                        <option value="sugestao">Sugestão</option>
+                        <option value="erro">Erro no blog</option>
+                        <option value="parceria">Parceria</option>
 
                     </select>
-
                 </div>
 
                 <div class="form-group full">
@@ -114,6 +124,7 @@
                         name="message"
                         rows="7"
                         placeholder="Escreva sua mensagem..."
+                        maxlength="5000"
                         required></textarea>
 
                 </div>
@@ -123,12 +134,19 @@
             <div class="contact-footer">
 
                 <button
+                    id="submitBtn"
                     class="btn-primary"
                     type="submit">
 
                     Enviar mensagem
 
                 </button>
+
+                <div
+                    id="formStatus"
+                    class="form-status"
+                    aria-live="polite">
+                </div>
 
                 <small class="contact-security">
                     🔒 Seus dados estão seguros e não serão compartilhados.
@@ -164,3 +182,9 @@
     </div>
 
 </section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}
