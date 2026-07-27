@@ -23,10 +23,16 @@ POST CARD
   transition: transform .3s ease;
 }
 
+.post-card:hover .post-card-image img {
+  transform: scale(1.04);
+}
+
 .post-card-link {
   display: flex;
   flex-direction: column;
   height: 100%;
+  flex: 1;
+
   color: inherit;
   text-decoration: none;
 }
@@ -37,6 +43,7 @@ POST CARD IMAGE
 
 .post-card-image {
   position: relative;
+  overflow: hidden;
 }
 
 .post-card-image img,
