@@ -107,6 +107,7 @@ USE_TZ = True
 # ======================================================
 # STATIC FILES (WhiteNoise)
 # ======================================================
+
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -114,30 +115,33 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATICFILES_STORAGE = (
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
-)
-
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
 # ======================================================
-# MEDIA / CLOUDINARY (com fallback seguro)
+# MEDIA / CLOUDINARY
 # ======================================================
 
 CLOUDINARY_URL = getenv("CLOUDINARY_URL")
 
-if CLOUDINARY_URL:
-    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-else:
-    # Fallback seguro para ambiente local / erro de config
-    DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": (
+            "cloudinary_storage.storage.MediaCloudinaryStorage"
+            if CLOUDINARY_URL
+            else "django.core.files.storage.FileSystemStorage"
+        ),
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
+if not CLOUDINARY_URL:
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media"
-
 
 # ======================================================
 # TinyMCE
