@@ -1,11 +1,16 @@
 {% load cloudinary_extras %}
 
 {% if post.featured_image %}
-  {% cloudinary_image post.featured_image 1200 630 as image_url %}
+  {% cloudinary_image post.featured_image 768 403 as image_url %}
+  {% cloudinary_srcset post.featured_image as image_srcset %}
 
   <figure class="post-featured-image">
     <img
       src="{{ image_url }}"
+      srcset="{{ image_srcset }}"
+      sizes="(max-width: 600px) 100vw,
+             (max-width: 900px) 90vw,
+             1200px"
       alt="{{ post.title }}"
       width="1200"
       height="630"
