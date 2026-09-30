@@ -1,10 +1,9 @@
-services:
+name: blog
 
+services:
   db:
     image: postgres:16
-
     container_name: blog_db
-
     restart: always
 
     env_file:
@@ -15,16 +14,12 @@ services:
 
   redis:
     image: redis:7-alpine
-
     container_name: blog_redis
-
     restart: always
 
   web:
     build: .
-
     container_name: blog_web
-
     restart: always
 
     command: /entrypoint.sh
@@ -44,4 +39,9 @@ services:
 
 volumes:
   postgres_data:
+    external: true
+    name: entre_bugs_e_solucoes_postgres_data
+
   static_volume:
+    external: true
+    name: entre_bugs_e_solucoes_static_volume
