@@ -40,6 +40,12 @@ def indexnow_key(_request):
         content_type="text/plain",
     )
 
+def ads_txt(_request):
+    return HttpResponse(
+        "google.com, pub-5960956644380983, DIRECT, f08c47fec0942fa0",
+        content_type="text/plain",
+    )
+
 
 # =========================================================
 # SITEMAPS
@@ -76,6 +82,16 @@ urlpatterns = [
         "b7360389d77240f3940b63ae081517d9.txt",
         indexnow_key,
         name="indexnow-key",
+    ),
+
+    # -----------------------------------------------------
+    # ADS.TXT
+    # -----------------------------------------------------
+
+    path(
+        "ads.txt",
+        ads_txt,
+        name="ads-txt",
     ),
 
     # -----------------------------------------------------
