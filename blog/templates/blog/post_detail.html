@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block canonical %}
-{{ post.get_absolute_url }}
+{{ request.scheme }}://{{ request.get_host }}{{ post.get_absolute_url }}
 {% endblock %}
 
 {% block og_title %}{{ post.title }}{% endblock %}
