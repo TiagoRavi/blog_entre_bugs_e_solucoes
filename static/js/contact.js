@@ -40,22 +40,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!response.ok) {
                 const erro = await response.text();
-                console.error("Resposta:", erro);
-                throw new Error(erro);
+
+                console.error("Resposta do servidor:", erro);
+
+                throw new Error(
+                    `Erro HTTP ${response.status}`
+                );
             }
 
-            const json = await response.json();
+            // O n8n pode responder com JSON ou com corpo vazio.
+            const texto = await response.text();
 
-            console.log("Resposta JSON:", json);
+            let mensagem = "Mensagem enviada com sucesso!";
+
+            if (texto.trim()) {
+                try {
+                    const json = JSON.parse(texto);
+
+                    console.log("Resposta JSON:", json);
+
+                    if (json.mensagem) {
+                        mensagem = json.mensagem;
+                    }
+                } catch (parseError) {
+                    console.warn(
+                        "A resposta não é um JSON válido:",
+                        texto
+                    );
+                }
+            }
 
             status.className = "form-status success show";
-            status.innerText = json.mensagem;
+            status.innerText = mensagem;
 
             form.reset();
 
         } catch (error) {
 
-            console.error("Erro:", error);
+            console.error("Erro ao enviar formulário:", error);
 
             status.className = "form-status error show";
             status.innerText =
