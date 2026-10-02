@@ -146,9 +146,9 @@ CLOUDINARY_URL = (
     f"{os.getenv('CLOUDINARY_CLOUD_NAME')}?secure=true"
 )
 
-DEFAULT_FILE_STORAGE = (
-    "cloudinary_storage.storage.MediaCloudinaryStorage"
-)
+STORAGES["default"] = {
+    "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+}
 
 # ======================================================
 # STATIC FILES
