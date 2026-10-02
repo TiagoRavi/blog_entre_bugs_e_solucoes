@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/ebooks.css' %}">
+{% endblock %}
+
+{% block title %}
+Ebooks | Entre Bugs e Soluções
+{% endblock %}
+
+{% block content %}
+<main class="ebooks-page">
+
+    <header class="ebooks-hero">
+        <div class="container">
+            <span class="ebooks-eyebrow">
+                EBOOKS
+            </span>
+
+            <h1>
+                Aprenda programação com ebooks premium
+            </h1>
+
+            <p>
+                Materiais práticos para quem quer aprender programação,
+                Python, Django e transformar conhecimento em oportunidades.
+            </p>
+        </div>
+    </header>
+
+
+    {% if categories %}
+        <section class="ebooks-categories">
+            <div class="container">
+
+                <header class="section-header">
+                    <span class="section-eyebrow">
+                        CATEGORIAS
+                    </span>
+
+                    <h2>
+                        Encontre um assunto para começar
+                    </h2>
+                </header>
+
+                <div class="ebooks-category-grid">
+
+                    {% for category in categories %}
+                        <article class="ebook-category-card">
+
+                            {% if category.image %}
+                                <a href="{{ category.get_absolute_url }}">
+                                    <img
+                                        src="{{ category.image.url }}"
+                                        alt="{{ category.name }}"
+                                        loading="lazy"
+                                    >
+                                </a>
+                            {% endif %}
+
+                            <div class="ebook-category-card__content">
+
+                                <h3>
+                                    <a href="{{ category.get_absolute_url }}">
+                                        {{ category.name }}
+                                    </a>
+                                </h3>
+
+                                {% if category.description %}
+                                    <p>
+                                        {{ category.description }}
+                                    </p>
+                                {% endif %}
+
+                                <a
+                                    href="{{ category.get_absolute_url }}"
+                                    class="ebook-category-card__link"
+                                >
+                                    Ver ebooks
+                                </a>
+
+                            </div>
+
+                        </article>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section>
+    {% endif %}
+
+
+    {% if ebooks %}
+        <section class="ebooks-list">
+            <div class="container">
+
+                <header class="section-header">
+                    <span class="section-eyebrow">
+                        EBOOKS
+                    </span>
+
+                    <h2>
+                        Comece nossos ebooks
+                    </h2>
+
+                    <p>
+                        Conteúdos práticos para quem quer aprender programação.
+                    </p>
+                </header>
+
+
+                <div class="ebooks-grid">
+
+                    {% for ebook in ebooks %}
+                        <article class="ebook-card">
+
+                            <a
+                                href="{{ ebook.get_absolute_url }}"
+                                class="ebook-card__cover"
+                            >
+                                <img
+                                    src="{{ ebook.cover.url }}"
+                                    alt="Capa do ebook {{ ebook.title }}"
+                                    loading="lazy"
+                                >
+                            </a>
+
+
+                            <div class="ebook-card__content">
+
+                                <span class="ebook-card__category">
+                                    {{ ebook.category.name }}
+                                </span>
+
+
+                                <h3>
+                                    <a href="{{ ebook.get_absolute_url }}">
+                                        {{ ebook.title }}
+                                    </a>
+                                </h3>
+
+
+                                <p>
+                                    {{ ebook.short_description }}
+                                </p>
+
+
+                                {% if ebook.original_price %}
+                                    {% if ebook.has_discount %}
+                                        <span class="ebook-card__discount">
+                                            {{ ebook.discount_percentage }}% OFF
+                                        </span>
+                                    {% endif %}
+
+                                    <div class="ebook-card__pricing">
+
+                                        {% if ebook.has_discount %}
+                                            <span class="ebook-card__original-price">
+                                                De
+                                                R$
+                                                {{ ebook.original_price|floatformat:2 }}
+                                            </span>
+                                        {% endif %}
+
+                                        {% if ebook.sale_price %}
+                                            <strong class="ebook-card__sale-price">
+                                                Por
+                                                R$
+                                                {{ ebook.sale_price|floatformat:2 }}
+                                            </strong>
+                                        {% else %}
+                                            <strong class="ebook-card__sale-price">
+                                                R$
+                                                {{ ebook.original_price|floatformat:2 }}
+                                            </strong>
+                                        {% endif %}
+
+                                    </div>
+                                {% endif %}
+
+
+                                <div class="ebook-card__actions">
+
+                                    {% if ebook.google_drive_url %}
+                                        <a
+                                            href="{% url 'ebooks:download' category_slug=ebook.category.slug slug=ebook.slug %}"
+                                            class="ebook-card__button ebook-card__button--free"
+                                        >
+                                            Baixar grátis
+                                        </a>
+                                    {% endif %}
+
+
+                                    {% if ebook.purchase_url %}
+                                        <a
+                                            href="{{ ebook.purchase_url }}"
+                                            class="ebook-card__button ebook-card__button--buy"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Comprar ebook
+                                        </a>
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        </article>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section>
+    {% endif %}
+
+
+    {% if not categories and not ebooks %}
+        <section class="ebooks-empty">
+            <div class="container">
+
+                <h2>
+                    Em breve teremos novos ebooks.
+                </h2>
+
+                <p>
+                    Estamos preparando materiais gratuitos e premium
+                    para você.
+                </p>
+
+            </div>
+        </section>
+    {% endif %}
+
+</main>
+{% endblock %}

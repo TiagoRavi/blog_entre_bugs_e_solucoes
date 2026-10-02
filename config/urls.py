@@ -18,6 +18,8 @@ from django.contrib.staticfiles.storage import (
 from blog.sitemaps import (
     PostSitemap,
     CategorySitemap,
+    EbookCategorySitemap,
+    EbookSitemap,
 )
 
 from config.tinymce_upload import tinymce_upload
@@ -54,6 +56,8 @@ def ads_txt(_request):
 sitemaps = {
     "posts": PostSitemap,
     "categories": CategorySitemap,
+    "ebook_categories": EbookCategorySitemap,
+    "ebooks": EbookSitemap,
 }
 
 # =========================================================
@@ -141,6 +145,11 @@ urlpatterns = [
     path(
         "",
         include("pages.urls"),
+    ),
+
+    path(
+        "ebooks/",
+        include("ebooks.urls"),
     ),
 
     # -----------------------------------------------------

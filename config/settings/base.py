@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Apps locais
     "blog.apps.BlogConfig",
     "pages",
+    "ebooks",
 ]
 
 SITE_ID = 2

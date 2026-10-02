@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/ebooks.css' %}">
+{% endblock %}
+
+{% block title %}
+{{ ebook.title }} | Ebook | Entre Bugs e Soluções
+{% endblock %}
+
+{% block content %}
+<main class="ebooks-page ebook-detail-page">
+
+    <article class="ebook-landing">
+
+        <section class="ebook-hero">
+            <div class="container">
+
+                <div class="ebook-hero__grid">
+
+                    <div class="ebook-hero__cover">
+                        <img
+                            src="{{ ebook.cover.url }}"
+                            alt="Capa do ebook {{ ebook.title }}"
+                        >
+                    </div>
+
+
+                    <div class="ebook-hero__content">
+
+                        <a
+                            href="{{ ebook.category.get_absolute_url }}"
+                            class="ebooks-breadcrumb"
+                        >
+                            ← Ebooks de {{ ebook.category.name }}
+                        </a>
+
+
+                        {% if ebook.google_drive_url %}
+                            <span class="ebooks-eyebrow">
+                                EBOOK GRATUITO
+                            </span>
+                        {% elif ebook.purchase_url %}
+                            <span class="ebooks-eyebrow">
+                                EBOOK PREMIUM
+                            </span>
+                        {% else %}
+                            <span class="ebooks-eyebrow">
+                                EBOOK
+                            </span>
+                        {% endif %}
+
+
+                        <h1>
+                            {{ ebook.title }}
+                        </h1>
+
+
+                        <p class="ebook-hero__description">
+                            {{ ebook.short_description }}
+                        </p>
+
+
+                        {% if ebook.author %}
+                            <p class="ebook-hero__author">
+                                Por {{ ebook.author }}
+                            </p>
+                        {% endif %}
+
+
+                        {% if ebook.sale_price or ebook.original_price %}
+                            <div class="ebook-hero__pricing">
+
+                                {% if ebook.has_discount %}
+                                    <span class="ebook-hero__discount">
+                                        {{ ebook.discount_percentage }}% OFF
+                                    </span>
+
+                                    <span class="ebook-hero__original-price">
+                                        De R$
+                                        {{ ebook.original_price|floatformat:2 }}
+                                    </span>
+                                {% endif %}
+
+
+                                {% if ebook.sale_price %}
+                                    <strong class="ebook-hero__sale-price">
+                                        Por R$
+                                        {{ ebook.sale_price|floatformat:2 }}
+                                    </strong>
+                                {% elif ebook.original_price %}
+                                    <strong class="ebook-hero__sale-price">
+                                        R$
+                                        {{ ebook.original_price|floatformat:2 }}
+                                    </strong>
+                                {% endif %}
+
+                            </div>
+                        {% endif %}
+
+
+                        <div class="ebook-hero__actions">
+
+                            {% if ebook.google_drive_url %}
+                                <a
+                                    href="{% url 'ebooks:download' category_slug=ebook.category.slug slug=ebook.slug %}"
+                                    class="ebook-download-button"
+                                >
+                                    Baixar grátis
+                                </a>
+                            {% endif %}
+
+
+                            {% if ebook.purchase_url %}
+                                <a
+                                    href="{{ ebook.purchase_url }}"
+                                    class="ebook-purchase-button"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Comprar ebook
+                                </a>
+                            {% endif %}
+
+                        </div>
+
+
+                        {% if ebook.google_drive_url %}
+                            <p class="ebook-hero__note">
+                                Download gratuito através do Google Drive.
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        {% if ebook.description %}
+            <section class="ebook-description">
+                <div class="container">
+
+                    <div class="ebook-content">
+
+                        <header class="section-header">
+
+                            <span class="section-eyebrow">
+                                SOBRE O EBOOK
+                            </span>
+
+                            <h2>
+                                O que você vai encontrar
+                            </h2>
+
+                        </header>
+
+
+                        <div class="ebook-description__text">
+                            {{ ebook.description|linebreaks }}
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        {% endif %}
+
+
+        {% if ebook.google_drive_url %}
+            <section class="ebook-download-cta">
+                <div class="container">
+
+                    <div class="ebook-download-cta__content">
+
+                        <span class="ebooks-eyebrow">
+                            MATERIAL GRATUITO
+                        </span>
+
+                        <h2>
+                            Comece a estudar hoje
+                        </h2>
+
+                        <p>
+                            Baixe gratuitamente o ebook
+                            <strong>{{ ebook.title }}</strong>.
+                        </p>
+
+                        <a
+                            href="{% url 'ebooks:download' category_slug=ebook.category.slug slug=ebook.slug %}"
+                            class="ebook-download-button"
+                        >
+                            Baixar ebook gratuitamente
+                        </a>
+
+                    </div>
+
+                </div>
+            </section>
+        {% endif %}
+
+
+        <section class="ebook-navigation">
+            <div class="container">
+
+                <a
+                    href="{{ ebook.category.get_absolute_url }}"
+                    class="ebook-category-card__link"
+                >
+                    Ver mais ebooks de {{ ebook.category.name }}
+                </a>
+
+
+                <a
+                    href="{% url 'ebooks:index' %}"
+                    class="ebook-category-card__link"
+                >
+                    Ver todos os ebooks
+                </a>
+
+            </div>
+        </section>
+
+    </article>
+
+</main>
+{% endblock %}
