@@ -692,12 +692,27 @@ PERFORMANCE MOBILE
 }
 
 .about-page__role {
+  margin: 0;
   color: #777;
   font-size: 1.05rem;
   line-height: 1.6;
 }
 
 /* CONTENT */
+
+.about-page__content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.about-page__content p {
+  margin: 0 0 1.5rem;
+  line-height: 1.8;
+}
+
+.about-page__content p:last-child {
+  margin-bottom: 0;
+}
 
 .about-page__content h2 {
   margin-top: 2.5rem;
@@ -729,6 +744,10 @@ PERFORMANCE MOBILE
   .about-page__name {
     font-size: 2.1rem;
   }
+
+  .about-page__content p {
+    line-height: 1.75;
+  }
 }
 
 @media (max-width: 480px) {
@@ -758,6 +777,6 @@ PERFORMANCE MOBILE
 
   .about-page__content p,
   .about-page__content li {
-    line-height: 1.65;
+    line-height: 1.7;
   }
 }
