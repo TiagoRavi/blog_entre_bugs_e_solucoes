@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
+
 
 from .models import Category, Post
 from .selectors import (
@@ -144,3 +146,45 @@ class CategoryPostListView(ListView):
 
         return context
 
+
+
+# ======================================================
+# PÁGINA DO AUTOR
+# ======================================================
+@method_decorator(cache_page(60 * 10), name="dispatch")
+class AuthorDetailView(ListView):
+    """
+    Página pública do autor.
+
+    Responsabilidades:
+    - Exibir somente artigos publicados pelo autor
+    - Apresentar os dados públicos do perfil
+    - Paginar os artigos
+    """
+
+    template_name = "blog/author_detail.html"
+    context_object_name = "posts"
+    paginate_by = 9
+
+    def get_author(self):
+        User = get_user_model()
+
+        return get_object_or_404(
+            User.objects.select_related("profile"),
+            username=self.kwargs["username"],
+        )
+
+    def get_queryset(self):
+        author = self.get_author()
+
+        return (
+            get_published_posts()
+            .filter(author=author)
+            .select_related("category", "author")
+            .order_by("-published_at", "-pk")
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["author"] = self.get_author()
+        return context

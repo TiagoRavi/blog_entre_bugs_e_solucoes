@@ -2,52 +2,47 @@
 
 {% if post.author %}
 <section class="author-box">
-    <div class="author-box__avatar">
-        {% if post.author.profile.image %}
-            <img 
-                src="{{ post.author.profile.image.url }}" 
-                alt="{{ post.author.get_full_name|default:post.author.username }}"
-                loading="lazy"
-            >
-        {% else %}
-            <img 
-                src="{% static 'img/perfil/tiagosousa.webp' %}" 
-                alt="{{ post.author.get_full_name|default:post.author.username }}"
-                loading="lazy"
-            >
-        {% endif %}
-    </div>
 
-    <div class="author-box__content">
-        <h3 class="author-box__name">
-            {{ post.author.get_full_name|default:post.author.username }}
-        </h3>
-
-        {% if post.author.profile.bio %}
-            <p class="author-box__bio">
-                {{ post.author.profile.bio }}
-            </p>
-        {% endif %}
-
-        <div class="author-box__links">
-            {% if post.author.profile.website %}
-                <a href="{{ post.author.profile.website }}" rel="noopener nofollow" target="_blank">
-                    Website
-                </a>
-            {% endif %}
-
-            {% if post.author.profile.linkedin %}
-                <a href="{{ post.author.profile.linkedin }}" rel="noopener nofollow" target="_blank">
-                    LinkedIn
-                </a>
-            {% endif %}
-
-            {% if post.author.profile.github %}
-                <a href="{{ post.author.profile.github }}" rel="noopener nofollow" target="_blank">
-                    GitHub
-                </a>
+    <a
+        class="author-box__link"
+        href="{% url 'pages:about' %}"
+        aria-label="Conheça {{ post.author.get_full_name|default:post.author.username }}"
+    >
+        <div class="author-box__avatar">
+            {% if post.author.profile.image %}
+                <img
+                    src="{{ post.author.profile.image.url }}"
+                    alt="{{ post.author.get_full_name|default:post.author.username }}"
+                    loading="lazy"
+                >
+            {% else %}
+                <img
+                    src="{% static 'img/perfil/tiagosousa.webp' %}"
+                    alt="{{ post.author.get_full_name|default:post.author.username }}"
+                    loading="lazy"
+                >
             {% endif %}
         </div>
-    </div>
+
+        <div class="author-box__content">
+            <h3 class="author-box__name">
+                {{ post.author.get_full_name|default:post.author.username }}
+            </h3>
+
+            {% if post.author.profile.bio %}
+                <p class="author-box__bio">
+                    {{ post.author.profile.bio|truncatewords:24 }}
+                </p>
+            {% else %}
+                <p class="author-box__bio">
+                    Conheça o autor e confira seus artigos sobre tecnologia e programação.
+                </p>
+            {% endif %}
+
+            <span class="author-box__cta">
+                Conheça o autor →
+            </span>
+        </div>
+    </a>
 </section>
 {% endif %}

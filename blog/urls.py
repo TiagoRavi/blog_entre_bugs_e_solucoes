@@ -1,3 +1,4 @@
+
 from django.urls import path
 
 from .views import (
@@ -5,6 +6,7 @@ from .views import (
     BlogListView,
     PostDetailView,
     CategoryPostListView,
+    AuthorDetailView,
 )
 
 # Namespace do app (obrigatório para reverse e templates)
@@ -50,5 +52,15 @@ urlpatterns = [
         "categoria/<slug:slug>/",
         CategoryPostListView.as_view(),
         name="category_posts",
+    ),
+
+    # --------------------------------------------------
+    # Página pública do autor
+    # URL: /autor/<username>/
+    # --------------------------------------------------
+    path(
+        "autor/<str:username>/",
+        AuthorDetailView.as_view(),
+        name="author_detail",
     ),
 ]
