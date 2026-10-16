@@ -1,54 +1,95 @@
+
 <section class="newsletter">
     <h2>Newsletter semanal</h2>
 
     <p class="newsletter-description">
-        Conteúdo útil, direto ao ponto e sem enrolação.
+        Dicas de programação, soluções para bugs e novidades
+        sobre tecnologia. Conteúdo útil, direto ao ponto e sem enrolação.
     </p>
 
-    <form class="newsletter-form" method="post">
-        {% csrf_token %}
+    <div class="sib-form newsletter-brevo">
+        <div id="sib-form-container" class="sib-form-container">
+            <div id="sib-container" class="sib-container--large sib-container--vertical">
 
-        <div class="form-group">
-            <input
-                type="email"
-                name="email"
-                class="form-control"
-                placeholder="Seu e-mail"
-                autocomplete="email"
-                required
-            >
+                <form
+                    id="sib-form"
+                    method="POST"
+                    action="https://2ca361f2.sibforms.com/serve/MUIFAPngvZ_7hmMDMxa1yshGu2c3hkvydY4kpws525k60o8Y2RMAPf7QhI2Z4DBGyERf6nXOM-uU-qqNLSKDey1IKoEnVPYfBAOLhMACQjHnOmK5kUpSlIRU6QtyPuLwTLnfDglM_f-KrnM9UMVlcRQ5EITCV27gNtL46YvYfccQTdh7XpyU2ZdvpwPjQL3RrITfZhp_HWBKe_2S"
+                >
+                    {% csrf_token %}
+
+                    <div class="newsletter-brevo-field">
+                        <label class="sr-only" for="newsletter-brevo-email">
+                            Seu e-mail
+                        </label>
+
+                        <input
+                            class="newsletter-brevo-input"
+                            type="email"
+                            id="newsletter-brevo-email"
+                            name="EMAIL"
+                            autocomplete="email"
+                            maxlength="254"
+                            placeholder="Digite seu melhor e-mail"
+                            required
+                        >
+                    </div>
+
+                    <p class="newsletter-brevo-note">
+                        ✅ Confirme seu e-mail e receba a primeira dica ainda hoje.
+                    </p>
+
+                    <div class="newsletter-brevo-consent">
+                        <label for="newsletter-brevo-optin">
+                            <input
+                                type="checkbox"
+                                id="newsletter-brevo-optin"
+                                name="OPT_IN"
+                                value="1"
+                                required
+                            >
+                            <span>
+                                Sem spam. Ao se inscrever, você concorda com nossos
+                                <a href="{% url 'pages:terms' %}" target="_blank" rel="noopener noreferrer">
+                                    termos
+                                </a>
+                                e
+                                <a href="{% url 'pages:privacy' %}" target="_blank" rel="noopener noreferrer">
+                                    política de privacidade
+                                </a>.
+                            </span>
+                        </label>
+                    </div>
+
+                    <button
+                        class="newsletter-brevo-button"
+                        type="submit"
+                    >
+                        Quero receber gratuitamente 💡
+                    </button>
+
+                    <input
+                        type="text"
+                        name="email_address_check"
+                        value=""
+                        class="newsletter-brevo-honeypot"
+                        tabindex="-1"
+                        autocomplete="off"
+                        aria-hidden="true"
+                    >
+
+                    <input type="hidden" name="locale" value="pt">
+                    <input type="hidden" name="html_type" value="simple">
+                </form>
+            </div>
         </div>
-
-        <label class="newsletter-consent">
-            <input
-                type="checkbox"
-                name="consent"
-                required
-            >
-            Aceito receber notícias e atualizações.
-        </label>
-
-        <button
-            type="submit"
-            class="primary"
-            disabled
-            title="Em breve"
-        >
-            Inscrever-me gratuitamente
-        </button>
-    </form>
+    </div>
 
     <p class="newsletter-policy">
-        <strong>
-            Você pode cancelar a inscrição a qualquer momento.
-            Para mais detalhes, consulte nossa
-            <a
-                href="https://entrebugsesolucoes.com.br/politica-de-privacidade/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Política de Privacidade
-            </a>.
-        </strong>
+        Você pode cancelar a inscrição a qualquer momento.
+        Consulte nossa
+        <a href="{% url 'pages:privacy' %}">
+            Política de Privacidade
+        </a>.
     </p>
 </section>

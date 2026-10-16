@@ -329,108 +329,294 @@ POST CTA
   transform: translateY(-1px);
 }
 
+
+
 /* ==========================================================
-   NEWSLETTER
+   NEWSLETTER — ENTRE BUGS E SOLUÇÕES
 ========================================================== */
 
 .newsletter {
-  max-width: 420px;
-  margin: var(--space-2xl) auto;
-  padding: 1.75rem;
+    width: 100%;
+    max-width: 420px;
+    margin: var(--space-xl) auto;
+    padding: 1.5rem;
 
-  background: var(--color-bg);
-  border-radius: var(--radius-md);
+    background: var(--color-bg);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: var(--radius-md);
 
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.08),
-    0 2px 6px rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.06),
+        0 2px 5px rgba(15, 23, 42, 0.03);
+
+    box-sizing: border-box;
 }
 
 .newsletter h2 {
-  margin-bottom: var(--space-sm);
-  font-size: 1.75rem;
-  font-weight: var(--font-weight-bold);
+    margin: 0 0 0.65rem;
+    color: #263445;
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
 }
 
 .newsletter-description {
-  margin-bottom: var(--space-lg);
-  color: #555;
-  text-align: justify;
+    margin: 0 0 1.25rem;
+    color: #596579;
+    font-size: 0.94rem;
+    line-height: 1.65;
 }
 
-.newsletter-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+/* ==========================================================
+   FORMULÁRIO BREVO
+========================================================== */
+
+.newsletter-brevo,
+.newsletter-brevo #sib-form-container,
+.newsletter-brevo #sib-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    text-align: left;
 }
 
-.newsletter-form input[type="email"] {
-  width: 100%;
-  padding: 0.875rem var(--space-md);
-
-  border: 1px solid #ddd;
-  border-radius: var(--radius-sm);
-
-  font: inherit;
+.newsletter-brevo form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.newsletter-form input[type="email"]:focus {
-  outline: none;
-  border-color: #000;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+.newsletter-brevo-field {
+    width: 100%;
 }
 
-.newsletter-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
-  font-size: 0.875rem;
+.newsletter-brevo-field label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #334155;
+    font-size: 0.875rem;
+    font-weight: 600;
 }
 
-.newsletter button {
-  width: 100%;
-  padding: 0.875rem;
+.newsletter-brevo-input {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 0.8rem 0.9rem;
 
-  border: 0;
-  border-radius: var(--radius-sm);
+    border: 1px solid #d5dce5;
+    border-radius: 8px;
+    background: #fff;
+    color: #263445;
 
-  background: #000;
-  color: var(--color-bg);
+    font-family: inherit;
+    font-size: 0.94rem;
+    line-height: 1.4;
 
-  font-weight: var(--font-weight-bold);
+    box-sizing: border-box;
 
-  cursor: pointer;
-  transition: background var(--transition);
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
 }
 
-.newsletter button:hover:not(:disabled) {
-  background: #222;
+.newsletter-brevo-input::placeholder {
+    color: #8a94a3;
+    opacity: 1;
 }
 
-.newsletter button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.newsletter-brevo-input:hover {
+    border-color: #aab5c4;
 }
+
+.newsletter-brevo-input:focus {
+    outline: none;
+    border-color: #ff7e03;
+    box-shadow: 0 0 0 3px rgba(255, 126, 3, 0.14);
+}
+
+/* Mensagem informativa */
+
+.newsletter-brevo-note {
+    margin: 0;
+    padding: 0.75rem 0.85rem;
+
+    border-radius: 8px;
+    background: #fff7ed;
+    color: #7c4512;
+
+    font-size: 0.84rem;
+    line-height: 1.55;
+}
+
+/* Consentimento */
+
+.newsletter-brevo-consent {
+    color: #596579;
+    font-size: 0.78rem;
+    line-height: 1.6;
+}
+
+.newsletter-brevo-consent label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    cursor: pointer;
+}
+
+.newsletter-brevo-consent input[type="checkbox"] {
+    flex: 0 0 17px;
+    width: 17px;
+    height: 17px;
+    margin: 2px 0 0;
+    accent-color: #ff7e03;
+    cursor: pointer;
+}
+
+.newsletter-brevo-consent a {
+    color: #2459a9;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.newsletter-brevo-consent a:hover {
+    color: #173f7b;
+}
+
+/* Botão principal */
+
+.newsletter-brevo-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+
+    width: 100%;
+    min-height: 49px;
+    padding: 0.85rem 1rem;
+
+    border: 1px solid #ff7e03;
+    border-radius: 8px;
+
+    background: #ff7e03;
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.4;
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.newsletter-brevo-button:hover {
+    background: #e96c00;
+    border-color: #e96c00;
+    box-shadow: 0 4px 12px rgba(255, 126, 3, 0.2);
+}
+
+.newsletter-brevo-button:active {
+    transform: translateY(1px);
+}
+
+.newsletter-brevo-button:focus-visible {
+    outline: 3px solid rgba(255, 126, 3, 0.35);
+    outline-offset: 3px;
+}
+
+/* Campo antispam invisível */
+
+.newsletter-brevo-honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+}
+
+/* ==========================================================
+   POLÍTICA DE PRIVACIDADE
+========================================================== */
 
 .newsletter-policy {
-  margin-top: var(--space-md);
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: #555;
+    margin: 1rem 0 0;
+    color: #778195;
+    font-size: 0.75rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.newsletter-policy strong {
+    font-weight: 400;
 }
 
 .newsletter-policy a {
-  color: inherit;
-  text-decoration: underline;
+    color: #526783;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-@media (max-width: 480px) {
-  .newsletter {
-    padding: var(--space-lg);
-    margin: var(--space-xl) 0;
-  }
+.newsletter-policy a:hover {
+    color: #263445;
+}
 
-  .newsletter h2 {
-    font-size: 1.5rem;
-  }
+.newsletter-policy a:focus-visible {
+    outline: 2px solid #ff7e03;
+    outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 480px) {
+    .newsletter {
+        max-width: 100%;
+        margin: var(--space-lg) 0;
+        padding: 1.25rem;
+    }
+
+    .newsletter h2 {
+        font-size: 1.4rem;
+    }
+
+    .newsletter-description {
+        font-size: 0.9rem;
+    }
+
+    .newsletter-brevo form {
+        gap: 0.9rem;
+    }
+
+    .newsletter-brevo-button {
+        font-size: 0.88rem;
+    }
+}
+
+/* ==========================================================
+   ACESSIBILIDADE
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .newsletter-brevo-input,
+    .newsletter-brevo-button {
+        transition: none;
+    }
+
+    .newsletter-brevo-button:active {
+        transform: none;
+    }
 }

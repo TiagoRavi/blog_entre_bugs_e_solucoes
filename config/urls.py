@@ -152,6 +152,11 @@ urlpatterns = [
         include("ebooks.urls"),
     ),
 
+    path(
+        "newsletter/",
+        include("newsletter.urls"),
+    ),
+
     # -----------------------------------------------------
     # FAVICON
     # -----------------------------------------------------

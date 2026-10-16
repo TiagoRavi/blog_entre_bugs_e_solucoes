@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "pages",
     "ebooks",
+    "newsletter.apps.NewsletterConfig",
 ]
 
 SITE_ID = 2
