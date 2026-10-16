@@ -17,17 +17,24 @@
 
   <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('consent', 'default', {
-      analytics_storage: 'denied'
-    });
-  </script>
+     <!-- Google tag (gtag.js) -->
+     <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     // Consentimento padrão: negar armazenamento até obter a escolha.
+     gtag('consent', 'default', {
+     analytics_storage: 'denied',
+     ad_storage: 'denied',
+     ad_user_data: 'denied',
+     ad_personalization: 'denied'
+     });
+     </script>
+
+     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR"></script>
+
 
   <!-- Google AdSense -->
   <script async
