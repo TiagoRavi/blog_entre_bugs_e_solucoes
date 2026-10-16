@@ -20,6 +20,7 @@ from blog.sitemaps import (
     CategorySitemap,
     EbookCategorySitemap,
     EbookSitemap,
+    StaticPagesSitemap,
 )
 
 from config.tinymce_upload import tinymce_upload
@@ -58,6 +59,7 @@ sitemaps = {
     "categories": CategorySitemap,
     "ebook_categories": EbookCategorySitemap,
     "ebooks": EbookSitemap,
+    "static_pages": StaticPagesSitemap,
 }
 
 # =========================================================

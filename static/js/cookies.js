@@ -19,6 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function loadAdSense() {
+    if (
+      document.querySelector(
+        'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'
+      )
+    ) {
+      return;
+    }
+
+    const adsScript = document.createElement("script");
+    adsScript.async = true;
+    adsScript.src =
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5960956644380983";
+    adsScript.crossOrigin = "anonymous";
+
+    document.head.appendChild(adsScript);
+  }
+
   function applyConsent(status) {
     if (typeof window.gtag !== "function") return;
 
@@ -32,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  
   function saveConsent(value) {
     try {
       localStorage.setItem(STORAGE_KEY, value);
@@ -46,6 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "; path=/; max-age=31536000; SameSite=Lax" + secure;
 
     applyConsent(value);
+
+    if (value === "accepted") {
+      loadAdSense();
+    }
   }
 
   function showBanner() {
@@ -63,11 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
     hideBanner();
   }
 
-  // Estado inicial do banner e consentimento salvo.
+  // O consentimento salvo já é aplicado no base.html.
+  // Aqui, apenas definimos a visibilidade do banner.
   const consent = getConsent();
 
   if (consent) {
-    applyConsent(consent);
     hideBanner();
   } else {
     showBanner();

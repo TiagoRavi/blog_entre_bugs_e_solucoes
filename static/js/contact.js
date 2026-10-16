@@ -1,30 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
 
+document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contactForm");
     const status = document.getElementById("formStatus");
     const button = document.getElementById("submitBtn");
 
-    form.addEventListener("submit", async (e) => {
+    // Evita erros caso o script seja carregado em outra página.
+    if (!form || !status || !button) {
+        return;
+    }
 
-        e.preventDefault();
+    const getField = (name) => form.elements.namedItem(name);
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        // Verificação adicional antes de enviar os dados.
+        if (!form.reportValidity()) {
+            return;
+        }
+
+        const name = getField("name");
+        const email = getField("email");
+        const phone = getField("phone");
+        const subject = getField("subject");
+        const category = getField("category");
+        const message = getField("message");
+
+        if (!name || !email || !phone || !subject || !category || !message) {
+            status.className = "form-status error show";
+            status.innerText =
+                "Não foi possível identificar todos os campos do formulário.";
+            return;
+        }
+
+        const dados = {
+            nome: name.value.trim(),
+            email: email.value.trim(),
+            telefone: phone.value.trim(),
+            assunto: subject.value.trim(),
+            categoria: category.value,
+            mensagem: message.value.trim()
+        };
+
+        // Impede o envio de campos obrigatórios vazios após remover espaços.
+        if (
+            !dados.nome ||
+            !dados.email ||
+            !dados.assunto ||
+            !dados.categoria ||
+            !dados.mensagem
+        ) {
+            status.className = "form-status error show";
+            status.innerText =
+                "Preencha todos os campos obrigatórios antes de enviar.";
+            return;
+        }
 
         button.disabled = true;
         button.innerText = "Enviando...";
-
         status.className = "form-status loading show";
         status.innerText = "Enviando sua mensagem...";
 
-        const dados = {
-            nome: form.name.value.trim(),
-            email: form.email.value.trim(),
-            telefone: form.phone.value.trim(),
-            assunto: form.subject.value.trim(),
-            categoria: form.category.value,
-            mensagem: form.message.value.trim()
-        };
-
         try {
-
             const response = await fetch(
                 "https://automacao.entrebugsesolucoes.com.br/webhook/contato",
                 {
@@ -36,47 +73,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
 
-            console.log("Status:", response.status);
-
             if (!response.ok) {
-                const erro = await response.text();
-
-                console.error("Resposta do servidor:", erro);
-
-                throw new Error(
-                    `Erro HTTP ${response.status}`
-                );
+                throw new Error(`Erro HTTP ${response.status}`);
             }
 
-            // O n8n pode responder com JSON ou com corpo vazio.
             const texto = await response.text();
-
-            let mensagem = "Mensagem enviada com sucesso!";
+            let mensagemSucesso = "Mensagem enviada com sucesso!";
 
             if (texto.trim()) {
                 try {
                     const json = JSON.parse(texto);
 
-                    console.log("Resposta JSON:", json);
-
-                    if (json.mensagem) {
-                        mensagem = json.mensagem;
+                    if (
+                        typeof json.mensagem === "string" &&
+                        json.mensagem.trim()
+                    ) {
+                        mensagemSucesso = json.mensagem;
                     }
-                } catch (parseError) {
-                    console.warn(
-                        "A resposta não é um JSON válido:",
-                        texto
-                    );
+                } catch {
+                    // Respostas não JSON são aceitas se o HTTP indicar sucesso.
                 }
             }
 
             status.className = "form-status success show";
-            status.innerText = mensagem;
-
+            status.innerText = mensagemSucesso;
             form.reset();
 
         } catch (error) {
-
             console.error("Erro ao enviar formulário:", error);
 
             status.className = "form-status error show";
@@ -84,12 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Não foi possível enviar sua mensagem. Tente novamente.";
 
         } finally {
-
             button.disabled = false;
             button.innerText = "Enviar mensagem";
-
         }
-
     });
-
 });

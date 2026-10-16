@@ -6,10 +6,10 @@
     <div class="footer-brand">
       <a href="{% url 'blog:post_list' %}" class="footer-logo-link">
         <img
-      src="{% static 'img/logo.webp' %}"
-      alt="Entre Bugs e Soluções"
-      class="footer-logo"
-      loading="lazy"
+          src="{% static 'img/logo.webp' %}"
+          alt="Entre Bugs e Soluções"
+          class="footer-logo"
+          loading="lazy"
         >
       </a>
       <p>
@@ -22,17 +22,19 @@
       <h3>Conteúdo</h3>
       <ul>
         <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
-        <li><a href="#">Categorias</a></li>
+        <li><a href="{% url 'blog:post_list' %}">Explorar artigos</a></li>
       </ul>
     </nav>
 
-    <nav class="footer-legal" aria-label="Links legais">
-      <h3>Legal</h3>
+    <nav class="footer-legal" aria-label="Links institucionais e legais">
+      <h3>Institucional e legal</h3>
       <ul>
+        <li><a href="{% url 'pages:about' %}">Sobre</a></li>
+        <li><a href="{% url 'pages:about_author' %}">Sobre o autor</a></li>
+        <li><a href="{% url 'pages:contact' %}">Contato</a></li>
         <li><a href="{% url 'pages:privacy' %}">Política de Privacidade</a></li>
         <li><a href="{% url 'pages:terms' %}">Termos de Uso</a></li>
-        <li><a href="{% url 'pages:about' %}">Sobre</a></li>
-        <li><a href="{% url 'pages:contact' %}">Contato</a></li>
+        <li><a href="{% url 'pages:disclaimer' %}">Disclaimer</a></li>
       </ul>
     </nav>
 

@@ -5,6 +5,8 @@ from django.shortcuts import render
 class AboutView(TemplateView):
     template_name = "pages/about.html"
 
+class AboutAuthorView(TemplateView):
+    template_name = "pages/about-author.html"
 
 class ContactView(TemplateView):
     template_name = "pages/contact.html"

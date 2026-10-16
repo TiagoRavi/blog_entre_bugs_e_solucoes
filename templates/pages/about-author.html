@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Sobre o Autor | Tiago Sousa | Entre Bugs e Soluções
+{% endblock %}
+
+{% block meta_description %}
+Conheça Tiago Sousa, autor do Entre Bugs e Soluções, bacharel em Ciências Contábeis e estudante de programação, que compartilha aprendizados sobre Python, Django e tecnologia.
+{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "name": "Sobre o Autor | Tiago Sousa",
+  "url": "{{ CANONICAL_URL }}",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Tiago Sousa",
+    "url": "{{ CANONICAL_URL }}",
+    "image": "{{ SITE_URL }}{% static 'img/perfil/tiagosousa.webp' %}",
+    "jobTitle": "Bacharel em Ciências Contábeis, estudante de programação e escritor",
+    "description": "Tiago Sousa é bacharel em Ciências Contábeis, estudante de programação e autor do blog Entre Bugs e Soluções, um projeto pessoal desenvolvido com Django."
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="about-page">
+
+    <header class="about-page__hero">
+        <img
+            src="{% static 'img/perfil/tiagosousa.webp' %}"
+            alt="Tiago Sousa, autor do blog Entre Bugs e Soluções"
+            class="about-page__avatar"
+            width="160"
+            height="160"
+            fetchpriority="high"
+        />
+
+        <h1 class="about-page__name">Sobre o Autor</h1>
+
+        <p class="about-page__role">
+            Tiago Sousa · Contabilidade · Programação · Tecnologia
+        </p>
+    </header>
+
+    <article class="about-page__content">
+
+        <h2>Olá, sou Tiago Sousa</h2>
+
+        <p>
+            Sou bacharel em <strong>Ciências Contábeis</strong>, estudante
+            de programação e autor do blog
+            <strong>Entre Bugs e Soluções</strong>.
+        </p>
+
+        <p>
+            Criei este espaço para documentar minha jornada na programação
+            e compartilhar conhecimentos, experiências e soluções que
+            possam ajudar outras pessoas que também estão aprendendo.
+        </p>
+
+        <h2>Por que criei o Entre Bugs e Soluções?</h2>
+
+        <p>
+            O <strong>Entre Bugs e Soluções</strong> é um projeto pessoal
+            desenvolvido por mim com <strong>Django</strong>. A ideia é
+            transformar estudos, experimentos, erros e descobertas em
+            conteúdos úteis para quem deseja desenvolver suas habilidades
+            em tecnologia.
+        </p>
+
+        <p>
+            Acredito que resolver problemas faz parte do aprendizado.
+            Por isso, procuro compartilhar não apenas resultados, mas
+            também explicações práticas que ajudem a entender como as
+            soluções funcionam.
+        </p>
+
+        <h2>O que você encontrará aqui?</h2>
+
+        <ul>
+            <li>
+                <strong>Python:</strong> conceitos, exemplos e exercícios
+                para desenvolver a lógica de programação.
+            </li>
+            <li>
+                <strong>Django e desenvolvimento web:</strong> criação de
+                aplicações, funcionalidades e resolução de problemas.
+            </li>
+            <li>
+                <strong>Tecnologia:</strong> ferramentas, experiências e
+                aprendizados relacionados ao desenvolvimento.
+            </li>
+        </ul>
+
+        <h2>Minha jornada na programação</h2>
+
+        <p>
+            Aprender programação envolve estudar conceitos, testar ideias,
+            investigar erros e encontrar soluções. Quero registrar essa
+            evolução e compartilhar o conhecimento adquirido ao longo
+            desse processo.
+        </p>
+
+        <h2>Vamos aprender juntos?</h2>
+
+        <p>
+            Explore os artigos do blog e acompanhe os conteúdos sobre
+            programação, Python, Django e tecnologia.
+        </p>
+
+        <p>
+            <a href="{% url 'blog:post_list' %}">
+                Explore nossos artigos
+            </a>
+        </p>
+
+    </article>
+</section>
+{% endblock %}

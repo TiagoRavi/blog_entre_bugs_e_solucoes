@@ -10,11 +10,11 @@ Disclaimer | Entre Bugs e Soluções
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Disclaimer",
-  "url": "{{ request.build_absolute_uri }}",
+  "url": "{{ CANONICAL_URL }}",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Entre Bugs e Soluções",
-    "url": "{{ request.scheme }}://{{ request.get_host }}/"
+    "url": "{{ SITE_URL }}/"
   },
   "publisher": {
     "@type": "Organization",

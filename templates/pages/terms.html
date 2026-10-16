@@ -5,16 +5,17 @@ Termos de Uso | Entre Bugs e Soluções
 {% endblock %}
 
 {% block extra_head %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LegalPage",
   "name": "Termos de Uso",
-  "url": "{{ request.build_absolute_uri }}",
+  "url": "{{ CANONICAL_URL }}",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Entre Bugs e Soluções",
-    "url": "{{ request.scheme }}://{{ request.get_host }}/"
+    "url": "{{ SITE_URL }}/"
   },
   "publisher": {
     "@type": "Organization",
@@ -22,6 +23,7 @@ Termos de Uso | Entre Bugs e Soluções
   }
 }
 </script>
+
 {% endblock %}
 
 {% block content %}

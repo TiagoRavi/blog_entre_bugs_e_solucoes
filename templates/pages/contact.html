@@ -5,6 +5,11 @@
 Contato | Entre Bugs e Soluções
 {% endblock %}
 
+{% block meta_description %}
+Entre em contato com o Entre Bugs e Soluções para tirar dúvidas,
+relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
+{% endblock %}
+
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/pages.css' %}">
 {% endblock %}
@@ -27,7 +32,7 @@ Contato | Entre Bugs e Soluções
 
     <div class="contact-card">
 
-        <form id="contactForm" class="contact-form" method="post" novalidate>
+        <form id="contactForm" class="contact-form" method="post">
 
             {% csrf_token %}
 

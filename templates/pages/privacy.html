@@ -4,6 +4,11 @@
 Política de Privacidade | Entre Bugs e Soluções
 {% endblock %}
 
+{% block meta_description %}
+Saiba como o Entre Bugs e Soluções trata dados pessoais, utiliza cookies
+e tecnologias de publicidade e protege a privacidade dos visitantes.
+{% endblock %}
+
 {% block extra_head %}
 
 <script type="application/ld+json">
@@ -11,11 +16,11 @@ Política de Privacidade | Entre Bugs e Soluções
   "@context": "https://schema.org",
   "@type": "PrivacyPolicy",
   "name": "Política de Privacidade",
-  "url": "{{ request.build_absolute_uri }}",
+  "url": "{{ CANONICAL_URL }}",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Entre Bugs e Soluções",
-    "url": "{{ request.scheme }}://{{ request.get_host }}/"
+    "url": "{{ SITE_URL }}/"
   },
   "publisher": {
     "@type": "Organization",

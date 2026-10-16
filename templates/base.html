@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,56 +16,101 @@
 
   <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
 
+  <!-- =========================================================
+       Google tag (gtag.js) e Consent Mode
+  ========================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-     <!-- Google tag (gtag.js) -->
-     <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
 
-     // Consentimento padrão: negar armazenamento até obter a escolha.
-     gtag('consent', 'default', {
-     analytics_storage: 'denied',
-     ad_storage: 'denied',
-     ad_user_data: 'denied',
-     ad_personalization: 'denied'
-     });
-     </script>
+    gtag('js', new Date());
 
-     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR"></script>
+    // Padrão: negar consentimento até existir uma preferência válida.
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
 
+    // Reaplica a preferência salva antes de carregar o Google tag.
+    try {
+      const savedConsent = localStorage.getItem('cookie_consent');
 
-  <!-- Google AdSense -->
-  <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5960956644380983"
-    crossorigin="anonymous"></script>
+      if (savedConsent === 'accepted' || savedConsent === 'declined') {
+        const consentValue =
+          savedConsent === 'accepted' ? 'granted' : 'denied';
 
+        gtag('consent', 'update', {
+          analytics_storage: consentValue,
+          ad_storage: consentValue,
+          ad_user_data: consentValue,
+          ad_personalization: consentValue
+        });
+      }
+    } catch (error) {
+      // Se o armazenamento estiver indisponível, mantém o padrão negado.
+    }
+  </script>
+
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR">
+  </script>
+
+  <!-- =========================================================
+       Descrição da página
+  ========================================================== -->
   <meta
     name="description"
     content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
   >
 
   <!-- =========================================================
-       Canonical URL (SEO crítico)
+       Canonical URL e SEO
   ========================================================== -->
-  <link rel="canonical" href="{% block canonical %}{{ CANONICAL_URL }}{% endblock %}">
+  <link
+    rel="canonical"
+    href="{% block canonical %}{{ CANONICAL_URL }}{% endblock %}"
+  >
   <meta property="og:url" content="{{ CANONICAL_URL }}">
 
   <!-- =========================================================
-       Open Graph (Facebook, LinkedIn, WhatsApp)
+       Open Graph
   ========================================================== -->
-  <meta property="og:title" content="{% block og_title %}Entre Bugs e Soluções{% endblock %}">
-  <meta property="og:description" content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}">
+  <meta
+    property="og:title"
+    content="{% block og_title %}Entre Bugs e Soluções{% endblock %}"
+  >
+  <meta
+    property="og:description"
+    content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}"
+  >
   <meta property="og:type" content="website">
-  <meta property="og:image" content="{% block og_image %}{% static 'img/logo.webp' %}{% endblock %}">
+  <meta
+    property="og:image"
+    content="{% block og_image %}{% static 'img/logo.webp' %}{% endblock %}"
+  >
 
   <!-- =========================================================
        Twitter Cards
   ========================================================== -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{% block twitter_title %}Entre Bugs e Soluções{% endblock %}">
-  <meta name="twitter:description" content="{% block twitter_description %}Blog sobre programação e soluções reais{% endblock %}">
-  <meta name="twitter:image" content="{% block twitter_image %}{% static 'img/logo.webp' %}{% endblock %}">
+  <meta
+    name="twitter:title"
+    content="{% block twitter_title %}Entre Bugs e Soluções{% endblock %}"
+  >
+  <meta
+    name="twitter:description"
+    content="{% block twitter_description %}Blog sobre programação e soluções reais{% endblock %}"
+  >
+  <meta
+    name="twitter:image"
+    content="{% block twitter_image %}{% static 'img/logo.webp' %}{% endblock %}"
+  >
 
   <!-- =========================================================
        Favicon
@@ -74,8 +118,7 @@
   <link rel="icon" href="{% static 'favicon.ico' %}">
 
   <!-- =========================================================
-       Preload da imagem LCP (Hero)
-       Ajuste para WEBP quando possível
+       Preload da imagem principal (LCP)
   ========================================================== -->
   <link
     rel="preload"
@@ -95,21 +138,20 @@
   {% block extra_head %}{% endblock %}
 
   <!-- =========================================================
-       Cookie Settings Button (flutuante)
+       Botão flutuante de configurações de cookies
   ========================================================== -->
   {% include "includes/cookie_button.html" %}
-
 </head>
 
 <body>
 
   <!-- =========================================================
-       Cookie banner (LGPD)
+       Banner de cookies
   ========================================================== -->
   {% include "includes/cookie_banner.html" %}
 
   <!-- =========================================================
-       Header
+       Cabeçalho
   ========================================================== -->
   {% include "includes/header.html" %}
 
@@ -121,19 +163,19 @@
   </main>
 
   <!-- =========================================================
-       Footer
+       Rodapé
   ========================================================== -->
   {% include "includes/footer.html" %}
 
   <!-- =========================================================
-       JS global
+       JavaScript global
   ========================================================== -->
   <script src="{% static 'js/cookies.js' %}" defer></script>
   <script src="{% static 'js/menu-submenu.js' %}" defer></script>
   <script src="{% static 'js/search.js' %}" defer></script>
 
   <!-- =========================================================
-       JS específico por página
+       JavaScript específico por página
   ========================================================== -->
   {% block extra_scripts %}{% endblock %}
 

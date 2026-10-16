@@ -2,9 +2,10 @@ from django.contrib.sitemaps import Sitemap
 
 from .models import Post, Category
 from ebooks.models import Ebook, EbookCategory
-
+from django.urls import reverse
 
 class PostSitemap(Sitemap):
+    protocol = "https"
     changefreq = "weekly"
     priority = 0.8
 
@@ -16,6 +17,7 @@ class PostSitemap(Sitemap):
 
 
 class CategorySitemap(Sitemap):
+    protocol = "https"
     changefreq = "monthly"
     priority = 0.5
 
@@ -24,6 +26,7 @@ class CategorySitemap(Sitemap):
 
 
 class EbookCategorySitemap(Sitemap):
+    protocol = "https"
     changefreq = "monthly"
     priority = 0.6
 
@@ -37,6 +40,7 @@ class EbookCategorySitemap(Sitemap):
 
 
 class EbookSitemap(Sitemap):
+    protocol = "https"
     changefreq = "weekly"
     priority = 0.8
 
@@ -48,3 +52,20 @@ class EbookSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.updated_at
+class StaticPagesSitemap(Sitemap):
+    protocol = "https"
+    changefreq = "yearly"
+    priority = 0.3
+
+    def items(self):
+        return [
+            "pages:about",
+            "pages:about_author",
+            "pages:contact",
+            "pages:privacy",
+            "pages:terms",
+            "pages:disclaimer",
+        ]
+
+    def location(self, item):
+        return reverse(item)
