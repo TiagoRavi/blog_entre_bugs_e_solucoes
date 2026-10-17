@@ -19,24 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function loadAdSense() {
-    if (
-      document.querySelector(
-        'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'
-      )
-    ) {
-      return;
-    }
-
-    const adsScript = document.createElement("script");
-    adsScript.async = true;
-    adsScript.src =
-      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5960956644380983";
-    adsScript.crossOrigin = "anonymous";
-
-    document.head.appendChild(adsScript);
-  }
-
   function applyConsent(status) {
     if (typeof window.gtag !== "function") return;
 
@@ -50,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  
   
   function saveConsent(value) {
     try {
@@ -65,11 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "; path=/; max-age=31536000; SameSite=Lax" + secure;
 
     applyConsent(value);
-
-    if (value === "accepted") {
-      loadAdSense();
-    }
   }
+
 
   function showBanner() {
     if (banner) banner.classList.remove("is-hidden");
