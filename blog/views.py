@@ -1,4 +1,3 @@
-
 from copy import copy
 
 from django.conf import settings
@@ -6,12 +5,14 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import get_language
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 
-from .models import Category, Post
+from .models import Category, Post, PostTranslation
 from .selectors import (
     get_latest_published_posts,
     get_posts_by_category,
@@ -20,6 +21,71 @@ from .selectors import (
     get_related_video_posts,
     get_post_translation_by_slug,
 )
+
+
+# ======================================================
+# PREPARAÇÃO DOS CARDS POR IDIOMA
+# ======================================================
+
+def prepare_post_cards(posts, language=None):
+    """
+    Prepara títulos, resumos e URLs dos cards conforme o idioma.
+
+    Se houver tradução, utiliza os dados traduzidos.
+    Se não houver tradução, direciona para a listagem
+    de artigos do idioma selecionado.
+    """
+    posts = list(posts)
+    language = (language or get_language() or "pt-br").lower()
+
+    # Valores padrão: dados do artigo original.
+    for post in posts:
+        post.card_title = post.title
+        post.card_excerpt = post.excerpt
+        post.card_url = reverse(
+            "blog:post_detail",
+            kwargs={"slug": post.slug},
+        )
+
+    # Em português, utiliza os artigos originais.
+    if language == "pt-br" or language not in {"en", "es"}:
+        return posts
+
+    post_ids = [post.pk for post in posts]
+
+    if not post_ids:
+        return posts
+
+    translations = PostTranslation.objects.filter(
+        post_id__in=post_ids,
+        language=language,
+        post__status=Post.Status.PUBLISHED,
+        post__published_at__lte=timezone.now(),
+    )
+
+    translations_by_post_id = {
+        translation.post_id: translation
+        for translation in translations
+    }
+
+    # Destino alternativo para artigos ainda não traduzidos.
+    fallback_url = reverse("blog:post_list")
+
+    for post in posts:
+        translation = translations_by_post_id.get(post.pk)
+
+        if translation:
+            post.card_title = translation.title
+            post.card_excerpt = translation.excerpt
+            post.card_url = reverse(
+                "blog:post_detail",
+                kwargs={"slug": translation.slug},
+            )
+        else:
+            post.card_url = fallback_url
+
+    return posts
+
 
 # ======================================================
 # HOME
@@ -37,6 +103,16 @@ class HomeView(ListView):
 
     def get_queryset(self):
         return get_latest_published_posts(limit=6)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["posts"] = prepare_post_cards(
+            context["posts"],
+            get_language(),
+        )
+
+        return context
 
 
 # ======================================================
@@ -57,6 +133,7 @@ class BlogListView(ListView):
         queryset = get_published_posts()
 
         q = self.request.GET.get("q")
+
         if q:
             queryset = queryset.filter(
                 Q(title__icontains=q)
@@ -65,6 +142,16 @@ class BlogListView(ListView):
             )
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["posts"] = prepare_post_cards(
+            context["posts"],
+            get_language(),
+        )
+
+        return context
 
 
 # ======================================================
@@ -95,6 +182,7 @@ class PostDetailView(DetailView):
                 self.get_queryset(),
                 slug=slug,
             )
+
             self.original_post = post
             return post
 
@@ -120,6 +208,7 @@ class PostDetailView(DetailView):
         post.content = translation.content
 
         self.translation = translation
+
         return post
 
     def get_context_data(self, **kwargs):
@@ -127,19 +216,26 @@ class PostDetailView(DetailView):
 
         post = self.object
         original_post = self.original_post or post
+        language = get_language()
 
-        # Usa o artigo original para buscar conteúdo relacionado.
-        context["related_posts"] = get_related_posts(
-            post=original_post,
-            limit=3,
+        # Conteúdo relacionado baseado no artigo original.
+        context["related_posts"] = prepare_post_cards(
+            get_related_posts(
+                post=original_post,
+                limit=3,
+            ),
+            language,
         )
 
         context["related_videos"] = []
 
         if original_post.youtube_video_id:
-            context["related_videos"] = get_related_video_posts(
-                post=original_post,
-                limit=3,
+            context["related_videos"] = prepare_post_cards(
+                get_related_video_posts(
+                    post=original_post,
+                    limit=3,
+                ),
+                language,
             )
 
         context["is_post_detail"] = True
@@ -202,6 +298,11 @@ class CategoryPostListView(ListView):
             slug=self.kwargs["slug"],
         )
 
+        context["posts"] = prepare_post_cards(
+            context["posts"],
+            get_language(),
+        )
+
         return context
 
 
@@ -240,5 +341,12 @@ class AuthorDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context["author"] = self.get_author()
+
+        context["posts"] = prepare_post_cards(
+            context["posts"],
+            get_language(),
+        )
+
         return context

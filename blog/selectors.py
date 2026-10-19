@@ -124,19 +124,39 @@ def get_related_video_posts(post: Post, limit:int=3) -> QuerySet[Post]:
         .exclude(pk=post.pk)[:limit]
     )
 
-
 # ======================================================
 # POST TRANSLATION SELECTORS
 # ======================================================
+
+def get_post_translation_for_post(
+    post: Post,
+    language: str,
+) -> Optional[PostTranslation]:
+    """
+    Retorna a tradução de um artigo para o idioma solicitado,
+    desde que o artigo original esteja publicado.
+    """
+    if language not in {"en", "es"}:
+        return None
+
+    return (
+        PostTranslation.objects
+        .filter(
+            post=post,
+            language=language,
+            post__status=Post.Status.PUBLISHED,
+            post__published_at__lte=timezone.now(),
+        )
+        .first()
+    )
+
 def get_post_translation_by_slug(
     slug: str,
     language: str,
 ) -> Optional[PostTranslation]:
     """
-    Retorna uma tradução de artigo publicada,
-    associada a um post original publicado.
-
-    Não retorna traduções de rascunhos.
+    Retorna uma tradução pelo slug e idioma,
+    desde que o artigo original esteja publicado.
     """
     if language not in {"en", "es"}:
         return None
@@ -149,6 +169,10 @@ def get_post_translation_by_slug(
             post__status=Post.Status.PUBLISHED,
             post__published_at__lte=timezone.now(),
         )
-        .select_related("post", "post__author", "post__category")
+        .select_related(
+            "post",
+            "post__author",
+            "post__category",
+        )
         .first()
     )
