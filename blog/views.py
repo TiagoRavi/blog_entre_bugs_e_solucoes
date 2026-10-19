@@ -242,6 +242,11 @@ class PostDetailView(DetailView):
         context["translation"] = self.translation
         context["original_post"] = original_post
 
+        if self.translation:
+            context["faqs"] = self.translation.faqs.all()
+        else:
+            context["faqs"] = original_post.faqs.all()
+
         site_url = getattr(
             settings,
             "SITE_URL",

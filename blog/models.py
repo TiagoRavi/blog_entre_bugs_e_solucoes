@@ -318,7 +318,19 @@ class FAQ(models.Model):
         Post,
         on_delete=models.CASCADE,
         related_name="faqs",
+        null=True,
+        blank=True,
     )
+
+    translation = models.ForeignKey(
+        "blog.PostTranslation",
+        on_delete=models.CASCADE,
+        related_name="faqs",
+        null=True,
+        blank=True,
+        verbose_name="Tradução do artigo",
+    )
+
     question = models.CharField(max_length=255)
     answer = models.TextField()
     order = models.PositiveIntegerField(default=0)
@@ -326,6 +338,30 @@ class FAQ(models.Model):
 
     class Meta:
         ordering = ["order", "id"]
+        constraints = [
+            models.CheckConstraint(
+                condition=(
+                    models.Q(
+                        post__isnull=False,
+                        translation__isnull=True,
+                    )
+                    | models.Q(
+                        post__isnull=True,
+                        translation__isnull=False,
+                    )
+                ),
+                name="faq_post_or_translation",
+            ),
+        ]
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+
+        if bool(self.post_id) == bool(self.translation_id):
+            raise ValidationError(
+                "A FAQ deve pertencer a um artigo original "
+                "ou a uma tradução, mas não aos dois."
+            )
 
     def __str__(self):
         return self.question

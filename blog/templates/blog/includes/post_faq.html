@@ -1,11 +1,10 @@
-
 {% load i18n %}
 
-{% if post.faqs.exists %}
+{% if faqs %}
 <section class="post-faq" aria-labelledby="faq-title">
     <h2 id="faq-title">{% trans "Perguntas frequentes" %}</h2>
 
-    {% for faq in post.faqs.all %}
+    {% for faq in faqs %}
         <details class="faq-item">
             <summary class="faq-question">
                 {{ faq.question }}

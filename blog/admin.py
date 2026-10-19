@@ -31,6 +31,17 @@ class FAQInline(admin.TabularInline):
     ordering = ("order",)
     fields = ("question", "answer", "order")
 
+
+# ======================================================
+# FAQ INLINE DAS TRADUÇÕES
+# ======================================================
+class TranslationFAQInline(admin.TabularInline):
+    model = FAQ
+    fk_name = "translation"
+    extra = 1
+    ordering = ("order",)
+    fields = ("question", "answer", "order")
+
 # ======================================================
 # CTA INLINE (SEO)
 # ======================================================
@@ -137,6 +148,8 @@ class CTAAdmin(admin.ModelAdmin):
 # ======================================================
 @admin.register(PostTranslation)
 class PostTranslationAdmin(admin.ModelAdmin):
+    inlines = [TranslationFAQInline]
+
     list_display = (
         "title",
         "post",
