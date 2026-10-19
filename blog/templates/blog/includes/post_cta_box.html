@@ -1,3 +1,6 @@
+
+{% load i18n %}
+
 {% if post.ctas.exists %}
 <section class="post-cta">
     {% for cta in post.ctas.all %}
@@ -17,7 +20,8 @@
                     href="{{ cta.url }}"
                     class="post-cta-button"
                     {% if cta.open_in_new_tab %}
-                        target="_blank" rel="noopener noreferrer"
+                        target="_blank"
+                        rel="noopener noreferrer"
                     {% endif %}
                 >
                     {{ cta.anchor_text }}

@@ -329,3 +329,82 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+
+# ======================================================
+# POST TRANSLATION
+# ======================================================
+class PostTranslation(models.Model):
+    """
+    Tradução de um artigo para inglês ou espanhol.
+    O artigo original permanece no modelo Post.
+    """
+
+    class Language(models.TextChoices):
+        ENGLISH = "en", "English"
+        SPANISH = "es", "Español"
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="translations",
+        verbose_name="Artigo original",
+    )
+
+    language = models.CharField(
+        max_length=5,
+        choices=Language.choices,
+        verbose_name="Idioma",
+    )
+
+    title = models.CharField(
+        max_length=200,
+        verbose_name="Título traduzido",
+    )
+
+    slug = models.SlugField(
+        max_length=220,
+        unique=True,
+        verbose_name="Slug traduzido",
+    )
+
+    excerpt = models.CharField(
+        max_length=160,
+        blank=True,
+        verbose_name="Resumo traduzido (SEO)",
+    )
+
+    content = HTMLField(
+        verbose_name="Conteúdo traduzido",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Criado em",
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Atualizado em",
+    )
+
+    class Meta:
+        verbose_name = "Tradução de artigo"
+        verbose_name_plural = "Traduções de artigos"
+        ordering = ["language", "title"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["post", "language"],
+                name="unique_post_translation_language",
+            ),
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.title} ({self.language})"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)
+

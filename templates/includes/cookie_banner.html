@@ -1,28 +1,27 @@
+{% load i18n %}
 
-<!-- ==================================================
-     Cookie Banner (LGPD)
-     - Aviso de uso de cookies
-     - Consentimento explícito
-     - Reversível via botão flutuante
-================================================== -->
+<!-- Banner de consentimento de cookies (LGPD) -->
 <div
   id="cookie-banner"
   class="cookie-banner is-hidden"
   role="dialog"
-  aria-label="Aviso de cookies"
+  aria-label="{% translate 'Aviso de cookies' %}"
   aria-live="polite"
 >
   <div class="cookie-banner__content">
 
     <p class="cookie-banner__text">
-      Utilizamos cookies e tecnologias semelhantes para o funcionamento
-      do site, análise de tráfego e, quando aplicável, publicidade.
-      Você pode aceitar ou recusar cookies não essenciais.
-      Consulte nossa
+      {% blocktranslate trimmed %}
+        Utilizamos cookies e tecnologias semelhantes para o funcionamento
+        do site, análise de tráfego e, quando aplicável, publicidade.
+        Você pode aceitar ou recusar cookies não essenciais.
+      {% endblocktranslate %}
+
       <a href="{% url 'pages:privacy' %}">
-        Política de Privacidade
+        {% translate "Política de Privacidade" %}
       </a>
-      para saber mais sobre o uso de cookies e suas preferências.
+
+      {% translate "para saber mais sobre o uso de cookies e suas preferências." %}
     </p>
 
     <div class="cookie-banner__actions">
@@ -31,7 +30,7 @@
         class="cookie-btn cookie-btn--accept"
         type="button"
       >
-        Aceitar
+        {% translate "Aceitar" %}
       </button>
 
       <button
@@ -39,7 +38,7 @@
         class="cookie-btn cookie-btn--decline"
         type="button"
       >
-        Recusar
+        {% translate "Recusar" %}
       </button>
     </div>
 

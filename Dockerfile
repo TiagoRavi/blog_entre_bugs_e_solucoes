@@ -7,15 +7,17 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+
 # ======================================================
 # SYSTEM DEPENDENCIES
 # ======================================================
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
     gcc \
     netcat-openbsd \
+    gettext \
     && rm -rf /var/lib/apt/lists/*
 
 # ======================================================

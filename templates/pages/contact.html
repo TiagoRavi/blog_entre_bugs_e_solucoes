@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-Contato | Entre Bugs e Soluções
+{% translate "Contato | Entre Bugs e Soluções" %}
 {% endblock %}
 
 {% block meta_description %}
-Entre em contato com o Entre Bugs e Soluções para tirar dúvidas,
-relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
+{% translate "Entre em contato com o Entre Bugs e Soluções para tirar dúvidas, relatar erros nos artigos ou propor parcerias sobre programação e tecnologia." %}
 {% endblock %}
 
 {% block extra_head %}
@@ -20,12 +20,10 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
 
     <header class="contact-header">
 
-        <h1 class="contact-title">Contato</h1>
+        <h1 class="contact-title">{% translate "Contato" %}</h1>
 
         <p class="contact-description">
-            Ficou com alguma dúvida, encontrou algum erro no blog ou deseja
-            propor uma parceria? Envie sua mensagem abaixo.
-            Será um prazer falar com você!
+            {% translate "Ficou com alguma dúvida, encontrou algum erro no blog ou deseja propor uma parceria? Envie sua mensagem abaixo. Será um prazer falar com você!" %}
         </p>
 
     </header>
@@ -40,14 +38,14 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
 
                 <div class="form-group">
                     <label for="name">
-                        Nome <span class="required">*</span>
+                        {% translate "Nome" %} <span class="required">*</span>
                     </label>
 
                     <input
                         id="name"
                         name="name"
                         type="text"
-                        placeholder="Seu nome completo"
+                        placeholder="{% translate 'Seu nome completo' %}"
                         autocomplete="name"
                         maxlength="120"
                         required>
@@ -55,14 +53,14 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
 
                 <div class="form-group">
                     <label for="email">
-                        E-mail <span class="required">*</span>
+                        {% translate "E-mail" %} <span class="required">*</span>
                     </label>
 
                     <input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="seu@email.com"
+                        placeholder="{% translate 'seu@email.com' %}"
                         autocomplete="email"
                         maxlength="150"
                         required>
@@ -70,35 +68,35 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
 
                 <div class="form-group">
                     <label for="phone">
-                        Telefone
+                        {% translate "Telefone" %}
                     </label>
 
                     <input
                         id="phone"
                         name="phone"
                         type="tel"
-                        placeholder="(11) 99999-9999"
+                        placeholder="{% translate '(11) 99999-9999' %}"
                         autocomplete="tel"
                         maxlength="20">
                 </div>
 
                 <div class="form-group">
                     <label for="subject">
-                        Assunto <span class="required">*</span>
+                        {% translate "Assunto" %} <span class="required">*</span>
                     </label>
 
                     <input
                         id="subject"
                         name="subject"
                         type="text"
-                        placeholder="Sobre o que deseja falar?"
+                        placeholder="{% translate 'Sobre o que deseja falar?' %}"
                         maxlength="150"
                         required>
                 </div>
 
                 <div class="form-group full">
                     <label for="category">
-                        Categoria <span class="required">*</span>
+                        {% translate "Categoria" %} <span class="required">*</span>
                     </label>
 
                     <select
@@ -107,13 +105,13 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
                         required>
 
                         <option value="" selected disabled>
-                            Selecione uma categoria
+                            {% translate "Selecione uma categoria" %}
                         </option>
 
-                        <option value="duvida">Dúvida</option>
-                        <option value="sugestao">Sugestão</option>
-                        <option value="erro">Erro no blog</option>
-                        <option value="parceria">Parceria</option>
+                        <option value="duvida">{% translate "Dúvida" %}</option>
+                        <option value="sugestao">{% translate "Sugestão" %}</option>
+                        <option value="erro">{% translate "Erro no blog" %}</option>
+                        <option value="parceria">{% translate "Parceria" %}</option>
 
                     </select>
                 </div>
@@ -121,14 +119,14 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
                 <div class="form-group full">
 
                     <label for="message">
-                        Mensagem <span class="required">*</span>
+                        {% translate "Mensagem" %} <span class="required">*</span>
                     </label>
 
                     <textarea
                         id="message"
                         name="message"
                         rows="7"
-                        placeholder="Escreva sua mensagem..."
+                        placeholder="{% translate 'Escreva sua mensagem...' %}"
                         maxlength="5000"
                         required></textarea>
 
@@ -143,7 +141,7 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
                     class="btn-primary"
                     type="submit">
 
-                    Enviar mensagem
+                    {% translate "Enviar mensagem" %}
 
                 </button>
 
@@ -154,9 +152,9 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
                 </div>
 
                 <small class="contact-security">
-                    🔒 As informações enviadas serão tratadas de acordo com a
+                    🔒 {% translate "As informações enviadas serão tratadas de acordo com a" %}
                     <a href="{% url 'pages:privacy' %}">
-                        Política de Privacidade
+                        {% translate "Política de Privacidade" %}
                     </a>.
                 </small>
 
@@ -168,7 +166,7 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
 
         <aside class="contact-info">
 
-            <h2>Outros canais</h2>
+            <h2>{% translate "Outros canais" %}</h2>
 
             <ul class="contact-list">
 
@@ -179,7 +177,7 @@ relatar erros nos artigos ou propor parcerias sobre programação e tecnologia.
 
                 <li>
                     🕒
-                    As mensagens são respondidas assim que possível.
+                    {% translate "As mensagens são respondidas assim que possível." %}
                 </li>
 
             </ul>

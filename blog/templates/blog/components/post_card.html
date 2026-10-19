@@ -1,50 +1,57 @@
+
+{% load static %}
+{% load i18n %}
 {% load cloudinary_extras %}
 
 <article class="post-card">
+    <a href="{% url 'blog:post_detail' post.slug %}" class="post-card-link">
 
-  <a href="{% url 'blog:post_detail' post.slug %}" class="post-card-link">
+        {% if post.featured_image %}
+            {% cloudinary_image post.featured_image 400 225 as image_url %}
 
-    {% if post.featured_image %}
-      {% cloudinary_image post.featured_image 400 225 as image_url %}
+            <figure class="post-card-image">
+                <img
+                    src="{{ image_url }}"
+                    alt="{{ post.title }}"
+                    loading="lazy"
+                    width="400"
+                    height="225"
+                >
 
-      <figure class="post-card-image">
-        <img
-          src="{{ image_url }}"
-          alt="{{ post.title }}"
-          loading="lazy"
-          width="400"
-          height="225"
-        >
-        {% if post.category %}
-          <span class="post-card-category">
-            {{ post.category.name }}
-          </span>
+                {% if post.category %}
+                    <span class="post-card-category">
+                        {{ post.category.name }}
+                    </span>
+                {% endif %}
+            </figure>
+        {% else %}
+            <figure class="post-card-image post-card-image--placeholder"
+                    aria-hidden="true"></figure>
         {% endif %}
-      </figure>
-    {% else %}
-      <figure class="post-card-image post-card-image--placeholder"></figure>
-    {% endif %}
 
-    <div class="post-card-body">
+        <div class="post-card-body">
 
-      <time class="post-card-date" datetime="{{ post.published_at|date:'Y-m-d' }}">
-        {{ post.published_at|date:"d M Y" }}
-      </time>
+            <time
+                class="post-card-date"
+                datetime="{{ post.published_at|date:'Y-m-d' }}"
+            >
+                {{ post.published_at|date:"d M Y" }}
+            </time>
 
-      <h2 class="post-card-title">
-        {{ post.title|truncatechars:65 }}
-      </h2>
+            <h2 class="post-card-title">
+                {{ post.title|truncatechars:65 }}
+            </h2>
 
-      <p class="post-excerpt">
-        {{ post.excerpt|truncatechars:120 }}
-      </p>
+            {% if post.excerpt %}
+                <p class="post-excerpt">
+                    {{ post.excerpt|truncatechars:120 }}
+                </p>
+            {% endif %}
 
-      <span class="post-card-cta">
-        Ler artigo →
-      </span>
+            <span class="post-card-cta">
+                {% trans "Ler artigo" %} &rarr;
+            </span>
 
-    </div>
-
-  </a>
-
+        </div>
+    </a>
 </article>

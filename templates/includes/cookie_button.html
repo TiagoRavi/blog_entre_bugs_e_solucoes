@@ -1,10 +1,11 @@
 {% load static %}
+{% load i18n %}
 
 <button
   id="cookie-settings-btn"
   class="cookie-settings-btn"
   type="button"
-  aria-label="Configurações de cookies"
+  aria-label="{% translate 'Configurações de cookies' %}"
 >
   <img
     src="{% static 'img/svg/cookie_icon.svg' %}"

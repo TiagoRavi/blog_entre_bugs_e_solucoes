@@ -1,9 +1,13 @@
-
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-Sobre o Entre Bugs e Soluções | Programação e Tecnologia
+{% translate "Sobre o Entre Bugs e Soluções | Programação e Tecnologia" %}
+{% endblock %}
+
+{% block meta_description %}
+{% translate "Conheça o Entre Bugs e Soluções, um blog dedicado à programação, Python, Django e tecnologia, com conteúdos acessíveis, didáticos e práticos." %}
 {% endblock %}
 
 {% block extra_head %}
@@ -30,116 +34,100 @@ Sobre o Entre Bugs e Soluções | Programação e Tecnologia
 
     <header class="about-page__hero">
         <h1 class="about-page__name">
-            Sobre o Entre Bugs e Soluções
+            {% translate "Sobre o Entre Bugs e Soluções" %}
         </h1>
 
         <p class="about-page__role">
-            Programação e tecnologia explicadas de forma acessível e didática.
+            {% translate "Programação e tecnologia explicadas de forma acessível e didática." %}
         </p>
     </header>
 
     <article class="about-page__content">
 
-        <h2>O que é o Entre Bugs e Soluções?</h2>
+        <h2>{% translate "O que é o Entre Bugs e Soluções?" %}</h2>
 
         <p>
-            O <strong>Entre Bugs e Soluções</strong> é um blog dedicado
-            à programação e à tecnologia, criado com o propósito de
-            compartilhar conhecimento de forma acessível, didática e prática.
+            {% translate "O" %}
+            <strong>{% translate "Entre Bugs e Soluções" %}</strong>
+            {% translate "é um blog dedicado à programação e à tecnologia, criado com o propósito de compartilhar conhecimento de forma acessível, didática e prática." %}
         </p>
 
         <p>
-            Acreditamos que aprender programação pode ser mais simples
-            quando os conceitos são apresentados com clareza, exemplos
-            práticos e explicações que ajudam a compreender não apenas
-            como algo funciona, mas também por que funciona.
+            {% translate "Acreditamos que aprender programação pode ser mais simples quando os conceitos são apresentados com clareza, exemplos práticos e explicações que ajudam a compreender não apenas como algo funciona, mas também por que funciona." %}
         </p>
 
-        <h2>Nossa missão</h2>
+        <h2>{% translate "Nossa missão" %}</h2>
 
         <p>
-            Nossa missão é <strong>ensinar programação e tecnologia de
-            forma acessível e didática</strong>, ajudando pessoas a
-            desenvolver conhecimentos, compreender conceitos e encontrar
-            soluções para desafios do dia a dia.
+            {% translate "Nossa missão é" %}
+            <strong>{% translate "ensinar programação e tecnologia de forma acessível e didática" %}</strong>,
+            {% translate "ajudando pessoas a desenvolver conhecimentos, compreender conceitos e encontrar soluções para desafios do dia a dia." %}
         </p>
 
         <p>
-            Queremos tornar o aprendizado mais próximo da realidade,
-            transformando dúvidas em conhecimento e problemas em
-            oportunidades para aprender.
+            {% translate "Queremos tornar o aprendizado mais próximo da realidade, transformando dúvidas em conhecimento e problemas em oportunidades para aprender." %}
         </p>
 
-        <h2>O que você encontra aqui?</h2>
+        <h2>{% translate "O que você encontra aqui?" %}</h2>
 
         <p>
-            Publicamos conteúdos voltados ao aprendizado e à aplicação
-            prática da tecnologia, incluindo:
+            {% translate "Publicamos conteúdos voltados ao aprendizado e à aplicação prática da tecnologia, incluindo:" %}
         </p>
 
         <ul>
             <li>
-                <strong>Programação:</strong> conceitos fundamentais,
-                lógica e conteúdos para quem deseja aprender.
+                <strong>{% translate "Programação:" %}</strong>
+                {% translate "conceitos fundamentais, lógica e conteúdos para quem deseja aprender." %}
             </li>
             <li>
-                <strong>Python:</strong> tutoriais, exemplos e explicações
-                para desenvolver habilidades com a linguagem.
+                <strong>{% translate "Python:" %}</strong>
+                {% translate "tutoriais, exemplos e explicações para desenvolver habilidades com a linguagem." %}
             </li>
             <li>
-                <strong>Django e desenvolvimento web:</strong> conteúdos
-                sobre criação de sites, aplicações e funcionalidades.
+                <strong>{% translate "Django e desenvolvimento web:" %}</strong>
+                {% translate "conteúdos sobre criação de sites, aplicações e funcionalidades." %}
             </li>
             <li>
-                <strong>Tecnologia:</strong> ferramentas, recursos e
-                conhecimentos úteis para projetos e estudos.
+                <strong>{% translate "Tecnologia:" %}</strong>
+                {% translate "ferramentas, recursos e conhecimentos úteis para projetos e estudos." %}
             </li>
             <li>
-                <strong>Aprendizado prático:</strong> soluções para erros,
-                desafios comuns e situações encontradas durante o desenvolvimento.
+                <strong>{% translate "Aprendizado prático:" %}</strong>
+                {% translate "soluções para erros, desafios comuns e situações encontradas durante o desenvolvimento." %}
             </li>
         </ul>
 
-        <h2>Para quem é o blog?</h2>
+        <h2>{% translate "Para quem é o blog?" %}</h2>
 
         <p>
-            Nosso conteúdo é voltado especialmente para pessoas que
-            desejam aprender programação, estudantes, iniciantes e
-            entusiastas da tecnologia.
+            {% translate "Nosso conteúdo é voltado especialmente para pessoas que desejam aprender programação, estudantes, iniciantes e entusiastas da tecnologia." %}
         </p>
 
         <p>
-            Nosso objetivo é oferecer explicações claras para que cada
-            leitor possa aprender no próprio ritmo, praticar o que
-            descobriu e avançar gradualmente em sua jornada.
+            {% translate "Nosso objetivo é oferecer explicações claras para que cada leitor possa aprender no próprio ritmo, praticar o que descobriu e avançar gradualmente em sua jornada." %}
         </p>
 
-        <h2>Aprender através de bugs e soluções</h2>
+        <h2>{% translate "Aprender através de bugs e soluções" %}</h2>
 
         <p>
-            Errar faz parte do desenvolvimento. Investigar um problema,
-            entender suas causas e encontrar uma solução são etapas
-            importantes do aprendizado em programação.
+            {% translate "Errar faz parte do desenvolvimento. Investigar um problema, entender suas causas e encontrar uma solução são etapas importantes do aprendizado em programação." %}
         </p>
 
         <p>
-            É essa ideia que inspira o nome
-            <strong>Entre Bugs e Soluções</strong>: compartilhar
-            experiências e conhecimentos que ajudem outras pessoas
-            a superar dificuldades e evoluir.
+            {% translate "É essa ideia que inspira o nome" %}
+            <strong>{% translate "Entre Bugs e Soluções" %}</strong>:
+            {% translate "compartilhar experiências e conhecimentos que ajudem outras pessoas a superar dificuldades e evoluir." %}
         </p>
 
-        <h2>Vamos aprender juntos?</h2>
+        <h2>{% translate "Vamos aprender juntos?" %}</h2>
 
         <p>
-            Explore os artigos do blog, descubra novos conteúdos e
-            coloque o conhecimento em prática. Estamos aqui para
-            tornar a programação e a tecnologia mais acessíveis.
+            {% translate "Explore os artigos do blog, descubra novos conteúdos e coloque o conhecimento em prática. Estamos aqui para tornar a programação e a tecnologia mais acessíveis." %}
         </p>
 
         <p>
             <a href="{% url 'blog:post_list' %}">
-                Explore nossos artigos
+                {% translate "Explore nossos artigos" %}
             </a>
         </p>
 

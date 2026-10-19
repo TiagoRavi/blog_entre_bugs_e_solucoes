@@ -53,6 +53,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",  # NOVO
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -98,13 +99,27 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+
 # ======================================================
 # I18N / TIMEZONE
 # ======================================================
 LANGUAGE_CODE = "pt-br"
+
+LANGUAGES = [
+    ("pt-br", "Português"),
+    ("en", "English"),
+    ("es", "Español"),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
+
 TIME_ZONE = "America/Sao_Paulo"
+
 USE_I18N = True
 USE_TZ = True
+
 
 # ======================================================
 # STATIC FILES (WhiteNoise)

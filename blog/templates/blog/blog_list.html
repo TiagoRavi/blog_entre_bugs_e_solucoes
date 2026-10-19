@@ -1,31 +1,33 @@
+
 {% extends "base.html" %}
-{% load static %}
+{% load i18n %}
 
 {% block title %}
-Entre Bugs e Soluções | Blog
+Entre Bugs e Soluções | {% trans "Blog" %}
 {% endblock %}
 
 {% block meta_description %}
-Artigos sobre programação, estudos práticos, bugs reais e soluções aplicadas no dia a dia.
+{% trans "Artigos sobre programação, estudos práticos, bugs reais e soluções aplicadas no dia a dia." %}
 {% endblock %}
 
 {% block content %}
 
 <section class="blog-header container">
-  <h1 class="blog-title">Artigos</h1>
-  <p class="blog-subtitle">
-    Conteúdo prático sobre programação, bugs reais e soluções aplicadas
-  </p>
+    <h1 class="blog-title">{% trans "Artigos" %}</h1>
+
+    <p class="blog-subtitle">
+        {% trans "Conteúdo prático sobre programação, bugs reais e soluções aplicadas" %}
+    </p>
 </section>
 
 <section class="posts-section container">
 
-  {% if posts %}
-    {% include "blog/includes/post_grid.html" %}
-    {% include "blog/includes/pagination.html" %}
-  {% else %}
-    <p>Nenhum post publicado ainda.</p>
-  {% endif %}
+    {% if posts %}
+        {% include "blog/includes/post_grid.html" %}
+        {% include "blog/includes/pagination.html" %}
+    {% else %}
+        <p>{% trans "Nenhum post publicado ainda." %}</p>
+    {% endif %}
 
 </section>
 

@@ -1,4 +1,6 @@
+
 {% load static %}
+{% load i18n %}
 
 {% if post.author %}
 <section class="author-box">
@@ -6,7 +8,7 @@
     <a
         class="author-box__link"
         href="{% url 'pages:about' %}"
-        aria-label="Conheça {{ post.author.get_full_name|default:post.author.username }}"
+        aria-label="{% blocktrans with author_name=post.author.get_full_name|default:post.author.username %}Conheça {{ author_name }}{% endblocktrans %}"
     >
         <div class="author-box__avatar">
             {% if post.author.profile.image %}
@@ -35,14 +37,15 @@
                 </p>
             {% else %}
                 <p class="author-box__bio">
-                    Conheça o autor e confira seus artigos sobre tecnologia e programação.
+                    {% trans "Conheça o autor e confira seus artigos sobre tecnologia e programação." %}
                 </p>
             {% endif %}
 
             <span class="author-box__cta">
-                Conheça o autor →
+                {% trans "Conheça o autor" %} &rarr;
             </span>
         </div>
     </a>
+
 </section>
 {% endif %}

@@ -1,25 +1,27 @@
+
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
 {{ category.name }} | Entre Bugs e Soluções
 {% endblock %}
 
 {% block meta_description %}
-Artigos sobre {{ category.name }} no blog Entre Bugs e Soluções.
+{% blocktrans with category_name=category.name %}Artigos sobre {{ category_name }} no blog Entre Bugs e Soluções.{% endblocktrans %}
 {% endblock %}
 
 {% block content %}
 
 <section class="posts-section container">
 
-  <h1>{{ category.name }}</h1>
+    <h1>{{ category.name }}</h1>
 
-  {% if posts %}
-    {% include "blog/includes/post_grid.html" %}
-    {% include "blog/includes/pagination.html" %}
-  {% else %}
-    <p>Nenhum post nesta categoria ainda.</p>
-  {% endif %}
+    {% if posts %}
+        {% include "blog/includes/post_grid.html" %}
+        {% include "blog/includes/pagination.html" %}
+    {% else %}
+        <p>{% trans "Nenhum post nesta categoria ainda." %}</p>
+    {% endif %}
 
 </section>
 

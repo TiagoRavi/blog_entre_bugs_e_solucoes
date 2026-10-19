@@ -1,11 +1,11 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
-Termos de Uso | Entre Bugs e Soluções
+{% translate "Termos de Uso | Entre Bugs e Soluções" %}
 {% endblock %}
 
 {% block extra_head %}
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -23,260 +23,215 @@ Termos de Uso | Entre Bugs e Soluções
   }
 }
 </script>
-
 {% endblock %}
 
 {% block content %}
 <section class="container post-detail">
-
   <div class="post-content-box">
 
-    <h1>Termos de Uso – Entre Bugs e Soluções</h1>
+    <h1>{% translate "Termos de Uso – Entre Bugs e Soluções" %}</h1>
 
     <p>
-      Bem-vindo ao site <strong>Entre Bugs e Soluções</strong>.
-      Ao acessar ou utilizar este site, você declara estar ciente destes
-      Termos de Uso. Caso não concorde com as condições aqui apresentadas,
-      recomendamos que não utilize o site.
+      {% translate "Bem-vindo ao site" %}
+      <strong>Entre Bugs e Soluções</strong>.
+      {% translate "Ao acessar ou utilizar este site, você declara estar ciente destes Termos de Uso. Caso não concorde com as condições aqui apresentadas, recomendamos que não utilize o site." %}
     </p>
 
     <p>
-      Este documento estabelece as regras gerais para utilização do site,
-      bem como informações sobre responsabilidades, direitos e condições
-      relacionadas ao acesso aos conteúdos disponibilizados.
+      {% translate "Este documento estabelece as regras gerais para utilização do site, bem como informações sobre responsabilidades, direitos e condições relacionadas ao acesso aos conteúdos disponibilizados." %}
     </p>
 
-    <h2>1. Aceitação dos termos</h2>
+    <h2>{% translate "1. Aceitação dos termos" %}</h2>
 
     <p>
-      Ao acessar, navegar ou utilizar qualquer conteúdo do site
-      <strong>Entre Bugs e Soluções</strong>, o usuário declara que leu,
-      compreendeu e concorda com estes Termos de Uso e reconhece que o
-      tratamento de dados pessoais é realizado conforme a
+      {% translate "Ao acessar, navegar ou utilizar qualquer conteúdo do site" %}
+      <strong>Entre Bugs e Soluções</strong>,
+      {% translate "o usuário declara que leu, compreendeu e concorda com estes Termos de Uso e reconhece que o tratamento de dados pessoais é realizado conforme a" %}
       <a href="{% url 'pages:privacy' %}">
-        Política de Privacidade
+        {% translate "Política de Privacidade" %}
       </a>.
     </p>
 
     <p>
-      Estes Termos de Uso podem ser atualizados sempre que necessário para
-      refletir alterações nas funcionalidades do site, nos conteúdos
-      disponibilizados ou nas práticas adotadas.
+      {% translate "Estes Termos de Uso podem ser atualizados sempre que necessário para refletir alterações nas funcionalidades do site, nos conteúdos disponibilizados ou nas práticas adotadas." %}
     </p>
 
-    <h2>2. Objetivo do site</h2>
+    <h2>{% translate "2. Objetivo do site" %}</h2>
 
     <p>
-      O site <strong>Entre Bugs e Soluções</strong> tem como objetivo
-      disponibilizar conteúdos informativos, educacionais e opinativos
-      relacionados principalmente a:
-    </p>
-
-    <ul>
-      <li>Tecnologia;</li>
-      <li>Programação;</li>
-      <li>Internet;</li>
-      <li>Ferramentas digitais;</li>
-      <li>Desenvolvimento e aprendizado de programação;</li>
-      <li>Boas práticas no ambiente online.</li>
-    </ul>
-
-    <p>
-      Os conteúdos são disponibilizados para fins informativos e educacionais
-      e não substituem orientação profissional especializada quando esta for
-      necessária.
-    </p>
-
-    <h2>3. Uso adequado do site</h2>
-
-    <p>
-      Ao utilizar o site, o usuário compromete-se a:
+      {% translate "O site" %}
+      <strong>Entre Bugs e Soluções</strong>
+      {% translate "tem como objetivo disponibilizar conteúdos informativos, educacionais e opinativos relacionados principalmente a:" %}
     </p>
 
     <ul>
-      <li>Respeitar a legislação vigente;</li>
-      <li>Não praticar atos ilícitos;</li>
-      <li>Não tentar obter acesso não autorizado a sistemas ou servidores;</li>
-      <li>Não utilizar o site para atividades fraudulentas ou prejudiciais;</li>
-      <li>Não copiar ou reproduzir conteúdos protegidos sem autorização;</li>
-      <li>Não utilizar o site para finalidades que possam prejudicar seu funcionamento ou outros usuários.</li>
+      <li>{% translate "Tecnologia;" %}</li>
+      <li>{% translate "Programação;" %}</li>
+      <li>{% translate "Internet;" %}</li>
+      <li>{% translate "Ferramentas digitais;" %}</li>
+      <li>{% translate "Desenvolvimento e aprendizado de programação;" %}</li>
+      <li>{% translate "Boas práticas no ambiente online." %}</li>
     </ul>
 
     <p>
-      O uso indevido do site poderá resultar na adoção de medidas cabíveis,
-      incluindo a restrição de acesso quando tecnicamente possível e
-      juridicamente aplicável.
+      {% translate "Os conteúdos são disponibilizados para fins informativos e educacionais e não substituem orientação profissional especializada quando esta for necessária." %}
     </p>
 
-    <h2>4. Propriedade intelectual</h2>
+    <h2>{% translate "3. Uso adequado do site" %}</h2>
+
+    <p>{% translate "Ao utilizar o site, o usuário compromete-se a:" %}</p>
+
+    <ul>
+      <li>{% translate "Respeitar a legislação vigente;" %}</li>
+      <li>{% translate "Não praticar atos ilícitos;" %}</li>
+      <li>{% translate "Não tentar obter acesso não autorizado a sistemas ou servidores;" %}</li>
+      <li>{% translate "Não utilizar o site para atividades fraudulentas ou prejudiciais;" %}</li>
+      <li>{% translate "Não copiar ou reproduzir conteúdos protegidos sem autorização;" %}</li>
+      <li>{% translate "Não utilizar o site para finalidades que possam prejudicar seu funcionamento ou outros usuários." %}</li>
+    </ul>
 
     <p>
-      Os conteúdos originais disponibilizados no site, incluindo textos,
-      imagens, logotipos, vídeos, materiais gráficos e demais elementos
-      produzidos para a plataforma, são protegidos pela legislação aplicável
-      de propriedade intelectual.
+      {% translate "O uso indevido do site poderá resultar na adoção de medidas cabíveis, incluindo a restrição de acesso quando tecnicamente possível e juridicamente aplicável." %}
     </p>
 
-    <p>
-      É permitido acessar, visualizar e utilizar os conteúdos para fins
-      pessoais e educacionais, desde que sejam respeitados os direitos
-      autorais e que a fonte seja indicada quando houver reprodução
-      autorizada.
-    </p>
+    <h2>{% translate "4. Propriedade intelectual" %}</h2>
 
     <p>
-      A reprodução, distribuição, comercialização ou utilização de conteúdo
-      protegido de forma que ultrapasse os limites permitidos pela legislação
-      depende de autorização prévia, quando exigida.
-    </p>
-
-    <h2>5. Isenção de responsabilidade</h2>
-
-    <p>
-      As informações publicadas no site são produzidas com base em estudos,
-      experiências, pesquisas e referências utilizadas durante a elaboração
-      dos conteúdos.
+      {% translate "Os conteúdos originais disponibilizados no site, incluindo textos, imagens, logotipos, vídeos, materiais gráficos e demais elementos produzidos para a plataforma, são protegidos pela legislação aplicável de propriedade intelectual." %}
     </p>
 
     <p>
-      Apesar dos esforços para manter as informações corretas e atualizadas,
-      não é possível garantir que todo conteúdo esteja permanentemente livre
-      de erros, omissões ou desatualizações.
+      {% translate "É permitido acessar, visualizar e utilizar os conteúdos para fins pessoais e educacionais, desde que sejam respeitados os direitos autorais e que a fonte seja indicada quando houver reprodução autorizada." %}
     </p>
 
     <p>
-      O usuário é responsável por avaliar as informações disponibilizadas e
-      verificar sua adequação antes de utilizá-las em situações específicas,
-      especialmente quando houver consequências técnicas, financeiras ou
-      profissionais.
+      {% translate "A reprodução, distribuição, comercialização ou utilização de conteúdo protegido de forma que ultrapasse os limites permitidos pela legislação depende de autorização prévia, quando exigida." %}
     </p>
 
-    <h2>6. Comentários e interações</h2>
+    <h2>{% translate "5. Isenção de responsabilidade" %}</h2>
 
     <p>
-      O site poderá disponibilizar recursos para comentários e outras
-      interações dos usuários.
+      {% translate "As informações publicadas no site são produzidas com base em estudos, experiências, pesquisas e referências utilizadas durante a elaboração dos conteúdos." %}
     </p>
 
     <p>
-      Ao utilizar esses recursos, o usuário é responsável pelo conteúdo que
-      publicar e compromete-se a:
+      {% translate "Apesar dos esforços para manter as informações corretas e atualizadas, não é possível garantir que todo conteúdo esteja permanentemente livre de erros, omissões ou desatualizações." %}
+    </p>
+
+    <p>
+      {% translate "O usuário é responsável por avaliar as informações disponibilizadas e verificar sua adequação antes de utilizá-las em situações específicas, especialmente quando houver consequências técnicas, financeiras ou profissionais." %}
+    </p>
+
+    <h2>{% translate "6. Comentários e interações" %}</h2>
+
+    <p>
+      {% translate "O site poderá disponibilizar recursos para comentários e outras interações dos usuários." %}
+    </p>
+
+    <p>
+      {% translate "Ao utilizar esses recursos, o usuário é responsável pelo conteúdo que publicar e compromete-se a:" %}
     </p>
 
     <ul>
-      <li>Não publicar conteúdo ilegal ou que viole direitos de terceiros;</li>
-      <li>Não publicar conteúdo ofensivo, discriminatório ou abusivo;</li>
-      <li>Não utilizar os recursos para spam ou divulgação indevida;</li>
-      <li>Respeitar os demais usuários.</li>
+      <li>{% translate "Não publicar conteúdo ilegal ou que viole direitos de terceiros;" %}</li>
+      <li>{% translate "Não publicar conteúdo ofensivo, discriminatório ou abusivo;" %}</li>
+      <li>{% translate "Não utilizar os recursos para spam ou divulgação indevida;" %}</li>
+      <li>{% translate "Respeitar os demais usuários." %}</li>
     </ul>
 
     <p>
-      Conteúdos que violem estes Termos de Uso ou a legislação aplicável
-      poderão ser removidos.
+      {% translate "Conteúdos que violem estes Termos de Uso ou a legislação aplicável poderão ser removidos." %}
     </p>
 
-    <h2>7. Links para sites de terceiros</h2>
+    <h2>{% translate "7. Links para sites de terceiros" %}</h2>
 
     <p>
-      O site pode conter links para páginas, serviços e plataformas de
-      terceiros.
-    </p>
-
-    <p>
-      Esses links são disponibilizados para facilitar o acesso a informações
-      ou serviços externos. O <strong>Entre Bugs e Soluções</strong> não
-      controla necessariamente o conteúdo, as políticas de privacidade ou as
-      práticas desses terceiros.
+      {% translate "O site pode conter links para páginas, serviços e plataformas de terceiros." %}
     </p>
 
     <p>
-      Recomendamos que o usuário consulte os termos de uso e as políticas de
-      privacidade dos sites externos antes de utilizá-los.
-    </p>
-
-    <h2>8. Modificações no site</h2>
-
-    <p>
-      O <strong>Entre Bugs e Soluções</strong> poderá modificar, atualizar,
-      suspender ou encerrar conteúdos e funcionalidades do site sempre que
-      necessário.
+      {% translate "Esses links são disponibilizados para facilitar o acesso a informações ou serviços externos. O" %}
+      <strong>Entre Bugs e Soluções</strong>
+      {% translate "não controla necessariamente o conteúdo, as políticas de privacidade ou as práticas desses terceiros." %}
     </p>
 
     <p>
-      Também poderão ocorrer períodos de indisponibilidade decorrentes de
-      manutenção, atualizações, problemas técnicos, falhas de terceiros ou
-      outros fatores fora do controle do responsável pelo site.
+      {% translate "Recomendamos que o usuário consulte os termos de uso e as políticas de privacidade dos sites externos antes de utilizá-los." %}
     </p>
 
-    <h2>9. Limitação de responsabilidade</h2>
+    <h2>{% translate "8. Modificações no site" %}</h2>
 
     <p>
-      Dentro dos limites permitidos pela legislação aplicável, o
-      <strong>Entre Bugs e Soluções</strong> não se responsabiliza por
-      prejuízos decorrentes de:
+      {% translate "O" %}
+      <strong>Entre Bugs e Soluções</strong>
+      {% translate "poderá modificar, atualizar, suspender ou encerrar conteúdos e funcionalidades do site sempre que necessário." %}
+    </p>
+
+    <p>
+      {% translate "Também poderão ocorrer períodos de indisponibilidade decorrentes de manutenção, atualizações, problemas técnicos, falhas de terceiros ou outros fatores fora do controle do responsável pelo site." %}
+    </p>
+
+    <h2>{% translate "9. Limitação de responsabilidade" %}</h2>
+
+    <p>
+      {% translate "Dentro dos limites permitidos pela legislação aplicável, o" %}
+      <strong>Entre Bugs e Soluções</strong>
+      {% translate "não se responsabiliza por prejuízos decorrentes de:" %}
     </p>
 
     <ul>
-      <li>Interpretação ou utilização inadequada das informações publicadas;</li>
-      <li>Falhas técnicas ou indisponibilidade temporária do site;</li>
-      <li>Problemas causados por serviços ou plataformas de terceiros;</li>
-      <li>Alterações ou indisponibilidade de conteúdos externos acessados por meio de links;</li>
-      <li>Decisões tomadas exclusivamente com base nos conteúdos disponibilizados.</li>
+      <li>{% translate "Interpretação ou utilização inadequada das informações publicadas;" %}</li>
+      <li>{% translate "Falhas técnicas ou indisponibilidade temporária do site;" %}</li>
+      <li>{% translate "Problemas causados por serviços ou plataformas de terceiros;" %}</li>
+      <li>{% translate "Alterações ou indisponibilidade de conteúdos externos acessados por meio de links;" %}</li>
+      <li>{% translate "Decisões tomadas exclusivamente com base nos conteúdos disponibilizados." %}</li>
     </ul>
 
     <p>
-      Nenhuma disposição destes Termos pretende excluir ou limitar
-      responsabilidades que não possam ser afastadas ou limitadas pela
-      legislação brasileira.
+      {% translate "Nenhuma disposição destes Termos pretende excluir ou limitar responsabilidades que não possam ser afastadas ou limitadas pela legislação brasileira." %}
     </p>
 
-    <h2>10. Privacidade dos usuários</h2>
+    <h2>{% translate "10. Privacidade dos usuários" %}</h2>
 
     <p>
-      O tratamento de dados pessoais realizado pelo site é descrito na
+      {% translate "O tratamento de dados pessoais realizado pelo site é descrito na" %}
       <a href="{% url 'pages:privacy' %}">
-        Política de Privacidade
+        {% translate "Política de Privacidade" %}
       </a>.
     </p>
 
     <p>
-      A Política de Privacidade apresenta informações sobre coleta, utilização,
-      armazenamento, compartilhamento e proteção de dados pessoais, bem como
-      sobre os direitos dos titulares previstos na legislação aplicável.
+      {% translate "A Política de Privacidade apresenta informações sobre coleta, utilização, armazenamento, compartilhamento e proteção de dados pessoais, bem como sobre os direitos dos titulares previstos na legislação aplicável." %}
     </p>
 
-    <h2>11. Legislação aplicável</h2>
+    <h2>{% translate "11. Legislação aplicável" %}</h2>
 
     <p>
-      Estes Termos de Uso são regidos pelas leis da República Federativa do
-      Brasil.
+      {% translate "Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil." %}
     </p>
 
     <p>
-      Eventuais questões relacionadas à utilização do site serão tratadas de
-      acordo com a legislação brasileira e, quando aplicável, pelos órgãos e
-      autoridades competentes.
+      {% translate "Eventuais questões relacionadas à utilização do site serão tratadas de acordo com a legislação brasileira e, quando aplicável, pelos órgãos e autoridades competentes." %}
     </p>
 
-    <h2>12. Contato</h2>
+    <h2>{% translate "12. Contato" %}</h2>
 
     <p>
-      Em caso de dúvidas, sugestões ou questões relacionadas a estes Termos
-      de Uso, entre em contato:
+      {% translate "Em caso de dúvidas, sugestões ou questões relacionadas a estes Termos de Uso, entre em contato:" %}
     </p>
 
     <p>
-      <strong>E-mail:</strong>
+      <strong>{% translate "E-mail:" %}</strong>
       <a href="mailto:tiagodesousacosta2024@gmail.com">
         tiagodesousacosta2024@gmail.com
       </a>
     </p>
 
     <p>
-      <strong>Última atualização:</strong> 5 de outubro de 2026
+      <strong>{% translate "Última atualização:" %}</strong>
+      {% translate "5 de outubro de 2026" %}
     </p>
 
   </div>
-
 </section>
 {% endblock %}

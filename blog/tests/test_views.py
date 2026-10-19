@@ -2,8 +2,9 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError, transaction
 
-from blog.models import Post, Category
+from blog.models import Post, PostTranslation, Category
 
 
 class BlogViewsTest(TestCase):
@@ -73,3 +74,49 @@ class PostDetailViewTest(TestCase):
         self.assertIn("related_videos", response.context)
 
 
+
+class PostTranslationModelTest(TestCase):
+    def setUp(self):
+        self.category = Category.objects.create(name="Python")
+
+        self.post = Post.objects.create(
+            title="Expressões em Python",
+            content="<p>Conteúdo original</p>",
+            category=self.category,
+            status=Post.Status.PUBLISHED,
+            published_at=timezone.now(),
+        )
+
+    def test_translation_can_be_created(self):
+        translation = PostTranslation.objects.create(
+            post=self.post,
+            language="en",
+            title="Python Expressions",
+            slug="python-expressions",
+            excerpt="Learn Python expressions.",
+            content="<p>Translated content</p>",
+        )
+
+        self.assertEqual(translation.post, self.post)
+        self.assertEqual(translation.language, "en")
+        self.assertEqual(translation.slug, "python-expressions")
+
+    
+    def test_post_can_have_one_translation_per_language(self):
+        PostTranslation.objects.create(
+            post=self.post,
+            language="en",
+            title="Python Expressions",
+            slug="python-expressions",
+            content="<p>Translated content</p>",
+        )
+
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                PostTranslation.objects.create(
+                    post=self.post,
+                    language="en",
+                    title="Python Expressions 2",
+                    slug="python-expressions-2",
+                    content="<p>Another translation</p>",
+                )

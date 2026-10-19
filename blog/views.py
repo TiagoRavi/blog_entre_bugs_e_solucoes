@@ -1,10 +1,15 @@
+
+from copy import copy
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
+from django.utils.translation import get_language
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
-
 
 from .models import Category, Post
 from .selectors import (
@@ -13,37 +18,31 @@ from .selectors import (
     get_published_posts,
     get_related_posts,
     get_related_video_posts,
+    get_post_translation_by_slug,
 )
 
 # ======================================================
 # HOME
 # ======================================================
+
 @method_decorator(cache_page(60 * 15), name="dispatch")
 class HomeView(ListView):
     """
     Página inicial do blog.
-
-    Responsabilidade:
-    - Exibir os últimos posts publicados
-    - NÃO definir regras de query complexas
+    Exibe os últimos posts publicados.
     """
 
     template_name = "blog/home.html"
     context_object_name = "posts"
 
     def get_queryset(self):
-        """
-        Retorna os 6 posts mais recentes.
-
-        A regra de consulta fica centralizada
-        no selector.
-        """
         return get_latest_published_posts(limit=6)
 
 
 # ======================================================
 # LISTAGEM DO BLOG + BUSCA
 # ======================================================
+
 @method_decorator(cache_page(60 * 10), name="dispatch")
 class BlogListView(ListView):
     """
@@ -67,62 +66,121 @@ class BlogListView(ListView):
 
         return queryset
 
+
 # ======================================================
 # DETALHE DO POST
 # ======================================================
+
 @method_decorator(cache_page(60 * 15), name="dispatch")
 class PostDetailView(DetailView):
-    """
-    Página de detalhe do post.
-
-    Responsabilidades:
-    - Exibir apenas posts publicados
-    - Injetar posts relacionados
-    - Injetar playlist de vídeos (quando existir)
-    """
-
     model = Post
     template_name = "blog/post_detail.html"
     context_object_name = "post"
 
     def get_queryset(self):
-        """
-        Retorna apenas posts publicados
-        com relações otimizadas.
-        """
         return (
             get_published_posts()
             .select_related("category", "author")
         )
 
+    def get_object(self, queryset=None):
+        language = (get_language() or "pt-br").lower()
+        slug = self.kwargs["slug"]
+
+        self.translation = None
+        self.original_post = None
+
+        if language == "pt-br":
+            post = get_object_or_404(
+                self.get_queryset(),
+                slug=slug,
+            )
+            self.original_post = post
+            return post
+
+        if language not in {"en", "es"}:
+            raise Http404("Idioma não suportado.")
+
+        translation = get_post_translation_by_slug(
+            slug=slug,
+            language=language,
+        )
+
+        if translation is None:
+            raise Http404("Artigo traduzido não encontrado.")
+
+        original_post = translation.post
+        self.original_post = original_post
+
+        # Copia o objeto para não sobrescrever os campos originais.
+        post = copy(original_post)
+        post.title = translation.title
+        post.slug = translation.slug
+        post.excerpt = translation.excerpt
+        post.content = translation.content
+
+        self.translation = translation
+        return post
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         post = self.object
+        original_post = self.original_post or post
 
-        # Posts relacionados (texto)
+        # Usa o artigo original para buscar conteúdo relacionado.
         context["related_posts"] = get_related_posts(
-            post=post,
+            post=original_post,
             limit=3,
         )
 
-        # Playlist de vídeos (somente se o post tiver vídeo)
         context["related_videos"] = []
 
-        if post.youtube_video_id:
+        if original_post.youtube_video_id:
             context["related_videos"] = get_related_video_posts(
-                post=post,
+                post=original_post,
                 limit=3,
             )
 
-        # Flag de layout
         context["is_post_detail"] = True
+        context["translation"] = self.translation
+        context["original_post"] = original_post
+
+        site_url = getattr(
+            settings,
+            "SITE_URL",
+            "https://entrebugsesolucoes.com.br",
+        ).rstrip("/")
+
+        language_alternates = [
+            {
+                "language": "pt-br",
+                "url": f"{site_url}/posts/{original_post.slug}/",
+            }
+        ]
+
+        for item in original_post.translations.all():
+            if item.language not in {"en", "es"}:
+                continue
+
+            language_alternates.append({
+                "language": item.language,
+                "url": (
+                    f"{site_url}/{item.language}/posts/"
+                    f"{item.slug}/"
+                ),
+            })
+
+        context["language_alternates"] = language_alternates
+        context["site_url"] = site_url
 
         return context
+
 
 # ======================================================
 # LISTAGEM POR CATEGORIA
 # ======================================================
+
 @method_decorator(cache_page(60 * 10), name="dispatch")
 class CategoryPostListView(ListView):
     """
@@ -147,19 +205,15 @@ class CategoryPostListView(ListView):
         return context
 
 
-
 # ======================================================
 # PÁGINA DO AUTOR
 # ======================================================
+
 @method_decorator(cache_page(60 * 10), name="dispatch")
 class AuthorDetailView(ListView):
     """
     Página pública do autor.
-
-    Responsabilidades:
-    - Exibir somente artigos publicados pelo autor
-    - Apresentar os dados públicos do perfil
-    - Paginar os artigos
+    Exibe artigos publicados, perfil público e paginação.
     """
 
     template_name = "blog/author_detail.html"

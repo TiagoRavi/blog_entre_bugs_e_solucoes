@@ -1,4 +1,6 @@
+
 {% load static %}
+{% load i18n %}
 
 <section class="hero-full">
 
@@ -24,7 +26,7 @@
     <!-- MOBILE -->
     <img
       src="{% static 'img/hero/hero-mobile.webp' %}"
-      alt="Entre Bugs e Soluções - Programação prática e soluções reais"
+      alt="{% translate 'Entre Bugs e Soluções - Programação prática e soluções reais' %}"
       class="hero-image"
       loading="eager"
       decoding="async"
@@ -33,25 +35,26 @@
 
   <div class="hero-overlay"></div>
 
-  <!-- 🔥 CONTEÚDO DO HERO -->
+  <!-- CONTEÚDO DO HERO -->
   <div class="hero-content">
-    
     <div class="hero-brand">
       <span class="hero-code">&lt;/&gt;</span>
-      <span class="hero-brand-text">ENTRE BUGS<br>E SOLUÇÕES</span>
+      <span class="hero-brand-text">
+        {% translate "ENTRE BUGS" %}<br>
+        {% translate "E SOLUÇÕES" %}
+      </span>
     </div>
 
     <h1 class="hero-title">
-      Domine programação<br>
-      com <span>aprendizado prático</span>
+      {% translate "Domine programação" %}<br>
+      {% translate "com" %} <span>{% translate "aprendizado prático" %}</span>
     </h1>
 
     <p class="hero-subtitle">
-      Dicas, tutoriais e soluções reais<br>
-      para desenvolvedores.
+      {% translate "Dicas, tutoriais e soluções reais" %}<br>
+      {% translate "para desenvolvedores." %}
     </p>
 
   </div>
 
 </section>
-

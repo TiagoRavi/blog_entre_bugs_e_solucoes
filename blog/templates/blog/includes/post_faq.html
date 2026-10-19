@@ -1,16 +1,20 @@
+
+{% load i18n %}
+
 {% if post.faqs.exists %}
 <section class="post-faq" aria-labelledby="faq-title">
-  <h2 id="faq-title">Perguntas frequentes</h2>
+    <h2 id="faq-title">{% trans "Perguntas frequentes" %}</h2>
 
-  {% for faq in post.faqs.all %}
-    <details class="faq-item">
-      <summary class="faq-question">
-        {{ faq.question }}
-      </summary>
-      <div class="faq-answer">
-        {{ faq.answer|safe }}
-      </div>
-    </details>
-  {% endfor %}
+    {% for faq in post.faqs.all %}
+        <details class="faq-item">
+            <summary class="faq-question">
+                {{ faq.question }}
+            </summary>
+
+            <div class="faq-answer">
+                {{ faq.answer|safe }}
+            </div>
+        </details>
+    {% endfor %}
 </section>
 {% endif %}

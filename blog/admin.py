@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Post, Category, FAQ, CTA
+from .models import (
+    Post,
+    PostTranslation,
+    Category,
+    FAQ,
+    CTA,
+)
 
 
 # ======================================================
@@ -124,3 +130,37 @@ class CTAAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
     search_fields = ("title", "anchor_text", "url")
     ordering = ("-created_at",)
+
+
+# ======================================================
+# POST TRANSLATION ADMIN
+# ======================================================
+@admin.register(PostTranslation)
+class PostTranslationAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "post",
+        "language",
+        "slug",
+        "updated_at",
+    )
+
+    list_filter = ("language",)
+    search_fields = (
+        "title",
+        "slug",
+        "post__title",
+    )
+
+    autocomplete_fields = ("post",)
+
+    fields = (
+        "post",
+        "language",
+        "title",
+        "slug",
+        "excerpt",
+        "content",
+    )
+
+    prepopulated_fields = {"slug": ("title",)}

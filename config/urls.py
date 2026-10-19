@@ -2,18 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import (
-    TemplateView,
-    RedirectView,
-)
-from django.http import (
-    JsonResponse,
-    HttpResponse,
-)
+from django.conf.urls.i18n import i18n_patterns
+from django.views.generic import TemplateView, RedirectView
+from django.http import JsonResponse, HttpResponse
 from django.contrib.sitemaps.views import sitemap
-from django.contrib.staticfiles.storage import (
-    staticfiles_storage,
-)
+from django.contrib.staticfiles.storage import staticfiles_storage
+from pages.language import switch_language
 
 from blog.sitemaps import (
     PostSitemap,
@@ -24,6 +18,7 @@ from blog.sitemaps import (
 )
 
 from config.tinymce_upload import tinymce_upload
+
 
 # =========================================================
 # HEALTHCHECK
@@ -42,6 +37,7 @@ def indexnow_key(_request):
         "b7360389d77240f3940b63ae081517d9",
         content_type="text/plain",
     )
+
 
 def ads_txt(_request):
     return HttpResponse(
@@ -62,47 +58,33 @@ sitemaps = {
     "static_pages": StaticPagesSitemap,
 }
 
+
 # =========================================================
-# URLS
+# URLS SEM PREFIXO DE IDIOMA
 # =========================================================
 
 urlpatterns = [
-    # -----------------------------------------------------
     # ADMIN
-    # -----------------------------------------------------
     path("admin/", admin.site.urls),
 
-    # -----------------------------------------------------
-    # HEALTHCHECK
-    # -----------------------------------------------------
-    path(
-        "health/",
-        healthcheck,
-        name="healthcheck",
-    ),
+    # INTERNACIONALIZAÇÃO
+    path("i18n/switch/", switch_language, name="switch_language"),
+    path("i18n/", include("django.conf.urls.i18n")),
 
-    # -----------------------------------------------------
+    # HEALTHCHECK
+    path("health/", healthcheck, name="healthcheck"),
+
     # INDEXNOW
-    # -----------------------------------------------------
     path(
         "b7360389d77240f3940b63ae081517d9.txt",
         indexnow_key,
         name="indexnow-key",
     ),
 
-    # -----------------------------------------------------
     # ADS.TXT
-    # -----------------------------------------------------
+    path("ads.txt", ads_txt, name="ads-txt"),
 
-    path(
-        "ads.txt",
-        ads_txt,
-        name="ads-txt",
-    ),
-
-    # -----------------------------------------------------
     # ROBOTS
-    # -----------------------------------------------------
     path(
         "robots.txt",
         TemplateView.as_view(
@@ -112,9 +94,7 @@ urlpatterns = [
         name="robots-txt",
     ),
 
-    # -----------------------------------------------------
     # SITEMAP
-    # -----------------------------------------------------
     path(
         "sitemap.xml",
         sitemap,
@@ -122,46 +102,15 @@ urlpatterns = [
         name="sitemap",
     ),
 
-    # -----------------------------------------------------
     # TINYMCE
-    # -----------------------------------------------------
-    path(
-        "tinymce/upload/",
-        tinymce_upload,
-        name="tinymce-upload",
-    ),
+    path("tinymce/upload/", tinymce_upload, name="tinymce-upload"),
+    path("tinymce/", include("tinymce.urls")),
 
-    path(
-        "tinymce/",
-        include("tinymce.urls"),
-    ),
+    # EBOOKS E NEWSLETTER MANTIDOS SEM PREFIXO DE IDIOMA
+    path("ebooks/", include("ebooks.urls")),
+    path("newsletter/", include("newsletter.urls")),
 
-    # -----------------------------------------------------
-    # APPS
-    # -----------------------------------------------------
-    path(
-        "",
-        include("blog.urls"),
-    ),
-
-    path(
-        "",
-        include("pages.urls"),
-    ),
-
-    path(
-        "ebooks/",
-        include("ebooks.urls"),
-    ),
-
-    path(
-        "newsletter/",
-        include("newsletter.urls"),
-    ),
-
-    # -----------------------------------------------------
     # FAVICON
-    # -----------------------------------------------------
     path(
         "favicon.ico",
         RedirectView.as_view(
@@ -170,6 +119,24 @@ urlpatterns = [
         ),
     ),
 ]
+
+
+# =========================================================
+# ROTAS PÚBLICAS
+# =========================================================
+
+# Páginas institucionais com caminhos explícitos por idioma
+urlpatterns += [
+    path("", include("pages.urls")),
+]
+
+# Blog internacionalizado:
+# Português sem prefixo; inglês com /en/; espanhol com /es/
+urlpatterns += i18n_patterns(
+    path("", include("blog.urls")),
+    prefix_default_language=False,
+)
+
 
 # =========================================================
 # MEDIA FILES (DEV ONLY)
@@ -181,10 +148,10 @@ if settings.DEBUG:
         document_root=settings.MEDIA_ROOT,
     )
 
+
 # =========================================================
 # CUSTOM ERROR HANDLERS
 # =========================================================
 
 handler404 = "pages.views.handler404"
-
 handler500 = "pages.views.handler500"

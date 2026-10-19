@@ -1,3 +1,6 @@
+
+{% load i18n %}
+
 <section
   class="home-ebooks-cta"
   aria-labelledby="home-ebooks-title"
@@ -7,23 +10,25 @@
     <div class="home-ebooks-cta-content">
 
       <span class="home-ebooks-eyebrow">
-        EBOOKS
+        {% translate "EBOOKS" %}
       </span>
 
       <h2 id="home-ebooks-title">
-        Aprenda programação com materiais premium
+        {% translate "Aprenda programação com materiais premium" %}
       </h2>
 
       <p>
-        Ebooks práticos sobre Python, Django e programação
-        para você estudar no seu ritmo.
+        {% blocktranslate %}
+          Ebooks práticos sobre Python, Django e programação
+          para você estudar no seu ritmo.
+        {% endblocktranslate %}
       </p>
 
       <a
         href="{% url 'ebooks:index' %}"
         class="home-ebooks-cta-link"
       >
-        Ver ebooks gratuitos →
+        {% translate "Ver ebooks gratuitos" %} →
       </a>
 
     </div>

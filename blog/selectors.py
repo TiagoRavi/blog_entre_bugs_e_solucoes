@@ -1,8 +1,10 @@
+from django.utils import timezone
+
 from typing import Optional
 
 from django.db.models import QuerySet
 
-from .models import Category, Post
+from .models import Category, Post, PostTranslation
 
 
 # ======================================================
@@ -120,4 +122,33 @@ def get_related_video_posts(post: Post, limit:int=3) -> QuerySet[Post]:
             youtube_video_id__isnull=False
         )
         .exclude(pk=post.pk)[:limit]
+    )
+
+
+# ======================================================
+# POST TRANSLATION SELECTORS
+# ======================================================
+def get_post_translation_by_slug(
+    slug: str,
+    language: str,
+) -> Optional[PostTranslation]:
+    """
+    Retorna uma tradução de artigo publicada,
+    associada a um post original publicado.
+
+    Não retorna traduções de rascunhos.
+    """
+    if language not in {"en", "es"}:
+        return None
+
+    return (
+        PostTranslation.objects
+        .filter(
+            slug=slug,
+            language=language,
+            post__status=Post.Status.PUBLISHED,
+            post__published_at__lte=timezone.now(),
+        )
+        .select_related("post", "post__author", "post__category")
+        .first()
     )

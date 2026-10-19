@@ -1,0 +1,1391 @@
+# Spanish translations for Entre Bugs e Soluções.
+msgid ""
+msgstr ""
+"Project-Id-Version: Entre Bugs e Soluções\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 13:15-0300\n"
+"PO-Revision-Date: 2026-10-19 15:10-0300\n"
+"Last-Translator: \n"
+"Language: es\n"
+"Language-Team: Spanish\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: blog/templates/blog/blog_list.html:6 templates/includes/footer.html:35
+#: templates/includes/header.html:39
+msgid "Blog"
+msgstr "Blog"
+
+#: blog/templates/blog/blog_list.html:10 blog/templates/blog/home.html:10
+msgid "Artigos sobre programação, estudos práticos, bugs reais e soluções aplicadas no dia a dia."
+msgstr "Artículos de programación, aprendizaje práctico, errores reales y soluciones para el día a día."
+
+#: blog/templates/blog/blog_list.html:16
+msgid "Artigos"
+msgstr "Artículos"
+
+#: blog/templates/blog/blog_list.html:19 blog/templates/blog/home.html:31
+msgid "Conteúdo prático sobre programação, bugs reais e soluções aplicadas"
+msgstr "Contenido práctico de programación, errores reales y soluciones concretas"
+
+#: blog/templates/blog/blog_list.html:29 blog/templates/blog/home.html:50
+msgid "Nenhum post publicado ainda."
+msgstr "Todavía no hay publicaciones."
+
+#: blog/templates/blog/category_posts.html:10
+#, python-format
+msgid "Artigos sobre %(category_name)s no blog Entre Bugs e Soluções."
+msgstr "Artículos sobre %(category_name)s en el blog Entre Bugs y Soluciones."
+
+#: blog/templates/blog/category_posts.html:23
+msgid "Nenhum post nesta categoria ainda."
+msgstr "Todavía no hay publicaciones en esta categoría."
+
+#: blog/templates/blog/components/ebooks_cta.html:13
+msgid "EBOOKS"
+msgstr "EBOOKS"
+
+#: blog/templates/blog/components/ebooks_cta.html:17
+msgid "Aprenda programação com materiais premium"
+msgstr "Aprende a programar con recursos prémium"
+
+#: blog/templates/blog/components/ebooks_cta.html:21
+msgid ""
+"\n"
+"          Ebooks práticos sobre Python, Django e programação\n"
+"          para você estudar no seu ritmo.\n"
+"        "
+msgstr ""
+"\n"
+"          Ebooks prácticos sobre Python, Django y programación\n"
+"          para que estudies a tu propio ritmo.\n"
+"        "
+
+#: blog/templates/blog/components/ebooks_cta.html:31
+msgid "Ver ebooks gratuitos"
+msgstr "Ver ebooks gratuitos"
+
+#: blog/templates/blog/components/post_card.html:52
+msgid "Ler artigo"
+msgstr "Leer artículo"
+
+#: blog/templates/blog/home.html:6
+msgid "Entre Bugs e Soluções | Blog"
+msgstr "Entre Bugs y Soluciones | Blog"
+
+#: blog/templates/blog/home.html:27
+msgid "Últimos artigos"
+msgstr "Últimos artículos"
+
+#: blog/templates/blog/home.html:38
+msgid "Ver todos os artigos do blog"
+msgstr "Ver todos los artículos del blog"
+
+#: blog/templates/blog/home.html:40
+msgid "Ver todos"
+msgstr "Ver todos"
+
+#: blog/templates/blog/includes/hero.html:29
+msgid "Entre Bugs e Soluções - Programação prática e soluções reais"
+msgstr "Entre Bugs y Soluciones: programación práctica y soluciones reales"
+
+#: blog/templates/blog/includes/hero.html:43
+msgid "ENTRE BUGS"
+msgstr "ENTRE BUGS"
+
+#: blog/templates/blog/includes/hero.html:44
+msgid "E SOLUÇÕES"
+msgstr "Y SOLUCIONES"
+
+#: blog/templates/blog/includes/hero.html:49
+msgid "Domine programação"
+msgstr "Domina la programación"
+
+#: blog/templates/blog/includes/hero.html:50
+msgid "com"
+msgstr "con"
+
+#: blog/templates/blog/includes/hero.html:50
+msgid "aprendizado prático"
+msgstr "aprendizaje práctico"
+
+#: blog/templates/blog/includes/hero.html:54
+msgid "Dicas, tutoriais e soluções reais"
+msgstr "Consejos, tutoriales y soluciones reales"
+
+#: blog/templates/blog/includes/hero.html:55
+msgid "para desenvolvedores."
+msgstr "para desarrolladores."
+
+#: blog/templates/blog/includes/pagination.html:5
+msgid "Paginação do blog"
+msgstr "Paginación del blog"
+
+#: blog/templates/blog/includes/pagination.html:13
+msgid "Anterior"
+msgstr "Anterior"
+
+#: blog/templates/blog/includes/pagination.html:41
+msgid "Próxima"
+msgstr "Siguiente"
+
+#: blog/templates/blog/includes/post_author_box.html:11
+#, python-format
+msgid "Conheça %(author_name)s"
+msgstr "Conoce a %(author_name)s"
+
+#: blog/templates/blog/includes/post_author_box.html:40
+msgid "Conheça o autor e confira seus artigos sobre tecnologia e programação."
+msgstr "Conoce al autor y explora sus artículos sobre tecnología y programación."
+
+#: blog/templates/blog/includes/post_author_box.html:45
+msgid "Conheça o autor"
+msgstr "Conoce al autor"
+
+#: blog/templates/blog/includes/post_faq.html:6
+msgid "Perguntas frequentes"
+msgstr "Preguntas frecuentes"
+
+#: blog/templates/blog/includes/post_video.html:11
+msgid "Vídeo do YouTube"
+msgstr "Video de YouTube"
+
+#: blog/templates/blog/includes/post_video.html:24
+msgid "Este vídeo é hospedado no YouTube e pode usar cookies."
+msgstr "Este video está alojado en YouTube y puede utilizar cookies."
+
+#: blog/templates/blog/includes/post_video.html:31
+msgid "Aceitar cookies e carregar vídeo"
+msgstr "Aceptar las cookies y cargar el vídeo"
+
+#: templates/includes/cookie_banner.html:8
+msgid "Aviso de cookies"
+msgstr "Aviso de cookies"
+
+#: templates/includes/cookie_banner.html:14
+msgid ""
+"Utilizamos cookies e tecnologias semelhantes para o funcionamento do site, análise de tráfego e, "
+"quando aplicável, publicidade. Você pode aceitar ou recusar cookies não essenciais."
+msgstr ""
+"Utilizamos cookies y tecnologías similares para el funcionamiento del sitio, el análisis del "
+"tráfico y, cuando corresponda, la publicidad. Puedes aceptar o rechazar las cookies no "
+"esenciales."
+
+#: templates/includes/cookie_banner.html:21 templates/includes/footer.html:74
+#: templates/pages/contact.html:157 templates/pages/disclaimer.html:174
+#: templates/pages/privacy.html:174 templates/pages/terms.html:51 templates/pages/terms.html:199
+msgid "Política de Privacidade"
+msgstr "Política de privacidad"
+
+#: templates/includes/cookie_banner.html:24
+msgid "para saber mais sobre o uso de cookies e suas preferências."
+msgstr "para obtener más información sobre el uso de cookies y tus preferencias."
+
+#: templates/includes/cookie_banner.html:33
+msgid "Aceitar"
+msgstr "Aceptar"
+
+#: templates/includes/cookie_banner.html:41
+msgid "Recusar"
+msgstr "Rechazar"
+
+#: templates/includes/cookie_button.html:8
+msgid "Configurações de cookies"
+msgstr "Configuración de cookies"
+
+#: templates/includes/footer.html:12 templates/includes/header.html:10
+#: templates/pages/about-author.html:65 templates/pages/about-author.html:76
+#: templates/pages/about.html:51 templates/pages/about.html:118
+msgid "Entre Bugs e Soluções"
+msgstr "Entre Bugs y Soluciones"
+
+#: templates/includes/footer.html:19
+msgid ""
+"\n"
+"        Entre Bugs e Soluções é um blog sobre programação,\n"
+"        aprendizado prático e soluções reais do dia a dia.\n"
+"        "
+msgstr ""
+"\n"
+"        Entre Bugs y Soluciones es un blog sobre programación,\n"
+"        aprendizaje práctico y soluciones reales para el día a día.\n"
+"        "
+
+#: templates/includes/footer.html:28
+msgid "Links de conteúdo"
+msgstr "Enlaces de contenido"
+
+#: templates/includes/footer.html:30
+msgid "Conteúdo"
+msgstr "Contenido"
+
+#: templates/includes/footer.html:41
+msgid "Explorar artigos"
+msgstr "Explorar artículos"
+
+#: templates/includes/footer.html:49
+msgid "Links institucionais e legais"
+msgstr "Enlaces institucionales y legales"
+
+#: templates/includes/footer.html:51
+msgid "Institucional e legal"
+msgstr "Información institucional y legal"
+
+#: templates/includes/footer.html:56 templates/includes/header.html:72
+msgid "Sobre"
+msgstr "Acerca de"
+
+#: templates/includes/footer.html:62 templates/includes/header.html:76
+msgid "Sobre o autor"
+msgstr "Sobre el autor"
+
+#: templates/includes/footer.html:68 templates/includes/header.html:80 templates/pages/contact.html:23
+msgid "Contato"
+msgstr "Contacto"
+
+#: templates/includes/footer.html:80 templates/pages/disclaimer.html:166
+#: templates/pages/privacy.html:166
+msgid "Termos de Uso"
+msgstr "Términos de uso"
+
+#: templates/includes/footer.html:86
+msgid "Disclaimer"
+msgstr "Aviso legal"
+
+#: templates/includes/footer.html:95
+#, python-format
+msgid "© %(current_year)s Entre Bugs e Soluções. Todos os direitos reservados."
+msgstr "© %(current_year)s Entre Bugs y Soluciones. Todos los derechos reservados."
+
+#: templates/includes/header.html:18
+msgid "Abrir menu"
+msgstr "Abrir menú"
+
+#: templates/includes/header.html:29
+msgid "Menu principal"
+msgstr "Menú principal"
+
+#: templates/includes/header.html:35
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/includes/header.html:43
+msgid "Ebooks"
+msgstr "Ebooks"
+
+#: templates/includes/header.html:53
+msgid "Categorias"
+msgstr "Categorías"
+
+#: templates/includes/header.html:104
+msgid "Selecionar idioma"
+msgstr "Seleccionar idioma"
+
+#: templates/includes/search_bar.html:18
+msgid "Buscar artigos..."
+msgstr "Buscar artículos..."
+
+#: templates/includes/search_bar.html:21
+msgid "Buscar artigos no blog"
+msgstr "Buscar artículos en el blog"
+
+#: templates/includes/search_bar.html:28
+msgid "Abrir pesquisa"
+msgstr "Abrir búsqueda"
+
+#: templates/includes/search_bar.html:42
+msgid "Pesquisar"
+msgstr "Buscar"
+
+#: templates/includes/search_bar.html:44
+msgid "Buscar"
+msgstr "Buscar"
+
+#: templates/pages/about-author.html:6
+msgid "Sobre o Autor | Tiago Sousa | Entre Bugs e Soluções"
+msgstr "Sobre el autor | Tiago Sousa | Entre Bugs y Soluciones"
+
+#: templates/pages/about-author.html:10
+msgid ""
+"Conheça Tiago Sousa, autor do Entre Bugs e Soluções, bacharel em Ciências Contábeis e estudante "
+"de programação, que compartilha aprendizados sobre Python, Django e tecnologia."
+msgstr ""
+"Conoce a Tiago Sousa, autor de Entre Bugs y Soluciones, graduado en Ciencias Contables y "
+"estudiante de programación, que comparte sus aprendizajes sobre Python, Django y tecnología."
+
+#: templates/pages/about-author.html:18
+msgid "Sobre o Autor | Tiago Sousa"
+msgstr "Sobre el autor | Tiago Sousa"
+
+#: templates/pages/about-author.html:25
+msgid "Bacharel em Ciências Contábeis, estudante de programação e escritor"
+msgstr "Graduado en Ciencias Contables, estudiante de programación y escritor"
+
+#: templates/pages/about-author.html:26
+msgid ""
+"Tiago Sousa é bacharel em Ciências Contábeis, estudante de programação e autor do blog Entre Bugs"
+" e Soluções, um projeto pessoal desenvolvido com Django."
+msgstr ""
+"Tiago Sousa es graduado en Ciencias Contables, estudiante de programación y autor del blog Entre "
+"Bugs y Soluciones, un proyecto personal desarrollado con Django."
+
+#: templates/pages/about-author.html:38
+msgid "Tiago Sousa, autor do blog Entre Bugs e Soluções"
+msgstr "Tiago Sousa, autor del blog Entre Bugs y Soluciones"
+
+#: templates/pages/about-author.html:46
+msgid "Sobre o Autor"
+msgstr "Sobre el autor"
+
+#: templates/pages/about-author.html:50
+msgid "Tiago Sousa"
+msgstr "Tiago Sousa"
+
+#: templates/pages/about-author.html:51
+msgid "Contabilidade"
+msgstr "Contabilidad"
+
+#: templates/pages/about-author.html:52
+msgid "Programação"
+msgstr "Programación"
+
+#: templates/pages/about-author.html:53 templates/pages/about-author.html:98
+msgid "Tecnologia"
+msgstr "Tecnología"
+
+#: templates/pages/about-author.html:59
+msgid "Olá, sou Tiago Sousa"
+msgstr "Hola, soy Tiago Sousa"
+
+#: templates/pages/about-author.html:62
+msgid "Sou bacharel em"
+msgstr "Soy graduado en"
+
+#: templates/pages/about-author.html:63
+msgid "Ciências Contábeis"
+msgstr "Contabilidad"
+
+#: templates/pages/about-author.html:64
+msgid "estudante de programação e autor do blog"
+msgstr "estudiante de programación y autor del blog"
+
+#: templates/pages/about-author.html:69
+msgid ""
+"Criei este espaço para documentar minha jornada na programação e compartilhar conhecimentos, "
+"experiências e soluções que possam ajudar outras pessoas que também estão aprendendo."
+msgstr ""
+"Creé este espacio para documentar mi trayectoria en programación y compartir conocimientos, "
+"experiencias y soluciones que puedan ayudar a otras personas que también están aprendiendo."
+
+#: templates/pages/about-author.html:72
+msgid "Por que criei o Entre Bugs e Soluções?"
+msgstr "¿Por qué creé Entre Bugs y Soluciones?"
+
+#: templates/pages/about-author.html:75 templates/pages/about.html:50 templates/pages/terms.html:165
+msgid "O"
+msgstr "El"
+
+#: templates/pages/about-author.html:77
+msgid "é um projeto pessoal desenvolvido por mim com"
+msgstr "es un proyecto personal que desarrollo con"
+
+#: templates/pages/about-author.html:79
+msgid ""
+"A ideia é transformar estudos, experimentos, erros e descobertas em conteúdos úteis para quem "
+"deseja desenvolver suas habilidades em tecnologia."
+msgstr ""
+"La idea es transformar estudios, experimentos, errores y descubrimientos en contenidos útiles "
+"para quienes desean desarrollar sus habilidades tecnológicas."
+
+#: templates/pages/about-author.html:83
+msgid ""
+"Acredito que resolver problemas faz parte do aprendizado. Por isso, procuro compartilhar não "
+"apenas resultados, mas também explicações práticas que ajudem a entender como as soluções "
+"funcionam."
+msgstr ""
+"Creo que resolver problemas forma parte del aprendizaje. Por eso, intento compartir no solo "
+"resultados, sino también explicaciones prácticas que ayuden a comprender cómo funcionan las "
+"soluciones."
+
+#: templates/pages/about-author.html:86
+msgid "O que você encontrará aqui?"
+msgstr "¿Qué encontrarás aquí?"
+
+#: templates/pages/about-author.html:91
+msgid "conceitos, exemplos e exercícios para desenvolver a lógica de programação."
+msgstr "conceptos, ejemplos y ejercicios para desarrollar la lógica de programación."
+
+#: templates/pages/about-author.html:94
+msgid "Django e desenvolvimento web"
+msgstr "Django y desarrollo web"
+
+#: templates/pages/about-author.html:95
+msgid "criação de aplicações, funcionalidades e resolução de problemas."
+msgstr "creación de aplicaciones y funcionalidades, y resolución de problemas."
+
+#: templates/pages/about-author.html:99
+msgid "ferramentas, experiências e aprendizados relacionados ao desenvolvimento."
+msgstr "herramientas, experiencias y aprendizajes relacionados con el desarrollo."
+
+#: templates/pages/about-author.html:103
+msgid "Minha jornada na programação"
+msgstr "Mi trayectoria en la programación"
+
+#: templates/pages/about-author.html:106
+msgid ""
+"Aprender programação envolve estudar conceitos, testar ideias, investigar erros e encontrar "
+"soluções. Quero registrar essa evolução e compartilhar o conhecimento adquirido ao longo desse "
+"processo."
+msgstr ""
+"Aprender programación implica estudiar conceptos, probar ideas, investigar errores y encontrar "
+"soluciones. Quiero registrar esta evolución y compartir los conocimientos adquiridos durante el "
+"proceso."
+
+#: templates/pages/about-author.html:109 templates/pages/about.html:122
+msgid "Vamos aprender juntos?"
+msgstr "¿Aprendemos juntos?"
+
+#: templates/pages/about-author.html:112
+msgid ""
+"Explore os artigos do blog e acompanhe os conteúdos sobre programação, Python, Django e "
+"tecnologia."
+msgstr ""
+"Explora los artículos del blog y descubre contenidos sobre programación, Python, Django y "
+"tecnología."
+
+#: templates/pages/about-author.html:117 templates/pages/about.html:130
+msgid "Explore nossos artigos"
+msgstr "Explorar artículos"
+
+#: templates/pages/about.html:6
+msgid "Sobre o Entre Bugs e Soluções | Programação e Tecnologia"
+msgstr "Sobre Entre Bugs y Soluciones | Programación y tecnología"
+
+#: templates/pages/about.html:10
+msgid ""
+"Conheça o Entre Bugs e Soluções, um blog dedicado à programação, Python, Django e tecnologia, com"
+" conteúdos acessíveis, didáticos e práticos."
+msgstr ""
+"Conoce Entre Bugs y Soluciones, un blog dedicado a la programación, Python, Django y tecnología, "
+"con contenidos accesibles, didácticos y prácticos."
+
+#: templates/pages/about.html:37
+msgid "Sobre o Entre Bugs e Soluções"
+msgstr "Sobre Entre Bugs y Soluciones"
+
+#: templates/pages/about.html:41
+msgid "Programação e tecnologia explicadas de forma acessível e didática."
+msgstr "Programación y tecnología explicadas de forma accesible y didáctica."
+
+#: templates/pages/about.html:47
+msgid "O que é o Entre Bugs e Soluções?"
+msgstr "¿Qué es Entre Bugs y Soluciones?"
+
+#: templates/pages/about.html:52
+msgid ""
+"é um blog dedicado à programação e à tecnologia, criado com o propósito de compartilhar "
+"conhecimento de forma acessível, didática e prática."
+msgstr ""
+"es un blog dedicado a la programación y la tecnología, creado con el propósito de compartir "
+"conocimientos de forma accesible, didáctica y práctica."
+
+#: templates/pages/about.html:56
+msgid ""
+"Acreditamos que aprender programação pode ser mais simples quando os conceitos são apresentados "
+"com clareza, exemplos práticos e explicações que ajudam a compreender não apenas como algo "
+"funciona, mas também por que funciona."
+msgstr ""
+"Creemos que aprender programación puede ser más sencillo cuando los conceptos se presentan con "
+"claridad, ejemplos prácticos y explicaciones que ayudan a comprender no solo cómo funciona algo, "
+"sino también por qué funciona."
+
+#: templates/pages/about.html:59
+msgid "Nossa missão"
+msgstr "Nuestra misión"
+
+#: templates/pages/about.html:62
+msgid "Nossa missão é"
+msgstr "Nuestra misión es"
+
+#: templates/pages/about.html:63
+msgid "ensinar programação e tecnologia de forma acessível e didática"
+msgstr "enseñar programación y tecnología de forma accesible y didáctica"
+
+#: templates/pages/about.html:64
+msgid ""
+"ajudando pessoas a desenvolver conhecimentos, compreender conceitos e encontrar soluções para "
+"desafios do dia a dia."
+msgstr ""
+"ayudando a las personas a adquirir conocimientos, comprender conceptos y encontrar soluciones a "
+"los desafíos cotidianos."
+
+#: templates/pages/about.html:68
+msgid ""
+"Queremos tornar o aprendizado mais próximo da realidade, transformando dúvidas em conhecimento e "
+"problemas em oportunidades para aprender."
+msgstr ""
+"Queremos acercar el aprendizaje a la realidad, transformando dudas en conocimiento y problemas en"
+" oportunidades para aprender."
+
+#: templates/pages/about.html:71
+msgid "O que você encontra aqui?"
+msgstr "¿Qué encontrarás aquí?"
+
+#: templates/pages/about.html:74
+msgid "Publicamos conteúdos voltados ao aprendizado e à aplicação prática da tecnologia, incluindo:"
+msgstr ""
+"Publicamos contenidos orientados al aprendizaje y a la aplicación práctica de la tecnología, "
+"entre ellos:"
+
+#: templates/pages/about.html:79
+msgid "Programação:"
+msgstr "Programación:"
+
+#: templates/pages/about.html:80
+msgid "conceitos fundamentais, lógica e conteúdos para quem deseja aprender."
+msgstr "conceptos fundamentales, lógica y contenidos para quienes desean aprender."
+
+#: templates/pages/about.html:83
+msgid "Python:"
+msgstr "Python:"
+
+#: templates/pages/about.html:84
+msgid "tutoriais, exemplos e explicações para desenvolver habilidades com a linguagem."
+msgstr "tutoriales, ejemplos y explicaciones para desarrollar habilidades con el lenguaje."
+
+#: templates/pages/about.html:87
+msgid "Django e desenvolvimento web:"
+msgstr "Django y desarrollo web:"
+
+#: templates/pages/about.html:88
+msgid "conteúdos sobre criação de sites, aplicações e funcionalidades."
+msgstr "contenidos sobre creación de sitios web, aplicaciones y funcionalidades."
+
+#: templates/pages/about.html:91
+msgid "Tecnologia:"
+msgstr "Tecnología:"
+
+#: templates/pages/about.html:92
+msgid "ferramentas, recursos e conhecimentos úteis para projetos e estudos."
+msgstr "herramientas, recursos y conocimientos útiles para proyectos y estudios."
+
+#: templates/pages/about.html:95
+msgid "Aprendizado prático:"
+msgstr "aprendizaje práctico"
+
+#: templates/pages/about.html:96
+msgid "soluções para erros, desafios comuns e situações encontradas durante o desenvolvimento."
+msgstr "soluciones para errores, desafíos comunes y situaciones que surgen durante el desarrollo."
+
+#: templates/pages/about.html:100
+msgid "Para quem é o blog?"
+msgstr "¿Para quién es este blog?"
+
+#: templates/pages/about.html:103
+msgid ""
+"Nosso conteúdo é voltado especialmente para pessoas que desejam aprender programação, estudantes,"
+" iniciantes e entusiastas da tecnologia."
+msgstr ""
+"Nuestro contenido está dirigido especialmente a quienes desean aprender programación, "
+"estudiantes, principiantes y entusiastas de la tecnología."
+
+#: templates/pages/about.html:107
+msgid ""
+"Nosso objetivo é oferecer explicações claras para que cada leitor possa aprender no próprio "
+"ritmo, praticar o que descobriu e avançar gradualmente em sua jornada."
+msgstr ""
+"Nuestro objetivo es ofrecer explicaciones claras para que cada lector pueda aprender a su propio "
+"ritmo, poner en práctica lo aprendido y avanzar gradualmente en su camino."
+
+#: templates/pages/about.html:110
+msgid "Aprender através de bugs e soluções"
+msgstr "Aprender a través de errores y soluciones"
+
+#: templates/pages/about.html:113
+msgid ""
+"Errar faz parte do desenvolvimento. Investigar um problema, entender suas causas e encontrar uma "
+"solução são etapas importantes do aprendizado em programação."
+msgstr ""
+"Cometer errores forma parte del desarrollo. Investigar un problema, comprender sus causas y "
+"encontrar una solución son etapas importantes del aprendizaje de programación."
+
+#: templates/pages/about.html:117
+msgid "É essa ideia que inspira o nome"
+msgstr "Esta es la idea que inspira el nombre"
+
+#: templates/pages/about.html:119
+msgid ""
+"compartilhar experiências e conhecimentos que ajudem outras pessoas a superar dificuldades e "
+"evoluir."
+msgstr ""
+"compartir experiencias y conocimientos que ayuden a otras personas a superar dificultades y "
+"progresar."
+
+#: templates/pages/about.html:125
+msgid ""
+"Explore os artigos do blog, descubra novos conteúdos e coloque o conhecimento em prática. Estamos"
+" aqui para tornar a programação e a tecnologia mais acessíveis."
+msgstr ""
+"Explora los artículos del blog, descubre nuevos contenidos y pon en práctica tus conocimientos. "
+"Estamos aquí para hacer que la programación y la tecnología sean más accesibles."
+
+#: templates/pages/contact.html:6
+msgid "Contato | Entre Bugs e Soluções"
+msgstr "Contacto | Entre Bugs y Soluciones"
+
+#: templates/pages/contact.html:10
+msgid ""
+"Entre em contato com o Entre Bugs e Soluções para tirar dúvidas, relatar erros nos artigos ou "
+"propor parcerias sobre programação e tecnologia."
+msgstr ""
+"Ponte en contacto con Entre Bugs y Soluciones para resolver dudas, informar de errores en los "
+"artículos o proponer colaboraciones sobre programación y tecnología."
+
+#: templates/pages/contact.html:26
+msgid ""
+"Ficou com alguma dúvida, encontrou algum erro no blog ou deseja propor uma parceria? Envie sua "
+"mensagem abaixo. Será um prazer falar com você!"
+msgstr ""
+"¿Tienes alguna duda, has encontrado algún error en el blog o deseas proponer una colaboración? "
+"Envíanos tu mensaje a continuación. ¡Será un placer hablar contigo!"
+
+#: templates/pages/contact.html:41
+msgid "Nome"
+msgstr "Nombre"
+
+#: templates/pages/contact.html:48
+msgid "Seu nome completo"
+msgstr "Tu nombre completo"
+
+#: templates/pages/contact.html:56
+msgid "E-mail"
+msgstr "Correo electrónico"
+
+#: templates/pages/contact.html:63
+msgid "seu@email.com"
+msgstr "tu@email.com"
+
+#: templates/pages/contact.html:71
+msgid "Telefone"
+msgstr "Teléfono"
+
+#: templates/pages/contact.html:78
+msgid "(11) 99999-9999"
+msgstr "(11) 99999-9999"
+
+#: templates/pages/contact.html:85
+msgid "Assunto"
+msgstr "Asunto"
+
+#: templates/pages/contact.html:92
+msgid "Sobre o que deseja falar?"
+msgstr "¿Sobre qué deseas hablar?"
+
+#: templates/pages/contact.html:99
+msgid "Categoria"
+msgstr "Categoría"
+
+#: templates/pages/contact.html:108
+msgid "Selecione uma categoria"
+msgstr "Selecciona una categoría"
+
+#: templates/pages/contact.html:111
+msgid "Dúvida"
+msgstr "Consulta"
+
+#: templates/pages/contact.html:112
+msgid "Sugestão"
+msgstr "Sugerencia"
+
+#: templates/pages/contact.html:113
+msgid "Erro no blog"
+msgstr "Error en el blog"
+
+#: templates/pages/contact.html:114
+msgid "Parceria"
+msgstr "Colaboración"
+
+#: templates/pages/contact.html:122
+msgid "Mensagem"
+msgstr "Mensaje"
+
+#: templates/pages/contact.html:129
+msgid "Escreva sua mensagem..."
+msgstr "Escribe tu mensaje..."
+
+#: templates/pages/contact.html:144
+msgid "Enviar mensagem"
+msgstr "Enviar mensaje"
+
+#: templates/pages/contact.html:155
+msgid "As informações enviadas serão tratadas de acordo com a"
+msgstr "La información enviada se tratará de acuerdo con la"
+
+#: templates/pages/contact.html:169
+msgid "Outros canais"
+msgstr "Otros canales"
+
+#: templates/pages/contact.html:180
+msgid "As mensagens são respondidas assim que possível."
+msgstr "Los mensajes se responden lo antes posible."
+
+#: templates/pages/disclaimer.html:5 templates/pages/privacy.html:5
+msgid "Disclaimer | Entre Bugs e Soluções"
+msgstr "Aviso legal | Entre Bugs y Soluciones"
+
+#: templates/pages/disclaimer.html:33 templates/pages/privacy.html:33
+msgid "Disclaimer – Entre Bugs e Soluções"
+msgstr "Aviso legal – Entre Bugs y Soluciones"
+
+#: templates/pages/disclaimer.html:36 templates/pages/privacy.html:36
+msgid "As informações disponibilizadas no site"
+msgstr "La información disponible en el sitio web"
+
+#: templates/pages/disclaimer.html:38 templates/pages/privacy.html:38
+msgid ""
+"têm finalidade informativa e educacional. O conteúdo é produzido com base em estudos, "
+"experiências, pesquisas, testes práticos e referências utilizadas durante a elaboração dos "
+"materiais."
+msgstr ""
+"tienen una finalidad informativa y educativa. El contenido se elabora a partir de estudios, "
+"experiencias, investigaciones, pruebas prácticas y referencias utilizadas durante la preparación "
+"de los materiales."
+
+#: templates/pages/disclaimer.html:42 templates/pages/privacy.html:42
+msgid ""
+"Embora sejam realizados esforços para manter as informações corretas e atualizadas, não é "
+"possível garantir que todo o conteúdo esteja permanentemente livre de erros, omissões ou "
+"desatualizações."
+msgstr ""
+"Aunque se hacen esfuerzos para mantener la información correcta y actualizada, no es posible "
+"garantizar que todo el contenido esté siempre libre de errores, omisiones o información "
+"desactualizada."
+
+#: templates/pages/disclaimer.html:45 templates/pages/privacy.html:45
+msgid "1. Finalidade dos conteúdos"
+msgstr "1. Finalidad del contenido"
+
+#: templates/pages/disclaimer.html:48 templates/pages/privacy.html:48
+msgid ""
+"Os artigos, tutoriais, exemplos, opiniões e demais materiais publicados no site têm como objetivo"
+" compartilhar conhecimento e experiências relacionadas principalmente a programação, tecnologia, "
+"desenvolvimento web, ferramentas digitais e aprendizado."
+msgstr ""
+"Los artículos, tutoriales, ejemplos, opiniones y demás materiales publicados en el sitio tienen "
+"como objetivo compartir conocimientos y experiencias relacionados principalmente con la "
+"programación, la tecnología, el desarrollo web, las herramientas digitales y el aprendizaje."
+
+#: templates/pages/disclaimer.html:52 templates/pages/privacy.html:52
+msgid "Os conteúdos não constituem aconselhamento profissional, consultoria ou garantia de resultados."
+msgstr "El contenido no constituye asesoramiento profesional, consultoría ni garantía de resultados."
+
+#: templates/pages/disclaimer.html:55 templates/pages/privacy.html:55
+msgid "2. Exemplos de código e programação"
+msgstr "2. Ejemplos de código y programación"
+
+#: templates/pages/disclaimer.html:58 templates/pages/privacy.html:58
+msgid ""
+"Os exemplos de código apresentados no site destinam-se principalmente a fins educacionais e podem"
+" precisar de adaptações conforme o ambiente, sistema operacional, versão da linguagem, "
+"biblioteca, framework ou ferramenta utilizada."
+msgstr ""
+"Los ejemplos de código del sitio web están destinados principalmente a fines educativos y pueden "
+"requerir adaptaciones según el entorno, el sistema operativo, la versión del lenguaje, la "
+"biblioteca, el framework o la herramienta utilizada."
+
+#: templates/pages/disclaimer.html:62 templates/pages/privacy.html:62
+msgid ""
+"Antes de utilizar qualquer código em ambientes de produção, recomenda-se que o usuário realize "
+"seus próprios testes, validações e análises de segurança."
+msgstr ""
+"Antes de utilizar cualquier código en entornos de producción, se recomienda que el usuario "
+"realice sus propias pruebas, validaciones y análisis de seguridad."
+
+#: templates/pages/disclaimer.html:67 templates/pages/privacy.html:67
+msgid ""
+"não garante que exemplos, comandos ou configurações apresentados sejam adequados para todos os "
+"ambientes ou situações."
+msgstr ""
+"no garantiza que los ejemplos, comandos o configuraciones presentados sean adecuados para todos "
+"los entornos o situaciones."
+
+#: templates/pages/disclaimer.html:70 templates/pages/privacy.html:70
+msgid "3. Tecnologia e ferramentas de terceiros"
+msgstr "3. Tecnología y herramientas de terceros"
+
+#: templates/pages/disclaimer.html:73 templates/pages/privacy.html:73
+msgid ""
+"O site pode apresentar informações, tutoriais ou referências relacionadas a softwares, serviços, "
+"plataformas, bibliotecas, frameworks e outras tecnologias desenvolvidas por terceiros."
+msgstr ""
+"El sitio web puede presentar información, tutoriales o referencias relacionadas con software, "
+"servicios, plataformas, bibliotecas, frameworks y otras tecnologías desarrolladas por terceros."
+
+#: templates/pages/disclaimer.html:77 templates/pages/privacy.html:77
+msgid ""
+"Essas tecnologias podem sofrer alterações, atualizações, descontinuações ou mudanças em seus "
+"termos e funcionalidades."
+msgstr ""
+"Estas tecnologías pueden sufrir cambios, actualizaciones, discontinuaciones o modificaciones en "
+"sus términos y funcionalidades."
+
+#: templates/pages/disclaimer.html:82 templates/pages/privacy.html:82
+msgid ""
+"não controla as alterações realizadas por terceiros e recomenda que o usuário consulte a "
+"documentação oficial dos serviços utilizados."
+msgstr ""
+"no controla los cambios realizados por terceros y recomienda que el usuario consulte la "
+"documentación oficial de los servicios utilizados."
+
+#: templates/pages/disclaimer.html:85 templates/pages/privacy.html:85
+msgid "4. Informações financeiras"
+msgstr "4. Información financiera"
+
+#: templates/pages/disclaimer.html:88 templates/pages/privacy.html:88
+msgid ""
+"Alguns conteúdos do site podem abordar temas relacionados a dinheiro, renda, trabalho, "
+"programação, empreendedorismo ou possibilidades de geração de renda."
+msgstr ""
+"Algunos contenidos del sitio web pueden tratar temas relacionados con el dinero, los ingresos, el"
+" trabajo, la programación, el emprendimiento o las posibilidades de generar ingresos."
+
+#: templates/pages/disclaimer.html:92 templates/pages/privacy.html:92
+msgid ""
+"Essas informações possuem caráter exclusivamente informativo e educacional e não constituem "
+"recomendação financeira, de investimento, contábil, tributária ou jurídica."
+msgstr ""
+"Esta información tiene un carácter exclusivamente informativo y educativo y no constituye "
+"asesoramiento financiero, de inversión, contable, fiscal ni jurídico."
+
+#: templates/pages/disclaimer.html:96 templates/pages/privacy.html:96
+msgid ""
+"Resultados financeiros ou profissionais podem variar de acordo com diversos fatores, incluindo "
+"conhecimento, experiência, dedicação, condições de mercado e decisões individuais."
+msgstr ""
+"Los resultados financieros o profesionales pueden variar según diversos factores, como los "
+"conocimientos, la experiencia, la dedicación, las condiciones del mercado y las decisiones "
+"individuales."
+
+#: templates/pages/disclaimer.html:100 templates/pages/privacy.html:100
+msgid "Nenhum resultado específico é garantido pela utilização das informações apresentadas no site."
+msgstr "El uso de la información presentada en el sitio web no garantiza ningún resultado específico."
+
+#: templates/pages/disclaimer.html:103 templates/pages/privacy.html:103
+msgid "5. Links e serviços externos"
+msgstr "5. Enlaces y servicios externos"
+
+#: templates/pages/disclaimer.html:106 templates/pages/privacy.html:106
+msgid "O site pode conter links para sites, plataformas, produtos ou serviços de terceiros."
+msgstr "El sitio web puede contener enlaces a sitios, plataformas, productos o servicios de terceros."
+
+#: templates/pages/disclaimer.html:110 templates/pages/privacy.html:110
+msgid ""
+"Esses links podem ser disponibilizados para complementar informações, indicar recursos ou "
+"facilitar o acesso a serviços externos."
+msgstr ""
+"Estos enlaces pueden ofrecerse para complementar información, señalar recursos o facilitar el "
+"acceso a servicios externos."
+
+#: templates/pages/disclaimer.html:115 templates/pages/privacy.html:115
+msgid ""
+"não controla necessariamente o conteúdo, a disponibilidade, as políticas ou as práticas desses "
+"serviços externos."
+msgstr ""
+"no controla necesariamente el contenido, la disponibilidad, las políticas ni las prácticas de "
+"estos servicios externos."
+
+#: templates/pages/disclaimer.html:119 templates/pages/privacy.html:119
+msgid ""
+"Recomendamos que o usuário consulte as políticas, termos e condições dos respectivos serviços "
+"antes de utilizá-los."
+msgstr ""
+"Recomendamos que el usuario consulte las políticas, los términos y las condiciones de los "
+"servicios correspondientes antes de utilizarlos."
+
+#: templates/pages/disclaimer.html:122 templates/pages/privacy.html:122
+msgid "6. Publicidade e links comerciais"
+msgstr "6. Publicidad y enlaces comerciales"
+
+#: templates/pages/disclaimer.html:125 templates/pages/privacy.html:125
+msgid ""
+"O site poderá exibir anúncios de terceiros, incluindo anúncios fornecidos por plataformas de "
+"publicidade como o"
+msgstr ""
+"El sitio web podrá mostrar anuncios de terceros, incluidos anuncios proporcionados por "
+"plataformas publicitarias como"
+
+#: templates/pages/disclaimer.html:130 templates/pages/privacy.html:130
+msgid ""
+"A exibição de um anúncio não representa necessariamente recomendação, aprovação ou garantia sobre"
+" o produto ou serviço anunciado."
+msgstr ""
+"La aparición de un anuncio no implica necesariamente una recomendación, aprobación o garantía del"
+" producto o servicio anunciado."
+
+#: templates/pages/disclaimer.html:134 templates/pages/privacy.html:134
+msgid ""
+"O site também poderá disponibilizar links comerciais ou links de terceiros em determinados "
+"conteúdos. Quando houver uma relação comercial ou outra forma de benefício associada a um link, "
+"essa relação será apresentada de acordo com as práticas aplicáveis."
+msgstr ""
+"El sitio también podrá incluir enlaces comerciales o de terceros en determinados contenidos. "
+"Cuando exista una relación comercial u otro beneficio asociado a un enlace, dicha relación se "
+"indicará conforme a las prácticas aplicables."
+
+#: templates/pages/disclaimer.html:137 templates/pages/privacy.html:137
+msgid "7. Responsabilidade do usuário"
+msgstr "7. Responsabilidad del usuario"
+
+#: templates/pages/disclaimer.html:140 templates/pages/privacy.html:140
+msgid ""
+"O usuário é responsável por avaliar as informações disponibilizadas no site e decidir como "
+"utilizá-las."
+msgstr ""
+"El usuario es responsable de evaluar la información disponible en el sitio web y decidir cómo "
+"utilizarla."
+
+#: templates/pages/disclaimer.html:144 templates/pages/privacy.html:144
+msgid ""
+"Antes de tomar decisões que possam gerar consequências técnicas, financeiras, profissionais ou de"
+" qualquer outra natureza, recomenda-se buscar informações adicionais e, quando necessário, "
+"orientação de um profissional qualificado."
+msgstr ""
+"Antes de tomar decisiones que puedan tener consecuencias técnicas, financieras, profesionales o "
+"de cualquier otro tipo, se recomienda buscar información adicional y, cuando sea necesario, "
+"orientación de un profesional cualificado."
+
+#: templates/pages/disclaimer.html:147 templates/pages/privacy.html:147
+msgid "8. Atualização das informações"
+msgstr "8. Actualización de la información"
+
+#: templates/pages/disclaimer.html:150 templates/pages/privacy.html:150
+msgid "O conteúdo do site poderá ser atualizado, corrigido ou modificado sempre que necessário."
+msgstr "El contenido del sitio web podrá actualizarse, corregirse o modificarse cuando sea necesario."
+
+#: templates/pages/disclaimer.html:154 templates/pages/privacy.html:154
+msgid ""
+"Entretanto, uma informação publicada anteriormente pode tornar-se desatualizada em razão de "
+"alterações em tecnologias, ferramentas, legislações, serviços, preços ou condições externas."
+msgstr ""
+"Sin embargo, la información publicada anteriormente puede quedar desactualizada debido a cambios "
+"en tecnologías, herramientas, leyes, servicios, precios o condiciones externas."
+
+#: templates/pages/disclaimer.html:158 templates/pages/privacy.html:158
+msgid ""
+"Por esse motivo, recomendamos verificar fontes oficiais e documentação atualizada quando a "
+"informação exigir precisão ou estiver sujeita a mudanças frequentes."
+msgstr ""
+"Por este motivo, recomendamos consultar fuentes oficiales y documentación actualizada cuando la "
+"información requiera precisión o esté sujeta a cambios frecuentes."
+
+#: templates/pages/disclaimer.html:161 templates/pages/privacy.html:161
+msgid "9. Relação com os Termos de Uso"
+msgstr "9. Relación con los Términos de uso"
+
+#: templates/pages/disclaimer.html:164 templates/pages/privacy.html:164
+msgid "Este Disclaimer complementa os"
+msgstr "Este aviso legal complementa los"
+
+#: templates/pages/disclaimer.html:168 templates/pages/privacy.html:168
+msgid "do site."
+msgstr "del sitio web."
+
+#: templates/pages/disclaimer.html:172 templates/pages/privacy.html:172
+msgid "As condições relacionadas ao tratamento de dados pessoais estão descritas na"
+msgstr "Las condiciones relativas al tratamiento de datos personales se describen en la"
+
+#: templates/pages/disclaimer.html:178 templates/pages/privacy.html:178
+msgid "10. Contato"
+msgstr "Contacto"
+
+#: templates/pages/disclaimer.html:181 templates/pages/privacy.html:181
+msgid "Em caso de dúvidas sobre este Disclaimer, entre em contato:"
+msgstr "Si tienes preguntas sobre este aviso legal, ponte en contacto con nosotros:"
+
+#: templates/pages/disclaimer.html:185 templates/pages/privacy.html:185 templates/pages/terms.html:224
+msgid "E-mail:"
+msgstr "Correo electrónico:"
+
+#: templates/pages/disclaimer.html:192 templates/pages/privacy.html:192 templates/pages/terms.html:231
+msgid "Última atualização:"
+msgstr "Última actualización:"
+
+#: templates/pages/disclaimer.html:193 templates/pages/privacy.html:193 templates/pages/terms.html:232
+msgid "5 de outubro de 2026"
+msgstr "5 de octubre de 2026"
+
+#: templates/pages/terms.html:5
+msgid "Termos de Uso | Entre Bugs e Soluções"
+msgstr "Términos de uso | Entre Bugs y Soluciones"
+
+#: templates/pages/terms.html:32
+msgid "Termos de Uso – Entre Bugs e Soluções"
+msgstr "Términos de uso – Entre Bugs y Soluciones"
+
+#: templates/pages/terms.html:35
+msgid "Bem-vindo ao site"
+msgstr "Te damos la bienvenida al sitio web"
+
+#: templates/pages/terms.html:37
+msgid ""
+"Ao acessar ou utilizar este site, você declara estar ciente destes Termos de Uso. Caso não "
+"concorde com as condições aqui apresentadas, recomendamos que não utilize o site."
+msgstr ""
+"Al acceder o utilizar este sitio web, declaras conocer estos Términos de uso. Si no estás de "
+"acuerdo con las condiciones aquí establecidas, te recomendamos que no utilices el sitio."
+
+#: templates/pages/terms.html:41
+msgid ""
+"Este documento estabelece as regras gerais para utilização do site, bem como informações sobre "
+"responsabilidades, direitos e condições relacionadas ao acesso aos conteúdos disponibilizados."
+msgstr ""
+"Este documento establece las reglas generales para utilizar el sitio web, así como información "
+"sobre responsabilidades, derechos y condiciones relacionadas con el acceso a los contenidos "
+"disponibles."
+
+#: templates/pages/terms.html:44
+msgid "1. Aceitação dos termos"
+msgstr "1. Aceptación de los términos"
+
+#: templates/pages/terms.html:47
+msgid "Ao acessar, navegar ou utilizar qualquer conteúdo do site"
+msgstr "Al acceder, navegar o utilizar cualquier contenido del sitio web"
+
+#: templates/pages/terms.html:49
+msgid ""
+"o usuário declara que leu, compreendeu e concorda com estes Termos de Uso e reconhece que o "
+"tratamento de dados pessoais é realizado conforme a"
+msgstr ""
+"el usuario declara que ha leído, comprendido y aceptado estos Términos de uso y reconoce que el "
+"tratamiento de datos personales se realiza de acuerdo con la"
+
+#: templates/pages/terms.html:56
+msgid ""
+"Estes Termos de Uso podem ser atualizados sempre que necessário para refletir alterações nas "
+"funcionalidades do site, nos conteúdos disponibilizados ou nas práticas adotadas."
+msgstr ""
+"Estos Términos de uso podrán actualizarse cuando sea necesario para reflejar cambios en las "
+"funcionalidades del sitio, los contenidos disponibles o las prácticas adoptadas."
+
+#: templates/pages/terms.html:59
+msgid "2. Objetivo do site"
+msgstr "2. Finalidad del sitio web"
+
+#: templates/pages/terms.html:62
+msgid "O site"
+msgstr "El sitio web"
+
+#: templates/pages/terms.html:64
+msgid ""
+"tem como objetivo disponibilizar conteúdos informativos, educacionais e opinativos relacionados "
+"principalmente a:"
+msgstr ""
+"tiene como objetivo ofrecer contenidos informativos, educativos y de opinión relacionados "
+"principalmente con:"
+
+#: templates/pages/terms.html:68
+msgid "Tecnologia;"
+msgstr "Tecnología;"
+
+#: templates/pages/terms.html:69
+msgid "Programação;"
+msgstr "Programación;"
+
+#: templates/pages/terms.html:70
+msgid "Internet;"
+msgstr "Internet;"
+
+#: templates/pages/terms.html:71
+msgid "Ferramentas digitais;"
+msgstr "Herramientas digitales;"
+
+#: templates/pages/terms.html:72
+msgid "Desenvolvimento e aprendizado de programação;"
+msgstr "Desarrollo y aprendizaje de programación;"
+
+#: templates/pages/terms.html:73
+msgid "Boas práticas no ambiente online."
+msgstr "Buenas prácticas en el entorno digital."
+
+#: templates/pages/terms.html:77
+msgid ""
+"Os conteúdos são disponibilizados para fins informativos e educacionais e não substituem "
+"orientação profissional especializada quando esta for necessária."
+msgstr ""
+"Los contenidos se ofrecen con fines informativos y educativos y no sustituyen el asesoramiento "
+"profesional especializado cuando sea necesario."
+
+#: templates/pages/terms.html:80
+msgid "3. Uso adequado do site"
+msgstr "3. Uso adecuado del sitio web"
+
+#: templates/pages/terms.html:82
+msgid "Ao utilizar o site, o usuário compromete-se a:"
+msgstr "Al utilizar el sitio web, el usuario se compromete a:"
+
+#: templates/pages/terms.html:85
+msgid "Respeitar a legislação vigente;"
+msgstr "Respetar la legislación vigente;"
+
+#: templates/pages/terms.html:86
+msgid "Não praticar atos ilícitos;"
+msgstr "No realizar actos ilícitos;"
+
+#: templates/pages/terms.html:87
+msgid "Não tentar obter acesso não autorizado a sistemas ou servidores;"
+msgstr "No intentar obtener acceso no autorizado a sistemas o servidores;"
+
+#: templates/pages/terms.html:88
+msgid "Não utilizar o site para atividades fraudulentas ou prejudiciais;"
+msgstr "No utilizar el sitio web para actividades fraudulentas o perjudiciales;"
+
+#: templates/pages/terms.html:89
+msgid "Não copiar ou reproduzir conteúdos protegidos sem autorização;"
+msgstr "No copiar ni reproducir contenido protegido sin autorización;"
+
+#: templates/pages/terms.html:90
+msgid "Não utilizar o site para finalidades que possam prejudicar seu funcionamento ou outros usuários."
+msgstr "No utilizar el sitio web para fines que puedan perjudicar su funcionamiento o a otros usuarios."
+
+#: templates/pages/terms.html:94
+msgid ""
+"O uso indevido do site poderá resultar na adoção de medidas cabíveis, incluindo a restrição de "
+"acesso quando tecnicamente possível e juridicamente aplicável."
+msgstr ""
+"El uso indebido del sitio podrá dar lugar a las medidas pertinentes, incluida la restricción del "
+"acceso cuando sea técnicamente posible y legalmente aplicable."
+
+#: templates/pages/terms.html:97
+msgid "4. Propriedade intelectual"
+msgstr "4. Propiedad intelectual"
+
+#: templates/pages/terms.html:100
+msgid ""
+"Os conteúdos originais disponibilizados no site, incluindo textos, imagens, logotipos, vídeos, "
+"materiais gráficos e demais elementos produzidos para a plataforma, são protegidos pela "
+"legislação aplicável de propriedade intelectual."
+msgstr ""
+"Los contenidos originales disponibles en el sitio, incluidos textos, imágenes, logotipos, vídeos,"
+" materiales gráficos y otros elementos creados para la plataforma, están protegidos por la "
+"legislación aplicable sobre propiedad intelectual."
+
+#: templates/pages/terms.html:104
+msgid ""
+"É permitido acessar, visualizar e utilizar os conteúdos para fins pessoais e educacionais, desde "
+"que sejam respeitados os direitos autorais e que a fonte seja indicada quando houver reprodução "
+"autorizada."
+msgstr ""
+"Se permite acceder, visualizar y utilizar los contenidos con fines personales y educativos, "
+"siempre que se respeten los derechos de autor y se cite la fuente cuando la reproducción esté "
+"autorizada."
+
+#: templates/pages/terms.html:108
+msgid ""
+"A reprodução, distribuição, comercialização ou utilização de conteúdo protegido de forma que "
+"ultrapasse os limites permitidos pela legislação depende de autorização prévia, quando exigida."
+msgstr ""
+"La reproducción, distribución, comercialización o utilización de contenido protegido más allá de "
+"los límites permitidos por la ley requiere autorización previa cuando así se exija."
+
+#: templates/pages/terms.html:111
+msgid "5. Isenção de responsabilidade"
+msgstr "5. Exención de responsabilidad"
+
+#: templates/pages/terms.html:114
+msgid ""
+"As informações publicadas no site são produzidas com base em estudos, experiências, pesquisas e "
+"referências utilizadas durante a elaboração dos conteúdos."
+msgstr ""
+"La información publicada en el sitio se elabora a partir de estudios, experiencias, "
+"investigaciones y referencias utilizadas durante la preparación de los contenidos."
+
+#: templates/pages/terms.html:118
+msgid ""
+"Apesar dos esforços para manter as informações corretas e atualizadas, não é possível garantir "
+"que todo conteúdo esteja permanentemente livre de erros, omissões ou desatualizações."
+msgstr ""
+"A pesar de los esfuerzos por mantener la información correcta y actualizada, no es posible "
+"garantizar que todo el contenido esté siempre libre de errores, omisiones o información "
+"desactualizada."
+
+#: templates/pages/terms.html:122
+msgid ""
+"O usuário é responsável por avaliar as informações disponibilizadas e verificar sua adequação "
+"antes de utilizá-las em situações específicas, especialmente quando houver consequências "
+"técnicas, financeiras ou profissionais."
+msgstr ""
+"El usuario es responsable de evaluar la información disponible y comprobar si es adecuada antes "
+"de utilizarla en situaciones concretas, especialmente cuando pueda haber consecuencias técnicas, "
+"financieras o profesionales."
+
+#: templates/pages/terms.html:125
+msgid "6. Comentários e interações"
+msgstr "6. Comentarios e interacciones"
+
+#: templates/pages/terms.html:128
+msgid "O site poderá disponibilizar recursos para comentários e outras interações dos usuários."
+msgstr "El sitio podrá ofrecer funciones para comentarios y otras formas de interacción de los usuarios."
+
+#: templates/pages/terms.html:132
+msgid "Ao utilizar esses recursos, o usuário é responsável pelo conteúdo que publicar e compromete-se a:"
+msgstr ""
+"Al utilizar estas funciones, el usuario es responsable del contenido que publique y se compromete"
+" a:"
+
+#: templates/pages/terms.html:136
+msgid "Não publicar conteúdo ilegal ou que viole direitos de terceiros;"
+msgstr "No publicar contenido ilegal o que vulnere derechos de terceros;"
+
+#: templates/pages/terms.html:137
+msgid "Não publicar conteúdo ofensivo, discriminatório ou abusivo;"
+msgstr "No publicar contenido ofensivo, discriminatorio o abusivo;"
+
+#: templates/pages/terms.html:138
+msgid "Não utilizar os recursos para spam ou divulgação indevida;"
+msgstr "No utilizar las funciones para enviar spam o realizar promociones indebidas;"
+
+#: templates/pages/terms.html:139
+msgid "Respeitar os demais usuários."
+msgstr "Respetar a los demás usuarios."
+
+#: templates/pages/terms.html:143
+msgid "Conteúdos que violem estes Termos de Uso ou a legislação aplicável poderão ser removidos."
+msgstr ""
+"Los contenidos que infrinjan estos Términos de uso o la legislación aplicable podrán ser "
+"eliminados."
+
+#: templates/pages/terms.html:146
+msgid "7. Links para sites de terceiros"
+msgstr "7. Enlaces a sitios web de terceros"
+
+#: templates/pages/terms.html:149
+msgid "O site pode conter links para páginas, serviços e plataformas de terceiros."
+msgstr "El sitio puede contener enlaces a páginas, servicios y plataformas de terceros."
+
+#: templates/pages/terms.html:153
+msgid "Esses links são disponibilizados para facilitar o acesso a informações ou serviços externos. O"
+msgstr "Estos enlaces se ofrecen para facilitar el acceso a información o servicios externos. El"
+
+#: templates/pages/terms.html:155
+msgid ""
+"não controla necessariamente o conteúdo, as políticas de privacidade ou as práticas desses "
+"terceiros."
+msgstr ""
+"no controla necesariamente el contenido, las políticas de privacidad ni las prácticas de dichos "
+"terceros."
+
+#: templates/pages/terms.html:159
+msgid ""
+"Recomendamos que o usuário consulte os termos de uso e as políticas de privacidade dos sites "
+"externos antes de utilizá-los."
+msgstr ""
+"Recomendamos que el usuario consulte los términos de uso y las políticas de privacidad de los "
+"sitios externos antes de utilizarlos."
+
+#: templates/pages/terms.html:162
+msgid "8. Modificações no site"
+msgstr "8. Modificaciones del sitio web"
+
+#: templates/pages/terms.html:167
+msgid ""
+"poderá modificar, atualizar, suspender ou encerrar conteúdos e funcionalidades do site sempre que"
+" necessário."
+msgstr ""
+"podrá modificar, actualizar, suspender o finalizar contenidos y funcionalidades del sitio cuando "
+"sea necesario."
+
+#: templates/pages/terms.html:171
+msgid ""
+"Também poderão ocorrer períodos de indisponibilidade decorrentes de manutenção, atualizações, "
+"problemas técnicos, falhas de terceiros ou outros fatores fora do controle do responsável pelo "
+"site."
+msgstr ""
+"También pueden producirse periodos de indisponibilidad debido a tareas de mantenimiento, "
+"actualizaciones, problemas técnicos, fallos de terceros u otros factores ajenos al control del "
+"responsable del sitio."
+
+#: templates/pages/terms.html:174
+msgid "9. Limitação de responsabilidade"
+msgstr "9. Limitación de responsabilidad"
+
+#: templates/pages/terms.html:177
+msgid "Dentro dos limites permitidos pela legislação aplicável, o"
+msgstr "Dentro de los límites permitidos por la legislación aplicable,"
+
+#: templates/pages/terms.html:179
+msgid "não se responsabiliza por prejuízos decorrentes de:"
+msgstr "no se hace responsable de los daños derivados de:"
+
+#: templates/pages/terms.html:183
+msgid "Interpretação ou utilização inadequada das informações publicadas;"
+msgstr "Interpretación o uso inadecuado de la información publicada;"
+
+#: templates/pages/terms.html:184
+msgid "Falhas técnicas ou indisponibilidade temporária do site;"
+msgstr "Fallos técnicos o indisponibilidad temporal del sitio web;"
+
+#: templates/pages/terms.html:185
+msgid "Problemas causados por serviços ou plataformas de terceiros;"
+msgstr "Problemas causados por servicios o plataformas de terceros;"
+
+#: templates/pages/terms.html:186
+msgid "Alterações ou indisponibilidade de conteúdos externos acessados por meio de links;"
+msgstr "Cambios o falta de disponibilidad de contenidos externos a los que se accede mediante enlaces;"
+
+#: templates/pages/terms.html:187
+msgid "Decisões tomadas exclusivamente com base nos conteúdos disponibilizados."
+msgstr "Decisiones tomadas exclusivamente sobre la base de los contenidos disponibles."
+
+#: templates/pages/terms.html:191
+msgid ""
+"Nenhuma disposição destes Termos pretende excluir ou limitar responsabilidades que não possam ser"
+" afastadas ou limitadas pela legislação brasileira."
+msgstr ""
+"Ninguna disposición de estos Términos pretende excluir o limitar responsabilidades que no puedan "
+"excluirse o limitarse conforme a la legislación brasileña."
+
+#: templates/pages/terms.html:194
+msgid "10. Privacidade dos usuários"
+msgstr "10. Privacidad de los usuarios"
+
+#: templates/pages/terms.html:197
+msgid "O tratamento de dados pessoais realizado pelo site é descrito na"
+msgstr "El tratamiento de datos personales realizado por el sitio web se describe en la"
+
+#: templates/pages/terms.html:204
+msgid ""
+"A Política de Privacidade apresenta informações sobre coleta, utilização, armazenamento, "
+"compartilhamento e proteção de dados pessoais, bem como sobre os direitos dos titulares previstos"
+" na legislação aplicável."
+msgstr ""
+"La Política de privacidad ofrece información sobre la recopilación, el uso, el almacenamiento, el"
+" intercambio y la protección de datos personales, así como sobre los derechos de sus titulares "
+"previstos en la legislación aplicable."
+
+#: templates/pages/terms.html:207
+msgid "11. Legislação aplicável"
+msgstr "11. Legislación aplicable"
+
+#: templates/pages/terms.html:210
+msgid "Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil."
+msgstr "Estos Términos de uso se rigen por las leyes de la República Federativa de Brasil."
+
+#: templates/pages/terms.html:214
+msgid ""
+"Eventuais questões relacionadas à utilização do site serão tratadas de acordo com a legislação "
+"brasileira e, quando aplicável, pelos órgãos e autoridades competentes."
+msgstr ""
+"Las cuestiones relacionadas con el uso del sitio se tratarán de acuerdo con la legislación "
+"brasileña y, cuando corresponda, ante los organismos y autoridades competentes."
+
+#: templates/pages/terms.html:217
+msgid "12. Contato"
+msgstr "Contacto"
+
+#: templates/pages/terms.html:220
+msgid "Em caso de dúvidas, sugestões ou questões relacionadas a estes Termos de Uso, entre em contato:"
+msgstr "Si tienes dudas, sugerencias o preguntas relacionadas con estos Términos de uso, ponte en contacto con nosotros:"
+
