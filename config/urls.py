@@ -11,6 +11,7 @@ from pages.language import switch_language
 
 from blog.sitemaps import (
     PostSitemap,
+    PostTranslationSitemap,
     CategorySitemap,
     EbookCategorySitemap,
     EbookSitemap,
@@ -52,6 +53,7 @@ def ads_txt(_request):
 
 sitemaps = {
     "posts": PostSitemap,
+    "post_translations": PostTranslationSitemap,
     "categories": CategorySitemap,
     "ebook_categories": EbookCategorySitemap,
     "ebooks": EbookSitemap,

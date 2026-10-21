@@ -1,8 +1,12 @@
-from django.contrib.sitemaps import Sitemap
 
-from .models import Post, Category
-from ebooks.models import Ebook, EbookCategory
+from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
+from django.utils import timezone
+from django.utils.translation import override
+
+from .models import Post, PostTranslation, Category
+from ebooks.models import Ebook, EbookCategory
+
 
 class PostSitemap(Sitemap):
     protocol = "https"
@@ -11,6 +15,28 @@ class PostSitemap(Sitemap):
 
     def items(self):
         return Post.objects.published()
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
+
+class PostTranslationSitemap(Sitemap):
+    protocol = "https"
+    changefreq = "weekly"
+    priority = 0.8
+
+    def items(self):
+        return PostTranslation.objects.filter(
+            post__status=Post.Status.PUBLISHED,
+            post__published_at__lte=timezone.now(),
+        ).select_related("post")
+
+    def location(self, obj):
+        with override(obj.language):
+            return reverse(
+                "blog:post_detail",
+                kwargs={"slug": obj.slug},
+            )
 
     def lastmod(self, obj):
         return obj.updated_at
@@ -52,6 +78,8 @@ class EbookSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.updated_at
+
+
 class StaticPagesSitemap(Sitemap):
     protocol = "https"
     changefreq = "yearly"
