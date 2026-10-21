@@ -2,192 +2,145 @@
 <!DOCTYPE html>
 <html lang="{% block html_lang %}pt-BR{% endblock %}">
 <head>
-  <!-- =========================================================
-       Meta básicos
-  ========================================================== -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Meta básicos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Verificação Bing -->
-  <meta name="msvalidate.01" content="B08F08D034CBCA80AEEECD1B9F6B9390">
+    <!-- Verificação Bing -->
+    <meta name="msvalidate.01" content="B08F08D034CBCA80AEEECD1B9F6B9390">
 
-  <!-- Verificação Pinterest -->
-  <meta name="p:domain_verify" content="7065ccbcaf1375a59d451cccba74823a">
+    <!-- Verificação Pinterest -->
+    <meta name="p:domain_verify" content="7065ccbcaf1375a59d451cccba74823a">
 
-  <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
+    <title>{% block title %}Entre Bugs e Soluções{% endblock %}</title>
 
-  <!-- =========================================================
-       Google tag (gtag.js) e Consent Mode
-  ========================================================== -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Google tag (gtag.js) e Consent Mode -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
+        gtag('js', new Date());
 
-    // Padrão: negar consentimento até existir uma preferência válida.
-    gtag('consent', 'default', {
-      analytics_storage: 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
-    });
-
-    // Reaplica a preferência salva antes de carregar o Google tag.
-    try {
-      const savedConsent = localStorage.getItem('cookie_consent');
-
-      if (savedConsent === 'accepted' || savedConsent === 'declined') {
-        const consentValue =
-          savedConsent === 'accepted' ? 'granted' : 'denied';
-
-        gtag('consent', 'update', {
-          analytics_storage: consentValue,
-          ad_storage: consentValue,
-          ad_user_data: consentValue,
-          ad_personalization: consentValue
+        // Negar consentimento até existir uma preferência válida.
+        gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
         });
-      }
-    } catch (error) {
-      // Se o armazenamento estiver indisponível, mantém o padrão negado.
-    }
-  </script>
 
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR">
-  </script>
+        // Reaplicar a preferência previamente salva.
+        try {
+            const savedConsent = localStorage.getItem('cookie_consent');
 
-  <!-- Google AdSense -->
-  <script
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5960956644380983"
-    crossorigin="anonymous">
-  </script>
+            if (savedConsent === 'accepted' || savedConsent === 'declined') {
+                const consentValue =
+                    savedConsent === 'accepted' ? 'granted' : 'denied';
 
-  <!-- =========================================================
-       Descrição da página
-  ========================================================== -->
-  <meta
-    name="description"
-    content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
-  >
+                gtag('consent', 'update', {
+                    analytics_storage: consentValue,
+                    ad_storage: consentValue,
+                    ad_user_data: consentValue,
+                    ad_personalization: consentValue
+                });
+            }
+        } catch (error) {
+            // Mantém o consentimento negado se o armazenamento falhar.
+        }
+    </script>
 
-    <!-- =========================================================
-         Canonical URL e SEO
-    ========================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2V7ET28GR"></script>
+
+    <!-- Google AdSense -->
+    <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5960956644380983"
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Descrição da página -->
+    <meta
+        name="description"
+        content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
+    >
+
+    <!-- URL canônica -->
     <link
         rel="canonical"
         href="{% block canonical %}{{ CANONICAL_URL }}{% endblock %}"
     >
+
+    <!-- Open Graph -->
     <meta
         property="og:url"
         content="{% block og_url %}{{ CANONICAL_URL }}{% endblock %}"
     >
+    <meta
+        property="og:title"
+        content="{% block og_title %}Entre Bugs e Soluções{% endblock %}"
+    >
+    <meta
+        property="og:description"
+        content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}"
+    >
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta
+        property="og:image"
+        content="{% block og_image %}{% static 'img/logo.webp' %}{% endblock %}"
+    >
 
-  <!-- =========================================================
-       Open Graph
-  ========================================================== -->
-  <meta
-    property="og:title"
-    content="{% block og_title %}Entre Bugs e Soluções{% endblock %}"
-  >
-  <meta
-    property="og:description"
-    content="{% block og_description %}Blog sobre programação e soluções reais{% endblock %}"
-  >
-  <meta property="og:type" content="website">
-  <meta
-    property="og:image"
-    content="{% block og_image %}{% static 'img/logo.webp' %}{% endblock %}"
-  >
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta
+        name="twitter:title"
+        content="{% block twitter_title %}Entre Bugs e Soluções{% endblock %}"
+    >
+    <meta
+        name="twitter:description"
+        content="{% block twitter_description %}Blog sobre programação e soluções reais{% endblock %}"
+    >
+    <meta
+        name="twitter:image"
+        content="{% block twitter_image %}{% static 'img/logo.webp' %}{% endblock %}"
+    >
 
-  <!-- =========================================================
-       Twitter Cards
-  ========================================================== -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta
-    name="twitter:title"
-    content="{% block twitter_title %}Entre Bugs e Soluções{% endblock %}"
-  >
-  <meta
-    name="twitter:description"
-    content="{% block twitter_description %}Blog sobre programação e soluções reais{% endblock %}"
-  >
-  <meta
-    name="twitter:image"
-    content="{% block twitter_image %}{% static 'img/logo.webp' %}{% endblock %}"
-  >
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}">
 
-  <!-- =========================================================
-       Favicon
-  ========================================================== -->
-  <link rel="icon" href="{% static 'favicon.ico' %}">
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-  <!-- =========================================================
-       Preload da imagem principal (LCP)
-  ========================================================== -->
-  <link
-    rel="preload"
-    as="image"
-    href="{% static 'img/hero/hero-desktop.webp' %}"
-    fetchpriority="high"
-  >
+    <!-- Head extra por página -->
+    {% block extra_head %}{% endblock %}
 
-  <!-- =========================================================
-       CSS principal
-  ========================================================== -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-  <!-- =========================================================
-       Head extra por página
-  ========================================================== -->
-  {% block extra_head %}{% endblock %}
-
-  <!-- =========================================================
-       Botão flutuante de configurações de cookies
-  ========================================================== -->
-  {% include "includes/cookie_button.html" %}
+    <!-- Botão flutuante de configurações de cookies -->
+    {% include "includes/cookie_button.html" %}
 </head>
 
 <body>
+    <!-- Banner de cookies -->
+    {% include "includes/cookie_banner.html" %}
 
-  <!-- =========================================================
-       Banner de cookies
-  ========================================================== -->
-  {% include "includes/cookie_banner.html" %}
+    <!-- Cabeçalho -->
+    {% include "includes/header.html" %}
 
-  <!-- =========================================================
-       Cabeçalho
-  ========================================================== -->
-  {% include "includes/header.html" %}
+    <!-- Conteúdo principal -->
+    <main id="content">
+        {% block content %}{% endblock %}
+    </main>
 
-  <!-- =========================================================
-       Conteúdo principal
-  ========================================================== -->
-  <main id="content">
-    {% block content %}{% endblock %}
-  </main>
+    <!-- Rodapé -->
+    {% include "includes/footer.html" %}
 
-  <!-- =========================================================
-       Rodapé
-  ========================================================== -->
-  {% include "includes/footer.html" %}
+    <!-- JavaScript global -->
+    <script src="{% static 'js/cookies.js' %}" defer></script>
+    <script src="{% static 'js/menu-submenu.js' %}" defer></script>
+    <script src="{% static 'js/search.js' %}" defer></script>
 
-  <!-- =========================================================
-       JavaScript global
-  ========================================================== -->
-  <script src="{% static 'js/cookies.js' %}" defer></script>
-  <script src="{% static 'js/menu-submenu.js' %}" defer></script>
-  <script src="{% static 'js/search.js' %}" defer></script>
-
-  <!-- =========================================================
-       JavaScript específico por página
-  ========================================================== -->
-  {% block extra_scripts %}{% endblock %}
-
+    <!-- JavaScript específico por página -->
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
