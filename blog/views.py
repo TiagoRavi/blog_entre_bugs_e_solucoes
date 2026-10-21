@@ -255,7 +255,7 @@ class PostDetailView(DetailView):
 
         language_alternates = [
             {
-                "language": "pt-br",
+                "language": "pt-BR",
                 "url": f"{site_url}/posts/{original_post.slug}/",
             }
         ]
