@@ -1,7 +1,10 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% load cloudinary_extras %}
+
+{% block html_lang %}
+{% if translation %}{{ translation.language }}{% else %}pt-BR{% endif %}
+{% endblock %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
@@ -10,6 +13,10 @@
 {% endblock %}
 
 {% block canonical %}
+{{ site_url }}{% if translation %}/{{ translation.language }}{% endif %}/posts/{% if translation %}{{ translation.slug }}{% else %}{{ original_post.slug|default:post.slug }}{% endif %}/
+{% endblock %}
+
+{% block og_url %}
 {{ site_url }}{% if translation %}/{{ translation.language }}{% endif %}/posts/{% if translation %}{{ translation.slug }}{% else %}{{ original_post.slug|default:post.slug }}{% endif %}/
 {% endblock %}
 
@@ -41,6 +48,7 @@
 
 {% block extra_head %}
 {{ block.super }}
+
 <meta property="og:type" content="article">
 <link rel="stylesheet" href="{% static 'css/pages.css' %}">
 
@@ -86,6 +94,7 @@
 
 {% block extra_scripts %}
 {{ block.super }}
+
 <script src="https://groot.mailerlite.com/js/w/webforms.min.js"></script>
 <script src="{% static 'js/post-toc.js' %}" defer></script>
 <script src="{% static 'js/share-fab.js' %}" defer></script>

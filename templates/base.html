@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="{% block html_lang %}pt-BR{% endblock %}">
 <head>
   <!-- =========================================================
        Meta básicos
@@ -76,14 +76,17 @@
     content="{% block meta_description %}Blog sobre programação e soluções reais{% endblock %}"
   >
 
-  <!-- =========================================================
-       Canonical URL e SEO
-  ========================================================== -->
-  <link
-    rel="canonical"
-    href="{% block canonical %}{{ CANONICAL_URL }}{% endblock %}"
-  >
-  <meta property="og:url" content="{{ CANONICAL_URL }}">
+    <!-- =========================================================
+         Canonical URL e SEO
+    ========================================================== -->
+    <link
+        rel="canonical"
+        href="{% block canonical %}{{ CANONICAL_URL }}{% endblock %}"
+    >
+    <meta
+        property="og:url"
+        content="{% block og_url %}{{ CANONICAL_URL }}{% endblock %}"
+    >
 
   <!-- =========================================================
        Open Graph
