@@ -18,17 +18,16 @@
 
 {% block og_description %}{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}{% endblock %}
 
-{% block og_image %}{% if post.featured_image %}{% cloudinary_image post.featured_image 1200 630 as social_image_url %}{{ social_image_url }}{% endif %}{% endblock %}
+{% block og_image %}{% if post.featured_image %}{% cloudinary_image post.featured_image 1200 630 as social_image_url %}{{ social_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block twitter_title %}{{ post.title }}{% endblock %}
 
 {% block twitter_description %}{{ post.excerpt|default:post.content|striptags|truncatechars:155 }}{% endblock %}
 
-{% block twitter_image %}{% if post.featured_image %}{% cloudinary_image post.featured_image 1200 630 as social_image_url %}{{ social_image_url }}{% endif %}{% endblock %}
+{% block twitter_image %}{% if post.featured_image %}{% cloudinary_image post.featured_image 1200 630 as social_image_url %}{{ social_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
-
 <link rel="stylesheet" href="{% static 'css/pages.css' %}">
 
 {% for alternate in language_alternates %}
@@ -36,4 +35,30 @@
 {% endfor %}
 
 <link rel="alternate" hreflang="x-default" href="{{ site_url }}/posts/{{ original_post.slug|default:post.slug }}/">
+{% endblock %}
+
+{% block content %}
+<article class="post-detail">
+    <header class="post-header">
+        <h1>{{ post.title }}</h1>
+        {% if post.excerpt %}
+        <p class="post-excerpt">{{ post.excerpt }}</p>
+        {% endif %}
+    </header>
+
+    {% if post.featured_image %}
+    <div class="post-featured-image">
+        {% cloudinary_image post.featured_image 1200 630 as article_image_url %}
+        <img src="{{ article_image_url }}" alt="{{ post.title }}" loading="eager">
+    </div>
+    {% endif %}
+
+    <div class="post-content">
+        {{ post.content|safe }}
+    </div>
+</article>
+{% endblock %}
+
+{% block extra_scripts %}
+{{ block.super }}
 {% endblock %}
