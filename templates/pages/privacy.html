@@ -1,8 +1,9 @@
+
 {% extends "base.html" %}
 {% load i18n %}
 
 {% block title %}
-{% translate "Disclaimer | Entre Bugs e Soluções" %}
+{% translate "Política de Privacidade | Entre Bugs e Soluções" %}
 {% endblock %}
 
 {% block extra_head %}
@@ -10,7 +11,8 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Disclaimer",
+  "name": "Política de Privacidade",
+  "description": "Política de Privacidade do Entre Bugs e Soluções, com informações sobre dados pessoais, cookies, publicidade e direitos dos usuários.",
   "url": "{{ CANONICAL_URL }}",
   "isPartOf": {
     "@type": "WebSite",
@@ -19,166 +21,279 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Entre Bugs e Soluções"
-  }
+    "name": "Entre Bugs e Soluções",
+    "url": "{{ SITE_URL }}/"
+  },
+  "inLanguage": "pt-BR"
 }
 </script>
 {% endblock %}
 
 {% block content %}
 <section class="container post-detail">
-
   <div class="post-content-box">
 
-    <h1>{% translate "Disclaimer – Entre Bugs e Soluções" %}</h1>
+    <h1>{% translate "Política de Privacidade" %}</h1>
 
     <p>
-      {% translate "As informações disponibilizadas no site" %}
-      <strong>Entre Bugs e Soluções</strong>
-      {% translate "têm finalidade informativa e educacional. O conteúdo é produzido com base em estudos, experiências, pesquisas, testes práticos e referências utilizadas durante a elaboração dos materiais." %}
+      {% translate "O Entre Bugs e Soluções respeita a privacidade dos visitantes e busca tratar os dados pessoais de maneira transparente, responsável e segura. Esta Política de Privacidade explica como as informações podem ser coletadas, utilizadas, armazenadas e compartilhadas durante a utilização deste site." %}
     </p>
 
     <p>
-      {% translate "Embora sejam realizados esforços para manter as informações corretas e atualizadas, não é possível garantir que todo o conteúdo esteja permanentemente livre de erros, omissões ou desatualizações." %}
-    </p>
-
-    <h2>{% translate "1. Finalidade dos conteúdos" %}</h2>
-
-    <p>
-      {% translate "Os artigos, tutoriais, exemplos, opiniões e demais materiais publicados no site têm como objetivo compartilhar conhecimento e experiências relacionadas principalmente a programação, tecnologia, desenvolvimento web, ferramentas digitais e aprendizado." %}
+      {% translate "Esta política deve ser interpretada em conjunto com os Termos de Uso do site e com as opções de privacidade e consentimento disponibilizadas ao usuário, quando aplicáveis." %}
     </p>
 
     <p>
-      {% translate "Os conteúdos não constituem aconselhamento profissional, consultoria ou garantia de resultados." %}
+      <strong>{% translate "Última atualização:" %}</strong>
+      22 de outubro de 2026
     </p>
 
-    <h2>{% translate "2. Exemplos de código e programação" %}</h2>
+    <h2>{% translate "1. Quem somos" %}</h2>
 
     <p>
-      {% translate "Os exemplos de código apresentados no site destinam-se principalmente a fins educacionais e podem precisar de adaptações conforme o ambiente, sistema operacional, versão da linguagem, biblioteca, framework ou ferramenta utilizada." %}
-    </p>
-
-    <p>
-      {% translate "Antes de utilizar qualquer código em ambientes de produção, recomenda-se que o usuário realize seus próprios testes, validações e análises de segurança." %}
+      {% translate "O Entre Bugs e Soluções é um site dedicado principalmente à programação, tecnologia, desenvolvimento web, ferramentas digitais e conteúdos educacionais." %}
     </p>
 
     <p>
-      O <strong>Entre Bugs e Soluções</strong>
-      {% translate "não garante que exemplos, comandos ou configurações apresentados sejam adequados para todos os ambientes ou situações." %}
+      {% translate "Para dúvidas, solicitações ou assuntos relacionados à privacidade, entre em contato pelo endereço de e-mail informado na seção Contato desta política." %}
     </p>
 
-    <h2>{% translate "3. Tecnologia e ferramentas de terceiros" %}</h2>
+    <h2>{% translate "2. Quais informações podem ser coletadas" %}</h2>
 
     <p>
-      {% translate "O site pode apresentar informações, tutoriais ou referências relacionadas a softwares, serviços, plataformas, bibliotecas, frameworks e outras tecnologias desenvolvidas por terceiros." %}
+      {% translate "Dependendo dos recursos utilizados e da forma como você interage com o site, as seguintes categorias de informações podem ser tratadas:" %}
     </p>
 
+    <ul>
+      <li>
+        <strong>{% translate "Informações fornecidas pelo usuário:" %}</strong>
+        {% translate "dados enviados voluntariamente por formulários de contato, mensagens ou outros recursos disponíveis no site, como nome, endereço de e-mail e conteúdo da mensagem." %}
+      </li>
+      <li>
+        <strong>{% translate "Dados técnicos e de acesso:" %}</strong>
+        {% translate "informações que podem ser registradas pelo servidor ou por ferramentas utilizadas no site, como endereço IP, data e horário do acesso, páginas solicitadas, navegador, sistema operacional e informações técnicas relacionadas à conexão." %}
+      </li>
+      <li>
+        <strong>{% translate "Cookies e identificadores:" %}</strong>
+        {% translate "informações armazenadas ou acessadas no navegador para viabilizar funcionalidades, guardar preferências, medir o uso do site ou disponibilizar publicidade, quando esses recursos estiverem ativos." %}
+      </li>
+      <li>
+        <strong>{% translate "Dados de utilização:" %}</strong>
+        {% translate "informações estatísticas sobre a interação com páginas e recursos do site, caso sejam utilizadas ferramentas de análise ou medição de audiência." %}
+      </li>
+    </ul>
+
     <p>
-      {% translate "Essas tecnologias podem sofrer alterações, atualizações, descontinuações ou mudanças em seus termos e funcionalidades." %}
+      {% translate "As categorias efetivamente coletadas dependem dos recursos habilitados e das interações realizadas. Não solicitamos dados pessoais além daqueles necessários às finalidades pertinentes, conforme aplicável." %}
     </p>
 
+    <h2>{% translate "3. Para quais finalidades utilizamos os dados" %}</h2>
+
     <p>
-      O <strong>Entre Bugs e Soluções</strong>
-      {% translate "não controla as alterações realizadas por terceiros e recomenda que o usuário consulte a documentação oficial dos serviços utilizados." %}
+      {% translate "As informações pessoais e técnicas podem ser utilizadas, conforme o caso, para:" %}
     </p>
 
-    <h2>{% translate "4. Informações financeiras" %}</h2>
+    <ul>
+      <li>{% translate "Disponibilizar, operar e manter o funcionamento do site." %}</li>
+      <li>{% translate "Responder a mensagens, dúvidas e solicitações enviadas pelos visitantes." %}</li>
+      <li>{% translate "Identificar falhas técnicas, prevenir abusos e proteger a segurança do site." %}</li>
+      <li>{% translate "Compreender o desempenho e a utilização do conteúdo, quando houver ferramentas de análise habilitadas." %}</li>
+      <li>{% translate "Armazenar preferências e permitir o funcionamento de recursos solicitados pelo usuário." %}</li>
+      <li>{% translate "Exibir publicidade e mensurar seu desempenho, quando houver serviços publicitários habilitados." %}</li>
+      <li>{% translate "Cumprir obrigações legais e exercer direitos em procedimentos administrativos ou judiciais, quando necessário." %}</li>
+    </ul>
+
+    <h2>{% translate "4. Bases legais para o tratamento de dados" %}</h2>
 
     <p>
-      {% translate "Alguns conteúdos do site podem abordar temas relacionados a dinheiro, renda, trabalho, programação, empreendedorismo ou possibilidades de geração de renda." %}
-    </p>
-
-    <p>
-      {% translate "Essas informações possuem caráter exclusivamente informativo e educacional e não constituem recomendação financeira, de investimento, contábil, tributária ou jurídica." %}
-    </p>
-
-    <p>
-      {% translate "Resultados financeiros ou profissionais podem variar de acordo com diversos fatores, incluindo conhecimento, experiência, dedicação, condições de mercado e decisões individuais." %}
-    </p>
-
-    <p>
-      {% translate "Nenhum resultado específico é garantido pela utilização das informações apresentadas no site." %}
-    </p>
-
-    <h2>{% translate "5. Links e serviços externos" %}</h2>
-
-    <p>
-      {% translate "O site pode conter links para sites, plataformas, produtos ou serviços de terceiros." %}
-    </p>
-
-    <p>
-      {% translate "Esses links podem ser disponibilizados para complementar informações, indicar recursos ou facilitar o acesso a serviços externos." %}
-    </p>
-
-    <p>
-      O <strong>Entre Bugs e Soluções</strong>
-      {% translate "não controla necessariamente o conteúdo, a disponibilidade, as políticas ou as práticas desses serviços externos." %}
-    </p>
-
-    <p>
-      {% translate "Recomendamos que o usuário consulte as políticas, termos e condições dos respectivos serviços antes de utilizá-los." %}
-    </p>
-
-    <h2>{% translate "6. Publicidade e links comerciais" %}</h2>
-
-    <p>
-      {% translate "O site poderá exibir anúncios de terceiros, incluindo anúncios fornecidos por plataformas de publicidade como o" %}
-      <strong>Google AdSense</strong>.
+      {% translate "Quando a legislação de proteção de dados for aplicável, o tratamento de dados pessoais será realizado com fundamento em uma ou mais bases legais previstas na legislação pertinente, conforme a finalidade e as circunstâncias de cada operação." %}
     </p>
 
     <p>
-      {% translate "A exibição de um anúncio não representa necessariamente recomendação, aprovação ou garantia sobre o produto ou serviço anunciado." %}
+      {% translate "Essas bases podem incluir o consentimento do titular, o cumprimento de obrigação legal ou regulatória, a execução de procedimentos solicitados pelo titular, o exercício regular de direitos e o legítimo interesse, desde que atendidos os requisitos legais aplicáveis." %}
     </p>
 
     <p>
-      {% translate "O site também poderá disponibilizar links comerciais ou links de terceiros em determinados conteúdos. Quando houver uma relação comercial ou outra forma de benefício associada a um link, essa relação será apresentada de acordo com as práticas aplicáveis." %}
+      {% translate "Quando o consentimento for necessário, ele deverá ser solicitado de forma apropriada. O titular poderá revogá-lo nos termos da legislação aplicável, sem que isso torne retroativamente ilícito o tratamento realizado anteriormente com fundamento válido." %}
     </p>
 
-    <h2>{% translate "7. Responsabilidade do usuário" %}</h2>
+    <h2>{% translate "5. Cookies e tecnologias semelhantes" %}</h2>
 
     <p>
-      {% translate "O usuário é responsável por avaliar as informações disponibilizadas no site e decidir como utilizá-las." %}
-    </p>
-
-    <p>
-      {% translate "Antes de tomar decisões que possam gerar consequências técnicas, financeiras, profissionais ou de qualquer outra natureza, recomenda-se buscar informações adicionais e, quando necessário, orientação de um profissional qualificado." %}
-    </p>
-
-    <h2>{% translate "8. Atualização das informações" %}</h2>
-
-    <p>
-      {% translate "O conteúdo do site poderá ser atualizado, corrigido ou modificado sempre que necessário." %}
+      {% translate "Cookies são pequenos arquivos armazenados no navegador ou dispositivo do visitante. Tecnologias semelhantes também podem ser utilizadas para guardar preferências, permitir funcionalidades, compreender o uso do site ou oferecer publicidade." %}
     </p>
 
     <p>
-      {% translate "Entretanto, uma informação publicada anteriormente pode tornar-se desatualizada em razão de alterações em tecnologias, ferramentas, legislações, serviços, preços ou condições externas." %}
+      {% translate "Conforme os recursos efetivamente utilizados, essas tecnologias podem ser classificadas nas seguintes categorias:" %}
+    </p>
+
+    <ul>
+      <li>
+        <strong>{% translate "Cookies necessários:" %}</strong>
+        {% translate "podem ser utilizados para permitir funcionalidades essenciais, segurança, navegação ou funcionamento técnico do site." %}
+      </li>
+      <li>
+        <strong>{% translate "Cookies de preferências:" %}</strong>
+        {% translate "podem guardar escolhas realizadas pelo visitante, quando esse recurso estiver disponível." %}
+      </li>
+      <li>
+        <strong>{% translate "Cookies de análise:" %}</strong>
+        {% translate "podem ajudar a compreender como os visitantes utilizam o site, caso sejam utilizadas ferramentas de análise." %}
+      </li>
+      <li>
+        <strong>{% translate "Cookies de publicidade:" %}</strong>
+        {% translate "podem ser utilizados por serviços publicitários próprios ou de terceiros para exibir anúncios, limitar sua repetição, medir resultados ou personalizar publicidade, conforme as configurações e permissões aplicáveis." %}
+      </li>
+    </ul>
+
+    <p>
+      {% translate "Você pode gerenciar ou excluir cookies por meio das configurações do navegador. O bloqueio de determinados cookies pode afetar algumas funcionalidades. Quando exigido pela legislação aplicável, as tecnologias não essenciais serão utilizadas conforme os requisitos de consentimento pertinentes." %}
+    </p>
+
+    <h2>{% translate "6. Google AdSense e publicidade de terceiros" %}</h2>
+
+    <p>
+      {% translate "O Entre Bugs e Soluções poderá utilizar o Google AdSense ou outros serviços de publicidade para financiar a manutenção e a produção de conteúdo do site. Esta seção se aplica quando esses serviços estiverem efetivamente implementados." %}
     </p>
 
     <p>
-      {% translate "Por esse motivo, recomendamos verificar fontes oficiais e documentação atualizada quando a informação exigir precisão ou estiver sujeita a mudanças frequentes." %}
+      {% translate "Os fornecedores de publicidade podem utilizar cookies, identificadores ou tecnologias semelhantes para disponibilizar anúncios, evitar a exibição excessiva dos mesmos anúncios, detectar atividades inválidas e medir o desempenho publicitário." %}
     </p>
 
-    <h2>{% translate "9. Relação com os Termos de Uso" %}</h2>
+    <p>
+      {% translate "Dependendo das configurações do serviço, da região do visitante e das permissões aplicáveis, a publicidade poderá ser personalizada com base em informações como interações anteriores com sites e anúncios. Quando a personalização não estiver habilitada ou permitida, poderão ser exibidos anúncios não personalizados." %}
+    </p>
 
     <p>
-      {% translate "Este Disclaimer complementa os" %}
-      <a href="{% url 'pages:terms' %}">
-        {% translate "Termos de Uso" %}
+      {% translate "O Google e outros fornecedores podem tratar dados de acordo com suas próprias políticas de privacidade e configurações. Para obter informações sobre como o Google utiliza dados em sites e aplicativos parceiros, consulte:" %}
+    </p>
+
+    <p>
+      <a href="https://policies.google.com/technologies/partner-sites"
+         target="_blank"
+         rel="noopener noreferrer">
+        {% translate "Como o Google utiliza informações de sites ou aplicativos que usam seus serviços" %}
       </a>
-      {% translate "do site." %}
     </p>
 
     <p>
-      {% translate "As condições relacionadas ao tratamento de dados pessoais estão descritas na" %}
-      <a href="{% url 'pages:privacy' %}">
-        {% translate "Política de Privacidade" %}
-      </a>.
+      {% translate "Para consultar ou alterar as opções de personalização de anúncios da sua Conta do Google, quando disponíveis, acesse:" %}
     </p>
 
-    <h2>{% translate "10. Contato" %}</h2>
+    <p>
+      <a href="https://myadcenter.google.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+        {% translate "Central de anúncios do Google" %}
+      </a>
+    </p>
 
     <p>
-      {% translate "Em caso de dúvidas sobre este Disclaimer, entre em contato:" %}
+      {% translate "A disponibilidade de controles e opções de consentimento pode variar de acordo com a região, o dispositivo e os serviços utilizados. As preferências de anúncios da Conta do Google não substituem outros mecanismos de consentimento que possam ser exigidos no site." %}
+    </p>
+
+    <h2>{% translate "7. Compartilhamento de informações" %}</h2>
+
+    <p>
+      {% translate "Os dados pessoais não devem ser compartilhados indiscriminadamente. Quando necessário e aplicável, informações poderão ser disponibilizadas às seguintes categorias de destinatários:" %}
+    </p>
+
+    <ul>
+      <li>{% translate "Provedores de hospedagem, infraestrutura, segurança e manutenção técnica." %}</li>
+      <li>{% translate "Prestadores de serviços utilizados para operar funcionalidades solicitadas pelo usuário." %}</li>
+      <li>{% translate "Fornecedores de análise de audiência e publicidade, caso estejam habilitados." %}</li>
+      <li>{% translate "Autoridades públicas ou órgãos competentes, quando houver obrigação legal ou determinação válida." %}</li>
+    </ul>
+
+    <p>
+      {% translate "O compartilhamento deverá estar relacionado à finalidade pertinente, ao funcionamento dos serviços ou a uma hipótese legal aplicável. Os destinatários poderão tratar os dados conforme suas próprias responsabilidades e obrigações legais." %}
+    </p>
+
+    <h2>{% translate "8. Transferência internacional de dados" %}</h2>
+
+    <p>
+      {% translate "Alguns fornecedores de infraestrutura, análise ou publicidade podem processar informações em outros países. Caso ocorra transferência internacional de dados pessoais, ela deverá observar os requisitos e mecanismos previstos na legislação de proteção de dados aplicável." %}
+    </p>
+
+    <h2>{% translate "9. Armazenamento e período de retenção" %}</h2>
+
+    <p>
+      {% translate "Os dados pessoais serão mantidos pelo período necessário para cumprir as finalidades pertinentes, atender solicitações, preservar a segurança, cumprir obrigações legais ou exercer direitos, conforme aplicável." %}
+    </p>
+
+    <p>
+      {% translate "O período de retenção pode variar conforme a categoria de informação, a finalidade do tratamento, os requisitos legais e as configurações dos serviços utilizados. Quando os dados deixarem de ser necessários, eles serão eliminados ou submetidos a procedimentos adequados, ressalvadas as hipóteses legais de conservação." %}
+    </p>
+
+    <h2>{% translate "10. Segurança das informações" %}</h2>
+
+    <p>
+      {% translate "São recomendadas e adotadas, conforme os recursos disponíveis, medidas técnicas e organizacionais destinadas a proteger as informações contra acessos não autorizados, perda, alteração, divulgação indevida ou outras formas de tratamento inadequado." %}
+    </p>
+
+    <p>
+      {% translate "Nenhum sistema de transmissão ou armazenamento pode ter sua segurança absoluta garantida. Por isso, embora sejam adotadas medidas apropriadas, não é possível assegurar a inexistência de todos os riscos." %}
+    </p>
+
+    <h2>{% translate "11. Direitos dos titulares de dados" %}</h2>
+
+    <p>
+      {% translate "Nos termos da Lei Geral de Proteção de Dados Pessoais (LGPD), quando aplicável, o titular poderá exercer os direitos previstos na legislação, incluindo:" %}
+    </p>
+
+    <ul>
+      <li>{% translate "Confirmar a existência de tratamento de seus dados pessoais." %}</li>
+      <li>{% translate "Solicitar acesso aos dados pessoais tratados." %}</li>
+      <li>{% translate "Solicitar a correção de dados incompletos, inexatos ou desatualizados." %}</li>
+      <li>{% translate "Solicitar anonimização, bloqueio ou eliminação de dados, quando cabível." %}</li>
+      <li>{% translate "Solicitar informações sobre entidades com as quais os dados tenham sido compartilhados, observadas as limitações legais." %}</li>
+      <li>{% translate "Solicitar a portabilidade, quando aplicável e observados os requisitos legais e regulamentares." %}</li>
+      <li>{% translate "Solicitar a eliminação de dados tratados com consentimento, ressalvadas as hipóteses legais de conservação." %}</li>
+      <li>{% translate "Revogar o consentimento e apresentar solicitações relacionadas ao tratamento de dados, quando aplicável." %}</li>
+    </ul>
+
+    <p>
+      {% translate "Para exercer seus direitos, entre em contato pelo e-mail indicado nesta política. Poderemos solicitar informações razoavelmente necessárias para confirmar sua identidade e proteger os dados contra solicitações fraudulentas." %}
+    </p>
+
+    <p>
+      {% translate "As solicitações serão analisadas e respondidas nos prazos e limites estabelecidos pela legislação aplicável. Alguns pedidos poderão ser limitados ou recusados quando houver fundamento legal para a manutenção do tratamento." %}
+    </p>
+
+    <h2>{% translate "12. Privacidade de crianças e adolescentes" %}</h2>
+
+    <p>
+      {% translate "O conteúdo do site é voltado principalmente à aprendizagem de programação e tecnologia. Caso sejam tratados dados pessoais de crianças ou adolescentes, esse tratamento deverá observar a legislação aplicável e o princípio do melhor interesse, considerando a natureza dos dados e as circunstâncias do tratamento." %}
+    </p>
+
+    <p>
+      {% translate "Caso você identifique o fornecimento indevido de dados pessoais de uma criança ou adolescente, poderá entrar em contato para que a situação seja avaliada e sejam adotadas as medidas cabíveis." %}
+    </p>
+
+    <h2>{% translate "13. Links para sites de terceiros" %}</h2>
+
+    <p>
+      {% translate "O site pode conter links para páginas, documentações, plataformas ou serviços externos. Ao acessar esses links, você estará sujeito às políticas e práticas dos respectivos terceiros." %}
+    </p>
+
+    <p>
+      {% translate "Recomendamos consultar as políticas de privacidade dos serviços externos antes de fornecer dados pessoais. O Entre Bugs e Soluções não controla necessariamente as práticas de privacidade de sites de terceiros." %}
+    </p>
+
+    <h2>{% translate "14. Alterações nesta política" %}</h2>
+
+    <p>
+      {% translate "Esta Política de Privacidade poderá ser atualizada para refletir mudanças nas funcionalidades do site, nos serviços utilizados, nas práticas de tratamento de dados ou nas exigências legais." %}
+    </p>
+
+    <p>
+      {% translate "A versão vigente será publicada nesta página, acompanhada da data de atualização. Recomendamos consultar esta política periodicamente." %}
+    </p>
+
+    <h2>{% translate "15. Contato sobre privacidade" %}</h2>
+
+    <p>
+      {% translate "Para dúvidas, solicitações ou assuntos relacionados ao tratamento de dados pessoais, entre em contato pelo seguinte endereço:" %}
     </p>
 
     <p>
@@ -189,11 +304,18 @@
     </p>
 
     <p>
-      <strong>{% translate "Última atualização:" %}</strong>
-      {% translate "5 de outubro de 2026" %}
+      {% translate "Se a solicitação estiver relacionada ao exercício de direitos previstos na legislação de proteção de dados, descreva o pedido com informações suficientes para que possamos compreendê-lo e analisá-lo." %}
+    </p>
+
+    <h2>{% translate "16. Termos de Uso" %}</h2>
+
+    <p>
+      {% translate "Esta Política de Privacidade complementa os Termos de Uso do site. Para consultar as condições gerais de utilização, acesse:" %}
+      <a href="{% url 'pages:terms' %}">
+        {% translate "Termos de Uso" %}
+      </a>.
     </p>
 
   </div>
-
 </section>
 {% endblock %}
